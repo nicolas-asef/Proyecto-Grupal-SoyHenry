@@ -35,9 +35,11 @@ const {Admin, Chat, Contract, Job, User, Worker } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
+User.hasMany(Contract, {foreignKey: id, as:'contratante'})
+Contract.belongsTo(User, {foreignKey: id, as:'sender'})
 
-
-
+Worker.hasMany(Contract, {foreignKey: id, as:'contratado'})
+Contract.belongsTo(Worker, {foreignKey: id, as:'recive'})
 
 // let probando = async () => {
 //   const agregando = await Videogame.create({nombre:'juanchito',descripcion:'alto',rating: 3.2,plataformas: 'Playstation'})
