@@ -1,8 +1,10 @@
 const { Router } = require('express');
-const router = require('.');
+
 // importarme los modelos
 const { User } = require('../db.js')
 
+
+const router = Router();
 
 const getUsers = async () => {
     const info = await User.findAll()
@@ -111,3 +113,4 @@ router.delete('/:id', async (req, res, next) => {
     }
 })
 
+module.exports = router

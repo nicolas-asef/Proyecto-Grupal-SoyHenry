@@ -4,7 +4,7 @@ const { Router } = require('express');
 // const modelWorker = require('./Worker.js')
 // const modelUser = require('./User.js')
 // Seguir agregando lo que falte....
-const modelUser = require('./Users.js')
+const modelUser = require('./users')
 
 const router = Router();
 
@@ -14,6 +14,6 @@ const router = Router();
 // router.use('/user',modelUser)
 
 
-router.use('/users', modelUser)
+router.use('/users', modelUser);
 
 module.exports = router;
