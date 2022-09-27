@@ -1,10 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import styles from './styles/Login.module.css';
 
 const Login = () => {
-	return <LoginStyle>Login</LoginStyle>;
+	return <div className={styles.login}>Login</div >;
 };
-
-export const LoginStyle = styled.div``;
 
 export default Login;

@@ -1,10 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import styles from './styles/Register.module.css';
 
 const Register = () => {
-	return <RegisterStyle>Register</RegisterStyle>;
+	return <div className={styles.register}>Register</div >;
 };
-
-export const RegisterStyle = styled.div``;
 
 export default Register;

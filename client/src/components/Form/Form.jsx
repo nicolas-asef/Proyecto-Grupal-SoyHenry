@@ -1,18 +1,8 @@
 import React from 'react';
-import Login from './Login/Login';
-import {
-	Container,
-	FormContainer
-} from './Styles'
+import styles from './styles/Form.module.css';
 
 const Form = () => {
-	return (
-		<Container>
-			<FormContainer>
-				<Login />
-			</FormContainer>
-		</Container>
-	);
+	return <div className={styles.form}>Form</div >;
 };
 
 export default Form;
