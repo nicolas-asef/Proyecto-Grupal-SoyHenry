@@ -22,8 +22,8 @@ const User = (props) => {
           placeholder="Alfonso.."
           {...register("name", {
             required: true,
-						minLength: 4,
-						maxLength: 15
+            minLength: 4,
+            maxLength: 15,
           })}
         />
         {errors.name?.type === "required" && <span>El campo es requerido</span>}
@@ -35,11 +35,13 @@ const User = (props) => {
           placeholder="Gutierrez.."
           {...register("lastname", {
             required: true,
-						minLength: 4,
-						maxLength: 15
+            minLength: 4,
+            maxLength: 15,
           })}
         />
-      	{errors.lastname?.type === "required" && <span>El campo es requerido</span>}
+        {errors.lastname?.type === "required" && (
+          <span>El campo es requerido</span>
+        )}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Usuario: </label>
@@ -48,11 +50,11 @@ const User = (props) => {
           placeholder="Usuario_202.."
           {...register("user", {
             required: true,
-						minLength: 4,
-						maxLength: 15,
+            minLength: 4,
+            maxLength: 15,
           })}
         />
-				{errors.user?.type === "required" && <span>El campo es requerido</span>}
+        {errors.user?.type === "required" && <span>El campo es requerido</span>}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Contraseña: </label>
@@ -61,11 +63,13 @@ const User = (props) => {
           placeholder="Contraseña.."
           {...register("pass", {
             required: true,
-						pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+            pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
           })}
         />
-				{errors.pass?.type === "required" && <span>El campo es requerido</span>}
-				{errors.pass?.type === "pattern" && <span>Ingresa una contraseña valida</span>}
+        {errors.pass?.type === "required" && <span>El campo es requerido</span>}
+        {errors.pass?.type === "pattern" && (
+          <span>Ingresa una contraseña valida</span>
+        )}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Telefono: </label>
@@ -74,11 +78,15 @@ const User = (props) => {
           placeholder="123456789.."
           {...register("phone", {
             required: true,
-						pattern: /^[0-9]*$/
+            pattern: /^[0-9]*$/,
           })}
         />
-				{errors.phone?.type === "required" && <span>El campo es requerido</span>}
-				{errors.phone?.type === "pattern" && <span>Ingresa un numero valido</span>}
+        {errors.phone?.type === "required" && (
+          <span>El campo es requerido</span>
+        )}
+        {errors.phone?.type === "pattern" && (
+          <span>Ingresa un numero valido</span>
+        )}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Documento de identidad: </label>
@@ -87,12 +95,13 @@ const User = (props) => {
           placeholder="123456789.."
           {...register("dni", {
             required: true,
-						pattern: /^[0-9]*$/
+            pattern: /^[0-9]*$/,
           })}
         />
-				{errors.dni?.type === "required" && <span>El campo es requerido</span>}
-				{errors.dni?.type === "pattern" && <span>Ingresa un documento valido</span>}
-
+        {errors.dni?.type === "required" && <span>El campo es requerido</span>}
+        {errors.dni?.type === "pattern" && (
+          <span>Ingresa un documento valido</span>
+        )}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Ubicacion: </label>
@@ -103,21 +112,39 @@ const User = (props) => {
             required: true,
           })}
         />
-				{errors.location?.type === "required" && <span>El campo es requerido</span>}
+        {errors.location?.type === "required" && (
+          <span>El campo es requerido</span>
+        )}
       </div>
-			{props.type === 'worker' && (
-				 <div className={style.inputContainer}>
-         <label htmlFor="name">Oficio: </label>
-         <input
-           type="select"
-           placeholder="Electricista.."
-           {...register("work", {
-             required: true,
-           })}
-         />
-         {errors.location?.type === "required" && <span>El campo es requerido</span>}
-       </div>
-			)}
+      {props.type === "worker" && (
+        <>
+          <div className={style.inputContainer}>
+            <label htmlFor="name">Oficio: </label>
+            <input
+              type="text"
+              placeholder="Electricista.."
+              {...register("work", {
+                required: true,
+              })}
+            />
+            {errors.location?.type === "required" && (
+              <span>El campo es requerido</span>
+            )}
+          </div>
+          <div className={style.inputContainer}>
+            <label htmlFor="name">Certificacion: </label>
+            <input
+              type="text"
+              {...register("certificate", {
+                required: true,
+              })}
+            />
+            {errors.location?.type === "required" && (
+              <span>El campo es requerido</span>
+            )}
+          </div>
+        </>
+      )}
       <input type="submit" value="Registrarse" />
     </form>
   );
