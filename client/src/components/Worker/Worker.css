@@ -1,0 +1,48 @@
+html { 
+    background-color: rgba(226, 226, 226, 0.699);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+.worker{
+    width: 10px;
+    font-size: 1.1em;
+    text-align: start;
+    color: #6f6d78;
+    font-weight: 400;
+    font-style: italic;
+}
+
+
+.w-portada>:nth-child(1){
+    width: 98vw;
+    height: 30vh;
+    background-color: aqua;
+
+}
+
+.w-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.w-right{
+    margin-left: 43vw;
+    margin-top: 2vh;
+    width: 54vw; 
+    /* border: 3px solid #73AD21; */
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+}
+
+
+.w-left{
+    position: absolute;
+    left: 4vw;
+    top: 20vh;
+    background-color: #6f6d78;
+    /* border: 3px solid #73AD21; */
+}

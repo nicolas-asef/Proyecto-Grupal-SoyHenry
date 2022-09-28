@@ -1,8 +1,9 @@
 import React from 'react';
 import './LandingPage.css'
-// let location = useLocation
-// const path = location
+import { Link } from 'react-router-dom';
+
 const LandingPage = () => {
+
 	return (
     <div className="landing-container">
       <header className="header-container">
