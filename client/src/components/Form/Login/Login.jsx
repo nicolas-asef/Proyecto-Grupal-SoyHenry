@@ -1,7 +1,8 @@
 import style from "./Login.module.css";
 import { useForm } from "react-hook-form";
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { validator } from "../validator";
 
 const Login = () => {
   const {
@@ -16,16 +17,16 @@ const Login = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-			<h2>Ingresar</h2>
+      <h2>Ingresar</h2>
       <div className={style.inputContainer}>
         <TextField
-          label='Email'
+          label="Email"
           type="text"
           variant="filled"
           placeholder="user@email.com"
           name="email"
           error={errors.email ? true : false}
-          helperText={errors.email?.type === 'required' ? "El campo es requerido" : "Ingrese un email valido"}
+          helperText={validator(errors.email?.type, "email")}
           {...register("email", {
             required: true,
             pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
@@ -34,11 +35,11 @@ const Login = () => {
       </div>
       <div className={style.inputContainer}>
         <TextField
-          label='Password'
+          label="Password"
           type="password"
           variant="filled"
           error={errors.pass ? true : false}
-          helperText={errors.pass?.type === 'required' && "El campo es requerido"}
+          helperText={validator(errors.pass?.type)}
           placeholder="password"
           name="pass"
           {...register("pass", {
@@ -47,7 +48,9 @@ const Login = () => {
         />
       </div>
 
-      <Button type="submit" value="Ingresar" variant="contained">Ingresar</Button>
+      <Button type="submit" value="Ingresar" variant="contained">
+        Ingresar
+      </Button>
     </form>
   );
 };

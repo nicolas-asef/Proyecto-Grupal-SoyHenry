@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import style from "./styles/User.module.css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import { validator } from "../../validator";
 
 const User = (props) => {
   const {
@@ -24,7 +24,7 @@ const User = (props) => {
           type="text"
           variant="filled"
           error={errors.name ? true : false}
-          helperText={errors.name && "El campo es requerido"}
+          helperText={validator(errors.name?.type, "name")}
           placeholder="Alfonso.."
           {...register("name", {
             required: true,
@@ -37,7 +37,7 @@ const User = (props) => {
           type="text"
           variant="filled"
           error={errors.lastname ? true : false}
-          helperText={errors.lastname && "El campo es requerido"}
+          helperText={validator(errors.lastname?.type, "lastname")}
           placeholder="Gutierrez.."
           {...register("lastname", {
             required: true,
@@ -52,7 +52,7 @@ const User = (props) => {
           label="Usuario"
           variant="filled"
           error={errors.user ? true : false}
-          helperText={errors.user && "El campo es requerido"}
+          helperText={validator(errors.user?.type, "user")}
           placeholder="Usuario_2022"
           {...register("user", {
             required: true,
@@ -67,7 +67,7 @@ const User = (props) => {
           type="password"
           variant="filled"
           error={errors.pass ? true : false}
-          helperText={errors.pass && "El campo es requerido"}
+          helperText={validator(errors.pass?.type, "pass")}
           placeholder="Contraseña.."
           {...register("pass", {
             required: true,
@@ -81,7 +81,7 @@ const User = (props) => {
           type="text"
           placeholder="123456789.."
           error={errors.phone ? true : false}
-          helperText={errors.phone && "El campo es requerido"}
+          helperText={validator(errors.phone?.type, "phone")}
           variant="filled"
           {...register("phone", {
             required: true,
@@ -93,7 +93,7 @@ const User = (props) => {
           type="text"
           variant="filled"
           error={errors.dni ? true : false}
-          helperText={errors.dni && "El campo es requerido"}
+          helperText={validator(errors.dni?.type, "dni")}
           placeholder="123456789.."
           {...register("dni", {
             required: true,
@@ -106,7 +106,7 @@ const User = (props) => {
           label="Ubicacion"
           type="text"
           error={errors.location ? true : false}
-          helperText={errors.location && "El campo es requerido"}
+          helperText={validator(errors.location?.type, "location")}
           variant="filled"
           placeholder="San miguel.."
           {...register("location", {
@@ -122,7 +122,7 @@ const User = (props) => {
               type="text"
               variant="filled"
               error={errors.work ? true : false}
-              helperText={errors.work && "El campo es requerido"}
+              helperText={validator(errors.work?.type, "work")}
               placeholder="Electricista.."
               {...register("work", {
                 required: true,
@@ -134,7 +134,7 @@ const User = (props) => {
               label="Certificacion"
               type="text"
               error={errors.certificate ? true : false}
-              helperText={errors.certificate && "El campo es requerido"}
+              helperText={validator(errors.certificate?.type, "certificate")}
               variant="filled"
               {...register("certificate", {
                 required: true,
