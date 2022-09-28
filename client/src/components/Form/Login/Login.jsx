@@ -1,5 +1,7 @@
 import style from "./Login.module.css";
 import { useForm } from "react-hook-form";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const Login = () => {
   const {
@@ -16,37 +18,36 @@ const Login = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
 			<h2>Ingresar</h2>
       <div className={style.inputContainer}>
-        <label htmlFor="userLogin">Email</label>
-        <input
+        <TextField
+          label='Email'
           type="text"
+          variant="filled"
           placeholder="user@email.com"
           name="email"
+          error={errors.email ? true : false}
+          helperText={errors.email?.type === 'required' ? "El campo es requerido" : "Ingrese un email valido"}
           {...register("email", {
             required: true,
             pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
           })}
         />
-        {errors.email?.type === "required" && (
-          <span>El campo es requerido</span>
-        )}
-        {errors.email?.type === "pattern" && (
-          <span>Ingresa un email valido</span>
-        )}
       </div>
       <div className={style.inputContainer}>
-        <label htmlFor="userLogin">Contraseña</label>
-        <input
+        <TextField
+          label='Password'
           type="password"
+          variant="filled"
+          error={errors.pass ? true : false}
+          helperText={errors.pass?.type === 'required' && "El campo es requerido"}
           placeholder="password"
           name="pass"
           {...register("pass", {
             required: true,
           })}
         />
-        {errors.pass?.type === "required" && <span>El campo es requerido</span>}
       </div>
 
-      <input type="submit" value="Ingresar" />
+      <Button type="submit" value="Ingresar" variant="contained">Ingresar</Button>
     </form>
   );
 };

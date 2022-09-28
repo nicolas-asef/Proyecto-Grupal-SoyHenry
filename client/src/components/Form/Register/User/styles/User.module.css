@@ -1,4 +1,13 @@
 .inputContainer{
   display: flex;
   flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.horizontal div {
+  margin-right: 10px;
 }

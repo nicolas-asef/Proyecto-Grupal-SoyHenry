@@ -1,6 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import style from "./styles/User.module.css";
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 
 const User = (props) => {
   const {
@@ -15,10 +18,13 @@ const User = (props) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.userclient}>
-      <div className={style.inputContainer}>
-        <label htmlFor="name">Nombre: </label>
-        <input
+      <div className={`${style.inputContainer} ${style.horizontal}`}>
+        <TextField
+          label="Nombre"
           type="text"
+          variant="filled"
+          error={errors.name ? true : false}
+          helperText={errors.name && "El campo es requerido"}
           placeholder="Alfonso.."
           {...register("name", {
             required: true,
@@ -26,12 +32,12 @@ const User = (props) => {
             maxLength: 15,
           })}
         />
-        {errors.name?.type === "required" && <span>El campo es requerido</span>}
-      </div>
-      <div className={style.inputContainer}>
-        <label htmlFor="name">Apellido: </label>
-        <input
+        <TextField
+          label="Apellido"
           type="text"
+          variant="filled"
+          error={errors.lastname ? true : false}
+          helperText={errors.lastname && "El campo es requerido"}
           placeholder="Gutierrez.."
           {...register("lastname", {
             required: true,
@@ -39,113 +45,105 @@ const User = (props) => {
             maxLength: 15,
           })}
         />
-        {errors.lastname?.type === "required" && (
-          <span>El campo es requerido</span>
-        )}
       </div>
       <div className={style.inputContainer}>
-        <label htmlFor="name">Usuario: </label>
-        <input
+        <TextField
           type="text"
-          placeholder="Usuario_202.."
+          label="Usuario"
+          variant="filled"
+          error={errors.user ? true : false}
+          helperText={errors.user && "El campo es requerido"}
+          placeholder="Usuario_2022"
           {...register("user", {
             required: true,
             minLength: 4,
             maxLength: 15,
           })}
         />
-        {errors.user?.type === "required" && <span>El campo es requerido</span>}
       </div>
       <div className={style.inputContainer}>
-        <label htmlFor="name">Contraseña: </label>
-        <input
+        <TextField
+          label="Contaseña"
           type="password"
+          variant="filled"
+          error={errors.pass ? true : false}
+          helperText={errors.pass && "El campo es requerido"}
           placeholder="Contraseña.."
           {...register("pass", {
             required: true,
             pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
           })}
         />
-        {errors.pass?.type === "required" && <span>El campo es requerido</span>}
-        {errors.pass?.type === "pattern" && (
-          <span>Ingresa una contraseña valida</span>
-        )}
       </div>
-      <div className={style.inputContainer}>
-        <label htmlFor="name">Telefono: </label>
-        <input
+      <div className={`${style.inputContainer} ${style.horizontal}`}>
+        <TextField
+          label="Numero de telefono"
           type="text"
           placeholder="123456789.."
+          error={errors.phone ? true : false}
+          helperText={errors.phone && "El campo es requerido"}
+          variant="filled"
           {...register("phone", {
             required: true,
             pattern: /^[0-9]*$/,
           })}
         />
-        {errors.phone?.type === "required" && (
-          <span>El campo es requerido</span>
-        )}
-        {errors.phone?.type === "pattern" && (
-          <span>Ingresa un numero valido</span>
-        )}
-      </div>
-      <div className={style.inputContainer}>
-        <label htmlFor="name">Documento de identidad: </label>
-        <input
+        <TextField
+          label="Documento (DNI)"
           type="text"
+          variant="filled"
+          error={errors.dni ? true : false}
+          helperText={errors.dni && "El campo es requerido"}
           placeholder="123456789.."
           {...register("dni", {
             required: true,
             pattern: /^[0-9]*$/,
           })}
         />
-        {errors.dni?.type === "required" && <span>El campo es requerido</span>}
-        {errors.dni?.type === "pattern" && (
-          <span>Ingresa un documento valido</span>
-        )}
       </div>
       <div className={style.inputContainer}>
-        <label htmlFor="name">Ubicacion: </label>
-        <input
+        <TextField
+          label="Ubicacion"
           type="text"
+          error={errors.location ? true : false}
+          helperText={errors.location && "El campo es requerido"}
+          variant="filled"
           placeholder="San miguel.."
           {...register("location", {
             required: true,
           })}
         />
-        {errors.location?.type === "required" && (
-          <span>El campo es requerido</span>
-        )}
       </div>
       {props.type === "worker" && (
         <>
           <div className={style.inputContainer}>
-            <label htmlFor="name">Oficio: </label>
-            <input
+            <TextField
+              label="Oficio"
               type="text"
+              variant="filled"
+              error={errors.work ? true : false}
+              helperText={errors.work && "El campo es requerido"}
               placeholder="Electricista.."
               {...register("work", {
                 required: true,
               })}
             />
-            {errors.location?.type === "required" && (
-              <span>El campo es requerido</span>
-            )}
           </div>
           <div className={style.inputContainer}>
-            <label htmlFor="name">Certificacion: </label>
-            <input
+            <TextField
+              label="Certificacion"
               type="text"
+              error={errors.certificate ? true : false}
+              helperText={errors.certificate && "El campo es requerido"}
+              variant="filled"
               {...register("certificate", {
                 required: true,
               })}
             />
-            {errors.location?.type === "required" && (
-              <span>El campo es requerido</span>
-            )}
           </div>
         </>
       )}
-      <input type="submit" value="Registrarse" />
+      <Button type="submit" variant="contained" value="Registrarse">Registrarse</Button>
     </form>
   );
 };

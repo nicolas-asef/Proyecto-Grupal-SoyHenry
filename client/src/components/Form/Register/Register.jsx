@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import style from "./Register.module.css";
 import User from "./User/User"
+import Button from '@mui/material/Button';
 
 const Register = () => {
   const [selected, setSelected] = useState({
@@ -25,14 +26,14 @@ const Register = () => {
 
   return (
     <div>
-			<button onClick={handleBack}>Back</button>
+			<Button disabled={selected.isSelected ? false : true} variant="outlined" onClick={handleBack}>Back</Button>
 			<h2>Registro</h2>
       {!selected.type && (
         <div>
           <label htmlFor="TypeUser">¿Como quieres registrarte?</label>
           <div className={style.selection}>
-            <button name="client" onClick={handleSelection}>Client</button>
-            <button name="worker" onClick={handleSelection}>Trabajador</button>
+            <Button variant="contained" name="client" onClick={handleSelection}>Client</Button>
+            <Button variant="contained" name="worker" onClick={handleSelection}>Trabajador</Button>
           </div>
         </div>
       )}
