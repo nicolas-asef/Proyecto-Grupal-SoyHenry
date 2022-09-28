@@ -7,7 +7,6 @@ const {
 } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/jobplatform`, {
-
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -35,8 +34,17 @@ const {Admin, Chat, Contract, Job, User, Worker } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
+
+
+User.hasMany(Contract, {foreignKey: id, as:'contratante'})
+Contract.belongsTo(User, {foreignKey: id, as:'sender'})
+
+Worker.hasMany(Contract, {foreignKey: id, as:'contratado'})
+Contract.belongsTo(Worker, {foreignKey: id, as:'recive'})
+
 User.hasOne(Worker);
 Worker.belongsTo(User);
+
 
 // let probando = async () => {
 //   const agregando = await Videogame.create({nombre:'juanchito',descripcion:'alto',rating: 3.2,plataformas: 'Playstation'})
