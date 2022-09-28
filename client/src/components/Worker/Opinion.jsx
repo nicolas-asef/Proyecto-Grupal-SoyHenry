@@ -47,7 +47,7 @@ import styled, { css } from 'styled-components'
 
 
 export default function Opinion({contratos}) {
-  const altura = contratos.length*19
+  const altura = contratos.length*16
   const Opinion2 = styled.div`
   height: ${altura}vh;
 `;
@@ -58,16 +58,8 @@ export default function Opinion({contratos}) {
     <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
     <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
     <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
+
+
   </Opinion2>
   )
 }

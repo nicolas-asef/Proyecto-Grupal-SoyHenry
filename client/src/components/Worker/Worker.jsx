@@ -17,7 +17,7 @@ export const Worker = (props) => {
         </div>
         <div className="w-right">
             <Stats/>
-            <Opinion contratos={[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]}/>
+            <Opinion contratos={[1,2,3,4,5]}/>
         </div>
     </div>
   )

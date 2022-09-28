@@ -20,10 +20,11 @@
     box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
     justify-content: start;
     align-items: center;
+
   }
   
   .opinion p:hover {
-    flex: 15 ;
+    flex: 20 ;
   }
   
 
