@@ -9,6 +9,7 @@ function App() {
     <Routes>
       <Route path='/' element={<LandingPage />} />
       <Route path='/users/login' element={ <Form /> }/>
+      <Route path='/users/register' element={ <Form /> }/>
     </Routes>
   );
 }
