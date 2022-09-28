@@ -1,0 +1,52 @@
+/* From uiverse.io by @joe-watson-sbf */
+.opinion {
+    width: 54vw;
+    border-radius: 4px;
+    display: flex;
+    gap: 5px;
+    padding: .4em;
+    flex-direction: column;
+    
+  }
+  
+  .opinion p {
+    flex: 5;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all .5s;
+    background: #ffffff;
+    display: flex;
+    box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
+    justify-content: start;
+    align-items: center;
+  }
+  
+  .opinion p:hover {
+    flex: 15 ;
+  }
+  
+
+  
+
+
+
+  .o-img  {
+    --size: 7rem;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    position: relative;
+    transition: all .3s ease-in-out;
+    object-fit: cover;
+   }
+
+
+
+   .p-interior{
+    padding-left: 2vw;
+    display: flex;
+    flex-direction: column;
+    margin: solid 1px black;
+    width: 10vw;
+}
