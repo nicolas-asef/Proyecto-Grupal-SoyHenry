@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
+const { Sequelize, Op } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -36,15 +36,24 @@ const {Admin, Chat, Contract, Job, User, Worker } = sequelize.models;
 // Product.hasMany(Reviews);
 
 
-User.hasMany(Contract, {foreignKey: id, as:'contratante'})
-Contract.belongsTo(User, {foreignKey: id, as:'sender'})
+User.hasMany(Contract)
+Contract.belongsTo(User)
 
-Worker.hasMany(Contract, {foreignKey: id, as:'contratado'})
-Contract.belongsTo(Worker, {foreignKey: id, as:'recive'})
+Worker.hasMany(Contract)
+Contract.belongsTo(Worker)
+
+User.hasMany(Chat)
+Chat.belongsTo(User)
+
+Worker.hasMany(Chat)
+Chat.belongsTo(Worker)
+
 
 User.hasOne(Worker);
 Worker.belongsTo(User);
 
+Job.belongsToMany(Worker,{through:"Works_Jobs"})
+Worker.belongsToMany(Job,{through:"Works_Jobs"})
 
 // let probando = async () => {
 //   const agregando = await Videogame.create({nombre:'juanchito',descripcion:'alto',rating: 3.2,plataformas: 'Playstation'})
@@ -53,5 +62,6 @@ Worker.belongsTo(User);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
+  conn: sequelize,
+  Op     // para importart la conexión { conn } = require('./db.js');
 };
