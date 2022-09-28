@@ -1,5 +1,4 @@
 export const validator = (type, fieldName) => {
-  console.log(type)
   switch (type) {
     case "required": {
       return "El campo es requerido";
