@@ -1,0 +1,25 @@
+.stats{
+    /* border: 3px solid #73AD21; */
+    width: 54vw;
+    box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
+    display: flex;
+    justify-content: space-between;
+    background: #ffffff;
+    border-radius: 10px;
+}
+
+
+.s-right{
+    display: flex;
+    
+}
+
+.s-right>:nth-child(2){
+    width: 5vw;
+}
+
+/* font-size: 1.1em;
+    text-align: start;
+    color: #6f6d78;
+    font-weight: 400;
+    font-style: italic; */
