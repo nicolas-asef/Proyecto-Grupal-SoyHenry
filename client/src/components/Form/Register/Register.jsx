@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import style from "./Register.module.css";
-import UserClient from "./UserClient/UserClient"
-import UserWorker from "./UserWorker/UserWorker"
+import User from "./User/User"
 
 const Register = () => {
   const [selected, setSelected] = useState({
@@ -37,11 +36,8 @@ const Register = () => {
           </div>
         </div>
       )}
-			{selected.type === 'client' && (
-				<UserClient />
-			)}
-			{selected.type === 'worker' && (
-				<UserWorker />
+			{selected.type !== '' && (
+				<User type={selected.type}/>
 			)}
     </div>
   );

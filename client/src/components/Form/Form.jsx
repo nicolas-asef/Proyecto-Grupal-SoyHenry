@@ -11,7 +11,6 @@ const Form = () => {
   return (
     <div className={style.container}>
       <div className={style.formContainer}>
-        {/* Imagen */}
         <div>
           {pathname === "/users/login" && <Login />}
           {pathname === "/users/register" && <Register />}

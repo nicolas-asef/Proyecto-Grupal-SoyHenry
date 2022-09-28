@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import style from "./styles/UserClient.module.css";
+import style from "./styles/User.module.css";
 
-const UserClient = () => {
+const User = (props) => {
   const {
     register,
     handleSubmit,
@@ -26,6 +26,7 @@ const UserClient = () => {
 						maxLength: 15
           })}
         />
+        {errors.name?.type === "required" && <span>El campo es requerido</span>}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Apellido: </label>
@@ -38,6 +39,7 @@ const UserClient = () => {
 						maxLength: 15
           })}
         />
+      	{errors.lastname?.type === "required" && <span>El campo es requerido</span>}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Usuario: </label>
@@ -50,6 +52,7 @@ const UserClient = () => {
 						maxLength: 15,
           })}
         />
+				{errors.user?.type === "required" && <span>El campo es requerido</span>}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Contraseña: </label>
@@ -61,6 +64,8 @@ const UserClient = () => {
 						pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
           })}
         />
+				{errors.pass?.type === "required" && <span>El campo es requerido</span>}
+				{errors.pass?.type === "pattern" && <span>Ingresa una contraseña valida</span>}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Telefono: </label>
@@ -69,10 +74,11 @@ const UserClient = () => {
           placeholder="123456789.."
           {...register("phone", {
             required: true,
-						minLength,
 						pattern: /^[0-9]*$/
           })}
         />
+				{errors.phone?.type === "required" && <span>El campo es requerido</span>}
+				{errors.phone?.type === "pattern" && <span>Ingresa un numero valido</span>}
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Documento de identidad: </label>
@@ -84,6 +90,9 @@ const UserClient = () => {
 						pattern: /^[0-9]*$/
           })}
         />
+				{errors.dni?.type === "required" && <span>El campo es requerido</span>}
+				{errors.dni?.type === "pattern" && <span>Ingresa un documento valido</span>}
+
       </div>
       <div className={style.inputContainer}>
         <label htmlFor="name">Ubicacion: </label>
@@ -94,10 +103,24 @@ const UserClient = () => {
             required: true,
           })}
         />
+				{errors.location?.type === "required" && <span>El campo es requerido</span>}
       </div>
+			{props.type === 'worker' && (
+				 <div className={style.inputContainer}>
+         <label htmlFor="name">Oficio: </label>
+         <input
+           type="select"
+           placeholder="Electricista.."
+           {...register("work", {
+             required: true,
+           })}
+         />
+         {errors.location?.type === "required" && <span>El campo es requerido</span>}
+       </div>
+			)}
       <input type="submit" value="Registrarse" />
     </form>
   );
 };
 
-export default UserClient;
+export default User;
