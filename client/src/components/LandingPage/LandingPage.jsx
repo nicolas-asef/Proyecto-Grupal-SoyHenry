@@ -2,9 +2,15 @@ import React from 'react';
 import NavBar from '../NavBar/NavBar';
 import './LandingPage.css'
 import { Link} from 'react-router-dom';
+
+
 // let location = useLocation
 // const path = location
+
+
+
 const LandingPage = () => {
+
 	return (
     <div className="landing-container">
       <NavBar />
