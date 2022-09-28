@@ -1,5 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from 'axios'
+export const GET_JOBS = "GET_JOBS"
 export const GET_USERS = 'GET_USERS'
 export const GET_USERNAME = 'GET_USERNAME'
 export const POST_USER = 'POST_USER'
@@ -41,5 +42,17 @@ export function createUser(payload){
             type: POST_USER,
         })
         return user;
+
+
+
+export function getJobs (){
+    return async function (dispatch){
+        try {
+            let jobs = await axios.get("http://localhost:3001/jobs")
+            return dispatch ({type: GET_JOBS, payload: jobs.data})
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 }

@@ -1,10 +1,11 @@
-import {GET_USERS, GET_USERNAME, POST_USER} from "../actions"
+import {GET_USERS, GET_USERNAME, POST_USER, GET_JOBS} from "../actions/actions"
 
 
 
 const initialState = {
   workers: [],
   users: [],
+  jobs: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ const reducer = (state = initialState, action) => {
         return {
           ...state
         }
+    case GET_JOBS: 
+      return{
+        ...state,
+        jobs : action.payload
+    }
     default:
       return state;
   }
