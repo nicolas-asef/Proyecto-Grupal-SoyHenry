@@ -36,6 +36,7 @@ const {Admin, Chat, Contract, Job, User, Worker } = sequelize.models;
 // Product.hasMany(Reviews);
 
 
+
 Contract.hasOne(Worker)
 Worker.hasMany(Contract)
 

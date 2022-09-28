@@ -1,21 +1,33 @@
-import React from "react";
+import {React, useState} from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useEffect } from "react-redux";
+import { createUser } from "../../../../redux/actions/actions";
 import style from "./styles/User.module.css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { validator } from "../../validator";
 
 const User = (props) => {
+  const dispatch = useDispatch();
+  const [done, setDone] = useState(false);
+  const [disable, setDisable] = useState(true);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = () => {
-    alert("Registrandose..");
+  const onSubmit = (data) => {
+    dispatch(createUser(data))
+      .then(res => {
+        res.status === 200 ? setDone(true) : setDone(false)
+      })
   };
 
+/*   useEffect( () => {
+
+  });
+ */
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.userclient}>
       <div className={`${style.inputContainer} ${style.horizontal}`}>
@@ -36,10 +48,10 @@ const User = (props) => {
           label="Apellido"
           type="text"
           variant="filled"
-          error={errors.lastname ? true : false}
-          helperText={validator(errors.lastname?.type, "lastname")}
+          error={errors.lastName ? true : false}
+          helperText={validator(errors.lastName?.type, "lastname")}
           placeholder="Gutierrez.."
-          {...register("lastname", {
+          {...register("lastName", {
             required: true,
             minLength: 4,
             maxLength: 15,
@@ -49,15 +61,15 @@ const User = (props) => {
       <div className={style.inputContainer}>
         <TextField
           type="text"
-          label="Usuario"
+          label="Email"
           variant="filled"
-          error={errors.user ? true : false}
-          helperText={validator(errors.user?.type, "user")}
-          placeholder="Usuario_2022"
-          {...register("user", {
+          error={errors.email ? true : false}
+          helperText={validator(errors.email?.type, "email")}
+          placeholder="user@mail.com"
+          {...register("email", {
             required: true,
-            minLength: 4,
-            maxLength: 15,
+            pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+            minLength: 5,
           })}
         />
       </div>
@@ -66,10 +78,10 @@ const User = (props) => {
           label="Contaseña"
           type="password"
           variant="filled"
-          error={errors.pass ? true : false}
-          helperText={validator(errors.pass?.type, "pass")}
+          error={errors.password ? true : false}
+          helperText={validator(errors.password?.type, "pass")}
           placeholder="Contraseña.."
-          {...register("pass", {
+          {...register("password", {
             required: true,
             pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
           })}

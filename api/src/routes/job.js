@@ -16,12 +16,12 @@ route.get('/', async (req, res) => {
 
 route.post('/', async (req,res) => {
     
-    const {nombre} = req.body
-    console.log(nombre)
+    const {name} = req.body
+    console.log(name)
     try {
         console.log(Job)
         const job = await Job.create({
-            nombre: nombre
+            name: name
         })
         res.send(job)
     } catch (error) {
