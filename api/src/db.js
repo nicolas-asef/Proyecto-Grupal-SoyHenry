@@ -36,11 +36,18 @@ const {Admin, Chat, Contract, Job, User, Worker } = sequelize.models;
 // Product.hasMany(Reviews);
 
 
-User.hasMany(Contract, {foreignKey: id, as:'contratante'})
-Contract.belongsTo(User, {foreignKey: id, as:'sender'})
+Contract.hasOne(Worker)
+Worker.hasMany(Contract)
 
-Worker.hasMany(Contract, {foreignKey: id, as:'contratado'})
-Contract.belongsTo(Worker, {foreignKey: id, as:'recive'})
+Contract.hasOne(User)
+User.hasMany(Contract)
+//Con Chat es lo mismo.
+
+
+
+Worker.belongsToMany(Job,{through:"Works_Jobs"})
+Job.belongsToMany(Worker,{through:"Works_Jobs"})
+
 
 User.hasOne(Worker);
 Worker.belongsTo(User);
