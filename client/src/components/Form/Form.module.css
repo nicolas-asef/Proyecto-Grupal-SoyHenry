@@ -1,0 +1,22 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formContainer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 400px;
+  min-height: 200px;
+  background-color: rgb(138, 139, 139);
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+  text-transform: capitalize;
+}
