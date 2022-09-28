@@ -1,14 +1,11 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-export const GET_JOBS = "GET_JOBS";
-export const GET_USERS = "GET_USERS";
-export const GET_USERNAME = "GET_USERNAME";
-export const POST_USER = "POST_USER";
+import { GET_JOBS, GET_USERNAME, GET_USERS, POST_USER } from "./actions_vars"
 
 export function getUsers() {
   return function (dispatch) {
     axios
-      .get("http://localhost:3001/api/users")
+      .get("http://localhost:3001/users")
       .then((u) => {
         dispatch({
           type: GET_USERS,
@@ -24,7 +21,7 @@ export function getUsers() {
 export function getUsersName(search) {
   return function (dispatch) {
     axios
-      .get("http://localhost:3001/api/users?name=" + search)
+      .get("http://localhost:3001/users?name=" + search)
       .then((u) => {
         dispatch({
           type: GET_USERNAME,
@@ -39,7 +36,7 @@ export function getUsersName(search) {
 
 export function createUser(payload) {
   return async function (dispatch) {
-    const user = await axios.post("http://localhost:3001/api/users", payload);
+    const user = await axios.post("http://localhost:3001/users", payload);
     dispatch({
       type: POST_USER,
     });
