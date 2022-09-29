@@ -34,7 +34,6 @@ export function getUsersName(search) {
 }
 
 export function createUser(payload) {
-  // seguramente el nombre del endpoint worker y los nombres de la data que manda haya que modificarla
   return async function (dispatch) {
     const user = await axios.post("http://localhost:3001/users", payload);
     const user_id = await user.data.ID;
@@ -47,7 +46,7 @@ export function createUser(payload) {
       }
       const res = await axios.post("http://localhost:3001/worker", worker);
     }
-    
+
     dispatch({
       type: POST_USER,
     });
