@@ -14,7 +14,7 @@ export { default as Opinion } from './Worker/Opinion';
 export { default as Profile } from './Worker/Profile';
 export { default as Stats } from './Worker/Stats';
 export { default as Worker } from './Worker/Worker';
-
+export { default as SearchBar } from './SearchBar/SearchBar';
 export * from './index';
 
 
