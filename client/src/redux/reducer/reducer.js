@@ -1,4 +1,4 @@
-import {GET_USERS, GET_USERNAME, POST_USER, GET_JOBS} from "../actions/actions_vars"
+import {GET_USERS, GET_USERNAME, POST_USER, GET_JOBS, GET_WORKERS_PREMIUM} from "../actions/actions_vars"
 
 
 
@@ -6,7 +6,7 @@ const initialState = {
   workers: [],
   users: [],
   jobs: [],
-  workersPremium: [],
+  workersPremium: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -30,6 +30,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         jobs : action.payload
     }
+    case GET_WORKERS_PREMIUM:
+      return {
+        ...state,
+        workersPremium: action.payload
+      }
     default:
       return state;
   }
