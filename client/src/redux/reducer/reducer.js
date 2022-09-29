@@ -5,7 +5,8 @@ import {GET_USERS, GET_USERNAME, POST_USER, GET_JOBS} from "../actions/actions_v
 const initialState = {
   workers: [],
   users: [],
-  jobs: []
+  jobs: [],
+  workersPremium: [],
 }
 
 const reducer = (state = initialState, action) => {

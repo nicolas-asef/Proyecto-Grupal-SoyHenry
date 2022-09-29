@@ -6,5 +6,7 @@ export { default as User } from './Form/Register/User/User';
 export * from './Form/validator';
 export { default as Home } from './Home/Home';
 export { default as LandingPage } from './LandingPage/LandingPage';
+export { default as PaginationSize } from './PaginationSize/PaginationSize';
 export { default as NavBar } from './NavBar/NavBar';
 export * from './index';
+
