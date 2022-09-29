@@ -1,33 +1,50 @@
-import {React, useState} from "react";
+import { useState, useEffect } from "react";
+import * as React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useEffect } from "react-redux";
-import { createUser } from "../../../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createUser,
+  getJobs,
+} from "../../../../redux/actions/actions";
 import style from "./styles/User.module.css";
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from '@mui/material/Alert';
 import { validator } from "../../validator";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const User = (props) => {
   const dispatch = useDispatch();
-  const [done, setDone] = useState(false);
-  const [disable, setDisable] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [severity, setseverity] = useState("");
+  const { jobs } = useSelector((state) => state);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    dispatch(getJobs());
+  }, [dispatch]);
+
   const onSubmit = (data) => {
-    dispatch(createUser(data))
-      .then(res => {
-        res.status === 200 ? setDone(true) : setDone(false)
-      })
+    dispatch(createUser(data)).then((res) => {
+      if (res.status === 200) {
+        setOpen(true);
+        setseverity("success");
+      } else {
+        setOpen(true);
+        setseverity("error");
+      }
+    });
   };
 
-/*   useEffect( () => {
-
-  });
- */
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.userclient}>
       <div className={`${style.inputContainer} ${style.horizontal}`}>
@@ -131,15 +148,22 @@ const User = (props) => {
           <div className={style.inputContainer}>
             <TextField
               label="Oficio"
-              type="text"
+              select
+              defaultValue=""
               variant="filled"
               error={errors.work ? true : false}
-              helperText={validator(errors.work?.type, "work")}
               placeholder="Electricista.."
               {...register("work", {
                 required: true,
               })}
-            />
+            >
+              {jobs &&
+                jobs.map((job) => (
+                  <MenuItem key={job.id} value={job.name}>
+                    {job.name}
+                  </MenuItem>
+                ))}
+            </TextField>
           </div>
           <div className={style.inputContainer}>
             <TextField
@@ -148,14 +172,17 @@ const User = (props) => {
               error={errors.certificate ? true : false}
               helperText={validator(errors.certificate?.type, "certificate")}
               variant="filled"
-              {...register("certificate", {
-                required: true,
-              })}
+              {...register("certificate")}
             />
           </div>
         </>
       )}
-      <Button type="submit" variant="contained" value="Registrarse">Registrarse</Button>
+      <Button type="submit" variant="contained" value="Registrarse">
+        Registrarse
+      </Button>
+      <Snackbar open={open} autoHideDuration={5000} onClose={() => setOpen(false)}>
+        <Alert severity={severity}>{severity === "success" ? "Registrado con exito!" : "Ocurrio un error en el registro"}</Alert>
+      </Snackbar>
     </form>
   );
 };

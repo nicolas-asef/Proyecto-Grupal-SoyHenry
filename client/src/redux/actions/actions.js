@@ -38,6 +38,17 @@ export function getUsersName(search) {
 export function createUser(payload) {
   return async function (dispatch) {
     const user = await axios.post("http://localhost:3001/users", payload);
+    const user_id = await user.data.ID;
+    if(payload.work) {
+      const worker = {
+        user_id,
+        jobs: payload.work,
+        certification: payload.certificate
+
+      }
+      const res = await axios.post("http://localhost:3001/worker", worker);
+    }
+
     dispatch({
       type: POST_USER,
     });
