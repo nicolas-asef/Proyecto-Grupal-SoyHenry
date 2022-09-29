@@ -46,10 +46,10 @@ export function createUser(payload) {
       const worker = {
         user_id,
         jobs: payload.work,
-        certificate: payload.certificate
+        certification: payload.certificate
 
       }
-      const res = await axios.post("http://localhost:3001/workers", worker);
+      const res = await axios.post("http://localhost:3001/worker", worker);
     }
     dispatch({
       type: POST_USER,
