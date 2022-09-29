@@ -1,10 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-export const GET_JOBS = "GET_JOBS";
-export const GET_USERS = "GET_USERS";
-export const GET_USERNAME = "GET_USERNAME";
-export const POST_USER = "POST_USER";
-
+import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER } from './actions_vars'
 export function getUsers() {
   return function (dispatch) {
     axios
@@ -51,6 +47,7 @@ export function createUser(payload) {
       }
       const res = await axios.post("http://localhost:3001/workers", worker);
     }
+    
     dispatch({
       type: POST_USER,
     });
