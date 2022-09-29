@@ -76,7 +76,7 @@ router.post('/', async (req, res, next) => {
             dni, 
             location
         })
-        res.status(200).send({message: 'El user fue creado correctamente'})
+        res.status(200).json(user) // para agarrar el id de usuario al crearlo
     } catch (error) {
         next(error)
     }
