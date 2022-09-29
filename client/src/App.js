@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { Form,Home,LandingPage,NavBar,Footer,About } from './components'
+import { Form,Home,LandingPage,NavBar,About } from './components'
 import Worker from './components/Worker/Worker';
 
 function App() {
@@ -15,7 +15,6 @@ function App() {
       <Route path='/users/login' element={ <Form /> }/>
       <Route path='/users/register' element={ <Form /> }/>
     </Routes>
-    <Footer/>
     </div>
   );
 }
