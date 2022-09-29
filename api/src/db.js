@@ -36,6 +36,7 @@ const {Admin, Chat, Contract, Job, User, Worker } = sequelize.models;
 // Product.hasMany(Reviews);
 
 
+
 User.hasMany(Contract)
 Contract.belongsTo(User)
 
@@ -47,6 +48,12 @@ Chat.belongsTo(User)
 
 Worker.hasMany(Chat)
 Chat.belongsTo(Worker)
+
+
+
+
+Worker.belongsToMany(Job,{through:"Works_Jobs"})
+Job.belongsToMany(Worker,{through:"Works_Jobs"})
 
 
 User.hasOne(Worker);
