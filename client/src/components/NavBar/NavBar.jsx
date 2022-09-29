@@ -143,9 +143,12 @@ const NavBar = () => {
           </div>
         )}{
           pathname === '/about'&& (
+            <div>
+              <h1 className='title-about'>About us</h1>
             <Link to='/home'>
               <Button variant="contained">Home</Button>
             </Link>
+            </div>
           )
         }
       </div>
