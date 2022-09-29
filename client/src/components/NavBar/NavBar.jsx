@@ -141,7 +141,13 @@ const NavBar = () => {
               </Menu>
             </React.Fragment>
           </div>
-        )}
+        )}{
+          pathname === '/about'&& (
+            <Link to='/home'>
+              <Button variant="contained">Home</Button>
+            </Link>
+          )
+        }
       </div>
     </div>
   );
