@@ -22,6 +22,7 @@ const User = (props) => {
   const [severity, setseverity] = useState("");
   const [jobsState, setJobsState] = useState([]);
   const [workMax, setWorkMax] = useState(false);
+  const [validateWorks, setValidateWorks] = useState(false);
   const { jobs } = useSelector((state) => state);
   const {
     register,
@@ -34,6 +35,8 @@ const User = (props) => {
   }, [dispatch]);
 
   const handleJob = (e) => {
+    setValidateWorks(false);
+
     const exist = jobsState.find( job => job === e.target.value);
     if (jobsState.length < 3) {
       if(!exist) {
@@ -52,6 +55,8 @@ const User = (props) => {
   };
 
   const onSubmit = (data) => {
+    if(props.type === "worker" && !jobsState.length) return setValidateWorks(true)
+
     dispatch(createUser(data, jobsState)).then((res) => {
       if (res.status === 200) {
         setOpen(true);
@@ -171,8 +176,10 @@ const User = (props) => {
               defaultValue=""
               variant="filled"
               onChange={handleJob}
-              error={workMax}
-              helperText={workMax && "Maximo tres oficios inicialmente"}
+              error={workMax || validateWorks}
+              helperText={workMax ?
+              "Maximo tres oficios inicialmente" : null
+              || validateWorks ? "El campo es requerido" : null }
               placeholder="Electricista.."
             >
               {jobs && jobs.map((job) => (
@@ -202,7 +209,7 @@ const User = (props) => {
         <Alert severity={severity}>
           {severity === "success"
             ? "Registrado con exito!"
-            : "Ocurrio un error en el registro"}
+            : "Todos los campos son requeridos"}
         </Alert>
       </Snackbar>
     </form>
