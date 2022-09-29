@@ -16,7 +16,7 @@ export default function PaginationSize({workersPerPage, workers, paginado}) {
   return (
     <Stack spacing={2}>
       
-      <Pagination count={pageNumber} size="large" onClick={paginado(e.target.value)}/>
+      <Pagination count={pageNumber} size="large" onClick={ e => paginado(e.target.value)}/>
     </Stack>
   );
 }
