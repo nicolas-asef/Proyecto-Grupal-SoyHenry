@@ -1,4 +1,4 @@
-import {GET_USERS, GET_USERNAME, POST_USER, GET_JOBS} from "../actions/actions"
+import {GET_USERS, GET_USERNAME, POST_USER, GET_JOBS} from "../actions/actions_vars"
 
 
 
