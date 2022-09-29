@@ -2,16 +2,14 @@ import { useState, useEffect } from "react";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createUser,
-  getJobs,
-} from "../../../../redux/actions/actions";
+import { createUser, getJobs } from "../../../../redux/actions/actions";
 import style from "./styles/User.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from '@mui/material/Alert';
+import MuiAlert from "@mui/material/Alert";
+import ButtonGroup from "@mui/material/ButtonGroup";
 import { validator } from "../../validator";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -22,6 +20,8 @@ const User = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [severity, setseverity] = useState("");
+  const [jobsState, setJobsState] = useState([]);
+  const [workMax, setWorkMax] = useState(false);
   const { jobs } = useSelector((state) => state);
   const {
     register,
@@ -33,8 +33,26 @@ const User = (props) => {
     dispatch(getJobs());
   }, [dispatch]);
 
+  const handleJob = (e) => {
+    const exist = jobsState.find( job => job === e.target.value);
+    if (jobsState.length < 3) {
+      if(!exist) {
+        setJobsState([...jobsState, e.target.value]);
+      }
+    } else {
+      setWorkMax(true);
+      setTimeout( () => {
+        setWorkMax(false);
+      }, 3000)
+    }
+  };
+
+  const handleDelete = (e) => {
+    setJobsState([...jobsState.filter( (job, index) => index !== parseInt(e.target.id))]);
+  };
+
   const onSubmit = (data) => {
-    dispatch(createUser(data)).then((res) => {
+    dispatch(createUser(data, jobsState)).then((res) => {
       if (res.status === 200) {
         setOpen(true);
         setseverity("success");
@@ -147,18 +165,17 @@ const User = (props) => {
         <>
           <div className={style.inputContainer}>
             <TextField
+              id="jobs"
               label="Oficio"
               select
               defaultValue=""
               variant="filled"
-              error={errors.work ? true : false}
+              onChange={handleJob}
+              error={workMax}
+              helperText={workMax && "Maximo tres oficios inicialmente"}
               placeholder="Electricista.."
-              {...register("work", {
-                required: true,
-              })}
             >
-              {jobs &&
-                jobs.map((job) => (
+              {jobs && jobs.map((job) => (
                   <MenuItem key={job.id} value={job.name}>
                     {job.name}
                   </MenuItem>
@@ -166,22 +183,27 @@ const User = (props) => {
             </TextField>
           </div>
           <div className={style.inputContainer}>
-            <TextField
-              label="Certificacion"
-              type="text"
-              error={errors.certificate ? true : false}
-              helperText={validator(errors.certificate?.type, "certificate")}
-              variant="filled"
-              {...register("certificate")}
-            />
+            <ButtonGroup variant="outlined">
+              {jobsState.length
+                ? jobsState.map((job, index) => <Button onClick={handleDelete} id={index} key={job}>{job}</Button>)
+                : null}
+            </ButtonGroup>
           </div>
         </>
       )}
       <Button type="submit" variant="contained" value="Registrarse">
         Registrarse
       </Button>
-      <Snackbar open={open} autoHideDuration={5000} onClose={() => setOpen(false)}>
-        <Alert severity={severity}>{severity === "success" ? "Registrado con exito!" : "Ocurrio un error en el registro"}</Alert>
+      <Snackbar
+        open={open}
+        autoHideDuration={5000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert severity={severity}>
+          {severity === "success"
+            ? "Registrado con exito!"
+            : "Ocurrio un error en el registro"}
+        </Alert>
       </Snackbar>
     </form>
   );

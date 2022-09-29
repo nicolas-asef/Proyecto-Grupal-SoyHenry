@@ -35,15 +35,14 @@ export function getUsersName(search) {
   };
 }
 
-export function createUser(payload) {
+export function createUser(payload, jobs) {
   return async function (dispatch) {
     const user = await axios.post("http://localhost:3001/users", payload);
     const user_id = await user.data.ID;
-    if(payload.work) {
+    if(jobs.length) {
       const worker = {
         user_id,
-        jobs: payload.work,
-        certification: payload.certificate
+        jobs,
 
       }
       const res = await axios.post("http://localhost:3001/worker", worker);
