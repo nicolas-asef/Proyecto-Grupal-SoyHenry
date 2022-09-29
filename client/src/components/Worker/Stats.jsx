@@ -5,7 +5,7 @@ import Estrella from '../../img/estrella.png';
 function Stats() {
   return (
     <div className="stats">
-        <div className="s-left">
+        <div className="s-left" style={{paddingLeft:"30px"}}>
             <p>Cantidad de trabajos terminados en la plataforma: 35</p>
         </div>
         <div className="s-right">

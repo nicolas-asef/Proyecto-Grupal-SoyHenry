@@ -1,6 +1,8 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER } from './actions_vars'
+import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM } from './actions_vars'
+
+
 export function getUsers() {
   return function (dispatch) {
     axios
@@ -64,3 +66,48 @@ export function getJobs() {
     }
   };
 }
+
+export function getWokersPremium() {
+  return async function (dispatch) {
+    try {
+      // let premium = await axios.get("http://localhost:3001/workers_premium");
+      return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+// Estos son los workers harcodeados, NO DEBE IR A LA MAIN
+const premium = [
+  {
+    nombre: "Lucas",
+    lastname: "Viotti",
+    img: "link",
+    job: "Albañil",
+    status: "Online"
+  },
+  {
+    nombre: "Feli",
+    lastname: "Liziano",
+    img: "link",
+    job: "Obrero",
+    status: "Online"
+  },
+  {
+    nombre: "Manuel",
+    lastname: "Lokito",
+    img: "link",
+    job: "Pintor",
+    status: "Offline"
+  },
+  {
+    nombre: "Guillermo",
+    lastname: "Gonzales",
+    img: "link",
+    job: "Durlero",
+    status: "Online"
+  }
+] 
+
