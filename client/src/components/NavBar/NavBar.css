@@ -9,9 +9,6 @@ body{
     padding: 10px 10px;
     background: #bbcc;
 }
-.nav-container .logo {
-    max-width: 250px;
-}
 li{
     display: inline-block;
     list-style:  none;
@@ -32,4 +29,7 @@ a:hover {
 }
 .left{
     flex-direction: row;
+}
+.title-about{
+    display: inline-block;
 }

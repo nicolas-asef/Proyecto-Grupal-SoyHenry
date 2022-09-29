@@ -1,9 +1,12 @@
 import React from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  let location = useLocation()
+  const {pathname} = location;
 	return (
 		<footer>
+      {pathname !== '/about' &&(
         <div className="footer-container">
           <div>
             <h3>Red de trabajos</h3>
@@ -49,14 +52,12 @@ const Footer = () => {
                 <Link to="/about">Sobre nosotros</Link>
               </li>
               <li>
-                <Link to="/contact">Contáctanos</Link>
-              </li>
-              <li>
                 <Link to="/faq">FAQ</Link>
               </li>
             </ul>
           </div>
         </div>
+        )}
       </footer>
 	)
 };
