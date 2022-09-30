@@ -3,3 +3,5 @@ export const GET_USERS = "GET_USERS";
 export const GET_USERNAME = "GET_USERNAME";
 export const POST_USER = "POST_USER";
 export const GET_WORKERS_PREMIUM = "GET_WORKERS_PREMIUM";
+export const ORDER_BY_RATING = "ORDER_BY_RATING"
+export const FILTER = "FILTER"
