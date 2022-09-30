@@ -1,6 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, GET_WORKERS } from './actions_vars'
+import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, GET_WORKERS_SEARCH, GET_WORKERS } from './actions_vars'
 
 
 export function getUsers() {
@@ -35,30 +35,43 @@ export function getUsersName(search) {
   };
 }
 
-export function getWorkers(query, search){
-  return function (dispatch) {
-    axios.get("http://localhost:3001/worker?" + query + "=" + search)
-    .then((w) => {
-      dispatch({
-        type: GET_WORKERS,
-        payload: w.data
-      });
-    })
-    .catch((err) => {
-      console.log(err)
+export function getWorkersSearch(search) {
+  return function (dispatch) {    
+    dispatch({
+      type:GET_WORKERS_SEARCH,
+      payload: search
     })
   }
 }
 
-export function createUser(payload) {
+export function getWorkers(query, search){
+   
+
+     return function (dispatch) {
+       axios.get("http://localhost:3001/worker")
+       .then((w) => {
+         dispatch({
+           type: GET_WORKERS,
+         payload: w.data
+       });
+     })
+     .catch((err) => {
+       console.log(err)
+     })
+   }
+   
+}
+
+
+export function createUser(payload, jobs) {
+
   return async function (dispatch) {
     const user = await axios.post("http://localhost:3001/users", payload);
     const user_id = await user.data.ID;
-    if(payload.work) {
+    if(jobs.length) {
       const worker = {
         user_id,
-        jobs: payload.work,
-        certification: payload.certificate
+        jobs,
 
       }
       const res = await axios.post("http://localhost:3001/worker", worker);

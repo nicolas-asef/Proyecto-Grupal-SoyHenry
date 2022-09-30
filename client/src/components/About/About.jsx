@@ -167,7 +167,7 @@ export default function About() {
         <Button size="small" href="https://www.linkedin.com/in//">Linkedin</Button>
       </CardActions>
     </Card>
-    <SearchBar/>
+    
     </div>
 
     </div>
