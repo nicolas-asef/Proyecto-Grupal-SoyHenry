@@ -39,8 +39,16 @@ export const Worker = (props) => {
   )
 }
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => {
+  return{
+    detailedWorker: state.detailedWorker
+  }
+}
 
-const mapDispatchToProps = {}
+const mapDispatchToProps = (dispatch) => {
+  // return{
+  //   getDetailedWorker: (id) => dispatch(getDetailedWorker(id))
+  // }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Worker)
