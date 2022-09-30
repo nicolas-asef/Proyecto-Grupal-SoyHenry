@@ -39,8 +39,6 @@ const Home = () => {
 		dispatch(filter(filtrado,job, available, e.target.value))
 	}
 
-
-
 	useEffect(() => {
 		dispatch(getJobs())
 	},[dispatch])
@@ -78,12 +76,6 @@ const Home = () => {
 				<option value="San Luis">San Luis</option>
 				<option value="Chaco">Chaco</option>
 			</select>	
-
-			{worker && worker.map( worker => {
-				return (
-					<h1 key={worker.id}>{worker.nombre} - rating: {worker.rating} - job: {worker.Jobs[0].nombre}/{worker.Jobs[1].nombre} - disponibilidad: {worker.available}, zona: {worker.zona}</h1>
-				)
-			})}
 		</div>
 
 	)
