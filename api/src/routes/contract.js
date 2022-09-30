@@ -19,6 +19,7 @@ route.get('/worker', async (req, res) => {
     try {
         let {id} = req.query
         const contrato = await Contract.findByPk(id);
+        console.log(contrato)
         const usuario = await contrato.getWorker({include:User})
         res.send(usuario)
     } catch (error) {
@@ -28,8 +29,7 @@ route.get('/worker', async (req, res) => {
 
 route.post('/', async (req,res) => {
     
-    const {id_user,id_worker,location,date} = req.body
-    console.log(name)
+    const {user_id,worker_id,location,date} = req.body
     try {
         const contrato = await Contract.create({
             finished:false,
@@ -41,11 +41,12 @@ route.post('/', async (req,res) => {
             comment_W:null,
             confirmed:false
         })
-        contrato.setWorker(id_worker)
-        contrato.setUser(id_user)
+        console.log("---------------->",worker_id)
+        contrato.setWorker(worker_id)
+        contrato.setUser(user_id)
         res.send(contrato)
     } catch (error) {
-        res .send("Error en la operacion: "+error.message)
+        res .send("---------------->Error en la operacion: "+error.message)
     }
 })
 
