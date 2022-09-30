@@ -66,7 +66,7 @@ export function getJobs() {
   };
 }
 
-export function getWokersPremium() {
+export function getWorkersPremium() {
   return async function (dispatch) {
     try {
       // let premium = await axios.get("http://localhost:3001/workers_premium");
