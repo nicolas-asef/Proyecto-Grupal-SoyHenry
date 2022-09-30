@@ -17,7 +17,6 @@ function App() {
       <Route path='/users/register' element={ <Form /> }/>
       <Route path='/catalog' element={<Catalog/>}/>
     </Routes>
-    <Footer/>
     </div>
   );
 }
