@@ -1,6 +1,6 @@
 /* From uiverse.io by @joe-watson-sbf */
 .opinion {
-    width: 54vw;
+    width: 98%;
     border-radius: 4px;
     display: flex;
     gap: 5px;
@@ -45,7 +45,7 @@
 
 
    .p-interior{
-    padding-left: 2vw;
+    padding-left: 3.8%;
     display: flex;
     flex-direction: column;
     margin: solid 1px black;

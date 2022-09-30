@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import Catalog from './components/Catalog/Catalog'
 import { Form,Home,LandingPage,NavBar,Footer,About } from './components'
 import Worker from './components/Worker/Worker';
 
@@ -14,8 +15,8 @@ function App() {
       <Route path = '/worker/:id' element = {<Worker/>}/>
       <Route path='/users/login' element={ <Form /> }/>
       <Route path='/users/register' element={ <Form /> }/>
+      <Route path='/catalog' element={<Catalog/>}/>
     </Routes>
-    <Footer/>
     </div>
   );
 }
