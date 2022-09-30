@@ -1,0 +1,16 @@
+.CardsDIV{
+    display: flex;
+    width: 80%;
+    height: fit-content;
+    background-color: rgb(239, 197, 104);
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.OutterCardsDIV{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height: fit-content;
+    background-color: rgb(145, 157, 157);
+}

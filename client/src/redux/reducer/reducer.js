@@ -30,6 +30,13 @@ const reducer = (state = initialState, action) => {
         jobs : action.payload
     }
     case GET_WORKERS:
+      let workers = action.payload
+      var totalrating = 0
+      for (let i = 0; i < workers.length; i++) {
+        totalrating = 0
+        workers[i].Contracts && workers[i].Contracts.map(contract => totalrating = totalrating + contract.rating_W)
+        workers[i].rating = totalrating / workers[i].Contracts.length
+      }
       return {
         ...state,
         workers: action.payload
