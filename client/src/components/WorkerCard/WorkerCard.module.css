@@ -1,35 +1,51 @@
-.CardDiv{
-    background: rgb(57,91,100);
-    background: linear-gradient(3deg, rgba(57,91,100,1) 0%, rgba(184,216,226,1) 100%);
-    width: 35vh;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    margin:40px;
-    border-radius: 20px;
-
-}
-.CardDiv img{
-    width: 150px;
+.conteiner {
+    background-image: url(https://www.riouruguay.com.ar/sites/default/files/2021-08/Banner-RUS.jpg);
+    width: 100vh;
     height: 150px;
-    border-radius: 100px;
-    margin-top:20px;
-    margin-bottom: 5px;
+    display: grid;
+    border-radius: 10px;
+    grid-template-columns: repeat(10, 1fr);
+    margin: 15px;
 }
-.imgDiv{
 
+.divImg{
+    grid-column: 1/3;
     display: flex;
     justify-content: center;
-}
-.atributos{
-    display:flex;
-    justify-content: flex-start;
+    align-items: center;
     flex-direction: column;
-    text-align: center;
-    background-color: rgb(196, 185, 185);
-    height: 35vh;
-    border-radius: 5px 5px 20px 20px;
 }
-.atributos h3{
-    margin-top:10px;
+
+.img{
+    width: 70%;
+    height: 70%;
+    border-radius: 100px;
+}
+
+.divDescription{
+    color: gainsboro;
+    grid-column: 3/9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.divRating{
+    grid-column: 9/11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h2{
+    font-weight: 500;
+    font-size: 25   px;
+    margin: 0;
+    color: white;
+}
+
+.h3{
+    font-weight: 300;
+    margin: 0;
+    font-size:15px;
 }

@@ -16,19 +16,20 @@ useEffect(()=>{
 })
 
 
-    return (<div className={s.OutterCardsDIV}>
-        <div className={s.CardsDIV}>
-        {workersdb.length === 0 ? <h1>Loading...</h1> : workersdb.map(worker => (
-            <div key={worker.ID}>
-             <WorkerCard
-             Worker={worker}            
-             User={worker.User}
-             Jobs={worker.Jobs}
-             Contracts={worker.Contracts}/>   
-            </div>
-        ))}
+    return (
+    <div className={s.OutterCardsDIV}>
+         <div className={s.CardsDIV}>
+            {workersdb.length === 0 ? <h1>Loading...</h1> : workersdb.map(worker => (
+                <div key={worker.ID} >
+                <WorkerCard
+                Worker={worker}            
+                User={worker.User}
+                Jobs={worker.Jobs}
+                Contracts={worker.Contracts}/>   
+                </div>
+            ))}
         </div>
-        </div>
+    </div>
     )
 }
 
