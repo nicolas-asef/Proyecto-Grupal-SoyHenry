@@ -50,9 +50,7 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
     
     let auxiliarTerminados = 0
     let auxiliarPromedio = 0
-   ////
     setMaxPag(Math.ceil(users.length/5))
-   
     listaValoraciones.forEach(e => {
 
       const elemento = {
@@ -73,20 +71,33 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
       setpromedioRating(auxiliarPromedio)
       //
      
-      setValoraciones(contractsVisualized.slice(0,5))
-  },[listaValoraciones,forzarCambio])
+      setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
+  },[listaValoraciones,forzarCambio,pag])
 
   const handleChange = (e) => {
     console.log((e.target.innerText))
     setPag(e.target.innerText)
-    console.log(contractsVisualized)
-    setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
+    // console.log(contractsVisualized)
+    // setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
     
   }
 
   const ordenarFiltrados = (tipo) => {
     if(tipo == 'r'){
       const auxiliar = listaValoraciones.sort((a,b) => (a.date > b.date) ? 1 : -1)
+      console.log(auxiliar)
+      setListaValoraciones(auxiliar)
+      setForzarCambio(!forzarCambio)
+    }
+    if(tipo === 'p'){
+      const auxiliar = listaValoraciones.sort((a,b) => (a.rating_U > b.rating_U) ? 1 : -1)
+      console.log(auxiliar)
+      setListaValoraciones(auxiliar)
+      setForzarCambio(!forzarCambio)
+    }
+    if(tipo === 'n'){
+      const auxiliar = listaValoraciones.sort((a,b) => (a.rating_U > b.rating_U) ? -1 : 1)
+      console.log(auxiliar)
       setListaValoraciones(auxiliar)
       setForzarCambio(!forzarCambio)
     }
