@@ -1,6 +1,7 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS, GET_WORKERS_PREMIUM } from './actions_vars'
+
+import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM } from './actions_vars'
 
 export function getWorkers() {
     return function (dispatch) {
@@ -16,7 +17,54 @@ export function getWorkers() {
     }
 }
 
+// export function getContractUsers(ids){
+//   return function(dispatch){
+//     dispatch({ type: LOADING });
+//     return fetch("http://localhost:3001/contract/user",{
+//       method:'GET',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(ids)
+//       })
+//   }
+//   .then(data => data.json())
+//   .then(json => {
+//     dispatch({type:GET_WORKER_DETAIL,payload:json})
+//   })
+// }
 
+export function getContractUsers(ids){
+
+  let ides = ids.reduce((acum,e) => acum+"&arr="+e,"arr=")
+  ides = ides.slice(5,ides.length)
+  return function(dispatch){
+    dispatch({ type: LOADING });
+    return fetch("http://localhost:3001/contract/user?"+ides)
+    .then(data =>{ 
+      return data.json()})
+    .then(json => {
+      
+      dispatch({type:GET_USERS_CONTRACTS,payload:json})
+    })
+  }
+}
+
+export function getWorkerDetail(id){
+  
+  return function(dispatch){
+    
+    dispatch({ type: LOADING });
+    
+    return fetch("http://localhost:3001/worker/"+id)
+    .then(data => {
+
+      return data.json()})
+    .then(json => {
+      dispatch({type:GET_WORKER_DETAIL,payload:json})
+    })
+  }
+}
 
 export function getUsers() {
     return function (dispatch) {

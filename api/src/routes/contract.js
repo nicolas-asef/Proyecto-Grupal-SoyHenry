@@ -1,15 +1,26 @@
 const { Router } = require('express')
-const { Contract,User,Worker } = require('../db')
+const { Op, Contract,User,Worker } = require('../db')
 
 
 const route = Router()
 
 route.get('/user', async (req, res) => {
     try {
-        let {id} = req.query
-        const contrato = await Contract.findByPk(id);
-        const usuario = await contrato.getUser()
-        res.send(usuario)
+        let id = req.query.arr
+        console.log(id)
+        if(!id.isArray){
+            id = [id]
+        }
+        const contracts = await Contract.findAll({
+            where:{
+                id:{
+                    [Op.or] : id
+                }
+            },
+            include: User
+        });
+     
+        res.send(contracts)
     } catch (error) {
         res .send("Error en la operacion: "+error.message)
     }
@@ -17,11 +28,19 @@ route.get('/user', async (req, res) => {
 
 route.get('/worker', async (req, res) => {
     try {
-        let {id} = req.query
-        const contrato = await Contract.findByPk(id);
-        console.log(contrato)
-        const usuario = await contrato.getWorker({include:User})
-        res.send(usuario)
+        let id = req.query.arr
+        
+        const contracts = await Contract.findAll({
+            where:{
+                id:{
+                    [Op.or] : id
+                }
+            },
+            include: [{model:Worker, include: User}]
+        });
+       
+        const workers = contracts.map(elem => elem.Worker)
+        res.send(workers)
     } catch (error) {
         res .send("Error en la operacion: "+error.message)
     }
@@ -29,7 +48,7 @@ route.get('/worker', async (req, res) => {
 
 route.post('/', async (req,res) => {
     
-    const {user_id,worker_id,location,date} = req.body
+    const {id_user,id_worker,location,date,rating_U,rating_W} = req.body
     try {
         const contrato = await Contract.create({
             finished:false,

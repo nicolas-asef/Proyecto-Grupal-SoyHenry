@@ -5,10 +5,9 @@ import { Typography, Rating,Box } from '@mui/material';
 
 //{contratosTerminados,value}
 
-function Stats() {
-  const contratosTerminados = 99999
-  const value = 4.4
-
+function Stats({finishedJobs,promedioRating}) {
+  const contratosTerminados = finishedJobs
+  const value = promedioRating
   let calificacion = "Safa"
   if(value >= 0 && value < 1)
     calificacion = "Malo-"

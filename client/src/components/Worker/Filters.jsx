@@ -37,12 +37,17 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useEffect } from 'react';
 
-export default function SelectAutoWidth() {
-  const [age, setAge] = React.useState('');
-
+export default function SelectAutoWidth({filtrado}) {
+  const [tipo, setTipo] = React.useState('');
+  
+  useEffect(() => {
+    filtrado(tipo)
+  }, [tipo])
+  
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setTipo(event.target.value);
   };
 
   return (
@@ -52,15 +57,14 @@ export default function SelectAutoWidth() {
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
-          value={age}
+          value={tipo}
           onChange={handleChange}
     
           label="Ordenar"
         >
-          <MenuItem value={210}>Mas recientes</MenuItem>
-          <MenuItem value={21}>Positivos</MenuItem>
-          <MenuItem value={22}>Negativos</MenuItem>
-          <MenuItem value={25}>{age}</MenuItem>
+          <MenuItem value={"r"}>Mas recientes</MenuItem>
+          <MenuItem value={"p"}>Positivos</MenuItem>
+          <MenuItem value={"n"}>Negativos</MenuItem>
         </Select>
       </FormControl>
     </div>
