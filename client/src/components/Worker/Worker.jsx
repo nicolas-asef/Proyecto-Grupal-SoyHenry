@@ -50,7 +50,6 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
     
     let auxiliarTerminados = 0
     let auxiliarPromedio = 0
-   ////
     setMaxPag(Math.ceil(users.length/5))
    
     listaValoraciones.forEach(e => {
