@@ -1,6 +1,7 @@
 const { Router } = require('express');
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const auth = require('../controllers/authMiddleware');
 
 // importarme los modelos
 const { User } = require('../db.js')
@@ -116,28 +117,6 @@ router.delete('/:id', async (req, res, next) => {
         throw new Error("User not found");
     } catch (error) {
         next()
-    }
-})
-
-router.post('/login', async (req,res,next) => {
-    const { email, password } = req.body;
-
-    try {
-        const user = await User.findOne({ where: { email } })
-        if(user) {
-            const password_valid = await bcrypt.compare(password, user.password);
-            if(password_valid) {
-
-                const token = jwt.sign({ id: user.ID, name: user.name, email: user.email}, 'secretkey'); // el secretkey deberia ir en el .env
-                res.status(200).json({token})
-            } else {
-                res.status(400).json({error: "Password Incorrect"});
-            }
-        } else {
-            res.status(404).json({error: "not found"})
-        }
-    } catch (error) {
-        res.status(404).json({error: "User does not exist"})
     }
 })
 

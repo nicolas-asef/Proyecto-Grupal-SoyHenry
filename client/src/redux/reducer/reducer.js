@@ -1,12 +1,19 @@
-import {GET_USERS, GET_USERNAME, POST_USER, GET_JOBS, GET_WORKERS_PREMIUM} from "../actions/actions_vars"
+import {GET_USERS, GET_USERNAME, POST_USER, GET_JOBS, GET_WORKERS_PREMIUM, LOGIN_SUCCES} from "../actions/actions_vars"
 
+const localStorageAuth = () => {
+  const auth = localStorage.getItem("auth");
+  if(JSON.parse(auth)) return JSON.parse(auth);
+  return { isLoggedIn: false , user: { id : "", name : "", token: ""}}
+}
 
+const storagedData = localStorageAuth();
 
 const initialState = {
   workers: [],
   users: [],
   jobs: [],
-  workersPremium: []
+  workersPremium: [],
+  authState: storagedData,
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,7 +40,18 @@ const reducer = (state = initialState, action) => {
     case GET_WORKERS_PREMIUM:
       return {
         ...state,
-        workersPremium: action.payload
+      workersPremium: action.payload
+      }
+    case LOGIN_SUCCES:
+      const authState = {
+        isLoggedIn: true,
+        user: action.payload
+      }
+
+      localStorage.setItem('auth', JSON.stringify(authState));
+      return {
+        ...state,
+        authState
       }
     default:
       return state;

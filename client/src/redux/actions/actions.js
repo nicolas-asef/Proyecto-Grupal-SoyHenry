@@ -1,6 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM } from './actions_vars'
+import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES } from './actions_vars'
 
 
 export function getUsers() {
@@ -73,6 +73,18 @@ export function getWokersPremium() {
       return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+export function authenticate(credentials) {
+  return async function (dispatch) {
+    try {
+      const res = await axios.post("http://localhost:3001/auth", credentials);
+      const { data } = res;
+      dispatch({ type: LOGIN_SUCCES, payload: data});
+    } catch (error) {
+      return error.response.status
     }
   };
 }
