@@ -8,6 +8,7 @@ const { Router } = require('express');
 const  modelJob  = require('./job')
 const modelUser = require('./users')
 const modelWorker = require('./worker.js')
+const modelContract = require('./contract.js')
 
 const router = Router();
 
@@ -19,5 +20,6 @@ const router = Router();
 router.use('/jobs', modelJob)
 router.use('/worker', modelWorker)
 router.use('/users', modelUser);
+router.use('/contract', modelContract);
 
 module.exports = router;
