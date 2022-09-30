@@ -1,6 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS } from './actions_vars'
+import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS, GET_WORKERS_PREMIUM } from './actions_vars'
 
 export function getWorkers() {
     return function (dispatch) {
@@ -15,6 +15,8 @@ export function getWorkers() {
             .catch(err => console.log(err))
     }
 }
+
+
 
 export function getUsers() {
     return function (dispatch) {
@@ -48,14 +50,26 @@ export function getUsersName(search) {
     };
 }
 
-export function createUser(payload) {
-    return async function (dispatch) {
-        const user = await axios.post("http://localhost:3001/users", payload);
-        dispatch({
-            type: POST_USER,
-        });
-        return user;
-    };
+
+export function createUser(payload, jobs) {
+  return async function (dispatch) {
+    const user = await axios.post("http://localhost:3001/users", payload);
+    const user_id = await user.data.ID;
+    if(jobs.length) {
+      const worker = {
+        user_id,
+        jobs,
+
+      }
+      const res = await axios.post("http://localhost:3001/worker", worker);
+    }
+
+    dispatch({
+      type: POST_USER,
+    });
+    return user;
+  };
+
 }
 
 export function getJobs() {
@@ -68,3 +82,48 @@ export function getJobs() {
         }
     };
 }
+
+export function getWokersPremium() {
+  return async function (dispatch) {
+    try {
+      // let premium = await axios.get("http://localhost:3001/workers_premium");
+      return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+
+// Estos son los workers harcodeados, NO DEBE IR A LA MAIN
+const premium = [
+  {
+    nombre: "Lucas",
+    lastname: "Viotti",
+    img: "link",
+    job: "Albañil",
+    status: "Online"
+  },
+  {
+    nombre: "Feli",
+    lastname: "Liziano",
+    img: "link",
+    job: "Obrero",
+    status: "Online"
+  },
+  {
+    nombre: "Manuel",
+    lastname: "Lokito",
+    img: "link",
+    job: "Pintor",
+    status: "Offline"
+  },
+  {
+    nombre: "Guillermo",
+    lastname: "Gonzales",
+    img: "link",
+    job: "Durlero",
+    status: "Online"
+  }
+] 
+

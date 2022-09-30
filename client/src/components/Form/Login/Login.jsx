@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { validator } from "../validator";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -47,7 +48,12 @@ const Login = () => {
           })}
         />
       </div>
-
+      <div className={style.register}>
+        ¿No tiene una cuenta? {" "}
+        <Link to='/users/register'>
+          <strong>Registrate ahora</strong>
+        </Link>
+      </div>
       <Button type="submit" value="Ingresar" variant="contained">
         Ingresar
       </Button>

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './NavBar.css'
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-
+import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -48,13 +48,10 @@ const NavBar = () => {
           <div className="right-container">
             <div className="login">
               <Link to="/users/login">
-                <button className="btn-login">Login</button>
+                <Button className="btn-login" variant="contained">Login</Button>
               </Link>
             </div>
             <div className="register">
-              <Link to="/users/register">
-                <button className="btn-register">Register</button>
-              </Link>
             </div>
           </div>
         )}
@@ -144,7 +141,16 @@ const NavBar = () => {
               </Menu>
             </React.Fragment>
           </div>
-        )}
+        )}{
+          pathname === '/about'&& (
+            <div>
+              <h1 className='title-about'>About us</h1>
+            <Link to='/home'>
+              <Button variant="contained">Home</Button>
+            </Link>
+            </div>
+          )
+        }
       </div>
     </div>
   );
