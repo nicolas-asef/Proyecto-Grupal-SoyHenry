@@ -41,16 +41,13 @@ import { useEffect } from 'react';
 
 export default function SelectAutoWidth({filtrado}) {
   const [tipo, setTipo] = React.useState('');
-
+  
   useEffect(() => {
- 
     filtrado(tipo)
   }, [tipo])
   
-
   const handleChange = (event) => {
     setTipo(event.target.value);
-    
   };
 
   return (

@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
-import { useEffect } from "react";
-import { PaginadoSize } from ".../PaginationSize/PaginadoSize"
+import { useState,useEffect } from "react";
+// import { PaginationSize } from ".../PaginationSize/PaginationSize"
 import { CardWorkerShowroom } from "./CardWorkerShowroom"
 import { Link } from "react-router-dom";
 
@@ -10,9 +10,9 @@ const ShowRoom = () => {
     //let users = useSelector((state) => state.users)
     const dispatch = useDispatch()
     
-    useEffect(()=>{
-        dispatch(getWorkersPremium())
-    }, [dispatch])
+    // useEffect(()=>{
+    //     dispatch(getWorkersPremium())
+    // }, [dispatch])
 
     const [currentPage, setCurrentPage] = useState(1);
     const [workersPerPage, setWorkersPerPage] = useState(3);
@@ -46,11 +46,11 @@ const ShowRoom = () => {
                 }
             </div>
             <div className="pagination-home">
-                <PaginadoSize
+                {/* <PaginationSize
                     workersPerPage={workersPerPage}
                     workers={workers.length}
                     paginado={paginado}
-                />
+                /> */}
             </div>
         </div>
     )

@@ -60,11 +60,12 @@ route.post('/', async (req,res) => {
             comment_W:null,
             confirmed:false
         })
-        contrato.setWorker(id_worker)
-        contrato.setUser(id_user)
+        console.log("---------------->",worker_id)
+        contrato.setWorker(worker_id)
+        contrato.setUser(user_id)
         res.send(contrato)
     } catch (error) {
-        res .send("Error en la operacion: "+error.message)
+        res .send("---------------->Error en la operacion: "+error.message)
     }
 })
 

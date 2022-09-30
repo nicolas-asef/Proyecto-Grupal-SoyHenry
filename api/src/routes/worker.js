@@ -15,6 +15,7 @@ const router = Router();
 router.get('/', async (req, res, next) =>{
 
     try {
+
         // const creacionJob = await Job.create({name:"Ingeniero"})
         // await Job.create({name:"Zapatero"})
         // await Job.create({name:"Zarp"})
