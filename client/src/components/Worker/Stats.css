@@ -1,22 +1,37 @@
 .stats{
     /* border: 3px solid #73AD21; */
-    width: 54vw;
+    margin-top: 2vh;
+    width: 100%;
+    height: 5rem;
+    padding-top: 1.2rem;
     box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     background: #ffffff;
     border-radius: 10px;
 }
 
 
+.rating{
+    display: flex;
+}
+
 .s-right{
     display: flex;
-    
+    flex-direction: column;
+    margin-right: 14vw;
+}
+
+.s-left{
+    margin-right: 8vw;
+   
 }
 
 .s-right>:nth-child(2){
     width: 5vw;
 }
+
+
 
 /* font-size: 1.1em;
     text-align: start;

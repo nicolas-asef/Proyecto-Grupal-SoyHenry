@@ -15,7 +15,10 @@ const router = Router();
 router.get('/', async (req, res, next) =>{
 
     try {
+
         // const creacionJob = await Job.create({name:"Ingeniero"})
+        // await Job.create({name:"Zapatero"})
+        // await Job.create({name:"Zarp"})
         // const creacionWorker = await Worker.create({description:"hola"})
         // const creacionUser = await User.create({name:"Inge niero",lastName:"Gonzales",email:"gonza",password:32,location:"San Luis"})
         // const creacionContract = await Contract.create({finished:false,confirmed:false})
@@ -80,7 +83,7 @@ try {
     const {certification, description,jobs,user_id} = req.body;
     const worker = await Worker.create({
         certificacion: certification, 
-        description :description,
+        description :"Agregar descripcion...",
     })
     for (let job = 0; job < jobs.length; job++) {
         const element = jobs[job];

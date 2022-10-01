@@ -1,0 +1,72 @@
+.conteiner {
+    background-image: url(https://www.riouruguay.com.ar/sites/default/files/2021-08/Banner-RUS.jpg);
+    width: 100vh;
+    height: 150px;
+    display: grid;
+    border-radius: 10px;
+    grid-template-columns: repeat(10, 1fr);
+    margin: 15px;
+}
+
+.divImg{
+    grid-column: 1/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img{
+    width: 70%;
+    height: 70%;
+    border-radius: 100px;
+}
+
+.divDescription{
+    color: gainsboro;
+    grid-column: 3/9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.divRating{
+    grid-column: 9/11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h2{
+    font-weight: 500;
+    font-size: 25   px;
+    margin: 0;
+    color: white;
+    margin-bottom: -5px;
+}
+
+.h3{
+    font-weight: 300;
+    margin: 0;
+    font-size:15px;
+}
+
+.divTop{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid white;
+}
+
+.job{
+    
+    padding: 3px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    background-color: white;
+    color: #086cf4;
+}
+
+.divName{
+    display: flex;
+}

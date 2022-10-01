@@ -2,26 +2,27 @@
 /*Magic card*/
 .card {
     border-radius: 10px;
-    width: 35vw;
+    width: 28.5rem;
     height: auto;
     background: #ffffff;
-    overflow: visible;
+    overflow-y: visible;
     box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
+    
    }
    
    .card-info {
     display: flex;
     flex-direction: column;
+
     /* gap: 1em; */
     /* padding: 0 1rem; */
-    padding-left: 1vw;
-    margin-top: 2vh;
+ 
+    margin-top: 1.5rem;
     position: relative;
-    top: -14vh;
+    top: -9rem;
    }
    
    .card-img {
@@ -77,18 +78,23 @@
    
    /*Text*/
    .text-title {
+    width: 100%;
     text-transform: uppercase;
     font-size: 1.5rem;
     color: #42caff;
     letter-spacing: 0.05rem;
+    text-align: center;
    }
    
    .text-body {
+    width: 100%;
     font-size: 1.1em;
     text-align: start;
     color: #6f6d78;
     font-weight: 400;
     font-style: italic;
+    text-align: center;
+    
    }
    
    /*Hover*/
@@ -111,3 +117,21 @@
     object-fit: cover;
 } */
 
+.contactar{
+    /* border: 3px solid #73AD21; */
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+ 
+    margin-top: 4vh;
+}
+
+.job-title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color:#7C8097;
+    font-size: 1.2em;
+    font-weight: 100;
+    font-family:roboto;
+  }

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
+import './Footer.css'
 const Footer = () => {
   let location = useLocation()
   const {pathname} = location;
 	return (
-		<footer>
+		<footer className='footer'>
       {pathname !== '/about' &&(
         <div className="footer-container">
           <div>
@@ -30,16 +30,6 @@ const Footer = () => {
                   rel="noreferrer"
                 >
                   Facebook
-                </a>
-              </li>
-              <li className="nav-link">
-                <a
-                  href="https://www.twitter.com"
-                  target="_blank"
-                  tittle="Seguinos en Instagram"
-                  rel="noreferrer"
-                >
-                  Twitter
                 </a>
               </li>
             </ul>
