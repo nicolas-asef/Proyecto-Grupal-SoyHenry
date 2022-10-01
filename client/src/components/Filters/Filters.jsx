@@ -1,8 +1,11 @@
 import React from 'react';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './styles/Filters.module.css';
 import { filter, getJobs, orderByRating } from '../../redux/actions/actions';
 
 const Filters = () => {
+	const dispatch = useDispatch();
 	const [order, setOrder] = useState('')
 	const [job, setJob] = useState('all')
 	const [available, setAvailable] = useState('available')
