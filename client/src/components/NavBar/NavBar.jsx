@@ -18,8 +18,7 @@ const pages = ['Home', 'About', 'FAQ'];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  /* const loggedState = useSelector( state => state.formState); */
-  const loggedState = {isLoggedIn : false};
+  const loggedState = useSelector( state => state.formState);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
