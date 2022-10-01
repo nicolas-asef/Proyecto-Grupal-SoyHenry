@@ -62,6 +62,27 @@ html {
 }
 
 
+.worker-button{
+        width: 18vh;
+        border-radius: 19px;
+        border:none;
+        color:white;
+        font-size:17px;
+        padding: 11px 26px 11px 26px;
+        /* background:linear-gradient(to right,#731ffcd5 -2%,#fc2bf1d2 99.36%); */
+        background: linear-gradient(to bottom right, #5E5AEC, #3F9EFC);
+
+        box-shadow: 0px 20px 24px 3px rgba(40, 72, 251, 0.42);
+}
+
+.worker-button:hover{
+    background:rgb(255, 255, 255);
+    cursor:pointer;
+    /* color: green; */
+    color:black;
+    border: 1px solid var(--orange);
+  }
+
 .filters{
     width: 97.5%;
     padding: 1vh;
@@ -73,4 +94,8 @@ html {
     justify-content: space-around;
     background: #ffffff;
     border-radius: 10px;
+}
+
+.w-buttons{
+    height: 3vh;
 }

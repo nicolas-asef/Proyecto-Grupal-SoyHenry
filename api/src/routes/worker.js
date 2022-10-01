@@ -83,7 +83,7 @@ try {
     const {certification, description,jobs,user_id} = req.body;
     const worker = await Worker.create({
         certificacion: certification, 
-        description :description,
+        description :"Agregar descripcion...",
     })
     for (let job = 0; job < jobs.length; job++) {
         const element = jobs[job];

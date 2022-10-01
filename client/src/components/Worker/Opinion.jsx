@@ -47,7 +47,7 @@ import styled, { css } from 'styled-components'
 
 
 export default function Opinion({contratos}) {
-  const altura = contratos.length*12
+  const altura = contratos.length*13
   let key = 0
   const Opinion2 = styled.div`
   height: ${altura}rem;

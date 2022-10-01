@@ -9,6 +9,7 @@ import { Pagination, Skeleton } from '@mui/material';
 import Filters from './Filters';
 import { getWorkerDetail,getContractUsers } from '../../redux/actions/actions';
 import { useParams } from 'react-router-dom';
+import Buttons from './Buttons';
 
 export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}) => {
 
@@ -124,6 +125,7 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
       </div>
       <div className="w-right">
           {finishedJobs > 0? <Stats finishedJobs={finishedJobs} promedioRating = {promedioRating}/>: <></>}
+          
           {worker.User ? <>
           <div className="filters">
             <Filters filtrado = {ordenarFiltrados}/>
