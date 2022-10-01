@@ -47,17 +47,16 @@ import styled, { css } from 'styled-components'
 
 
 export default function Opinion({contratos}) {
-  const altura = contratos.length*16
+  const altura = contratos.length*12
+  let key = 0
   const Opinion2 = styled.div`
-  height: ${altura}vh;
+  height: ${altura}rem;
 `;
   return (
     <Opinion2 className='opinion'>      
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'La verdad es que me enamoro el chico con su casquito, su sonrisa y no lo digo porque sea yo mismo,pero bueno, como trabajador no sirve'} nombre='Elin Geniero' imagen={Estrella}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
-    <CommentBox descripcion={'ta weno'} nombre='Gonzalo Carlos Barroso' imagen={Perfil}/>
+    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <></>}
+
+    
 
 
   </Opinion2>
