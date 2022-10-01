@@ -1,0 +1,15 @@
+.container-about__cards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px 10px;
+    padding: 3px;
+}
+
+.about-card{
+    padding: 7px;
+}
+.title-about{
+    align-content: center;
+}

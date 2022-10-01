@@ -1,4 +1,7 @@
 const { Router } = require('express');
+require('dotenv').config();
+const bcrypt = require('bcryptjs');
+const auth = require('../controllers/authMiddleware');
 
 // importarme los modelos
 const { User } = require('../db.js')
@@ -62,21 +65,24 @@ router.get('/:id', async (req, res, next) =>{
         next(error)
     }
 })
-           
+
 router.post('/', async (req, res, next) => {
+
     const {name, lastName, img, email, password, phone, dni, location } = req.body;
     try {
+        const salt = await bcrypt.genSalt(10);
+
         let user = await User.create({
-            name, 
-            lastName, 
-            img, 
-            email, 
-            password, 
-            phone, 
-            dni, 
+            name,
+            lastName,
+            img,
+            email,
+            password: await bcrypt.hash(password, salt),
+            phone,
+            dni,
             location
         })
-        res.status(200).send({message: 'El user fue creado correctamente'})
+        res.status(200).json(user) // para agarrar el id de usuario al crearlo
     } catch (error) {
         next(error)
     }
@@ -100,6 +106,7 @@ router.put('/:id', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
     const { id } = req.params;
+    console.log(id)
     try {
         const deleted = await User.destroy({
             where: { id: id }
