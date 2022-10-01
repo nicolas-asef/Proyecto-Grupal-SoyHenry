@@ -28,7 +28,7 @@ function Profile({name,jobs,description,available,status}) {
         </div> */}
        
         <p className="text-title">{name}</p>
-            {jobs ? <p className="text-body">{jobs}</p>: <p className="text-body">Error no se han mandado Jobs</p> }
+            {jobs ? <p className="job-title">{jobs}</p>: <p className="text-body">Error no se han mandado Jobs</p> }
             {/* <p className="text-body">Electricista Gasista Plomero Programador </p> */}
         <p className="text-body">{description}</p>
         <p className="text-body">{available}</p>

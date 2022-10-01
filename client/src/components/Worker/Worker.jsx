@@ -118,7 +118,7 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
       </div>
       <div className="w-content">
         <div className="w-left">
-            {worker.User ? <Profile name = {worker.User.name} jobs = {worker.Jobs} description="Me encanta hablar" available="A veces si a veces no" status = "Online"/> : <Skeleton variant = "circular">
+            {worker.User ? <Profile name = {worker.User.name} jobs = {worker.Jobs} description="Me considero una persona trabajadora, emprendedora, me gustaria poder viajar y conocer gente nueva, y todo we" available="Generalmente estoy de lunes a viernes de 10 AM hasta las 22 PM aproximadamente" status = "Online"/> : <Skeleton variant = "circular">
             <Profile/>
             </Skeleton> }
           </div>
