@@ -32,3 +32,8 @@
     padding: .5%;
     margin: .5%
 }
+.container-options{
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+}
