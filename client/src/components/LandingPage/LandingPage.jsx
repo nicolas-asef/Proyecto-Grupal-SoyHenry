@@ -1,72 +1,181 @@
-import React from 'react';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Rating from '@mui/material/Rating';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './LandingPage.css'
 
-const LandingPage = () => {
 
-	return (
-    <div className="landing-container">
-      <header className="header-container">
-        <h1>Busca ese trabajo que necesitas</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
-          ducimus? Nostrum aspernatur culpa sed molestiae, blanditiis iusto,
-          fugiat eveniet nobis iure sunt ipsa atque totam illum exercitationem
-          delectus quos nemo?
-        </p>
-      </header>
-      {/* <article>Haria un gif mostrando las cards de los workers</article> */}
-      <section>
-        <div className="expo-cards">
-		  <h1>Reseñas de profesionales
-            <br />
-			<p>Nombre Oficios Descripcion Comentarios<br/> Lo recibiran las cards</p>
-			</h1>
-          <div className="expo-cards__container">
-			
-            <div className="expo-cards__card">
-              <h3>Card 1</h3>
-              <div className="expo-cards__logo">
-                <div>
-                  <img
-                    src="https://wkncdn.com/newx/assets/build/img/home/logo-unx-digital.0dc0b8c8c.svg"
-                    alt="comentario"
-                    width="80px"
-                    height="80px"
-                  ></img>
-                </div>
-              </div>
-            </div>
-            <div className="expo-cards__card">
-              <h3>Card 2</h3>
-              <div className="expo-cards__logo">
-                <div>
-                  <img
-                    src="https://wkncdn.com/newx/assets/build/img/home/logo-unx-digital.0dc0b8c8c.svg"
-                    alt="comentario"
-                    width="80px"
-                    height="80px"
-                  ></img>
-                </div>
-              </div>
-            </div>
-            <div className="expo-cards__card">
-              <h3>Card 3</h3>
-              <div className="expo-cards__logo">
-                <div>
-                  <img
-                    src="https://wkncdn.com/newx/assets/build/img/home/logo-unx-digital.0dc0b8c8c.svg"
-                    alt="comentario"
-                    width="80px"
-                    height="80px"
-                  ></img>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+function Copyright() {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
   );
-};
+}
 
-export default LandingPage;
+const pages = ['Home','Register']
+const options = [
+  {
+    title: 'QUIERO CONTRATAR',
+    description:[
+      'Soluciones 24hs',
+      'Seguridad en tu hogar',
+      'Profesionales altamente capacitados'
+    ],
+    buttonText: 'Contratar',
+    pages: '/home',
+    buttonVariant: 'outlined',
+  },
+  {
+    title: 'SOY PROFESIONAL',
+    description:[
+      'Trabajo de manera segura',
+      'Seguro laboral',
+      'Posicionamiento profesional'
+    ],
+    buttonText: 'Soy profesional',
+    buttonVariant: 'outlined',
+    pages: '/users/register'
+  },
+]
+const cards = [
+  {
+    value:3,
+    title: 'Albañil',
+  },{
+    value:4,
+    title: 'Gasista'
+  },{
+    value:5,
+    title: 'Plomero'
+  }];
+
+const theme = createTheme();
+
+export default function Album() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <main>
+        {/* Hero unit */}
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxWidth="string" align="center">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              La nueva era del oficio
+            </Typography>
+            <Typography
+              variant="h5"
+              align="center"
+              color="text.secondary"
+              paragraph
+            >
+              Resolvemos de manera segura
+            </Typography>
+            <div className='container-options'>
+            <Container maxWidth="string" component="main" align="center">
+              <Grid container spacing={5} alignItems="center">
+                {options.map((tier) => (
+                  <Grid
+                    item
+                    key={tier.title}
+                    xs={2}
+                    xl={tier.title === "QUIERO CONTRATAR" ? 6 : 2}
+                    md={4}
+                  >
+                    <Card>
+                      <CardContent>
+                        <ul>
+                          {tier.description.map((line) => (
+                            <Typography
+                              component="li"
+                              variant="subtitle1"
+                              align="center"
+                              key={line}
+                            >
+                              {line}
+                            </Typography>
+                          ))}
+                        </ul>
+                      </CardContent>
+                      <CardActions>
+                        <Button fullWidth variant={tier.buttonVariant} component={Link} href={tier.pages}>
+                          {tier.buttonText}
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Container>
+            </div>
+          </Container>
+        </Box>
+        <Container sx={{ py: 8 }} maxWidth="md">
+          {/* End hero unit */}
+          <Grid container spacing={4}>
+            {cards.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card sx={{ maxWidth: 345 }}>
+                  <Rating name="read-only" value={card.value} readOnly />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {card.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Lizards are a widespread group of squamate reptiles, with
+                      over 6,000 species, ranging across all continents except
+                      Antarctica
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Mas info...</Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </main>
+      {/* Footer */}
+      <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          component="p"
+        >
+          Something here to give the footer a purpose!
+        </Typography>
+        <Copyright />
+      </Box>
+      {/* End footer */}
+    </ThemeProvider>
+  );
+}
+
