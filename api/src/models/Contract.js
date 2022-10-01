@@ -23,7 +23,8 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     date:{
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
     },
     confirmed: {
       type: DataTypes.BOOLEAN,

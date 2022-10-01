@@ -6,14 +6,13 @@ import { workersdb } from './workersdb' // Database de trabajadores simulada par
 import s from './Catalog.module.css'
 
 const Catalog = () => {
-    const workers =  useSelector(state => state.workers) // el array de workers real sacado de redux (se utilizaría una vez que haya trabajadores en la base de datos)
     const dispatch = useDispatch()
+    const workers =  useSelector(state => state.workers) // el array de workers real sacado de redux (se utilizaría una vez que haya trabajadores en la base de datos)
     
 useEffect(()=>{
-    if (workers.length === 0){
+
         dispatch(getWorkers())
-    }
-})
+},[dispatch])
 
 
     return (
