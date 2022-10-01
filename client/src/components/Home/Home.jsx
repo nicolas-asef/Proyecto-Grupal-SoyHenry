@@ -7,7 +7,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Footer from '../Footer/Footer';
+import Filters from '../Filters/Filters';
 import './Home.css';
+
 
 const Home = () => {
 
@@ -32,7 +34,7 @@ let dispatch = useDispatch();
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <Typography variant="h5" component="div">
-                Componente Filtros
+                <Filters />
               </Typography>
             </CardContent>
           </Card>

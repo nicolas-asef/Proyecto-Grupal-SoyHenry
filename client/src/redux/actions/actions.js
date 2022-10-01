@@ -1,6 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH } from './actions_vars'
+import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER } from './actions_vars'
 
 export function getWorkers(query, search){
 
@@ -156,6 +156,101 @@ export function getWorkersPremium() {
   };
 }
 
+export function orderByRating(array, orderBy){
+
+  function order( a, b )
+  {
+    if ( a.rating < b.rating){
+      return 1;
+  }
+  if ( a.rating > b.rating){
+      return -1;
+  }
+  return 0;
+  }
+
+  if (orderBy === 'maxRating'){
+    array.sort(order)
+  } 
+  if (orderBy === 'minRating') {
+    array.sort(order).reverse()
+  }
+  return function (dispatch){
+    dispatch ({type: ORDER_BY_RATING, payload: array})
+  }
+}
+
+export function filter(array, job, disponibilidad, zona){
+  let filterArray = []
+  console.log(job, zona)
+
+  if (job === 'all' && disponibilidad === 'available' && zona === 'all'){
+    filterArray = array
+  }
+
+  if (job !== 'all' && disponibilidad !== 'available' && zona !== 'all'){
+    for (let i = 0; i < array.length; i++) {
+      array[i].Jobs.map(el => {
+        if (el.nombre === job && array[i].available === disponibilidad && array[i].zona === zona){
+          filterArray.push(array[i])
+        }
+      })
+    }
+  }
+
+  if (job !== 'all' && disponibilidad === 'available' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      array[i].Jobs.map(el => {
+        if (el.nombre === job){
+          filterArray.push(array[i])
+        }
+      })
+    }
+  }
+  if (job === 'all' && disponibilidad !== 'available' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].available === disponibilidad){
+        filterArray.push(array[i])
+      }
+    }
+  }
+  if (job === 'all' && disponibilidad === 'available' && zona !== 'all'){
+    for (let i = 0; i < array.length; i++) {
+      if(array[i].zona === zona){
+        filterArray.push(array[i])
+      }
+    }
+  }
+
+  if (job !== 'all' && disponibilidad !== 'available' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      array[i].Jobs.map(el => {
+        if (el.nombre === job && array[i].available === disponibilidad){
+          filterArray.push(array[i])
+        }
+      })
+    }
+  }
+  if (job === 'all' && disponibilidad !== 'available' && zona !== 'all'){
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].available === disponibilidad && array[i].zona === zona){
+        filterArray.push(array[i])
+      }
+    }
+  }
+  if (job !== 'all' && disponibilidad === 'available' && zona !== 'all'){
+    for (let i = 0; i < array.length; i++) {
+      array[i].Jobs.map(el => {
+        if (el.nombre === job && array[i].zona === zona){
+          filterArray.push(array[i])
+        }
+      })
+    }
+  }
+  return function (dispatch){
+    dispatch({type: FILTER, payload: filterArray})
+  }
+}
 export function authenticate(credentials) {
   return async function (dispatch) {
     try {
