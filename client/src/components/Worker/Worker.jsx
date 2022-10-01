@@ -56,10 +56,10 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
       const elemento = {
         name : e.User.lastName + " "+ e.User.name,
         img : e.User.img,
-        // comment: e.comment_U
-        comment:"Este chico me cae bien",
-        // rating: e.rating_U
-        rating: 4.2
+        comment: e.comment_U,
+        //comment:"Este chico me cae bien",
+        rating: e.rating_U
+        //rating: 4.2
       }
 
       auxiliarTerminados++
@@ -90,13 +90,13 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
       setForzarCambio(!forzarCambio)
     }
     if(tipo === 'p'){
-      const auxiliar = listaValoraciones.sort((a,b) => (a.rating_U > b.rating_U) ? 1 : -1)
+      const auxiliar = listaValoraciones.sort((a,b) => (a.rating_U > b.rating_U) ? -1 : 1)
       console.log(auxiliar)
       setListaValoraciones(auxiliar)
       setForzarCambio(!forzarCambio)
     }
     if(tipo === 'n'){
-      const auxiliar = listaValoraciones.sort((a,b) => (a.rating_U > b.rating_U) ? -1 : 1)
+      const auxiliar = listaValoraciones.sort((a,b) => (a.rating_U > b.rating_U) ? 1 : -1)
       console.log(auxiliar)
       setListaValoraciones(auxiliar)
       setForzarCambio(!forzarCambio)
