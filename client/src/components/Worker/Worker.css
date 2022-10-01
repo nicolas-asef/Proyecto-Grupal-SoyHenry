@@ -17,6 +17,7 @@ html {
 }
 
 
+
 .w-portada>:nth-child(1){
     width: 98vw;
     height: 30vh;
@@ -26,12 +27,12 @@ html {
 
 .w-content{
     display: flex;
-    flex-direction: column;
 }
 
+
 .w-right{
-    margin-left: 42vw;
-    margin-top: 2vh;
+    margin-left: 2vw;
+    margin-top: 1vh;
     width: 55vw; 
     margin-bottom: 3rem;
     /* border: 3px solid #73AD21; */
@@ -42,11 +43,14 @@ html {
 
 
 .w-left{
-    position: absolute;
-    left: 4vw;
+    padding-left: 3rem;
+
+    height: 100%;
     top: 20vh;
-    background-color: #6f6d78;
+ 
+    position: sticky;
     /* border: 3px solid #73AD21; */
+    /* position: fixed; */
 }
 
 .pagination{

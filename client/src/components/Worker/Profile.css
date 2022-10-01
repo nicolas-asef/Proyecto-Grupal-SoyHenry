@@ -5,12 +5,12 @@
     width: 28.5rem;
     height: auto;
     background: #ffffff;
-    overflow: visible;
+    overflow-y: visible;
     box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
+    
    }
    
    .card-info {
