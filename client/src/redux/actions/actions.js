@@ -1,10 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-<<<<<<< HEAD
-import { GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, ORDER_BY_RATING, FILTER } from './actions_vars'
-=======
-import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH } from './actions_vars'
->>>>>>> dc9a8c5f94f3b0d6716503bf6715508cadf678dd
+import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER } from './actions_vars'
 
 export function getWorkers(query, search){
 
@@ -160,7 +156,6 @@ export function getWorkersPremium() {
   };
 }
 
-<<<<<<< HEAD
 export function orderByRating(array, orderBy){
 
   function order( a, b )
@@ -255,7 +250,7 @@ export function filter(array, job, disponibilidad, zona){
   return function (dispatch){
     dispatch({type: FILTER, payload: filterArray})
   }
-=======
+}
 export function authenticate(credentials) {
   return async function (dispatch) {
     try {
@@ -266,7 +261,6 @@ export function authenticate(credentials) {
       return error.response.status
     }
   };
->>>>>>> dc9a8c5f94f3b0d6716503bf6715508cadf678dd
 }
 
 
