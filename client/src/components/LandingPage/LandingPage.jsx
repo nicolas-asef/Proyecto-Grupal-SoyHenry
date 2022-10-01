@@ -12,22 +12,9 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './LandingPage.css'
+import Footer from '../Footer/Footer';
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-const pages = ['Home','Register']
 const options = [
   {
     title: 'QUIERO CONTRATAR',
@@ -47,7 +34,7 @@ const options = [
       'Seguro laboral',
       'Posicionamiento profesional'
     ],
-    buttonText: 'Soy profesional',
+    buttonText: 'Registrarse',
     buttonVariant: 'outlined',
     pages: '/users/register'
   },
@@ -84,8 +71,10 @@ export default function Album() {
               component="h1"
               variant="h2"
               align="center"
+              width="max-content"
               color="text.primary"
               gutterBottom
+              className='title'
             >
               La nueva era del oficio
             </Typography>
@@ -98,41 +87,25 @@ export default function Album() {
               Resolvemos de manera segura
             </Typography>
             <div className='container-options'>
-            <Container maxWidth="string" component="main" align="center">
-              <Grid container spacing={5} alignItems="center">
-                {options.map((tier) => (
-                  <Grid
-                    item
-                    key={tier.title}
-                    xs={2}
-                    xl={tier.title === "QUIERO CONTRATAR" ? 6 : 2}
-                    md={4}
-                  >
-                    <Card>
-                      <CardContent>
-                        <ul>
-                          {tier.description.map((line) => (
-                            <Typography
-                              component="li"
-                              variant="subtitle1"
-                              align="center"
-                              key={line}
-                            >
-                              {line}
-                            </Typography>
-                          ))}
-                        </ul>
-                      </CardContent>
-                      <CardActions>
-                        <Button fullWidth variant={tier.buttonVariant} component={Link} href={tier.pages}>
-                          {tier.buttonText}
-                        </Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
+              { options && options.map( option => (
+                <div className='card'>
+                  <div className='titlecontainer'>
+                    <h3>{option.title}</h3>
+                  </div>
+                  <div className='description'>
+                    {option.description.map( desc => (
+                      <p className='desc'>• {desc}</p>
+                    ))}
+                  </div>
+                    <Button 
+                    fullWidth 
+                    variant='contained'
+                    component={Link}
+                    href={option.pages}
+                    >{option.buttonText}</Button>
+                </div>
+              ))
+              }
             </div>
           </Container>
         </Box>
@@ -164,15 +137,7 @@ export default function Album() {
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
+        <Footer />
       </Box>
       {/* End footer */}
     </ThemeProvider>
