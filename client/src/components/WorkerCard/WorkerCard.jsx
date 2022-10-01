@@ -57,7 +57,13 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
             </div>
             
             <div className={s.divDescription}>
+              <div className={s.divName}>
                 <h2 className={s.h2}>{`${User.name} ${User.lastName}`}</h2>
+              </div>
+              <div className={s.divTop}>
+                <h3 className={`${s.h3} ${s.job}`}>Programador </h3>
+                <h3 className={`${s.h3} ${s.job}`}>Ingenierio </h3>
+              </div>
                 <h3 className={s.h3}>Ubicación: {User.location}</h3>
                 <h3 className={s.h3}>Estado: {User.status === false ? 'Desconectado' : 'Conectado'}</h3>
                 <h3 className={s.h3}>Trabajos hechos: {finishedContracts.length}</h3>
