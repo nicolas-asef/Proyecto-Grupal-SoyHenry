@@ -1,6 +1,7 @@
 .stats{
     /* border: 3px solid #73AD21; */
-    width: 99%;
+    margin-top: 2vh;
+    width: 100%;
     height: 5rem;
     padding-top: 1.2rem;
     box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);

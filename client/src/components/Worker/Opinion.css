@@ -10,7 +10,7 @@
   }
   
   .opinion p {
-    flex: 5;
+    flex: 6;
     overflow: hidden;
     cursor: pointer;
     border-radius: 10px;

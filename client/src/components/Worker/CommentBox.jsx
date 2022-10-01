@@ -12,7 +12,6 @@ function CommentBox({descripcion,imagen,nombre,rating}) {
     <Avatar alt={nombre} src={imagen} sx={{ width: 94, height: 94, marginLeft:2}} />
     {nombre}
   </div>
-
   <div className="c-right">
   
     <div className="c-rating">
