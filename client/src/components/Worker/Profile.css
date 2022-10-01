@@ -83,7 +83,7 @@
     font-size: 1.5rem;
     color: #42caff;
     letter-spacing: 0.05rem;
-    text-align: center;
+    text-align: start;
    }
    
    .text-body {
@@ -93,7 +93,7 @@
     color: #6f6d78;
     font-weight: 400;
     font-style: italic;
-    text-align: center;
+    text-align: start;
     
    }
    
@@ -129,7 +129,7 @@
 .job-title{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     color:#7C8097;
     font-size: 1.2em;
     font-weight: 100;

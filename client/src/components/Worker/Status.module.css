@@ -1,0 +1,53 @@
+
+  div.container {
+    height: auto;
+    width: auto;
+    /* border: 3px solid #73AD21; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  div.onlineIndicator {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    
+    /* background-color: #0fcc45; */
+    border-radius: 50%;
+    
+    position: relative;
+  }
+  span.blink {
+    display: block;
+    width: 15px;
+    height: 15px;
+    
+    /* background-color: #b61616; */
+    opacity: 0.7;
+    border-radius: 50%;
+    
+    animation: blink 1s linear infinite;
+  }
+  
+  h2.onlineText {
+    display: inline;
+    
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    text-shadow: 0px 3px 6px rgba(150, 150, 150, 0.2);
+    font-size: 2.7vh;
+
+    position: relative;
+    cursor: pointer;
+  }
+  
+  /*Animations*/
+  
+  @keyframes blink {
+    100% { transform: scale(2, 2); 
+            opacity: 0;
+          }
+  }
