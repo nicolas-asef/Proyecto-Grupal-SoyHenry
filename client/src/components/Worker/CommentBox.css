@@ -1,0 +1,30 @@
+.c-left{
+    padding-left: 3.8%;
+    display: flex;
+    flex-direction: column;
+    margin: solid 1px black;
+    width: 10vw;
+}
+
+.c-description{
+    /* border: 3px solid #73AD21; */
+    margin-top: 1rem;
+}
+
+.c-right{
+    /* border: 3px solid #73AD21; */
+    padding-left: 1.8%;
+    display: flex;
+    flex-direction: column;
+    margin: solid 1px black;
+    height: 9rem;
+    width: 40rem;
+    margin-bottom: 1rem;
+}
+
+.c-rating{
+    /* border: 3px solid #73AD21; */
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1rem;
+}

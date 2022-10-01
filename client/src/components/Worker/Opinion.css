@@ -24,7 +24,7 @@
   }
   
   .opinion p:hover {
-    flex: 20 ;
+    flex: 10 ;
   }
   
 
@@ -44,10 +44,4 @@
 
 
 
-   .p-interior{
-    padding-left: 3.8%;
-    display: flex;
-    flex-direction: column;
-    margin: solid 1px black;
-    width: 10vw;
-}
+   

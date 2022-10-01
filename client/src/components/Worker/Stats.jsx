@@ -2,10 +2,12 @@ import React from 'react'
 import './Stats.css'
 import Estrella from '../../img/estrella.png';
 import { Typography, Rating,Box } from '@mui/material';
-
+import { createTheme } from '@mui/system';
 //{contratosTerminados,value}
 
 function Stats({finishedJobs,promedioRating}) {
+  const theme = createTheme();
+
   const contratosTerminados = finishedJobs
   const value = promedioRating
   let calificacion = "Safa"
@@ -33,7 +35,7 @@ function Stats({finishedJobs,promedioRating}) {
         </div>
         <div className="s-right">
           {/* <p>Rating</p> */}
-          <Typography component="legend">Rating</Typography>
+          <Typography component="legend">Valoracion</Typography>
           <div className="rating">
           <Rating name="read-only" value={value} readOnly  precision={0.1}/>
           <Box sx={{ ml: 2 }}>{calificacion}</Box>

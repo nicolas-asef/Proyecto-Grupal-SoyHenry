@@ -54,7 +54,7 @@ export default function Opinion({contratos}) {
 `;
   return (
     <Opinion2 className='opinion'>      
-    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <></>}
+    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <></>}
 
     
 
