@@ -48,17 +48,16 @@ route.get('/worker', async (req, res) => {
 
 route.post('/', async (req,res) => {
     
-    const {id_user,id_worker,location,date,rating_U,rating_W} = req.body
+    const {id_user, id_worker, finished, rating_U, rating_W, location, comment_U, comment_W, confirmed} = req.body
     try {
         const contrato = await Contract.create({
-            finished:false,
-            rating_U:null,
-            rating_W:null,
+            finished:finished,
+            rating_U:rating_U,
+            rating_W:rating_W,
             location:location,
-            date:date,
-            comment_U:null,
-            comment_W:null,
-            confirmed:false
+            comment_U:comment_U,
+            comment_W:comment_W,
+            confirmed:confirmed
         })
         contrato.setWorker(id_worker)
         contrato.setUser(id_user)
