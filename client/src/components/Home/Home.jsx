@@ -15,12 +15,12 @@ let dispatch = useDispatch();
 	useEffect(() => {
       dispatch(getJobs());
       dispatch(getWorkers())
-   }, []);
+   }, [dispatch]);
       
 	return (
     <div className="all-home">
       <div className="header-container">
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 575 }}>
           <CardContent>
             <Typography variant="h5" component="div">
               <SearchBar/>
