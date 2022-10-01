@@ -43,7 +43,7 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
 
     return (
         <div className={s.conteiner}>
-
+           {/* <Link to={`/worker/${Worker.ID}`}></Link> */}
             <div className={s.divImg}>
             <Stack direction="row" spacing={2}>
                 <StyledBadge
@@ -55,6 +55,7 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
                 </StyledBadge>
                 </Stack>
             </div>
+            
             <div className={s.divDescription}>
                 <h2 className={s.h2}>{`${User.name} ${User.lastName}`}</h2>
                 <h3 className={s.h3}>Ubicación: {User.location}</h3>
@@ -62,8 +63,9 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
                 <h3 className={s.h3}>Trabajos hechos: {finishedContracts.length}</h3>
             </div>
             <div className={s.divRating}>
-                <Rating name="read-only" value={3} readOnly />
+                <Rating name="read-only" value={Worker.rating} readOnly />
             </div>
+            
         </div>
     )
 }
