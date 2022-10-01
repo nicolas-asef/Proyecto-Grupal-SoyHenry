@@ -19,7 +19,7 @@ useEffect(()=>{
     return (
     <div className={s.OutterCardsDIV}>
          <div className={s.CardsDIV}>
-            {workersdb.length === 0 ? <h1>Loading...</h1> : workersdb.map(worker => (
+            {workers.length === 0 ? <h1>Loading...</h1> : workers.map(worker => (
                 <div key={worker.ID} >
                 <WorkerCard
                 Worker={worker}            
