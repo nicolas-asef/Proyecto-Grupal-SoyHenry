@@ -9,10 +9,9 @@ const Catalog = () => {
     const dispatch = useDispatch()
     const workers =  useSelector(state => state.workers) // el array de workers real sacado de redux (se utilizaría una vez que haya trabajadores en la base de datos)
     
-useEffect(()=>{
-
-        dispatch(getWorkers())
-},[dispatch])
+/* useEffect(()=>{
+    dispatch(getWorkers())
+},[dispatch]) */
 
 
     return (
