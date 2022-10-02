@@ -1,6 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER } from './actions_vars'
+import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET } from './actions_vars'
 
 export function getWorkers(query, search){
 
@@ -103,7 +103,7 @@ export function getUsersName(search) {
 
 export function getWorkersSearch(search) {
   return function (dispatch) {    
-    dispatch({ type: "RESET" })
+    dispatch({ type: RESET })
     dispatch({
       type:GET_WORKERS_SEARCH,
       payload: search
