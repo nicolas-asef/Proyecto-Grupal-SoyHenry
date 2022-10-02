@@ -5,9 +5,12 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
+import { useDispatch } from 'react-redux';
+import { temporalLogout } from '../../redux/actions/actions';
 
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleCloseUserMenu = () => {
@@ -17,8 +20,28 @@ const Profile = () => {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
+  const handleLogout = () => {
+    dispatch(temporalLogout());
+  }
   
-  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  const settings = [
+    {
+      name: 'Profile',
+      handler: handleCloseUserMenu
+    }, 
+    {
+      name: "Account",
+      handler: handleCloseUserMenu
+    },
+    {
+      name: "Dashboard",
+      handler: handleCloseUserMenu
+    },
+    {
+      name: "Logout",
+      handler: handleLogout
+    }];
 
   return (
     <>
@@ -44,8 +67,8 @@ const Profile = () => {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
+          <MenuItem key={setting.name} onClick={setting.handler}>
+            <Typography textAlign="center">{setting.name}</Typography>
           </MenuItem>
         ))}
       </Menu>
