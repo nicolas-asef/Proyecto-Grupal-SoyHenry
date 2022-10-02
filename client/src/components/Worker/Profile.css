@@ -1,6 +1,6 @@
 /* From uiverse.io by @alexruix */
 /*Magic card*/
-.card {
+.profile-card {
     border-radius: 10px;
     width: 28.5rem;
     height: auto;
@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    /* border: 3px solid #73AD21; */
    }
    
    .card-info {

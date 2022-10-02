@@ -50,6 +50,8 @@ export function getContractUsers(ids){
       
       dispatch({type:GET_USERS_CONTRACTS,payload:json})
     })
+    .catch(error => {dispatch({type:GET_USERS_CONTRACTS,payload:{}})
+    })
   }
 }
 
