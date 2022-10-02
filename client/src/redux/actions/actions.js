@@ -103,6 +103,7 @@ export function getUsersName(search) {
 
 export function getWorkersSearch(search) {
   return function (dispatch) {    
+    dispatch({ type: "RESET" })
     dispatch({
       type:GET_WORKERS_SEARCH,
       payload: search

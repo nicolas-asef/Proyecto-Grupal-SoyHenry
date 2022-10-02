@@ -71,8 +71,16 @@ const reducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        workers: action.payload
+        workers: action.payload,
+        allWorkers: action.payload
 }
+
+    case "RESET": 
+      return {
+        ...state,
+        workers: state.allWorkers
+      }
+
     case GET_WORKERS_PREMIUM:
       return {
         ...state,
@@ -116,7 +124,7 @@ const reducer = (state = initialState, action) => {
       }
     return {
         ...state,
-        workers: filtrado
+        workers: action.payload !== "" ? filtrado : state.allWorkers
       }
     case ORDER_BY_RATING:{
       return {
