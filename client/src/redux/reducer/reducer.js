@@ -97,16 +97,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         authState
       }
-    case GET_WORKERS:
-      return {
-        ...state,
-        workers: action.payload
-      }
+
     case GET_WORKERS_SEARCH:
       
       let filtrado = state.workers.filter( (e) => e.User.name.toLowerCase().includes(action.payload.toLowerCase()))
       if(filtrado.length === 0) {
-        filtrado = state.workers.filter( c => c.Jobs.some( j => j.name.toLowerCase() === action.payload.toLowerCase()));
+        filtrado = state.workers.filter( c => c.Jobs.some( j => j.name.toLowerCase().includes(action.payload.toLowerCase())));
       }
     return {
         ...state,
