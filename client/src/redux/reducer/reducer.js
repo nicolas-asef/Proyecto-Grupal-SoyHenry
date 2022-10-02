@@ -1,4 +1,4 @@
-import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH } from '../actions/actions_vars'
+import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER } from '../actions/actions_vars'
 
 const localStorageAuth = () => {
   const auth = localStorage.getItem("auth");
@@ -10,6 +10,7 @@ const storagedData = localStorageAuth();
 
 const initialState = {
   workers: [],
+  allWorkers: [],
   users: [],
   jobs: [],
   workersPremium: [],
@@ -42,7 +43,8 @@ const reducer = (state = initialState, action) => {
     case GET_USERS:
         return {
           ...state,            
-          users: action.payload            
+          users: action.payload,
+          allWorkers: action.payload         
         }
     case GET_USERNAME:
       return {
@@ -116,6 +118,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         workers: filtrado
       }
+    case ORDER_BY_RATING:{
+      return {
+        ...state,
+        workers: action.payload
+      }
+    }
+    case FILTER: {
+      return {
+        ...state,
+        workers: action.payload
+      }
+    }
     default:
       return state;
   }

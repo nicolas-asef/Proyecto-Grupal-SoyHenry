@@ -53,7 +53,7 @@ export default function SelectAutoWidth({filtrado}) {
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: "50vw" }}>
-        <InputLabel id="demo-simple-select-autowidth-label">Ordenar</InputLabel>
+        <InputLabel id="demo-simple-select-autowidth-label">Ordenar </InputLabel>
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"

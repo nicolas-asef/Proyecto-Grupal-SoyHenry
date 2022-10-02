@@ -102,6 +102,7 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
       setListaValoraciones(auxiliar)
       setForzarCambio(!forzarCambio)
     }
+    console.log(worker)
   }
   
 
@@ -112,30 +113,32 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
      </Skeleton>
     
     : 
-
-      <div className="worker">
-        <div className="w-left">
-          {worker.User ? <Profile name = {worker.User.name} jobs = {worker.Jobs} description="Me encanta hablar" available="A veces si a veces no" status = "Online"/> : <Skeleton variant = "circular">
-          <Profile/>
-          </Skeleton> }
-        </div>
-
+    <div className="worker">
       <div className="w-portada">
           <img src={Banner} alt='banner'/>
       </div>
-      <div className="w-right">
-          {finishedJobs > 0? <Stats finishedJobs={finishedJobs} promedioRating = {promedioRating}/>: <></>}
-          
-          {worker.User ? <>
-          <div className="filters">
-            <Filters filtrado = {ordenarFiltrados}/>
+      <div className="w-content">
+        <div className="w-left">
+            {worker.User ? <Profile img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {worker.User.status}/> : <Skeleton variant = "circular">
+            <Profile/>
+            </Skeleton> }
           </div>
-          <Opinion contratos={valoraciones} />
-          <div className="pagination">
-            {maxPag > 0  ?  <Pagination count={maxPag} onChange={handleChange} hidePrevButton hideNextButton/> :<></>}
-          </div></>: <></>}
-          
+
+        <div className="w-right">
+            {finishedJobs > 0? <Stats finishedJobs={finishedJobs} promedioRating = {promedioRating}/>: <></>}
+            
+            {worker.User ? <>
+            <div className="filters">
+              <Filters filtrado = {ordenarFiltrados}/>
+            </div>
+            <Opinion contratos={valoraciones} />
+            <div className="pagination">
+              {maxPag > 0  ?  <Pagination count={maxPag} onChange={handleChange} hidePrevButton hideNextButton/> :<></>}
+            </div></>: <></>}
+            
+        </div>
       </div>
+
     </div>
     }
 
