@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Footer from '../Footer/Footer';
 import Filters from '../Filters/Filters';
+import Catalog from '../Catalog/Catalog'
 import './Home.css';
 
 
@@ -21,44 +22,14 @@ let dispatch = useDispatch();
       
 	return (
     <div className="all-home">
-      <div className="header-container">
-        <Card sx={{ minWidth: 575 }}>
-          <CardContent>
-            <Typography variant="h5" component="div">
-              <SearchBar/>
-            </Typography>
-          </CardContent>
-        </Card>
-
-        <div className="filters">
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                <Filters />
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
+      <div className='container'>
+        <SearchBar/>
       </div>
-      <div className="container-cards">
-        <div className="about-card">
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                Componente Carousel
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
-        <div className="about-card">
-          <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-              <Typography variant="h5" component="div">
-                Componente Carousel
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
+      <div className='filter-container'>
+        <Filters />
+      </div>
+      <div className='container'>
+        <Catalog />
       </div>
       <div className="paginado">
         <Card sx={{ minWidth: 275 }}>

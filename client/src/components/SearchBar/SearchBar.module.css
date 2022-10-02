@@ -12,5 +12,6 @@
 .search button {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  height: 40px;
+  height: 56px;
+  box-shadow: none;
 }

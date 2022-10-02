@@ -1,3 +1,9 @@
-.filters{
+.fieldContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
 
+.textField {
+  width: 20vh;
 }

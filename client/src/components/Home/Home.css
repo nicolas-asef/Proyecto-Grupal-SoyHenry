@@ -7,3 +7,12 @@
 .about-card{
     background-color: red;
 }
+
+.container {
+    margin-top: 30px;
+    width: 45%;
+}
+
+.filter-container {
+    width: 45%;
+}
