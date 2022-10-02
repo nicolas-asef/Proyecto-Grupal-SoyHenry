@@ -46,8 +46,8 @@ import style from './SearchBar.module.css'
     }
     return (
         <form className={style.search} onSubmit={handleSubmit}>
-            <TextField fullWidth placeholder='Buscar un oficio o nombre de trabajador' type="text" variant="outlined" size='small' onChange={handleChange}/>
-            <Button variant='contained' size='medium' type='submit' endIcon={<SearchIcon/>}>Buscar</Button>
+            <TextField label="Buscar un oficio o nombre de trabajador" fullWidth type="text" variant="outlined" size='large' onChange={handleChange}/>
+            <Button variant='contained' size='large' type='submit' endIcon={<SearchIcon/>}>Buscar</Button>
         </form>
     )
 }
