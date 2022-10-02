@@ -22,23 +22,21 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
   const [finishedJobs,setFinishedJobs] = useState(0)
   const [listaValoraciones,setListaValoraciones] = useState([])
   const [forzarCambio, setForzarCambio] = useState(false)
-
-
   useEffect(() =>{
     getWorkerDetail(id)
+
   },[])
 
 
   useEffect(() =>{
-   
     if(Object.keys(worker).length !== 0){
       worker.User.name = worker.User.lastName + " " + worker.User.name  
-      worker.Jobs = worker.Jobs[0].name? worker.Jobs.map(e => e.name) : worker.Jobs
+      worker.Jobs = worker.Jobs.map(e => e.name)
       const contratos = []
       worker.Contracts.forEach(e => contratos.push(e.id))
       getContractUsers(contratos)
     }
-
+    
   },[worker])
 
 
@@ -54,7 +52,6 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
     let auxiliarTerminados = 0
     let auxiliarPromedio = 0
     setMaxPag(Math.ceil(users.length/5))
-    if(Object.keys(listaValoraciones).length !== 0)
     listaValoraciones.forEach(e => {
 
       const elemento = {
@@ -79,28 +76,33 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
   },[listaValoraciones,forzarCambio,pag])
 
   const handleChange = (e) => {
+    console.log((e.target.innerText))
     setPag(e.target.innerText)
+    // console.log(contractsVisualized)
+    // setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
     
   }
 
   const ordenarFiltrados = (tipo) => {
     if(tipo == 'r'){
       const auxiliar = listaValoraciones.sort((a,b) => (a.date > b.date) ? 1 : -1)
+      console.log(auxiliar)
       setListaValoraciones(auxiliar)
       setForzarCambio(!forzarCambio)
     }
     if(tipo === 'p'){
       const auxiliar = listaValoraciones.sort((a,b) => (a.rating_U > b.rating_U) ? -1 : 1)
-
+      console.log(auxiliar)
       setListaValoraciones(auxiliar)
       setForzarCambio(!forzarCambio)
     }
     if(tipo === 'n'){
       const auxiliar = listaValoraciones.sort((a,b) => (a.rating_U > b.rating_U) ? 1 : -1)
-
+      console.log(auxiliar)
       setListaValoraciones(auxiliar)
       setForzarCambio(!forzarCambio)
     }
+    console.log(worker)
   }
   
 
@@ -117,22 +119,22 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
       </div>
       <div className="w-content">
         <div className="w-left">
-            {worker.User && worker.User.name ? <Profile img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {worker.User.status}/> : <Skeleton variant = "circular">
-
+            {worker.User ? <Profile img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {worker.User.status}/> : <Skeleton variant = "circular">
+            <Profile/>
             </Skeleton> }
           </div>
 
         <div className="w-right">
-            {finishedJobs > 0? <Stats finishedJobs={finishedJobs} promedioRating = {promedioRating}/>: <Stats finishedJobs={0} promedioRating = {0}/>}
+            {finishedJobs > 0? <Stats finishedJobs={finishedJobs} promedioRating = {promedioRating}/>: <></>}
             
             {worker.User ? <>
             <div className="filters">
               <Filters filtrado = {ordenarFiltrados}/>
             </div>
             <Opinion contratos={valoraciones} />
-            
-              {maxPag > 0 && finishedJobs > 0 ?  <div className="pagination"><Pagination count={maxPag} onChange={handleChange} hidePrevButton hideNextButton/> </div>:<></>}
-            </>: <></>}
+            <div className="pagination">
+              {maxPag > 0  ?  <Pagination count={maxPag} onChange={handleChange} hidePrevButton hideNextButton/> :<></>}
+            </div></>: <></>}
             
         </div>
       </div>

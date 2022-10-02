@@ -4,7 +4,7 @@ import './Opinion.css'
 import Estrella from '../../img/perfil.jpg';
 import Perfil from '../../img/estrella.png';
 import styled, { css } from 'styled-components'
-import EmptyContainer from './EmptyContainer';
+
 
 
 
@@ -47,17 +47,14 @@ import EmptyContainer from './EmptyContainer';
 
 
 export default function Opinion({contratos}) {
-  let altura = 13
-  if(contratos.length > 0)
-    altura = contratos.length*13
+  const altura = contratos.length*13
   let key = 0
   const Opinion2 = styled.div`
   height: ${altura}rem;
 `;
   return (
-
     <Opinion2 className='opinion'>      
-    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <EmptyContainer/>}
+    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <></>}
 
     
 
