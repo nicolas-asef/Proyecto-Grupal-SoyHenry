@@ -6,14 +6,15 @@ import { filter, getJobs, orderByRating } from "../../redux/actions/actions";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
-const Filters = () => {
+const Filters = (callbk) => {
   const dispatch = useDispatch();
+  const jobs = useSelector (state => state.jobs)
   const [order, setOrder] = useState("");
   const [job, setJob] = useState("all");
   const [available, setAvailable] = useState("available");
   const [zone, setZone] = useState("all");
   const worker = useSelector((worker) => worker.workers);
-  const filtrado = useSelector((worker) => worker.allWorkers);
+  const filtrado = useSelector((worker) => worker.filters);
 
   const orderBy = (e) => {
     dispatch(orderByRating(worker, e.target.value));
@@ -66,13 +67,19 @@ const Filters = () => {
           onChange={(e) => filterjob(e)}
         >
           <MenuItem value="all">all</MenuItem>
+          {jobs && jobs.map (job => {
+            return (
+              <MenuItem value={job.name} key={job.id}>{job.name}</MenuItem>
+            )})
+          }
+          {/* <MenuItem value="all">all</MenuItem>
           <MenuItem value="Vendedor">Vendedor</MenuItem>
           <MenuItem value="Pintor">Pintor</MenuItem>
           <MenuItem value="Ingeniero">Ingeniero</MenuItem>
           <MenuItem value="Carpintero">Carpintero</MenuItem>
           <MenuItem value="Plomero">Plomero</MenuItem>
           <MenuItem value="Programador">Programador</MenuItem>
-          <MenuItem value="Electricista">Electricista</MenuItem>
+          <MenuItem value="Electricista">Electricista</MenuItem> */}
         </TextField>
       </div>
       <div className={styles.textField}>
@@ -86,11 +93,15 @@ const Filters = () => {
           onChange={(e) => filterAvailable(e)}
         >
           <MenuItem value="available">available</MenuItem>
-          <MenuItem value="Online">Online</MenuItem>
-          <MenuItem value="Offline">Offline</MenuItem>
+          <MenuItem value={false}>Online</MenuItem>
+          <MenuItem value={true}>Offline</MenuItem>
         </TextField>
       </div>
-      <div className={styles.textField}>
+
+        {/* SE DESHABILITA MOMENTANEMANTE HASTA HACER UNA TABLA QUE CONTENGA LAS UBICACIONES PARA PODER MAPEARLAS  */}
+
+
+      {/* <div className={styles.textField}>
         <TextField
           fullWidth
           variant="outlined"
@@ -106,7 +117,7 @@ const Filters = () => {
           <MenuItem value="San Luis">San Luis</MenuItem>
           <MenuItem value="Chaco">Chaco</MenuItem>
         </TextField>
-      </div>
+      </div> */}
     </div>
   );
 };

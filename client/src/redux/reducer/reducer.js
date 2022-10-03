@@ -11,6 +11,7 @@ const storagedData = localStorageAuth();
 const initialState = {
   workers: [],
   allWorkers: [],
+  filters: [],
   users: [],
   jobs: [],
   workersPremium: [],
@@ -72,7 +73,9 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         workers: action.payload,
-        allWorkers: action.payload
+        allWorkers: action.payload,
+        filters: action.payload
+
 }
 
     case RESET: 
@@ -106,7 +109,8 @@ const reducer = (state = initialState, action) => {
       }
     return {
         ...state,
-        workers: action.payload !== "" ? filtrado : state.allWorkers
+        workers: action.payload !== "" ? filtrado : state.allWorkers,
+        filters: filtrado
       }
     case ORDER_BY_RATING:{
       return {

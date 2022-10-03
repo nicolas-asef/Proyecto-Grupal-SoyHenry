@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from "react"
 import  SearchBar  from '../SearchBar/SearchBar'
 import { getJobs, getWorkers } from '../../redux/actions/actions'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -12,40 +12,9 @@ import Catalog from '../Catalog/Catalog'
 import Paginado from '../Pagination/Pagination';
 import './Home.css';
 
-const workers = [
-  {name : "Martin"},
-  {name : "Nicoals"},
-  {name : "Juan"},
-  {name : "Santi"},
-  {name : "Luciano"},
-  {name : "sab"},
-  {name : "asdasd"},
-  {name : "Jueqwean"},
-  {name : "zxcz"},
-  {name : "Luci213ano"},
-  {name : "Martin"},
-  {name : "Nicoals"},
-  {name : "Juan"},
-  {name : "Santi"},
-  {name : "Luciano"},
-  {name : "sab"},
-  {name : "asdasd"},
-  {name : "Jueqwean"},
-  {name : "zxcz"},
-  {name : "Luci213ano"},
-  {name : "Martin"},
-  {name : "Nicoals"},
-  {name : "Juan"},
-  {name : "Santi"},
-  {name : "Luciano"},
-  {name : "sab"},
-  {name : "asdasd"},
-  {name : "Jueqwean"},
-  {name : "zxcz"},
-  {name : "Luci213ano"}
-]
 
 const Home = () => {
+  const workers = useSelector (state => state.workers)
   const [page, setPage] = useState (1)
   const lastIndex = page * 4
   const firstIndex = lastIndex - 4
@@ -53,6 +22,7 @@ const Home = () => {
   const pagesNumber = (num) => {
     setPage(num)
   }
+  console.log(workers)
   
 let dispatch = useDispatch();
 	useEffect(() => {
@@ -66,34 +36,33 @@ let dispatch = useDispatch();
         <SearchBar/>
       </div>
       <div className='filter-container'>
-        <Filters />
-      </div>
-      <div className='container'>
-        <Catalog />
+        <Filters callbk={pagesNumber}/>
       </div>
       <div className="paginado">
-        <Card sx={{ minWidth: 275 }}>
+        <Paginado
+          callbk = {pagesNumber}
+          cantWorkers = {workers.length}
+        />
+      </div>
+      <div className='container'>
+        <Catalog workers={currentWorkers} />
+      </div>
+      <div className="paginado">
+        {/* <Card sx={{ minWidth: 275 }}>
           <CardContent>
             <Typography variant="h5" component="div">
               Componente Paginado
             </Typography>
           </CardContent>
-        </Card>
+        </Card> */}
+        <Paginado
+          callbk = {pagesNumber}
+          cantWorkers = {workers.length}
+        />
       </div>
       <div className="footer">
         <Footer />
       </div>
-      <Paginado
-        callbk = {pagesNumber}
-        cantWorkers = {workers.length}
-      />
-      {currentWorkers.map ( worker => {
-        return (
-          <div>
-            {worker.name}
-          </div>
-        )
-      })}
 
     </div>
   );

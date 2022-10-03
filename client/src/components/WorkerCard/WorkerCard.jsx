@@ -62,7 +62,7 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
                 <h2 className={s.h2}>{`${User.name} ${User.lastName}`}</h2>
               </div>
               <div className={s.divTop}>
-              {Jobs && Jobs.map(job =><h3 className={`${s.h3} ${s.job}`}>{job.name}</h3>)}
+              {Jobs && Jobs.map(job =><h3 className={`${s.h3} ${s.job}`} key={job.name}>{job.name}</h3>)}
               </div>
                 <h3 className={s.h3}>Ubicación: {User.location}</h3>
                 <h3 className={s.h3}>Estado: {User.status === false ? 'Desconectado' : 'Conectado'}</h3>

@@ -7,10 +7,8 @@ export default function Pagination ({callbk, cantWorkers}){
     return (
         <ul>
             {paginas.map(pagina => {
-                console.log(pagina)
                 return (
                     <li key={pagina} onClick={() => callbk(pagina)}>
-                        {console.log(pagina)}
                         <a>{pagina}</a>
                     </li>
                 )

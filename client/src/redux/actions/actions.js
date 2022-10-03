@@ -185,7 +185,7 @@ export function orderByRating(array, orderBy){
 
 export function filter(array, job, disponibilidad, zona){
   let filterArray = []
-  console.log(job, zona)
+  console.log(job)
 
   if (job === 'all' && disponibilidad === 'available' && zona === 'all'){
     filterArray = array
@@ -194,7 +194,7 @@ export function filter(array, job, disponibilidad, zona){
   if (job !== 'all' && disponibilidad !== 'available' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].available === disponibilidad && array[i].zona === zona){
+        if (el.name === job && array[i].User.status === disponibilidad && array[i].zona === zona){
           filterArray.push(array[i])
         }
       })
@@ -202,9 +202,10 @@ export function filter(array, job, disponibilidad, zona){
   }
 
   if (job !== 'all' && disponibilidad === 'available' && zona === 'all'){
+    console.log("entro")
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map(el => {
-        if (el.nombre === job){
+        if (el.name === job){
           filterArray.push(array[i])
         }
       })
@@ -212,7 +213,7 @@ export function filter(array, job, disponibilidad, zona){
   }
   if (job === 'all' && disponibilidad !== 'available' && zona === 'all'){
     for (let i = 0; i < array.length; i++) {
-      if (array[i].available === disponibilidad){
+      if (array[i].User.status === disponibilidad){
         filterArray.push(array[i])
       }
     }
@@ -228,7 +229,7 @@ export function filter(array, job, disponibilidad, zona){
   if (job !== 'all' && disponibilidad !== 'available' && zona === 'all'){
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].available === disponibilidad){
+        if (el.name === job && array[i].User.status === disponibilidad){
           filterArray.push(array[i])
         }
       })
@@ -236,7 +237,7 @@ export function filter(array, job, disponibilidad, zona){
   }
   if (job === 'all' && disponibilidad !== 'available' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
-      if (array[i].available === disponibilidad && array[i].zona === zona){
+      if (array[i].User.status === disponibilidad && array[i].zona === zona){
         filterArray.push(array[i])
       }
     }
@@ -244,7 +245,7 @@ export function filter(array, job, disponibilidad, zona){
   if (job !== 'all' && disponibilidad === 'available' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].zona === zona){
+        if (el.name === job && array[i].zona === zona){
           filterArray.push(array[i])
         }
       })
