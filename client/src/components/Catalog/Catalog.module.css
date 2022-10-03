@@ -11,3 +11,10 @@
     align-items: center;
     width:100%;
 }
+
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
