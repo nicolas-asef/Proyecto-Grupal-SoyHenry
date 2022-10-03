@@ -12,7 +12,4 @@ export const GET_WORKER_DETAIL = "GET_WORKER_DETAIL";
 export const GET_USERS_CONTRACTS = "GET_USERS_CONTRACTS";
 export const LOADING = "LOADING";
 export const RESET = "RESET";
-export const GET_USER_ID = "GET_USER_ID";
-export const PUT_USER = "PUT_USER";
 export const TEMPORAL_LOGOUT = "TEMPORAL_LOGOUT";
-

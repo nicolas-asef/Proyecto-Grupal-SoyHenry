@@ -13,7 +13,7 @@ const getUsers = async () => {
     const info = await User.findAll()
     const dataUser = info?.map((u) => {
         return {
-            id: u.ID,
+            id: u.id,
             name: u.name,
             lastName: u.lastName,
             img: u.img,
@@ -88,19 +88,19 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {   
-    const {info} = req.body;
-    const {id} = req.params; 
+router.put('/:id', async (req, res, next) => {
+    const {id} = req.params;
     try {
-        const updated = await User.update(info, {
+        const updated = await User.update(req.body, {
             where: {id: id}
-        });        
+        });
         if(updated){
             const updatedUser = await User.findOne({where: {id: id}});
-            return res.status(200).json(updatedUser);
-        }       
+            return res.status(200).json({user: updatedUser});
+        }
+        throw new Error('User not found');
     } catch (error) {
-        res.send("entro al catch")        
+        next(error)
     }
 })
 
