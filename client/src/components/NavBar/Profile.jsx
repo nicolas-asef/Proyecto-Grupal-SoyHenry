@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { temporalLogout } from '../../redux/actions/actions';
 import { useEffect } from 'react';
 import { getUsers } from '../../redux/actions/actions'
-import {  Route, useNavigate } from 'react-router-dom';
-import Link from '@mui/material/Link';
+import {  useNavigate } from 'react-router-dom';
+
 
 
 const Profile = () => {
