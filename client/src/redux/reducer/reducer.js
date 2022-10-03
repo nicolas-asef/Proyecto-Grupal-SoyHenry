@@ -1,4 +1,7 @@
-import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,GET_USER_ID, PUT_USER } from '../actions/actions_vars'
+
+import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,GET_USER_ID, PUT_USER, TEMPORAL_LOGOUT } from '../actions/actions_vars'
+
+
 
 const localStorageAuth = () => {
   const auth = localStorage.getItem("auth");
@@ -105,16 +108,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         authState
       }
-    case GET_WORKERS:
-      return {
-        ...state,
-        workers: action.payload
-      }
+
     case GET_WORKERS_SEARCH:
       
       let filtrado = state.workers.filter( (e) => e.User.name.toLowerCase().includes(action.payload.toLowerCase()))
       if(filtrado.length === 0) {
-        filtrado = state.workers.filter( c => c.Jobs.some( j => j.name.toLowerCase() === action.payload.toLowerCase()));
+        filtrado = state.workers.filter( c => c.Jobs.some( j => j.name.toLowerCase().includes(action.payload.toLowerCase())));
       }
     return {
         ...state,
@@ -130,6 +129,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         workers: action.payload
+      }
+    }
+    case TEMPORAL_LOGOUT: {
+      const authState = {
+        isLoggedIn: false,
+      }
+
+      localStorage.setItem('auth', JSON.stringify(authState));
+      return {
+        ...state,
+        authState
       }
     }
     default:

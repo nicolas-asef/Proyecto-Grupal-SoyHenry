@@ -88,26 +88,19 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {   
+    const {info} = req.body;
     const {id} = req.params; 
-    
     try {
-        const userUpdate = await User.findOne({where: {id: id}})
-        res.status(200).send(userUpdate)
-        console.log(userUpdate)
-        // const updated = await User.update(req.body, {
-        //     where: {id: id}
-        // });
-        // res.send(update)
-        
-        // if(updated){
-        //     const updatedUser = await User.findOne({where: {id: id}});
-        //     return res.status(200).json({user: updatedUser});
-        // }
-        // throw new Error('User not found');
+        const updated = await User.update(info, {
+            where: {id: id}
+        });        
+        if(updated){
+            const updatedUser = await User.findOne({where: {id: id}});
+            return res.status(200).json(updatedUser);
+        }       
     } catch (error) {
-        res.send("entro al catch")
-        
+        res.send("entro al catch")        
     }
 })
 
