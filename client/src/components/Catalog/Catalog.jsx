@@ -13,9 +13,9 @@ const Catalog = () => {
   const lastIndex = page * 4;
   const firstIndex = lastIndex - 4; //0
 
-  const numberPages = Math.ceil((allWorkers.length/4))
+  const numberPages = Math.ceil((workers.length/4))
 
-  let currentWorkers = allWorkers.slice(firstIndex, lastIndex);
+  let currentWorkers = workers.slice(firstIndex, lastIndex);
 
   const pagesNumber = (event, value) => {
     console.log(value)
