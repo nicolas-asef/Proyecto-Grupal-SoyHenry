@@ -92,19 +92,23 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:id', async (req, res, next) => {
-    const {id} = req.params;
+
+router.put('/:id', async (req, res, next) => {   
+    const info = req.body;
+    const {id} = req.params; 
+    const salt = await bcrypt.genSalt(10);    
     try {
-        const updated = await User.update(req.body, {
-            where: {id: id}
-        });
-        if(updated){
-            const updatedUser = await User.findOne({where: {id: id}});
-            return res.status(200).json({user: updatedUser});
-        }
-        throw new Error('User not found');
+        const updatedUser = await User.findOne({where: {ID: id}});        
+        const us = await updatedUser.update({
+            email: info.email,
+            password: await bcrypt.hash(info.password, salt),
+            phone: info.phone,
+            img: info.img, 
+            location: info.location
+        })
+        res.status(200).json(us)       
     } catch (error) {
-        next(error)
+        res.status(500).send("entro al catch")        
     }
 })
 

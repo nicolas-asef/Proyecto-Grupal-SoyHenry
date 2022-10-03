@@ -13,3 +13,5 @@ export const GET_USERS_CONTRACTS = "GET_USERS_CONTRACTS";
 export const LOADING = "LOADING";
 export const RESET = "RESET";
 export const TEMPORAL_LOGOUT = "TEMPORAL_LOGOUT";
+export const PUT_USER = "PUT_USER";
+export const GET_USER_ID = "GET_USER_ID";
