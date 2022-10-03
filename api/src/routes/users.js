@@ -2,18 +2,19 @@ const { Router } = require('express');
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const auth = require('../controllers/authMiddleware');
+const { Admin, Chat, Contract, Job, User, Worker } = require("../db.js")
 
 // importarme los modelos
-const { User } = require('../db.js')
+
 
 
 const router = Router();
 
 const getUsers = async () => {
-    const info = await User.findAll()
+    const info = await User.findAll({include:[{model:Worker},{model:Contract},{model:Chat}]})
     const dataUser = info?.map((u) => {
         return {
-            id: u.id,
+            id: u.ID,
             name: u.name,
             lastName: u.lastName,
             img: u.img,
@@ -22,7 +23,10 @@ const getUsers = async () => {
             phone: u.phone,
             dni: u.dni, 
             location: u.location,
-            status: u.status
+            status: u.status,
+            Worker: u.Worker,
+            Contracts: u.Contracts,
+            Chats: u.Chats
         }
     });
     return dataUser;
