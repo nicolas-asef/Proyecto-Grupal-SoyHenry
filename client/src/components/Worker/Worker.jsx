@@ -62,7 +62,7 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
         img : e.User.img,
         comment: e.comment_U,
         //comment:"Este chico me cae bien",
-        rating: e.rating_U
+        rating: e.rating_W
         //rating: 4.2
       }
 
