@@ -35,9 +35,9 @@ const Profile = () => {
   const handleOpenProfile = () => {
     navigate(`/profile/${userProfileInfo[0].Worker.ID}`)
     setAnchorElUser(null);
-    console.log(userinfo.user)
+/*     console.log(userinfo.user)
     console.log(users)
-    console.log(userProfileInfo)
+    console.log(userProfileInfo) */
   }
   
   const handleOpenUserMenu = (event) => {
@@ -90,7 +90,7 @@ const Profile = () => {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem component={Link} href={setting.ruta} key={setting.name} onClick={setting.handler}>
+          <MenuItem key={setting.name} onClick={setting.handler}>
             <Typography textAlign="center">{setting.name}</Typography>
           </MenuItem>
         ))}
