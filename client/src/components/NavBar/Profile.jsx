@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { temporalLogout } from '../../redux/actions/actions';
 import { useEffect } from 'react';
-import { getUsers } from '../../redux/actions/actions'
+import {  getUserId } from '../../redux/actions/actions'
 import {  useNavigate } from 'react-router-dom';
 
 
@@ -18,13 +18,12 @@ const Profile = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const userinfo = useSelector(state=> state.authState)
   const users = useSelector(state => state.users)
-  const userProfileInfo = users.filter(user=> user.id === userinfo.user.id)
   const navigate = useNavigate()
 
 
   useEffect(()=>{
     if (users.length === 0) {
-    dispatch(getUsers())
+    dispatch(getUserId(userinfo.user.id))
     }
     console.log(users)
   },[dispatch])
@@ -33,10 +32,10 @@ const Profile = () => {
     setAnchorElUser(null);
   };
   const handleOpenProfile = () => {
-    navigate(`/profile/${userProfileInfo[0].Worker.ID}`)
+    navigate(`/profile/${users.Worker.ID}`)
     setAnchorElUser(null);
-/*     console.log(userinfo.user)
-    console.log(users)
+  /* console.log(users.Worker.ID)
+     console.log(users)
     console.log(userProfileInfo) */
   }
   
@@ -47,6 +46,9 @@ const Profile = () => {
   const handleLogout = () => {
     dispatch(temporalLogout());
   }
+  const handleSettings = () => {
+    navigate('/profile/settings')
+  }
   
   const settings = [
     {
@@ -54,8 +56,8 @@ const Profile = () => {
       handler: handleOpenProfile
     }, 
     {
-      name: "Account",
-      handler: handleCloseUserMenu
+      name: "Settings",
+      handler: handleSettings
     },
     {
       name: "Dashboard",
