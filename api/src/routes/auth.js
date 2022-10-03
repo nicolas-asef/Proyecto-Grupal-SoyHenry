@@ -15,7 +15,7 @@ router.post('/', async (req,res,next) => {
 
           if(password_valid) {
               const token = jwt.sign({ id: user.ID, name: user.name, lastname: user.lastName, status: user.status}, process.env.JWT_SECRET, {expiresIn: '5h'});
-              res.status(200).json({id: user.ID, name: user.name, token})
+              res.status(200).json({id: user.ID, name: user.name,img: user.img, token})
           } else {
               res.status(400).json({error: "Password Incorrect"});
           }

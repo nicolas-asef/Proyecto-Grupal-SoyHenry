@@ -3,7 +3,7 @@ import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GE
 const localStorageAuth = () => {
   const auth = localStorage.getItem("auth");
   if(JSON.parse(auth)) return JSON.parse(auth);
-  return { isLoggedIn: false , user: { id : "", name : "", token: ""}}
+  return { isLoggedIn: false , user: { id : "", name : "",img: "", token: ""}}
 }
 
 const storagedData = localStorageAuth();
@@ -43,8 +43,7 @@ const reducer = (state = initialState, action) => {
     case GET_USERS:
         return {
           ...state,            
-          users: action.payload,
-          allWorkers: action.payload         
+          users: action.payload,     
         }
     case GET_USERNAME:
       return {

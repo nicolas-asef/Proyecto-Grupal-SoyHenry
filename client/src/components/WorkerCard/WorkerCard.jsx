@@ -69,7 +69,7 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
                 <h3 className={s.h3}>Trabajos hechos: {finishedContracts.length}</h3>
             </div>
             <div className={s.divRating}>
-            <Link className={s.perfilLink} to={`/worker/${Worker.ID}`}> <h3 className={s.h3}>Perfil</h3> </Link>
+            <Link className={s.perfilLink} to={`/profile/${Worker.ID}`}> <h3 className={s.h3}>Perfil</h3> </Link>
             <Rating
         name="read-only"
         value={Worker.rating}
