@@ -129,6 +129,11 @@ const reducer = (state = initialState, action) => {
         authState
       }
     }
+    case GET_USER_ID:
+      return {
+        ...state,
+        users: action.payload 
+      }
     case PUT_USER: {
       return{
         ...state
