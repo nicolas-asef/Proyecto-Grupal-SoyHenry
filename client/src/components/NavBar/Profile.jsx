@@ -7,12 +7,12 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch } from 'react-redux';
 import { temporalLogout } from '../../redux/actions/actions';
-
+import {useNavigate} from 'react-router-dom'
 
 const Profile = () => {
   const dispatch = useDispatch();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const navigate = useNavigate()
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -25,14 +25,17 @@ const Profile = () => {
     dispatch(temporalLogout());
   }
   
+  const handleSettings = () => {
+    navigate('/profile/settings')
+  }
   const settings = [
     {
       name: 'Profile',
       handler: handleCloseUserMenu
     }, 
     {
-      name: "Account",
-      handler: handleCloseUserMenu
+      name: "Settings",
+      handler: handleSettings
     },
     {
       name: "Dashboard",
