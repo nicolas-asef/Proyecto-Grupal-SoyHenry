@@ -98,7 +98,6 @@ const reducer = (state = initialState, action) => {
       }
 
     case GET_WORKERS_SEARCH:
-      
       let filtrado = state.workers.filter( (e) => e.User.name.toLowerCase().includes(action.payload.toLowerCase()))
       if(filtrado.length === 0) {
         filtrado = state.workers.filter( c => c.Jobs.some( j => j.name.toLowerCase().includes(action.payload.toLowerCase())));
