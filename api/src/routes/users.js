@@ -11,7 +11,7 @@ const { Admin, Chat, Contract, Job, User, Worker } = require("../db.js")
 const router = Router();
 
 const getUsers = async () => {
-    const info = await User.findAll({include:[{model:Worker},{model:Contract},{model:Chat}]})
+    const info = await User.findAll({include:[{model:Worker,include:[Job]},{model:Contract},{model:Chat}]})
     const dataUser = info?.map((u) => {
         return {
             id: u.ID,
