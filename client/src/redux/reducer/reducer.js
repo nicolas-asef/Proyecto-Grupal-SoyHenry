@@ -1,9 +1,9 @@
-import {GET_WORKER_CONTRACTS,GET_USER_DETAIL,LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH } from '../actions/actions_vars'
+import {GET_WORKER_CONTRACTS,GET_USER_DETAIL,LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET, TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID } from '../actions/actions_vars'
 
 const localStorageAuth = () => {
   const auth = localStorage.getItem("auth");
   if(JSON.parse(auth)) return JSON.parse(auth);
-  return { isLoggedIn: false , user: { id : "", name : "", token: ""}}
+  return { isLoggedIn: false , user: { id : "", name : "",img: "", token: ""}}
 }
 //Probando
 const storagedData = localStorageAuth();
@@ -17,7 +17,8 @@ const initialState = {
   workerDetail: {},
   selectedContracts: [],
   isLoading: false,
-  userDetail: {}
+  userDetail: {},
+  allWorkers: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -85,7 +86,8 @@ const reducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        workers: action.payload
+        workers: action.payload,
+        allWorkers: action.payload
 }
     case GET_WORKERS_PREMIUM:
       return {
