@@ -18,7 +18,7 @@ route.post('/', async (req, res) => {
         const countrie = await Country.create({
             name: name
         })
-    res.send(contrie)
+    res.send(countrie)
     } catch (error) {
         res.send(error)
     }
