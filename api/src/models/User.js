@@ -39,10 +39,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull:true
     },
-    location:{
-      type:DataTypes.STRING,
-      allowNull:false
-    },
+    // location:{
+    //   type:DataTypes.STRING,
+    //   allowNull:false
+    // },
     status:{
       type:DataTypes.BOOLEAN,
       allowNull: false,

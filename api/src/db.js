@@ -31,7 +31,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const {Admin, Chat, Contract, Job, User, Worker } = sequelize.models;
+const {Admin, Chat, Contract, Job, User, Worker, Country } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -50,7 +50,8 @@ Chat.belongsTo(User)
 Worker.hasMany(Chat)
 Chat.belongsTo(Worker)
 
-
+Country.hasMany(User)
+User.belongsTo(Country)
 
 
 Worker.belongsToMany(Job,{through:"Works_Jobs"})
