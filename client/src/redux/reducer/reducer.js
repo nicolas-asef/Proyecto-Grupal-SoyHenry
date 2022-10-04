@@ -5,7 +5,7 @@ const localStorageAuth = () => {
   if(JSON.parse(auth)) return JSON.parse(auth);
   return { isLoggedIn: false , user: { id : "", name : "",img: "", token: ""}}
 }
-
+//Probando
 const storagedData = localStorageAuth();
 
 const initialState = {
