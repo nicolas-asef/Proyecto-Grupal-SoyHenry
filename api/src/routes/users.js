@@ -1,16 +1,21 @@
 const { Router } = require('express');
+require('dotenv').config();
+const bcrypt = require('bcryptjs');
+const auth = require('../controllers/authMiddleware');
+const { Admin, Chat, Contract, Job, User, Worker, Country } = require("../db.js")
 
 // importarme los modelos
-const { User } = require('../db.js')
+
 
 
 const router = Router();
 
 const getUsers = async () => {
-    const info = await User.findAll()
+    const info = await User.findAll({include:[{model:Worker,include:[Job]},{model:Contract},{model:Chat},{model:Country}]})
+
     const dataUser = info?.map((u) => {
         return {
-            id: u.id,
+            id: u.ID,
             name: u.name,
             lastName: u.lastName,
             img: u.img,
@@ -18,8 +23,11 @@ const getUsers = async () => {
             password: u.password,
             phone: u.phone,
             dni: u.dni, 
-            location: u.location,
-            status: u.status
+            location: u.Country,
+            status: u.status,
+            Worker: u.Worker,
+            Contracts: u.Contracts,
+            Chats: u.Chats
         }
     });
     return dataUser;
@@ -62,44 +70,53 @@ router.get('/:id', async (req, res, next) =>{
         next(error)
     }
 })
-           
+
 router.post('/', async (req, res, next) => {
+
     const {name, lastName, img, email, password, phone, dni, location } = req.body;
     try {
+        const salt = await bcrypt.genSalt(10);
+
         let user = await User.create({
-            name, 
-            lastName, 
-            img, 
-            email, 
-            password, 
-            phone, 
-            dni, 
-            location
+            name,
+            lastName,
+            img,
+            email,
+            password: await bcrypt.hash(password, salt),
+            phone,
+            dni,
         })
-        res.status(200).send({message: 'El user fue creado correctamente'})
+
+        user.setCountry(location)
+        res.status(200).json(user) // para agarrar el id de usuario al crearlo
     } catch (error) {
         next(error)
     }
 })
 
-router.put('/:id', async (req, res, next) => {
-    const {id} = req.params;
+
+router.put('/:id', async (req, res, next) => {   
+    const info = req.body;
+    const {id} = req.params; 
+    const salt = await bcrypt.genSalt(10);    
     try {
-        const updated = await User.update(req.body, {
-            where: {id: id}
-        });
-        if(updated){
-            const updatedUser = await User.findOne({where: {id: id}});
-            return res.status(200).json({user: updatedUser});
-        }
-        throw new Error('User not found');
+        const updatedUser = await User.findOne({where: {ID: id}});        
+        const us = await updatedUser.update({
+            email: info.email,
+            password: await bcrypt.hash(info.password, salt),
+            phone: info.phone,
+            img: info.img, 
+            location: info.location
+        })
+        res.status(200).json(us)       
     } catch (error) {
-        next(error)
+        res.status(500).send("entro al catch")        
     }
 })
 
 router.delete('/:id', async (req, res, next) => {
     const { id } = req.params;
+    console.log(id)
     try {
         const deleted = await User.destroy({
             where: { id: id }

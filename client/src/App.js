@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { Form,Home,LandingPage,NavBar,Footer,About, SearchBar } from './components'
+import Catalog from './components/Catalog/Catalog'
+import Worker from './components/Worker/Worker';
+import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <NavBar/>
+      <Routes>
+        <Route path='/' element={<LandingPage/>} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/about' element={<About />}/>
+        <Route path='/profile/:id' element = {<Worker/>}/>
+        <Route path='/profile/settings' element={<SettingsProfile/>} />
+        <Route path='/users/login' element={ <Form /> }/>
+        <Route path='/users/register' element={ <Form /> }/>
+        <Route path='/catalog' element={<Catalog/>}/>
+      </Routes>
     </div>
   );
 }

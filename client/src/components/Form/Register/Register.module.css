@@ -1,0 +1,8 @@
+.selection {
+  display: flex;
+  flex-direction: column;
+}
+
+.selection button {
+  margin: 10px;
+}
