@@ -46,7 +46,10 @@ import EmptyContainer from './EmptyContainer';
 // }
 
 
-export default function Opinion({contratos}) {
+export default function Opinion({contratos,tipo}) {
+  let requerido = "requeridos"
+  if(tipo)
+    requerido = "terminados"
   let altura = 13
   if(contratos.length > 0)
     altura = contratos.length*13
@@ -57,7 +60,7 @@ export default function Opinion({contratos}) {
   return (
 
     <Opinion2 className='opinion'>      
-    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <EmptyContainer/>}
+    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <EmptyContainer texto = {requerido}/>}
 
     
 

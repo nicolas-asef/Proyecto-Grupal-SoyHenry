@@ -23,14 +23,15 @@ function Profile({img,name,jobs,description,available,status}) {
       <div className="card-info">
         
         <p className="text-title">{name}</p>
-            {jobs && jobs.length ? <p className="job-title">{jobs}</p>: <p className="text-body">Error no se han mandado Jobs</p> }
+            {jobs && jobs.length ? <p className="job-title">{jobs}</p>: <p className="text-body">Usuario</p> }
     
         <p className="text-body">{description? description : "No se ha realizado una descripcion aun."}</p>
-        <p className="text-body">{available? available : "Disponibilidad no registrada"}</p>
+        {jobs && jobs.length ? <p className="text-body">{available? available : "Disponibilidad no registrada"}</p> : "" }
         <p className="text-body">{status ? <Status text="Online"/> : <Status text="Offline"/>}</p>
         <div className="contactar">
           <button className='worker-button'><span>Mensaje</span></button>
-          <button className='worker-button'><span>Contratar</span></button>
+          {jobs && jobs.length ? <button className='worker-button'><span>Contratar</span></button> : "" }
+          
         </div>
       </div>
     </div>

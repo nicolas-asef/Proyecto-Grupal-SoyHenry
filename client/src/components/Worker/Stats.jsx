@@ -5,7 +5,7 @@ import { Typography, Rating,Box } from '@mui/material';
 import { createTheme } from '@mui/system';
 //{contratosTerminados,value}
 
-function Stats({finishedJobs,promedioRating}) {
+function Stats({finishedJobs,promedioRating,texto}) {
   const theme = createTheme();
 
   const contratosTerminados = finishedJobs
@@ -27,11 +27,13 @@ function Stats({finishedJobs,promedioRating}) {
     calificacion = "Bueno+"
   if(value >= 4.5)
     calificacion = "Excelente"
-  
+  if(contratosTerminados == 0){
+    calificacion = ""
+  }
   return (
     <div className="stats">
         <div className="s-left" style={{paddingLeft:"30px"}}>
-            <p>Cantidad de trabajos terminados: {contratosTerminados}</p>
+            <p>Cantidad de trabajos {texto}: {contratosTerminados}</p>
         </div>
         <div className="s-right">
           {/* <p>Rating</p> */}
