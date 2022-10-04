@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Op,Worker, Job, Contract, User, Chat } = require("../db.js")
+const { Op,Worker, Job, Contract, User, Chat, Country } = require("../db.js")
 
 
 
@@ -42,8 +42,9 @@ router.get('/', async (req, res, next) =>{
         },{model:User, where:{
                 name:{
                     [Op.iLike] : `%${name}%`
-                }
-            }
+                },
+            },
+            include:[{model:Country}]
         },Contract,Chat]});  
         
         

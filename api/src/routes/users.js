@@ -2,7 +2,7 @@ const { Router } = require('express');
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const auth = require('../controllers/authMiddleware');
-const { Admin, Chat, Contract, Job, User, Worker } = require("../db.js")
+const { Admin, Chat, Contract, Job, User, Worker, Country } = require("../db.js")
 
 // importarme los modelos
 
@@ -11,7 +11,8 @@ const { Admin, Chat, Contract, Job, User, Worker } = require("../db.js")
 const router = Router();
 
 const getUsers = async () => {
-    const info = await User.findAll({include:[{model:Worker,include:[Job]},{model:Contract},{model:Chat}]})
+    const info = await User.findAll({include:[{model:Worker,include:[Job]},{model:Contract},{model:Chat},{model:Country}]})
+
     const dataUser = info?.map((u) => {
         return {
             id: u.ID,
@@ -22,7 +23,7 @@ const getUsers = async () => {
             password: u.password,
             phone: u.phone,
             dni: u.dni, 
-            location: u.location,
+            location: u.Country,
             status: u.status,
             Worker: u.Worker,
             Contracts: u.Contracts,
@@ -84,8 +85,9 @@ router.post('/', async (req, res, next) => {
             password: await bcrypt.hash(password, salt),
             phone,
             dni,
-            location
         })
+
+        user.setCountry(location)
         res.status(200).json(user) // para agarrar el id de usuario al crearlo
     } catch (error) {
         next(error)

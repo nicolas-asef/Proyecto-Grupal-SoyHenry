@@ -10,6 +10,7 @@ const modelUser = require('./users')
 const modelWorker = require('./worker.js')
 const authRoute = require('./auth.js')
 const modelContract = require('./contract.js')
+const modelCountries = require('./countries')
 
 const router = Router();
 
@@ -23,5 +24,6 @@ router.use('/worker', modelWorker)
 router.use('/users', modelUser);
 router.use('/auth', authRoute)
 router.use('/contract', modelContract);
+router.use('/countries', modelCountries)
 
 module.exports = router;
