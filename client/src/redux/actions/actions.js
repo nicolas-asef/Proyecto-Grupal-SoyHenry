@@ -272,40 +272,6 @@ export function temporalLogout() {
   }
 }
 
-
-// Estos son los workers harcodeados, NO DEBE IR A LA MAIN
-const premium = [
-  {
-    nombre: "Lucas",
-    lastname: "Viotti",
-    img: "link",
-    job: "Albañil",
-    status: "Online"
-  },
-  {
-    nombre: "Feli",
-    lastname: "Liziano",
-    img: "link",
-    job: "Obrero",
-    status: "Online"
-  },
-  {
-    nombre: "Manuel",
-    lastname: "Lokito",
-    img: "link",
-    job: "Pintor",
-    status: "Offline"
-  },
-  {
-    nombre: "Guillermo",
-    lastname: "Gonzales",
-    img: "link",
-    job: "Durlero",
-    status: "Online"
-  }
-] 
-
-
 export function updateUser(payload, payloadId) {
   return async function(dispatch){
     console.log(payload)
@@ -332,3 +298,73 @@ export function getUserId(id) {
         });
 };
 }
+
+
+
+// Estos son los workers harcodeados, NO DEBE IR A LA MAIN
+const premium = [
+  {
+    name: "Lucas",
+    lastname: "Viotti",
+    image: "https://eststatic.com/2676/conversions/malas-personas-default.jpg",
+    job: "Albañil",
+    status: "Online",
+    rating: 2
+  },
+  {
+    name: "Feli",
+    lastname: "Liziano",
+    image: "https://eststatic.com/2676/conversions/malas-personas-default.jpg",
+    job: "Obrero",
+    status: "Online",
+    rating: 3
+  },
+  {
+    name: "Manuel",
+    lastname: "Lokito",
+    image: "https://eststatic.com/2676/conversions/malas-personas-default.jpg",
+    job: "Pintor",
+    status: "Offline",
+    rating: 4
+  },
+  {
+    name: "Guillermo",
+    lastname: "Gonzales",
+    image: "https://eststatic.com/2676/conversions/malas-personas-default.jpg",
+    job: "Durlero",
+    status: "Online",
+    rating: 5
+  },
+  {
+    name: "Lucas",
+    lastname: "Viotti",
+    image: "https://eststatic.com/2676/conversions/malas-personas-default.jpg",
+    job: "Albañil",
+    status: "Online",
+    rating: 2
+  },
+  {
+    name: "Feli",
+    lastname: "Liziano",
+    image: "https://eststatic.com/2676/conversions/malas-personas-default.jpg",
+    job: "Obrero",
+    status: "Online",
+    rating: 3
+  },
+  {
+    name: "Manuel",
+    lastname: "Lokito",
+    image: "https://eststatic.com/2676/conversions/malas-personas-default.jpg",
+    job: "Pintor",
+    status: "Offline",
+    rating: 4
+  },
+  {
+    name: "Guillermo",
+    lastname: "Gonzales",
+    image: "https://eststatic.com/2676/conversions/malas-personas-default.jpg",
+    job: "Durlero",
+    status: "Online",
+    rating: 5
+  }
+] 
