@@ -47,6 +47,7 @@ import EmptyContainer from './EmptyContainer';
 
 
 export default function Opinion({contratos,tipo}) {
+  console.log(contratos)
   let requerido = "requeridos"
   if(tipo)
     requerido = "terminados"
@@ -60,7 +61,7 @@ export default function Opinion({contratos,tipo}) {
   return (
 
     <Opinion2 className='opinion'>      
-    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <EmptyContainer texto = {requerido}/>}
+    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox id={e.id} rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <EmptyContainer texto = {requerido}/>}
 
     
 

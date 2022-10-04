@@ -67,12 +67,15 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
     if(Object.keys(listaValoraciones).length !== 0){
       let variableComent = "comment_W"
       let variableRating = "rating_W"
+      let variableId = "WorkerID"
       if(user.Worker){
         variableComent = "comment_U"
         variableRating = "rating_U"
+        variableId = "UserID"
       }
       listaValoraciones.forEach(e => {
       const elemento = {
+        id: e[variableId],
         name : e.User.lastName + " "+ e.User.name,
         img : e.User.img,
         comment: e[variableComent],
@@ -95,7 +98,6 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
   }
 
   const ordenarFiltrados = (tipo) => {
-    console.log(listaValoraciones)
     if(tipo == 'r' ){
       const auxiliar = listaValoraciones.sort((a,b) => (a.date > b.date) ? 1 : -1)
       setListaValoraciones(auxiliar)
