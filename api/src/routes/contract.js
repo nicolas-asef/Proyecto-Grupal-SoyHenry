@@ -4,6 +4,15 @@ const { Op, Contract,User,Worker } = require('../db')
 
 const route = Router()
 
+route.get('/', async (req, res) => {
+    try {
+        const contractsAll = await Contract.findAll({})
+        res.send(contractsAll)
+    } catch (error) {
+        res.send("Error en la operacion: "+error.message)
+    }
+})
+
 route.get('/user', async (req, res) => {
     try {
         let id = req.query.arr
@@ -46,18 +55,15 @@ route.get('/worker', async (req, res) => {
     }
 })
 
+
+//Importante, cuando se cree un contrato se debe usar el id del user del worker, no el id del worker
 route.post('/', async (req,res) => {
     
-    const {id_user, id_worker, finished, rating_U, rating_W, location, comment_U, comment_W, confirmed} = req.body
+    const {id_user, id_worker, location,date} = req.body
     try {
         const contrato = await Contract.create({
-            finished:finished,
-            rating_U:rating_U,
-            rating_W:rating_W,
             location:location,
-            comment_U:comment_U,
-            comment_W:comment_W,
-            confirmed:confirmed
+            date:date
         })
         contrato.setWorker(id_worker)
         contrato.setUser(id_user)

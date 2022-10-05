@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../Footer/Footer';
 import Filters from '../Filters/Filters';
 import Catalog from '../Catalog/Catalog'
+import CardSlider from '../Showroom/CardSlider.jsx'
 import './Home.css';
 
 const Home = () => {
@@ -23,6 +24,9 @@ const Home = () => {
       <div className='filter-container'>
         <Filters />
       </div>
+      <div className='carousel'>
+        <CardSlider/>
+      </div>
       <div className='container'>
         <Catalog />
       </div>
@@ -34,3 +38,4 @@ const Home = () => {
 };
 
 export default Home;
+

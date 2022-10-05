@@ -1,9 +1,10 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
-import {LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT } from './actions_vars'
+
+import {LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
+
 
 export function getWorkers(query, search){
-
 
   return function (dispatch) {
     axios.get("http://localhost:3001/worker")
@@ -48,6 +49,25 @@ export function getContractUsers(ids){
       return data.json()})
     .then(json => {
       
+      dispatch({type:GET_WORKER_CONTRACTS,payload:json})
+    })
+    .catch(error => {dispatch({type:GET_WORKER_CONTRACTS,payload:{}})
+    })
+  }
+}
+
+
+export function getContractWorker(ids){
+
+  let ides = ids.reduce((acum,e) => acum+"&arr="+e,"arr=")
+  ides = ides.slice(5,ides.length)
+  return function(dispatch){
+    dispatch({ type: LOADING });
+    return fetch("http://localhost:3001/contract/worker?"+ides)
+    .then(data =>{ 
+      return data.json()})
+    .then(json => {
+      
       dispatch({type:GET_USERS_CONTRACTS,payload:json})
     })
     .catch(error => {dispatch({type:GET_USERS_CONTRACTS,payload:{}})
@@ -55,18 +75,35 @@ export function getContractUsers(ids){
   }
 }
 
-export function getWorkerDetail(id){
+
+// export function getUserId(id) {
+//   return function (dispatch) {
+//     axios
+//         .get("http://localhost:3001/users/" + id)
+//         .then((u) => {
+//             dispatch({
+//                 type: GET_USER_ID,
+//                 payload: u.data,
+//             });
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// };
+// }
+
+
+export function getUserDetail(id){
   
   return function(dispatch){
     
     dispatch({ type: LOADING });
     
-    return fetch("http://localhost:3001/worker/"+id)
+    return fetch("http://localhost:3001/users/"+id)
     .then(data => {
-
       return data.json()})
     .then(json => {
-      dispatch({type:GET_WORKER_DETAIL,payload:json})
+      dispatch({type:GET_USER_DETAIL,payload:json})
     })
   }
 }
@@ -113,8 +150,6 @@ export function getWorkersSearch(search) {
   }
 }
 
-
-
 export function createUser(payload, jobs) {
 
   return async function (dispatch) {
@@ -148,16 +183,6 @@ export function getJobs() {
     };
 }
 
-export function getWorkersPremium() {
-  return async function (dispatch) {
-    try {
-      // let premium = await axios.get("http://localhost:3001/workers_premium");
-      return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
 
 export function orderByRating(array, orderBy){
 
@@ -272,36 +297,40 @@ export function temporalLogout() {
   }
 }
 
-
-// Estos son los workers harcodeados, NO DEBE IR A LA MAIN
-const premium = [
-  {
-    nombre: "Lucas",
-    lastname: "Viotti",
-    img: "link",
-    job: "Albañil",
-    status: "Online"
-  },
-  {
-    nombre: "Feli",
-    lastname: "Liziano",
-    img: "link",
-    job: "Obrero",
-    status: "Online"
-  },
-  {
-    nombre: "Manuel",
-    lastname: "Lokito",
-    img: "link",
-    job: "Pintor",
-    status: "Offline"
-  },
-  {
-    nombre: "Guillermo",
-    lastname: "Gonzales",
-    img: "link",
-    job: "Durlero",
-    status: "Online"
+export function get_countries() {
+  return async function (dispatch) {
+    try {
+      let countries = await axios.get('http://localhost:3001/countries')
+      dispatch ({type: GET_COUNTRIES, payload: countries.data})
+    } catch (error) {
+      return error.response.status
+    }
   }
-] 
+}
 
+export function updateUser(payload, payloadId) {
+  return async function(dispatch){
+    console.log(payload)
+    const user = await axios.put("http://localhost:3001/users/" + payloadId , payload);
+    dispatch({
+      type: PUT_USER,
+    });
+    return user;
+  } 
+}
+
+export function getUserId(id) {
+  return function (dispatch) {
+    axios
+        .get("http://localhost:3001/users/" + id)
+        .then((u) => {
+            dispatch({
+                type: GET_USER_ID,
+                payload: u.data,
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+}
