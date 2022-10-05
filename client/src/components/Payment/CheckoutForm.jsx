@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { pay, premiumPay } from '../../redux/actions/actions'
 import {useState} from 'react'
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function CheckoutForm() {
     const stripe = useStripe();
+    const { user: { sub } } = useAuth0();
     const elements = useElements();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -20,7 +22,7 @@ export default function CheckoutForm() {
     const authUser = useSelector((state) => state.authState)
     console.log("auth")
     console.log(authUser)
-    const idUser = authUser.user.id
+    const idUser = sub;
     console.log("idUser")
     console.log(idUser)
     const workers = useSelector((state) => state.workers)

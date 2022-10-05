@@ -24,8 +24,6 @@ function App() {
         <Route path='/profile/:id' element = {<Worker/>}/>
         <Route path='/profile/settings' element={<SettingsProfile/>} />
         <Route path='/profile/settings/premium' element={<Payment/>}/>
-        <Route path='/users/login' element={ <Form /> }/>
-        <Route path='/users/register' element={ <Form /> }/>
         <Route path='/catalog' element={<Catalog/>}/>
         <Route path='/onboarding' element={ <OnBoarding /> } />
       </Routes>

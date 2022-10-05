@@ -166,7 +166,7 @@ export function createUser(payload, jobs) {
       }
       const res = await axios.post(baseURL+"worker", worker);
     }
-
+      */
 
     dispatch({
       type: POST_USER,
@@ -375,14 +375,14 @@ export function finishUserCreation(id, data, jobs) {
 
      return user;
   };
-
+}
 
 export function pay( paymentMethod ) {
     //cambiar estado premium del modelo  de wokrers
   return async function(dispatch) {
     try {
       const response = await axios.post("http://localhost:3001/payments", { paymentMethod });
-      console.log(response.data);
+      
       const r = response.data;
       dispatch({
         type: PAY

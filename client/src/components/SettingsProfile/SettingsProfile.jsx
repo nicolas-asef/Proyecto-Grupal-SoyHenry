@@ -62,12 +62,12 @@ export default function SettingProfile(){
                         label="Email"
                         name="email"
                         value={input.email}
-                        defaultValue={user.email}  
+                        /* defaultValue={user.email} */  
                         onChange={handleChange}         
                         />
                     </div>
                     <hr/>
-                    <div  className='bloke'>
+                    <div className='bloke'>
                         <h3 className='pad'>Password</h3>
                         <TextField          
                         id="outlined-required"
@@ -75,7 +75,8 @@ export default function SettingProfile(){
                         name="password"
                         type="password"
                         value={input.password}
-                        defaultValue={user.password} 
+                        placeholder={user.password}
+                        /* defaultValue={user.password} */ 
                         onChange={handleChange}          
                         />
                     </div>
@@ -87,7 +88,7 @@ export default function SettingProfile(){
                         label="Location"
                         name="location"
                         value={input.location}
-                        defaultValue={user.location}
+                        /* defaultValue={user.location} */
                         onChange={handleChange}           
                         />
                     </div>
@@ -99,7 +100,7 @@ export default function SettingProfile(){
                         label="Phone" 
                         name="phone" 
                         value={input.phone}
-                        defaultValue={user.phone}  
+                        /* defaultValue={user.phone}  */ 
                         onChange={handleChange}       
                         />
                     </div>
@@ -111,7 +112,7 @@ export default function SettingProfile(){
                         label="Image"
                         name="img"
                         value={input.img}
-                        defaultValue={user.img} 
+                        /* defaultValue={user.img}  */
                         onChange={handleChange}          
                         />
                     </div>    
