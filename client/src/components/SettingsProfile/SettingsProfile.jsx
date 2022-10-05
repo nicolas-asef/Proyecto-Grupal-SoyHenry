@@ -51,8 +51,9 @@ export default function SettingProfile(){
 
     return (
         <div className='container-setting'>
+            
+            <div className='conteiner-form'>
 
-            <div>
                 <form onSubmit={onSubmit}>
                     <h1>Edit profile</h1>
                     <div className='bloke'>
@@ -123,9 +124,9 @@ export default function SettingProfile(){
 
 
                 
-            </div>
-            <div>
-                <button onClick={handlePremium}>PREMIUM</button>
+                <div>
+                    <button onClick={handlePremium}>PREMIUM</button>
+                </div>
             </div>
         </div>
     )

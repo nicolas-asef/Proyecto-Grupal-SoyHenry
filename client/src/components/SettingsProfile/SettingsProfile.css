@@ -61,6 +61,7 @@
   .container-setting{
     text-align: center;
     width: 50%;
+    justify-content: center;
   
   }
   .bloke{
@@ -71,4 +72,8 @@
   .pad{
     width: 10%;
     padding-right: 4rem;
+  }
+  .conteiner-form{
+    text-align: center;
+    justify-content: center;
   }
