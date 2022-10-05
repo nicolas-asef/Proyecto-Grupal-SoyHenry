@@ -8,7 +8,7 @@ import MuiAlert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 
 import { useForm } from "react-hook-form";
-import { validator } from "../validator";
+import { validator } from "../../OnBoarding/validator";
 import { authenticate } from "../../../redux/actions/actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";

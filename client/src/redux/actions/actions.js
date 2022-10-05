@@ -1,7 +1,7 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
 
-import {LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
+import {LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, test } from './actions_vars'
 
 
 export function getWorkers(query, search){
@@ -105,6 +105,7 @@ export function getUserDetail(id){
       return data.json()})
     .then(json => {
       dispatch({type:GET_USER_DETAIL,payload:json})
+      return json;
     })
   }
 }
@@ -158,14 +159,14 @@ export function createUser(payload, jobs) {
   return async function (dispatch) {
     const user = await axios.post("http://localhost:3001/users", payload);
     const user_id = await user.data.ID;
-    if(jobs.length) {
+    /* if(jobs.length) {
       const worker = {
         user_id,
         jobs,
 
       }
       const res = await axios.post("http://localhost:3001/worker", worker);
-    }
+    } */
 
     dispatch({
       type: POST_USER,
@@ -292,6 +293,7 @@ export function filter(array, job, disponibilidad, zona){
     dispatch({type: FILTER, payload: filterArray})
   }
 }
+
 export function authenticate(credentials) {
   return async function (dispatch) {
     try {
@@ -377,7 +379,18 @@ export function getUserId(id) {
             });
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err)
         });
 };
+}
+
+export function testAction(user) {
+  return async function (dispatch) {
+    const payload = {
+      ID: user.sub,
+      email: user.email,
+      img: user.picture
+    }
+    dispatch(createUser(payload))
+  }
 }

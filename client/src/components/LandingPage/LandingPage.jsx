@@ -88,13 +88,13 @@ export default function Album() {
             </Typography>
             <div className='container-options'>
               { options && options.map( option => (
-                <div className='card'>
+                <div key={option.title} className='card'>
                   <div className='titlecontainer'>
                     <h3>{option.title}</h3>
                   </div>
                   <div className='description'>
-                    {option.description.map( desc => (
-                      <p className='desc'>• {desc}</p>
+                    {option.description.map( (desc, index) => (
+                      <p key={index} className='desc'>• {desc}</p>
                     ))}
                   </div>
                     <Button 
@@ -112,8 +112,8 @@ export default function Album() {
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {cards.map((card, index) => (
+              <Grid item key={index} xs={12} sm={6} md={4}>
                 <Card sx={{ maxWidth: 345 }}>
                   <Rating name="read-only" value={card.value} readOnly />
                   <CardContent>

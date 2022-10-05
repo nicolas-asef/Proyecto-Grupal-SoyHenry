@@ -1,0 +1,19 @@
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.horizontal div:nth-child(1) {
+  margin-right: 15px;
+}
+
+.jobsStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

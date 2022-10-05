@@ -4,13 +4,19 @@ import { Form,Home,LandingPage,NavBar,Footer,About, SearchBar } from './componen
 import Catalog from './components/Catalog/Catalog'
 import Worker from './components/Worker/Worker';
 import SettingsProfile from './components/SettingsProfile/SettingsProfile';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import OnBoarding from './components/OnBoarding/OnBoarding';
 
 function App() {
   return (
     <div>
       <NavBar/>
       <Routes>
-        <Route path='/' element={<LandingPage/>} />
+        <Route path='/' element={ 
+          <ProtectedRoute>
+            <LandingPage/>
+          </ProtectedRoute>
+        } />
         <Route path='/home' element={<Home />} />
         <Route path='/about' element={<About />}/>
         <Route path='/profile/:id' element = {<Worker/>}/>
@@ -18,6 +24,7 @@ function App() {
         <Route path='/users/login' element={ <Form /> }/>
         <Route path='/users/register' element={ <Form /> }/>
         <Route path='/catalog' element={<Catalog/>}/>
+        <Route path='/onboarding' element={ <OnBoarding /> } />
       </Routes>
     </div>
   );
