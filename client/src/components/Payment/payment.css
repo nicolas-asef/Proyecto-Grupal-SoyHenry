@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+.card-payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-payment-title {
+    font-size: 2.5vh;
+    margin: 1%;
+}
+
+.form-payment-subtitle {
+    color: gray;
+    margin: 0 0 4% 0;
+}
+
+.form-payment {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    width: fit-content;
+    box-shadow: 5px 5px 20px 10px rgb(213 213 213);
+    border-radius: 20px;
+    margin: 2%;
+    padding: 3%;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-payment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 28rem;
+    min-height: 28rem;
+    text-align: justify;
+    padding: 0 3% 0 3%;
+}
+
+.form-payment-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 30rem;
+    padding: 0 3% 2% 3%;
+}
+
+.opciones-payment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.form-check-payment {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 3% 0 3%;
+    font-family: inherit;
+    font-weight: bolder;
+}
+
+.form-label-payment {
+    display: flex;
+}
+
+
+.donation-image {
+    width: 380px;
+}
+
+.card-element-payment {
+    width: 20rem;
+    margin: 4% 25% 1% 25%;
+}
+
+.btn-payment {
+    width: 51%;
+    padding: 10px;
+    border: none;
+    background-color: #427fcb;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: 0.4s;
+    font-family: inherit;
+    letter-spacing: 0.5px;
+    margin-top: 1.5rem;
+}
+
+.btn-payment:hover {
+    border: none;
+    background-color: #224a7b;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.payment-error{
+    font: smaller;
+    color: rgba(255, 0, 0, 0.8);
+}

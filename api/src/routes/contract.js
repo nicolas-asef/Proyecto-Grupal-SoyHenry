@@ -4,6 +4,15 @@ const { Op, Contract,User,Worker } = require('../db')
 
 const route = Router()
 
+route.get('/', async (req, res) => {
+    try {
+        const contractsAll = await Contract.findAll({})
+        res.send(contractsAll)
+    } catch (error) {
+        res.send("Error en la operacion: "+error.message)
+    }
+})
+
 route.get('/user', async (req, res) => {
     try {
         let id = req.query.arr

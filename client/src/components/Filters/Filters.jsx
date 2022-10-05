@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./styles/Filters.module.css";
-import { filter, getJobs, orderByRating } from "../../redux/actions/actions";
+import { filter, getJobs, get_countries, orderByRating } from "../../redux/actions/actions";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -10,10 +10,13 @@ const Filters = () => {
   const dispatch = useDispatch();
   const [order, setOrder] = useState("");
   const [job, setJob] = useState("all");
-  const [available, setAvailable] = useState("available");
+  const [available, setAvailable] = useState("all");
   const [zone, setZone] = useState("all");
-  const worker = useSelector((worker) => worker.workers);
-  const filtrado = useSelector((worker) => worker.allWorkers);
+  const worker = useSelector(state => state.workers);
+  const filtrado = useSelector(state => state.filtrado);
+  const jobs = useSelector(state => state.jobs)
+  const countries = useSelector(state => state.allCountries)
+
 
   const orderBy = (e) => {
     dispatch(orderByRating(worker, e.target.value));
@@ -38,6 +41,11 @@ const Filters = () => {
     dispatch(filter(filtrado, job, available, e.target.value));
   };
 
+  useEffect (() => {
+    dispatch(getJobs())
+    dispatch(get_countries())
+  },[])
+
   return (
     <div className={styles.fieldContainer}>
       <div className={styles.textField}>
@@ -48,7 +56,7 @@ const Filters = () => {
           label="Rating"
           defaultValue=""
           select
-          onChange={(e) => orderBy(e)}
+          onChange={orderBy}
         >
           <MenuItem value="select">Seleccionar</MenuItem>
           <MenuItem value="maxRating">Mayor Rating</MenuItem>
@@ -63,16 +71,14 @@ const Filters = () => {
           label="Oficio"
           select
 					defaultValue=""
-          onChange={(e) => filterjob(e)}
+          onChange={filterjob}
         >
-          <MenuItem value="all">all</MenuItem>
-          <MenuItem value="Vendedor">Vendedor</MenuItem>
-          <MenuItem value="Pintor">Pintor</MenuItem>
-          <MenuItem value="Ingeniero">Ingeniero</MenuItem>
-          <MenuItem value="Carpintero">Carpintero</MenuItem>
-          <MenuItem value="Plomero">Plomero</MenuItem>
-          <MenuItem value="Programador">Programador</MenuItem>
-          <MenuItem value="Electricista">Electricista</MenuItem>
+          <MenuItem value="all">All</MenuItem>
+          {jobs && jobs.map( job => {
+            return (
+              <MenuItem value={job.name} key={job.id}>{job.name}</MenuItem>
+            )
+          })}
         </TextField>
       </div>
       <div className={styles.textField}>
@@ -83,11 +89,11 @@ const Filters = () => {
           label="Disponibilidad"
 					defaultValue=""
           select
-          onChange={(e) => filterAvailable(e)}
+          onChange={filterAvailable}
         >
-          <MenuItem value="available">available</MenuItem>
-          <MenuItem value="Online">Online</MenuItem>
-          <MenuItem value="Offline">Offline</MenuItem>
+          <MenuItem value="all">all</MenuItem>
+          <MenuItem value={false}>Online</MenuItem>
+          <MenuItem value={true}>Offline</MenuItem>
         </TextField>
       </div>
       <div className={styles.textField}>
@@ -98,13 +104,14 @@ const Filters = () => {
           label="Ubicacion"
 					defaultValue=""
           select
-          onChange={(e) => filterZone(e)}
+          onChange={filterZone}
         >
           <MenuItem value="all">all</MenuItem>
-          <MenuItem value="Buenos aires">Buenos aires</MenuItem>
-          <MenuItem value="Cordoba">Cordoba</MenuItem>
-          <MenuItem value="San Luis">San Luis</MenuItem>
-          <MenuItem value="Chaco">Chaco</MenuItem>
+          {countries && countries.map( country => {
+            return (
+              <MenuItem value={country.name} key={country.id}>{country.name}</MenuItem>
+            )
+          })}
         </TextField>
       </div>
     </div>

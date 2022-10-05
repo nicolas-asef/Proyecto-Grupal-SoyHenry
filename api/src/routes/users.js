@@ -8,6 +8,15 @@ const { Admin, Chat, Contract, Job, User, Worker, Country } = require("../db.js"
 
 
 
+// const Stripe = require("stripe")
+
+// const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
+
+
+// const stripe = new Stripe(STRIPE_SECRET_KEY)
+
+
+
 const router = Router();
 
 const getUsers = async () => {

@@ -1,13 +1,17 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
 
-import {LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
 
 
-const baseURL = "https://databasepf.herokuapp.com/" //Esto se cambia por localhost:3001 para usarlo local
+import {PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
+
+
+
+
+
+const baseURL = "http://localhost:3001/" //Esto se cambia por localhost:3001 para usarlo local
 
 export function getWorkers(query, search){
-
 
   return function (dispatch) {
     axios.get(baseURL+"worker")
@@ -153,8 +157,6 @@ export function getWorkersSearch(search) {
   }
 }
 
-
-
 export function createUser(payload, jobs) {
 
   return async function (dispatch) {
@@ -188,16 +190,8 @@ export function getJobs() {
     };
 }
 
-export function getWorkersPremium() {
-  return async function (dispatch) {
-    try {
-      // let premium = await axios.get(baseURL+"workers_premium");
-      return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
+
+
 
 export function orderByRating(array, orderBy){
 
@@ -225,66 +219,68 @@ export function orderByRating(array, orderBy){
 
 export function filter(array, job, disponibilidad, zona){
   let filterArray = []
-  console.log(job, zona)
 
-  if (job === 'all' && disponibilidad === 'available' && zona === 'all'){
+  if (job === 'all' && disponibilidad === 'all' && zona === 'all'){
     filterArray = array
   }
 
-  if (job !== 'all' && disponibilidad !== 'available' && zona !== 'all'){
+  if (job !== 'all' && disponibilidad !== 'all' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].available === disponibilidad && array[i].zona === zona){
+        if (el.name === job && array[i].User.status === disponibilidad && array[i].User.Country.name === zona){
           filterArray.push(array[i])
         }
       })
     }
   }
+  
+  if (job !== 'all' && disponibilidad === 'all' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      
+      array[i].Jobs.map(el => {
+        if (el.name === job){
+          filterArray.push(array[i])
+        }
+      })
+    }
+  }
+  if (job === 'all' && disponibilidad !== 'all' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].User.status === disponibilidad){
+        filterArray.push(array[i])
+      }
+    }
+  }
+  if (job === 'all' && disponibilidad === 'all' && zona !== 'all'){
+    for (let i = 0; i < array.length; i++) {
+      if(array[i].User.Country.name === zona){
+        filterArray.push(array[i])
+      }
+    }
+  }
+  
+  if (job !== 'all' && disponibilidad !== 'all' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      array[i].Jobs.map(el => {
+        console.log(el)
+        if (el.name === job && array[i].User.status === disponibilidad){
 
-  if (job !== 'all' && disponibilidad === 'available' && zona === 'all'){
-    for (let i = 0; i < array.length; i++) {
-      array[i].Jobs.map(el => {
-        if (el.nombre === job){
           filterArray.push(array[i])
         }
       })
     }
   }
-  if (job === 'all' && disponibilidad !== 'available' && zona === 'all'){
+  if (job === 'all' && disponibilidad !== 'all' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
-      if (array[i].available === disponibilidad){
+      if (array[i].User.status === disponibilidad && array[i].User.Country.name === zona){
         filterArray.push(array[i])
       }
     }
   }
-  if (job === 'all' && disponibilidad === 'available' && zona !== 'all'){
-    for (let i = 0; i < array.length; i++) {
-      if(array[i].zona === zona){
-        filterArray.push(array[i])
-      }
-    }
-  }
-
-  if (job !== 'all' && disponibilidad !== 'available' && zona === 'all'){
+  if (job !== 'all' && disponibilidad === 'all' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].available === disponibilidad){
-          filterArray.push(array[i])
-        }
-      })
-    }
-  }
-  if (job === 'all' && disponibilidad !== 'available' && zona !== 'all'){
-    for (let i = 0; i < array.length; i++) {
-      if (array[i].available === disponibilidad && array[i].zona === zona){
-        filterArray.push(array[i])
-      }
-    }
-  }
-  if (job !== 'all' && disponibilidad === 'available' && zona !== 'all'){
-    for (let i = 0; i < array.length; i++) {
-      array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].zona === zona){
+        if (el.name === job && array[i].User.Country.name === zona){
           filterArray.push(array[i])
         }
       })
@@ -312,6 +308,7 @@ export function temporalLogout() {
   }
 }
 
+
 export function get_countries() {
   return async function (dispatch) {
     try {
@@ -324,38 +321,17 @@ export function get_countries() {
   }
 }
 
+// export function updateUser(payload, payloadId) {
+//   return async function(dispatch){
+//     console.log(payload)
+//     const user = await axios.put("http://localhost:3001/users/" + payloadId , payload);
+//     dispatch({
+//       type: PUT_USER,
+//     });
+//     return user;
+//   } 
+// }
 
-// Estos son los workers harcodeados, NO DEBE IR A LA MAIN
-const premium = [
-  {
-    nombre: "Lucas",
-    lastname: "Viotti",
-    img: "link",
-    job: "Albañil",
-    status: "Online"
-  },
-  {
-    nombre: "Feli",
-    lastname: "Liziano",
-    img: "link",
-    job: "Obrero",
-    status: "Online"
-  },
-  {
-    nombre: "Manuel",
-    lastname: "Lokito",
-    img: "link",
-    job: "Pintor",
-    status: "Offline"
-  },
-  {
-    nombre: "Guillermo",
-    lastname: "Gonzales",
-    img: "link",
-    job: "Durlero",
-    status: "Online"
-  }
-] 
 
 
 export function updateUser(payload, payloadId) {
@@ -383,4 +359,32 @@ export function getUserId(id) {
             console.log(err);
         });
 };
+}
+
+export function pay( paymentMethod ) {
+    //cambiar estado premium del modelo  de wokrers
+  return async function(dispatch) {
+    try {
+      const response = await axios.post("http://localhost:3001/payments", { paymentMethod });
+      console.log(response.data);
+      const r = response.data;
+      dispatch({
+        type: PAY
+      });
+      return response.data
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  }
+}
+
+export function premiumPay(payload) {
+  return async function(dispatch){
+    const worker = await axios.put("http://localhost:3001/worker/" + payload, {premium: true});
+    dispatch({
+      type: PUT_WORKER_PREMIUM,
+    });
+    return worker;
+  } 
 }

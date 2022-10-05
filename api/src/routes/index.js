@@ -11,7 +11,7 @@ const modelWorker = require('./worker.js')
 const authRoute = require('./auth.js')
 const modelContract = require('./contract.js')
 const modelCountries = require('./countries')
-
+const stripeModel = require('./payments.js')
 const router = Router();
 
 // Configurar los routers
@@ -25,5 +25,6 @@ router.use('/users', modelUser);
 router.use('/auth', authRoute)
 router.use('/contract', modelContract);
 router.use('/countries', modelCountries)
+router.use('/payments', stripeModel)
 
 module.exports = router;
