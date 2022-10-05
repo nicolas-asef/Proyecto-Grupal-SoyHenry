@@ -16,7 +16,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <Auth0Provider domain={domain} clientId={clientId} redirectUri={window.location.origin}>
+        <Auth0Provider  domain={domain} clientId={clientId} redirectUri={window.location.origin} cacheLocation="localstorage" useRefreshTokens>
           <App />
         </Auth0Provider>
       </Router>
