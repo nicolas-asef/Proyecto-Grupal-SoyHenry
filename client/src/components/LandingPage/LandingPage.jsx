@@ -82,7 +82,7 @@ export default function Album() {
               width="max-content"
               color="text.primary"
               gutterBottom
-              className='title'
+              className={s.title}
             >
               La nueva era del oficio
             </Typography>
@@ -96,13 +96,13 @@ export default function Album() {
             </Typography>
             <div className={s.containerOptions}>
               { options && options.map( option => (
-                <div className='card'>
+                <div className={s.card}>
                   <div className={s.titleContainer}>
                     <h3>{option.title}</h3>
                   </div>
                   <div className={s.description}>
                     {option.description.map( desc => (
-                      <p className='desc'>• {desc}</p>
+                      <p className={s.desc}>• {desc}</p>
                     ))}
                   </div>
                     <Button 
