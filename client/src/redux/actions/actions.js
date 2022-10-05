@@ -3,7 +3,10 @@ import axios from "axios";
 
 
 
+
 import {PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
+
+
 
 
 
@@ -192,7 +195,6 @@ export function getJobs() {
 
 
 
-
 export function orderByRating(array, orderBy){
 
   function order( a, b )
@@ -321,6 +323,7 @@ export function get_countries() {
   }
 }
 
+
 // export function updateUser(payload, payloadId) {
 //   return async function(dispatch){
 //     console.log(payload)
@@ -331,6 +334,7 @@ export function get_countries() {
 //     return user;
 //   } 
 // }
+
 
 
 
