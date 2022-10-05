@@ -27,7 +27,6 @@ const ProtectedRoute = ({children}) => {
         if(!userDetail.onBoarded) {
           setRedirect(true)
         } else {
-          console.log('ya esta registrado totalmente')
           setRedirect(false)
         }
       } else if (userDetail.message) {

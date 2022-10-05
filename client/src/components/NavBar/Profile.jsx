@@ -6,7 +6,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { temporalLogout } from '../../redux/actions/actions';
 import { useEffect } from 'react';
 import {  getUserId } from '../../redux/actions/actions'
 import {  useNavigate } from 'react-router-dom';
@@ -14,6 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const { user: { sub } } = useAuth0();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const userinfo = useSelector(state=> state.authState)
   const users = useSelector(state => state.users)
@@ -23,7 +23,7 @@ const Profile = () => {
 
   useEffect(()=>{
     if (users.length === 0) {
-    /* dispatch(getUserId(userinfo.user.id)) */
+    dispatch(getUserId(sub))
     }
   },[dispatch])
 
@@ -31,7 +31,7 @@ const Profile = () => {
     setAnchorElUser(null);
   };
   const handleOpenProfile = () => {
-    /* navigate(`/profile/${users.Worker.ID}`) */
+    navigate(`/profile/${sub}`)
     setAnchorElUser(null);
   }
   

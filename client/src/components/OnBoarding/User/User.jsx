@@ -56,6 +56,14 @@ const User = (props) => {
     ]);
   };
 
+  const handleSelection = (e) => {
+    props.selectedCb({
+    type: "",
+    isSelected: false,
+    });
+    props.stepperCb(0)
+  };
+
   const onSubmit = (data) => {
 		if (props.type === "worker" && !jobsState.length) return setValidateWorks(true);
 		props.stepperCb(3);
@@ -188,6 +196,7 @@ const User = (props) => {
       <Button fullWidth size="large" type="submit" variant="contained" value="Registrarse">
         Registrarse
       </Button>
+      <Button className={style.back} fullWidth variant="outlined" color="error" onClick={handleSelection}>Volver</Button>
     </form>
   );
 };

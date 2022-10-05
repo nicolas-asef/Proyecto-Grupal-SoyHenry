@@ -75,7 +75,7 @@ const OnBoarding = () => {
           )}
 				{selected.type !== "" && (
 					<div className={style.userForm}>
-						<User type={selected.type} stepperCb={setStep} authID={sub}/>
+						<User type={selected.type} stepperCb={setStep} authID={sub} selectedCb={setSelected}/>
 					</div>
 					)}
         </div>
