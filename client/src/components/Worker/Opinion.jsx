@@ -47,7 +47,6 @@ import EmptyContainer from './EmptyContainer';
 
 
 export default function Opinion({contratos,tipo}) {
-  console.log(contratos)
   let requerido = "requeridos"
   if(tipo)
     requerido = "terminados"
