@@ -7,11 +7,12 @@ import Stats from './Stats';
 import Opinion from './Opinion';
 import { Pagination, Skeleton } from '@mui/material';
 import Filters from './Filters';
-import { getWorkerDetail,getContractUsers } from '../../redux/actions/actions';
+import { getUserDetail,getContractUsers, getContractWorker } from '../../redux/actions/actions';
 import { useParams } from 'react-router-dom';
 import Buttons from './Buttons';
+import Footer from '../Footer/Footer';
 
-export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}) => {
+export const Worker = ({authState,getUserDetail,getContractWorker,getContractUsers,user,users,isLoading}) => {
 
   const id = useParams().id
   const [pag,setPag] = useState(1)
@@ -22,28 +23,37 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
   const [finishedJobs,setFinishedJobs] = useState(0)
   const [listaValoraciones,setListaValoraciones] = useState([])
   const [forzarCambio, setForzarCambio] = useState(false)
-
+  const [worker, setWorker] = useState({})
 
   useEffect(() =>{
-    getWorkerDetail(id)
+    getUserDetail(id)
   },[])
 
 
-  useEffect(() =>{
-   
-    if(Object.keys(worker).length !== 0){
-      worker.User.name = worker.User.lastName + " " + worker.User.name  
-      worker.Jobs = worker.Jobs[0].name? worker.Jobs.map(e => e.name) : worker.Jobs
+
+
+  useEffect(() =>{ 
+    let nuevoObjeto = {}
+    if(Object.keys(user).length !== 0 ){
       const contratos = []
-      worker.Contracts.forEach(e => contratos.push(e.id))
-      getContractUsers(contratos)
+      user.Contracts.forEach(e => contratos.push(e.id))
+      nuevoObjeto.User= {}
+        nuevoObjeto.User.name = user.lastName + " " + user.name  
+        nuevoObjeto.User.img = user.img
+      if(user.Worker){
+        nuevoObjeto.Jobs = user.Worker.Jobs[0].name? user.Worker.Jobs.map(e => e.name) : user.Worker.Jobs
+        getContractUsers(contratos)
+        
+      }else {
+        getContractWorker(contratos)
+      }
+      setWorker(nuevoObjeto)
     }
-
-  },[worker])
+  },[user])
 
 
   useEffect(() =>{
-    if(users){
+    if(users && Array.isArray(users)){
       setListaValoraciones(users)
     }
   },[users])
@@ -54,27 +64,31 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
     let auxiliarTerminados = 0
     let auxiliarPromedio = 0
     setMaxPag(Math.ceil(users.length/5))
-    if(Object.keys(listaValoraciones).length !== 0)
-    listaValoraciones.forEach(e => {
-
+    if(Object.keys(listaValoraciones).length !== 0){
+      let variableComent = "comment_W"
+      let variableRating = "rating_W"
+      let variableId = "WorkerID"
+      if(user.Worker){
+        variableComent = "comment_U"
+        variableRating = "rating_U"
+        variableId = "UserID"
+      }
+      listaValoraciones.forEach(e => {
       const elemento = {
+        id: e[variableId],
         name : e.User.lastName + " "+ e.User.name,
         img : e.User.img,
-        comment: e.comment_U,
-        //comment:"Este chico me cae bien",
-        rating: e.rating_U
-        //rating: 4.2
+        comment: e[variableComent],
+        rating: e[variableRating]
       }
 
       auxiliarTerminados++
       auxiliarPromedio = (elemento.rating+auxiliarPromedio)
       contractsVisualized.push(elemento)
-      })
+      })}
       auxiliarPromedio = auxiliarPromedio/auxiliarTerminados
       setFinishedJobs(auxiliarTerminados)
       setpromedioRating(auxiliarPromedio)
-      //
-     
       setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
   },[listaValoraciones,forzarCambio,pag])
 
@@ -84,7 +98,7 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
   }
 
   const ordenarFiltrados = (tipo) => {
-    if(tipo == 'r'){
+    if(tipo == 'r' ){
       const auxiliar = listaValoraciones.sort((a,b) => (a.date > b.date) ? 1 : -1)
       setListaValoraciones(auxiliar)
       setForzarCambio(!forzarCambio)
@@ -107,37 +121,38 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
   return (
     <>
     {isLoading? 
-    <Skeleton variant="circular">
-     </Skeleton>
+    <h1>Cargando...</h1>
     
-    : 
+    : <>
     <div className="worker">
       <div className="w-portada">
           <img src={Banner} alt='banner'/>
       </div>
       <div className="w-content">
         <div className="w-left">
-            {worker.User && worker.User.name ? <Profile img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {worker.User.status}/> : <Skeleton variant = "circular">
+            {worker.User && worker.User.name ? <Profile img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {authState.isLoggedIn}/> : <Skeleton variant = "circular">
 
             </Skeleton> }
           </div>
 
         <div className="w-right">
-            {finishedJobs > 0? <Stats finishedJobs={finishedJobs} promedioRating = {promedioRating}/>: <Stats finishedJobs={0} promedioRating = {0}/>}
+            {finishedJobs > 0? <Stats finishedJobs={finishedJobs} promedioRating = {promedioRating} texto = {worker.Jobs? "terminados" : "requeridos"}/>: <Stats finishedJobs={0} promedioRating = {0} texto = {worker.Jobs? "terminados" : "requeridos"}/>}
             
             {worker.User ? <>
             <div className="filters">
               <Filters filtrado = {ordenarFiltrados}/>
             </div>
-            <Opinion contratos={valoraciones} />
+            <Opinion contratos={valoraciones} tipo = {worker.Jobs} />
             
               {maxPag > 0 && finishedJobs > 0 ?  <div className="pagination"><Pagination count={maxPag} onChange={handleChange} hidePrevButton hideNextButton/> </div>:<></>}
             </>: <></>}
             
         </div>
       </div>
-
     </div>
+    <Footer />
+    </>
+ 
     }
 
     </>
@@ -148,13 +163,18 @@ export const Worker = ({getWorkerDetail,getContractUsers,worker,users,isLoading}
 const mapStateToProps = (state) => ({
   worker : state.workerDetail,
   users: state.selectedContracts,
-  isLoading: state.isLoading
+  isLoading: state.isLoading,
+  user: state.userDetail,
+  authState: state.authState
 })
 
 function mapDispatchToProps (dispatch) {
   return {
-  // getWorkerDetail : (id) => dispatch(getWorkerDetail(id)),
-  getContractUsers : (ids) => dispatch(getContractUsers(ids))
+
+  getUserDetail : (id) => dispatch(getUserDetail(id)),
+  getContractUsers : (ids) => dispatch(getContractUsers(ids)),
+  getContractWorker: (ids) => dispatch(getContractWorker(ids))
+
   }
 }
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser, getJobs } from "../../../../redux/actions/actions";
+import { createUser, getJobs, get_countries } from "../../../../redux/actions/actions";
 import style from "./styles/User.module.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -24,6 +24,7 @@ const User = (props) => {
   const [workMax, setWorkMax] = useState(false);
   const [validateWorks, setValidateWorks] = useState(false);
   const { jobs } = useSelector((state) => state);
+  const countries = useSelector(state => state.allCountries)
   const {
     register,
     handleSubmit,
@@ -32,6 +33,7 @@ const User = (props) => {
 
   useEffect(() => {
     dispatch(getJobs());
+    dispatch(get_countries())
   }, [dispatch]);
 
   const handleJob = (e) => {
@@ -55,6 +57,7 @@ const User = (props) => {
   };
 
   const onSubmit = (data) => {
+    console.log(data)
     if(props.type === "worker" && !jobsState.length) return setValidateWorks(true)
 
     dispatch(createUser(data, jobsState)).then((res) => {
@@ -67,6 +70,8 @@ const User = (props) => {
       }
     });
   };
+
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={style.userclient}>
@@ -161,10 +166,21 @@ const User = (props) => {
           helperText={validator(errors.location?.type, "location")}
           variant="filled"
           placeholder="San miguel.."
+          select
+          defaultValue=""
           {...register("location", {
             required: true,
           })}
-        />
+          
+        >
+        {countries && countries.map (countrie => {
+          return (
+            <MenuItem key={countrie.id} value={countrie.id}>
+            {countrie.name}
+          </MenuItem>
+          )
+        })}
+        </TextField>
       </div>
       {props.type === "worker" && (
         <>
