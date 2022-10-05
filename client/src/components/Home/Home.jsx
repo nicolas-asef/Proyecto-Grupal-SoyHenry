@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import Filters from '../Filters/Filters';
 import Catalog from '../Catalog/Catalog'
 import CardSlider from '../Showroom/CardSlider.jsx'
-import './Home.css';
+import s from './Home.module.css';
 
 const Home = () => {
   let dispatch = useDispatch();
@@ -17,20 +17,20 @@ const Home = () => {
   }, [dispatch]);
       
 	return (
-    <div className="all-home">
-      <div className='container'>
+    <div className={s.all}>
+      <div className={s.container}>
         <SearchBar/>
       </div>
-      <div className='filter-container'>
+      <div className={s.filterContainer}>
         <Filters />
       </div>
-      <div className='carousel'>
+      <div className={s.carousel}>
         <CardSlider/>
       </div>
-      <div className='container'>
+      <div className={s.container}>
         <Catalog />
       </div>
-      <div className="footer">
+      <div className={s.footer}>
         <Footer />
       </div>
     </div>

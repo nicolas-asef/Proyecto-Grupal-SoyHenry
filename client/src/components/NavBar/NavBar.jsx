@@ -12,7 +12,6 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Profile from './Profile';
 import {Link, useLocation} from 'react-router-dom'
-import './NavBar.css'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const pages = ['Home', 'About', 'FAQ'];

@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './Footer.css'
+import s from "./Footer.module.css";
+
 const Footer = () => {
   let location = useLocation()
   const {pathname} = location;
 	return (
-		<footer className='footer'>
+		<footer className={s.footer}>
       {pathname !== '/about' &&(
-        <div className="footer-container">
+        <div className={s.footerContainer}>
           <div>
             <h3>Red de trabajos</h3>
             <span>© 2022 | - Todos los derechos reservados</span>
-            <ul>
-              <li className="nav-link">
+            <ul className={s.footerContainer}>
+              <li >
                 <a
                   href="https://www.instagram.com"
                   target="_blank"
@@ -22,7 +23,7 @@ const Footer = () => {
                   Instagram
                 </a>
               </li>
-              <li className="nav-link">
+              <li>
                 <a
                   href="https://www.facebook.com"
                   target="_blank"
@@ -35,14 +36,14 @@ const Footer = () => {
             </ul>
           </div>
           <hr />
-          <div className="footer-links">
+          <div className={s.footerLinks}>
             <h4>¿Quiénes somos?</h4>
             <ul>
               <li>
                 <Link to="/about">Sobre nosotros</Link>
               </li>
               <li>
-                <Link to="/faq">FAQ</Link>
+                <Link to="/faq">FAQs</Link>
               </li>
             </ul>
           </div>
