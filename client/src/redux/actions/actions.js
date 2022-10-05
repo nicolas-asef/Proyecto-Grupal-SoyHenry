@@ -3,12 +3,14 @@ import axios from "axios";
 
 import {LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
 
+//original = http://localhost:3001
+const URL = "https://databasepf.herokuapp.com/"
 
 export function getWorkers(query, search){
 
 
   return function (dispatch) {
-    axios.get("http://localhost:3001/worker")
+    axios.get(URL+"worker")
     .then((w) => {
       dispatch({
         type: GET_WORKERS,
@@ -25,7 +27,7 @@ export function getWorkers(query, search){
 // export function getContractUsers(ids){
 //   return function(dispatch){
 //     dispatch({ type: LOADING });
-//     return fetch("http://localhost:3001/contract/user",{
+//     return fetch(URL+"contract/user",{
 //       method:'GET',
 //       headers: {
 //         'Content-Type': 'application/json'
@@ -45,7 +47,7 @@ export function getContractUsers(ids){
   ides = ides.slice(5,ides.length)
   return function(dispatch){
     dispatch({ type: LOADING });
-    return fetch("http://localhost:3001/contract/user?"+ides)
+    return fetch(URL+"contract/user?"+ides)
     .then(data =>{ 
       return data.json()})
     .then(json => {
@@ -64,7 +66,7 @@ export function getContractWorker(ids){
   ides = ides.slice(5,ides.length)
   return function(dispatch){
     dispatch({ type: LOADING });
-    return fetch("http://localhost:3001/contract/worker?"+ides)
+    return fetch(URL+"contract/worker?"+ides)
     .then(data =>{ 
       return data.json()})
     .then(json => {
@@ -80,7 +82,7 @@ export function getContractWorker(ids){
 // export function getUserId(id) {
 //   return function (dispatch) {
 //     axios
-//         .get("http://localhost:3001/users/" + id)
+//         .get(URL+"users/" + id)
 //         .then((u) => {
 //             dispatch({
 //                 type: GET_USER_ID,
@@ -100,7 +102,7 @@ export function getUserDetail(id){
     
     dispatch({ type: LOADING });
     
-    return fetch("http://localhost:3001/users/"+id)
+    return fetch(URL+"users/"+id)
     .then(data => {
       return data.json()})
     .then(json => {
@@ -112,7 +114,7 @@ export function getUserDetail(id){
 export function getUsers() {
     return function (dispatch) {
         axios
-            .get("http://localhost:3001/users")
+            .get(URL+"users")
             .then((u) => {
                 dispatch({
                     type: GET_USERS,
@@ -128,7 +130,7 @@ export function getUsers() {
 export function getUsersName(search) {
     return function (dispatch) {
         axios
-            .get("http://localhost:3001/users?name=" + search)
+            .get(URL+"users?name=" + search)
             .then((u) => {
                 dispatch({
                     type: GET_USERNAME,
@@ -156,7 +158,7 @@ export function getWorkersSearch(search) {
 export function createUser(payload, jobs) {
 
   return async function (dispatch) {
-    const user = await axios.post("http://localhost:3001/users", payload);
+    const user = await axios.post(URL+"users", payload);
     const user_id = await user.data.ID;
     if(jobs.length) {
       const worker = {
@@ -164,7 +166,7 @@ export function createUser(payload, jobs) {
         jobs,
 
       }
-      const res = await axios.post("http://localhost:3001/worker", worker);
+      const res = await axios.post(URL+"worker", worker);
     }
 
     dispatch({
@@ -178,7 +180,7 @@ export function createUser(payload, jobs) {
 export function getJobs() {
     return async function (dispatch) {
         try {
-            let jobs = await axios.get("http://localhost:3001/jobs");
+            let jobs = await axios.get(URL+"jobs");
             return dispatch({ type: GET_JOBS, payload: jobs.data });
         } catch (error) {
             console.log(error);
@@ -189,7 +191,7 @@ export function getJobs() {
 export function getWorkersPremium() {
   return async function (dispatch) {
     try {
-      // let premium = await axios.get("http://localhost:3001/workers_premium");
+      // let premium = await axios.get(URL+"workers_premium");
       return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
     } catch (error) {
       console.log(error);
@@ -295,7 +297,7 @@ export function filter(array, job, disponibilidad, zona){
 export function authenticate(credentials) {
   return async function (dispatch) {
     try {
-      const res = await axios.post("http://localhost:3001/auth", credentials);
+      const res = await axios.post(URL+"auth", credentials);
       const { data } = res;
       dispatch({ type: LOGIN_SUCCES, payload: data});
     } catch (error) {
@@ -313,7 +315,7 @@ export function temporalLogout() {
 export function get_countries() {
   return async function (dispatch) {
     try {
-      let countries = await axios.get('http://localhost:3001/countries')
+      let countries = await axios.get(URL+'countries')
       dispatch ({type: GET_COUNTRIES, payload: countries.data})
     } catch (error) {
       return error.response.status
@@ -358,7 +360,7 @@ const premium = [
 export function updateUser(payload, payloadId) {
   return async function(dispatch){
     console.log(payload)
-    const user = await axios.put("http://localhost:3001/users/" + payloadId , payload);
+    const user = await axios.put(URL+"users/" + payloadId , payload);
     dispatch({
       type: PUT_USER,
     });
@@ -369,7 +371,7 @@ export function updateUser(payload, payloadId) {
 export function getUserId(id) {
   return function (dispatch) {
     axios
-        .get("http://localhost:3001/users/" + id)
+        .get(URL+"users/" + id)
         .then((u) => {
             dispatch({
                 type: GET_USER_ID,
