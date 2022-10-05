@@ -16,6 +16,7 @@ const Catalog = () => {
   const numberPages = Math.ceil((workers.length/4))
 
   let currentWorkers = workers.slice(firstIndex, lastIndex);
+  console.log(workers)
   
 
   const pagesNumber = (event, value) => {
