@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 //import ModalPayment from "./modalPayment/ModalPayment.js";
 import { pay, premiumPay } from '../../redux/actions/actions'
 import {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutForm() {
     const stripe = useStripe();
     const elements = useElements();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [error, setError] = useState("");
     const [cargando, setCargando] = useState(false);
@@ -55,6 +57,7 @@ export default function CheckoutForm() {
             setCompraConcretada(data.payment)
             dispatch(premiumPay(workerId))
             elements.getElement(CardElement).clear()
+            navigate('/home')
         } else {
             setError("Sorry, something as wrong ")
         }
