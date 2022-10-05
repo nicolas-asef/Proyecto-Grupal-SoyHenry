@@ -13,7 +13,7 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './LandingPage.css'
 import Footer from '../Footer/Footer';
-
+import Payment from '../Payment/Payment'
 
 const options = [
   {
@@ -56,6 +56,7 @@ const theme = createTheme();
 export default function Album() {
   return (
     <ThemeProvider theme={theme}>
+      <Payment/>
       <CssBaseline />
       <main>
         {/* Hero unit */}
