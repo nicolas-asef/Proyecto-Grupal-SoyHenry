@@ -16,7 +16,6 @@ export const PUT_USER = "PUT_USER";
 export const GET_USER_ID = "GET_USER_ID";
 export const GET_USER_DETAIL = "GET_USER_DETAIL";
 export const GET_WORKER_CONTRACTS = "GET_WORKER_CONTRACTS";
-
-export const GET_COUNTRIES = "GET_COUNTRIES"
-export const PAY = "PAY" 
+export const GET_COUNTRIES = "GET_COUNTRIES";
+export const PAY = "PAY" ;
 export const PUT_WORKER_PREMIUM = "PUT_WORKER_PREMIUM";
