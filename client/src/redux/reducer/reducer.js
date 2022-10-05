@@ -22,9 +22,9 @@ const initialState = {
   isLoading: false,
   userDetail: {},
   allCountries: [],
-  allWorkers: []
+  allWorkers: [],
+  filtrado: []
 }
-
 const reducer = (state = initialState, action) => {
   switch(action.type) {
 
@@ -93,6 +93,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         workers: action.payload,
         allWorkers: action.payload,
+        filtrado: action.payload
         workersPremium: filteredByPremium
 }
     case RESET: 
@@ -100,12 +101,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         workers: state.allWorkers
     }
-
-    case GET_WORKERS_PREMIUM:
-      return {
-        ...state,
-      workersPremium: action.payload
-      }
 
     case LOGIN_SUCCES:
       const authState = {
@@ -131,7 +126,8 @@ const reducer = (state = initialState, action) => {
         }
       return {
           ...state,
-          workers: action.payload !== "" ? filtrado : state.allWorkers
+          workers: action.payload !== "" ? filtrado : state.allWorkers,
+          filtrado: action.payload !== "" ? filtrado : state.allWorkers,
         }
 
       case ORDER_BY_RATING:{

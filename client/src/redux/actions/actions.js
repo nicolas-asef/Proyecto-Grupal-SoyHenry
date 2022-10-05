@@ -214,66 +214,68 @@ export function orderByRating(array, orderBy){
 
 export function filter(array, job, disponibilidad, zona){
   let filterArray = []
-  console.log(job, zona)
 
-  if (job === 'all' && disponibilidad === 'available' && zona === 'all'){
+  if (job === 'all' && disponibilidad === 'all' && zona === 'all'){
     filterArray = array
   }
 
-  if (job !== 'all' && disponibilidad !== 'available' && zona !== 'all'){
+  if (job !== 'all' && disponibilidad !== 'all' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].available === disponibilidad && array[i].zona === zona){
+        if (el.name === job && array[i].User.status === disponibilidad && array[i].User.Country.name === zona){
           filterArray.push(array[i])
         }
       })
     }
   }
+  
+  if (job !== 'all' && disponibilidad === 'all' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      
+      array[i].Jobs.map(el => {
+        if (el.name === job){
+          filterArray.push(array[i])
+        }
+      })
+    }
+  }
+  if (job === 'all' && disponibilidad !== 'all' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].User.status === disponibilidad){
+        filterArray.push(array[i])
+      }
+    }
+  }
+  if (job === 'all' && disponibilidad === 'all' && zona !== 'all'){
+    for (let i = 0; i < array.length; i++) {
+      if(array[i].User.Country.name === zona){
+        filterArray.push(array[i])
+      }
+    }
+  }
+  
+  if (job !== 'all' && disponibilidad !== 'all' && zona === 'all'){
+    for (let i = 0; i < array.length; i++) {
+      array[i].Jobs.map(el => {
+        console.log(el)
+        if (el.name === job && array[i].User.status === disponibilidad){
 
-  if (job !== 'all' && disponibilidad === 'available' && zona === 'all'){
-    for (let i = 0; i < array.length; i++) {
-      array[i].Jobs.map(el => {
-        if (el.nombre === job){
           filterArray.push(array[i])
         }
       })
     }
   }
-  if (job === 'all' && disponibilidad !== 'available' && zona === 'all'){
+  if (job === 'all' && disponibilidad !== 'all' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
-      if (array[i].available === disponibilidad){
+      if (array[i].User.status === disponibilidad && array[i].User.Country.name === zona){
         filterArray.push(array[i])
       }
     }
   }
-  if (job === 'all' && disponibilidad === 'available' && zona !== 'all'){
-    for (let i = 0; i < array.length; i++) {
-      if(array[i].zona === zona){
-        filterArray.push(array[i])
-      }
-    }
-  }
-
-  if (job !== 'all' && disponibilidad !== 'available' && zona === 'all'){
+  if (job !== 'all' && disponibilidad === 'all' && zona !== 'all'){
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].available === disponibilidad){
-          filterArray.push(array[i])
-        }
-      })
-    }
-  }
-  if (job === 'all' && disponibilidad !== 'available' && zona !== 'all'){
-    for (let i = 0; i < array.length; i++) {
-      if (array[i].available === disponibilidad && array[i].zona === zona){
-        filterArray.push(array[i])
-      }
-    }
-  }
-  if (job !== 'all' && disponibilidad === 'available' && zona !== 'all'){
-    for (let i = 0; i < array.length; i++) {
-      array[i].Jobs.map(el => {
-        if (el.nombre === job && array[i].zona === zona){
+        if (el.name === job && array[i].User.Country.name === zona){
           filterArray.push(array[i])
         }
       })
