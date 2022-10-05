@@ -11,13 +11,16 @@ import { useSelector } from 'react-redux'
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Profile from './Profile';
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 
 const pages = ['Home', 'About', 'FAQ'];
 
 const NavBar = () => {
+  const location = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const loggedState = useSelector( state => state.authState);
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -26,6 +29,8 @@ const NavBar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  if(location.pathname === '/onboarding') return;
 
   return (
     <AppBar style={{ background: '#121213' }} position="static">
@@ -119,9 +124,9 @@ const NavBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {loggedState.isLoggedIn ?
+            {isAuthenticated ?
               <Profile /> : 
-                <Button  sx={{ my: 1, color: 'white','&:hover': { color: 'white' }, display: 'flex' }} component={Link} to='/users/login'>Ingresar</Button>
+                <Button onClick={loginWithRedirect} sx={{ my: 1, color: 'white','&:hover': { color: 'white' }, display: 'flex' }}>Ingresar</Button>
             }
           </Box>
         </Toolbar>
