@@ -1,8 +1,8 @@
 
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //import ModalPayment from "./modalPayment/ModalPayment.js";
-import { pay } from '../../redux/actions/actions'
+import { pay, premiumPay } from '../../redux/actions/actions'
 import {useState} from 'react'
 
 export default function CheckoutForm() {
@@ -14,6 +14,21 @@ export default function CheckoutForm() {
     const [cargando, setCargando] = useState(false);
     const [compraConcretada, setCompraConcretada] = useState("");
     
+    
+    const authUser = useSelector((state) => state.authState)
+    console.log("auth")
+    console.log(authUser)
+    const idUser = authUser.user.id
+    console.log("idUser")
+    console.log(idUser)
+    const workers = useSelector((state) => state.workers)
+    console.log("workers")
+    console.log(workers)
+    const worker = workers.filter(e => e.UserID === idUser)
+    console.log("worker")
+    console.log(worker)
+    const workerId = worker[0].ID
+    console.log(workerId)
 
 
     const handleSubmit = async (event) => {
@@ -32,11 +47,13 @@ export default function CheckoutForm() {
         }
         setError("")      
         let data = {}
-        data = await dispatch(pay( paymentMethod))
+        data = await dispatch(pay(paymentMethod))
+        console.log("data abajo")
         console.log(data)
         setCargando(false)
         if ( data.status === "succeeded") {
             setCompraConcretada(data.payment)
+            dispatch(premiumPay(workerId))
             elements.getElement(CardElement).clear()
         } else {
             setError("Lo sentimos, algo salio mal ")

@@ -1,4 +1,5 @@
 const axios = require('axios');
+require('dotenv').config();
 const { Router } = require('express');
 const Stripe = require("stripe")
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY

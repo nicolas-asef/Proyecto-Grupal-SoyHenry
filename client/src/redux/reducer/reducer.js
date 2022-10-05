@@ -1,5 +1,5 @@
 
-import {PAY, GET_WORKER_CONTRACTS,GET_USER_DETAIL,LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET, TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from '../actions/actions_vars'
+import {PUT_WORKER_PREMIUM, PAY, GET_WORKER_CONTRACTS,GET_USER_DETAIL,LOADING,GET_USERS_CONTRACTS,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET, TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from '../actions/actions_vars'
 
 const localStorageAuth = () => {
   const auth = localStorage.getItem("auth");
@@ -171,13 +171,15 @@ const reducer = (state = initialState, action) => {
       }
     }
     case PAY:{
-
-      let workerPremium = state.workers.filter( (e) => e.id === authState.user.id )
-      
-
+      //let workerPremium = state.workers.filter( (e) => e.id === authState.user.id )
       return{
         ...state
         //modificar el premium
+      }
+    }
+    case PUT_WORKER_PREMIUM: {
+      return{
+        ...state
       }
     }
     default:

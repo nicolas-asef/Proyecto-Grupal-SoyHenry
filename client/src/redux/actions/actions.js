@@ -1,7 +1,7 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
 
-import {PAY, LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
+import {PUT_WORKER_PREMIUM, PAY, LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, GET_WORKERS_PREMIUM, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
 
 
 export function getWorkers(query, search){
@@ -384,14 +384,28 @@ export function getUserId(id) {
 
 export function pay( paymentMethod ) {
     //cambiar estado premium del modelo  de wokrers
-  return function(dispatch) {
-    return axios.post("http://localhost:3001/payments", { paymentMethod })
-          .then(response => { console.log(response.data); return response.data })
-          .then((r)=> {
-            dispatch({
-              type: PAY
-            })
-          })
-          .catch(error => { console.error(error); return error })
+  return async function(dispatch) {
+    try {
+      const response = await axios.post("http://localhost:3001/payments", { paymentMethod });
+      console.log(response.data);
+      const r = response.data;
+      dispatch({
+        type: PAY
+      });
+      return response.data
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
   }
+}
+
+export function premiumPay(payload) {
+  return async function(dispatch){
+    const worker = await axios.put("http://localhost:3001/worker/" + payload, {premium: true});
+    dispatch({
+      type: PUT_WORKER_PREMIUM,
+    });
+    return worker;
+  } 
 }

@@ -109,7 +109,7 @@ router.put('/:id', async (req, res, next) => {
         const worker = await Worker.findByPk(id);
         certification ? worker.certificacion = certification : certification
         description ? worker.description = description : description
-        premium ? worker.premium = premium : premium
+        premium ? worker.premium = true : false
         available ? worker.available = available : available
         
         if(jobs){
