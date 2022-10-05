@@ -6,6 +6,8 @@ import Worker from './components/Worker/Worker';
 import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import OnBoarding from './components/OnBoarding/OnBoarding';
+import Payment from './components/Payment/Payment';
+
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
         <Route path='/about' element={<About />}/>
         <Route path='/profile/:id' element = {<Worker/>}/>
         <Route path='/profile/settings' element={<SettingsProfile/>} />
+        <Route path='/profile/settings/premium' element={<Payment/>}/>
+        <Route path='/users/login' element={ <Form /> }/>
+        <Route path='/users/register' element={ <Form /> }/>
         <Route path='/catalog' element={<Catalog/>}/>
         <Route path='/onboarding' element={ <OnBoarding /> } />
       </Routes>

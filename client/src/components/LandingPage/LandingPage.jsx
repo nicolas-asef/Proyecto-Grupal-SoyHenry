@@ -13,7 +13,10 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './LandingPage.css'
 import Footer from '../Footer/Footer';
-
+import Payment from '../Payment/Payment'
+import { getWorkers } from '../../redux/actions/actions';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 const options = [
   {
@@ -52,10 +55,15 @@ const cards = [
   }];
 
 const theme = createTheme();
-
+  
 export default function Album() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getWorkers())
+  }, [])
   return (
     <ThemeProvider theme={theme}>
+      
       <CssBaseline />
       <main>
         {/* Hero unit */}

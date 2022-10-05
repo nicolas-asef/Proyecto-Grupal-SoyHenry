@@ -170,9 +170,11 @@ const mapStateToProps = (state) => ({
 
 function mapDispatchToProps (dispatch) {
   return {
+
   getUserDetail : (id) => dispatch(getUserDetail(id)),
   getContractUsers : (ids) => dispatch(getContractUsers(ids)),
   getContractWorker: (ids) => dispatch(getContractWorker(ids))
+
   }
 }
 

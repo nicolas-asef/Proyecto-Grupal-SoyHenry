@@ -6,13 +6,15 @@ import  TextField  from '@mui/material/TextField';
 import { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
+import {  useNavigate } from 'react-router-dom';
 
 export default function SettingProfile(){
 
     const dispatch = useDispatch()
     const user = useSelector((state) => state.users)
     const userAuth = useSelector((state) => state.authState)
-    
+    const navigate = useNavigate()
+
     const id = userAuth.user.id
     const [input, setInput] = useState({
         email: user.email,
@@ -40,8 +42,11 @@ export default function SettingProfile(){
             ...input,
             [e.target.name]: e.target.value  
             
-        })
-        
+        })       
+    }
+
+    function handlePremium(){
+        navigate('/profile/settings/premium')
     }
 
     return (
@@ -115,8 +120,13 @@ export default function SettingProfile(){
                         Send
                     </Button>
                 </form>
-            </div>
 
+
+                
+            </div>
+            <div>
+                <button onClick={handlePremium}>PREMIUM</button>
+            </div>
         </div>
     )
 }
