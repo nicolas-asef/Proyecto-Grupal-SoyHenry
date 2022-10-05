@@ -1,9 +1,6 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
 
-
-
-
 import {PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
 
 
@@ -114,6 +111,7 @@ export function getUserDetail(id){
       return data.json()})
     .then(json => {
       dispatch({type:GET_USER_DETAIL,payload:json})
+      return json;
     })
   }
 }
@@ -165,7 +163,7 @@ export function createUser(payload, jobs) {
   return async function (dispatch) {
     const user = await axios.post(baseURL+"users", payload);
     const user_id = await user.data.ID;
-    if(jobs.length) {
+    /* if(jobs.length) {
       const worker = {
         user_id,
         jobs,
@@ -173,6 +171,7 @@ export function createUser(payload, jobs) {
       }
       const res = await axios.post(baseURL+"worker", worker);
     }
+
 
     dispatch({
       type: POST_USER,
@@ -292,6 +291,7 @@ export function filter(array, job, disponibilidad, zona){
     dispatch({type: FILTER, payload: filterArray})
   }
 }
+
 export function authenticate(credentials) {
   return async function (dispatch) {
     try {
@@ -360,10 +360,42 @@ export function getUserId(id) {
             });
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err)
         });
 };
 }
+
+
+export function finishUserCreation(id, data, jobs) {
+  return async function (dispatch) {
+    const {name, lastName,phone, dni, location } = data;
+    const toSend = {
+      name,
+      lastName,
+      phone,
+      dni,
+      countryId: location,
+      onBoarded: true
+    }
+
+    const user = await axios.put(`http://localhost:3001/users/${id}`, toSend);
+
+    if(jobs.length) {
+      const worker = {
+        user_id: id,
+        jobs,
+
+      }
+      const res = await axios.post("http://localhost:3001/worker", worker);
+    }
+
+    dispatch({
+      type: POST_USER,
+    });
+
+     return user;
+  };
+
 
 export function pay( paymentMethod ) {
     //cambiar estado premium del modelo  de wokrers

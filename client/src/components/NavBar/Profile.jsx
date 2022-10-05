@@ -6,37 +6,33 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { temporalLogout } from '../../redux/actions/actions';
 import { useEffect } from 'react';
 import {  getUserId } from '../../redux/actions/actions'
 import {  useNavigate } from 'react-router-dom';
-
-
+import { useAuth0 } from '@auth0/auth0-react'
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const { user: { sub } } = useAuth0();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const userinfo = useSelector(state=> state.authState)
   const users = useSelector(state => state.users)
   const navigate = useNavigate()
+  const { logout } = useAuth0();
 
 
   useEffect(()=>{
     if (users.length === 0) {
-    dispatch(getUserId(userinfo.user.id))
+    dispatch(getUserId(sub))
     }
-    console.log(users)
   },[dispatch])
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
   const handleOpenProfile = () => {
-    navigate(`/profile/${users.Worker.ID}`)
+    navigate(`/profile/${sub}`)
     setAnchorElUser(null);
-  /* console.log(users.Worker.ID)
-     console.log(users)
-    console.log(userProfileInfo) */
   }
   
   const handleOpenUserMenu = (event) => {
@@ -44,7 +40,7 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    dispatch(temporalLogout());
+    logout();
   }
   const handleSettings = () => {
     navigate('/profile/settings')
@@ -72,7 +68,7 @@ const Profile = () => {
     <>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src={userinfo.user.img} />
+          <Avatar alt="Remy Sharp" /* src={userinfo.user.img} */ />
         </IconButton>
       </Tooltip>
       <Menu

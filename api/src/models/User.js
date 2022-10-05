@@ -5,18 +5,17 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('User', {
     ID:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.STRING,
       allowNull:false,
       primaryKey: true
     },
     name:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     lastName:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     img:{
       type: DataTypes.STRING,
@@ -27,10 +26,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    password:{
-      type: DataTypes.STRING,
-      allowNull:false
-    },
     phone:{
       type: DataTypes.INTEGER,
       allowNull:true
@@ -39,11 +34,12 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull:true
     },
-    // location:{
-    //   type:DataTypes.STRING,
-    //   allowNull:false
-    // },
-    status:{
+    /* status:{
+      type:DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }, */
+    onBoarded:{
       type:DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
