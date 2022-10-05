@@ -95,14 +95,14 @@ export default function Album() {
               Resolvemos de manera segura
             </Typography>
             <div className={s.containerOptions}>
-              { options && options.map( option => (
-                <div className={s.card}>
+              { options && options.map( (option, index) => (
+                <div key={index} className={s.card}>
                   <div className={s.titleContainer}>
                     <h3>{option.title}</h3>
                   </div>
                   <div className={s.description}>
                     {option.description.map( desc => (
-                      <p className={s.desc}>• {desc}</p>
+                      <p key={desc} className={s.desc}>• {desc}</p>
                     ))}
                   </div>
                     <Button 
