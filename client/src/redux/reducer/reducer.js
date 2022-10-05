@@ -21,9 +21,9 @@ const initialState = {
   isLoading: false,
   userDetail: {},
   allCountries: [],
-  allWorkers: []
+  allWorkers: [],
+  filtrado: []
 }
-
 const reducer = (state = initialState, action) => {
   switch(action.type) {
 
@@ -90,7 +90,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         workers: action.payload,
-        allWorkers: action.payload
+        allWorkers: action.payload,
+        filtrado: action.payload
 }
     case RESET: 
     return {
@@ -125,7 +126,8 @@ const reducer = (state = initialState, action) => {
         }
       return {
           ...state,
-          workers: action.payload !== "" ? filtrado : state.allWorkers
+          workers: action.payload !== "" ? filtrado : state.allWorkers,
+          filtrado: action.payload !== "" ? filtrado : state.allWorkers,
         }
 
       case ORDER_BY_RATING:{
