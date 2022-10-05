@@ -38,15 +38,15 @@ const CardSlider = () => {
               <h1>{w.User.name} {w.User.lastName}</h1>
             </div>
             <div className="card-bottom">
-                {w.Jobs.map((each) => {
+                {w.Jobs.map((each, index) => {
                   return (
-                    <h3>{each.name}</h3>
+                    <h3 key={index}>{each.name}</h3>
                   )
                 })}                
             </div>
             <div className='Rating'>
               <Stack spacing={1}>
-                  <Rating name="half-rating-read" defaultValue="3" precision={0.5} readOnly />    {/* CAMBIAR defaultValue=w.rating* Cuando haya DB con contratos hechos*/}
+                  <Rating name="half-rating-read" defaultValue={3} precision={0.5} readOnly />    {/* CAMBIAR defaultValue=w.rating* Cuando haya DB con contratos hechos*/}
               </Stack>
             </div>
           </div>
