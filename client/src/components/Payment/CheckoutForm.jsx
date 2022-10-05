@@ -56,7 +56,7 @@ export default function CheckoutForm() {
             dispatch(premiumPay(workerId))
             elements.getElement(CardElement).clear()
         } else {
-            setError("Lo sentimos, algo salio mal ")
+            setError("Sorry, something as wrong ")
         }
     }
 
@@ -64,10 +64,10 @@ export default function CheckoutForm() {
         <div className="card-payment">
             <div className="form-payment">
                 <div className="text-payment-container">
-                    <h1>¿Por qué colaborar?</h1>
-                    <p>Timberli es una plataforma totalmente gratuita. Nuestro sueño es que desarrolladores de todo el mundo puedan dar mayor visibilidad a sus trabajos, inspirarse y conectar con colegas y reclutadores.</p>
-                    <p>Si la plataforma te parece útil, considera hacer una donación! Gracias a la participación de gente como tú, Timberli crece cada día y permanece sin publicidad y accesible para todos.</p>
-                    <h3>¡Gracias por tu ayuda!</h3>
+                    <h1>¿Why choose to be premium?</h1>
+                    <p>JobsOffice is a totally free platform. Our dream is that informal workers from all over the country can form a network of clients, give greater visibility to their work, be inspired and connect with colleagues.</p>
+                    <p>Being premium will increase your visibility on the page and enhance your work network</p>
+                    <h3>¡Thanks for your help!</h3>
                 </div>
                 <form className="form-payment-container" onSubmit={handleSubmit}>
                     <img
@@ -75,14 +75,14 @@ export default function CheckoutForm() {
                         alt="donation"
                         className="donation-image"
                     />
-                    <h5 className="form-payment-title">Selecciona el monto a donar en dolares:</h5>
-                    <p className="form-payment-subtitle">(Tu tarjeta lo convierte a tu moneda local)</p>
+                    <h5 className="form-payment-title">Premium has a cost of 100 dollars</h5>
+                    <p className="form-payment-subtitle">(Your card converts it to your local currency)</p>
                     
                     <CardElement className="card-element-payment" />
                     {error && <div className="payment-error">{error}</div>}
-                    <button className="btn-payment" type="submit" disabled={cargando}> CONTRIBUIR </button>
+                    <button className="btn-payment" type="submit" disabled={cargando}> BE PREMIUM </button>
                     
-                    {cargando && <div >Cargando...</div>}
+                    {cargando && <div >Loading...</div>}
                 </form>
             </div>
         </div>

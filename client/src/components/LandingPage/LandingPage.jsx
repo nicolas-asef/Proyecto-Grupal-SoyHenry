@@ -63,7 +63,7 @@ export default function Album() {
   }, [])
   return (
     <ThemeProvider theme={theme}>
-      <Payment/>
+      
       <CssBaseline />
       <main>
         {/* Hero unit */}
