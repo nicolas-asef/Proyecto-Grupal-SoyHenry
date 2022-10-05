@@ -17,22 +17,8 @@
 .footer-links{
     align-items: center;
 }
-.expo-cards{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-}
-.expo-cards__container{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: .5%;
-    margin: .5%
-}
-.container-options{
+
+.containerOptions{
     display: flex ;
     justify-content: center ;
     align-items: center ;

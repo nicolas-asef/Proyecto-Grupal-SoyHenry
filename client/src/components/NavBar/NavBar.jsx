@@ -12,7 +12,6 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Profile from './Profile';
 import {Link} from 'react-router-dom'
-import './NavBar.css'
 
 const pages = ['Home', 'About', 'FAQ'];
 

@@ -93,7 +93,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         workers: action.payload,
         allWorkers: action.payload,
-        filtrado: action.payload
+        filtrado: action.payload,
         workersPremium: filteredByPremium
 }
     case RESET: 

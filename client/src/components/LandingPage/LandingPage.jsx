@@ -11,12 +11,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import './LandingPage.css'
 import Footer from '../Footer/Footer';
 import Payment from '../Payment/Payment'
 import { getWorkers } from '../../redux/actions/actions';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import s from './LandingPage.module.css'
 
 const options = [
   {
@@ -94,13 +94,13 @@ export default function Album() {
             >
               Resolvemos de manera segura
             </Typography>
-            <div className='container-options'>
+            <div className={s.containerOptions}>
               { options && options.map( option => (
                 <div className='card'>
-                  <div className='titlecontainer'>
+                  <div className={s.titleContainer}>
                     <h3>{option.title}</h3>
                   </div>
-                  <div className='description'>
+                  <div className={s.description}>
                     {option.description.map( desc => (
                       <p className='desc'>• {desc}</p>
                     ))}
