@@ -18,6 +18,7 @@ const getUsers = async () => {
             id: u.ID,
             name: u.name,
             lastName: u.lastName,
+            onBoarded: u.onBoarded,
             img: u.img,
             email: u.email,
             password: u.password,
@@ -63,7 +64,7 @@ router.get('/:id', async (req, res, next) =>{
             if(user){
                 res.status(200).json(user)
             }else {
-                res.status(500).send({message: "no existe el user"})
+                res.status(404).json({message: "no existe el user"})
             }
         }
     } catch (error) {
@@ -73,21 +74,14 @@ router.get('/:id', async (req, res, next) =>{
 
 router.post('/', async (req, res, next) => {
 
-    const {name, lastName, img, email, password, phone, dni, location } = req.body;
+    const {ID, email, img } = req.body;
     try {
-        const salt = await bcrypt.genSalt(10);
-
         let user = await User.create({
-            name,
-            lastName,
-            img,
+            ID,
             email,
-            password: await bcrypt.hash(password, salt),
-            phone,
-            dni,
+            img
         })
 
-        user.setCountry(location)
         res.status(200).json(user) // para agarrar el id de usuario al crearlo
     } catch (error) {
         next(error)
@@ -102,12 +96,14 @@ router.put('/:id', async (req, res, next) => {
     try {
         const updatedUser = await User.findOne({where: {ID: id}});        
         const us = await updatedUser.update({
+            name: info.name,
+            lastName: info.lastName,
             email: info.email,
-            password: await bcrypt.hash(info.password, salt),
             phone: info.phone,
-            img: info.img, 
-            location: info.location
+            dni: info.dni,
+            onBoarded: info.onBoarded
         })
+        us.setCountry(info.countryId)
         res.status(200).json(us)       
     } catch (error) {
         res.status(500).send("entro al catch")        

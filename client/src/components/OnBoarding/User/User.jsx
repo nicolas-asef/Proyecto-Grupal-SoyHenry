@@ -3,7 +3,7 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createUser,
+  finishUserCreation,
   getJobs,
   get_countries,
 } from "../../../redux/actions/actions";
@@ -13,11 +13,11 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { validator } from "../validator";
+import {useAuth0} from "@auth0/auth0-react"
 
 const User = (props) => {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [severity, setseverity] = useState("");
+	const {loginWithRedirect} = useAuth0();
   const [jobsState, setJobsState] = useState([]);
   const [workMax, setWorkMax] = useState(false);
   const [validateWorks, setValidateWorks] = useState(false);
@@ -36,7 +36,7 @@ const User = (props) => {
 
   const handleJob = (e) => {
     setValidateWorks(false);
-
+		props.stepperCb(2)
     const exist = jobsState.find((job) => job === e.target.value);
     if (jobsState.length < 3) {
       if (!exist) {
@@ -57,19 +57,14 @@ const User = (props) => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-    if (props.type === "worker" && !jobsState.length)
-      return setValidateWorks(true);
-
-    dispatch(createUser(data, jobsState)).then((res) => {
-      if (res.status === 200) {
-        setOpen(true);
-        setseverity("success");
-      } else {
-        setOpen(true);
-        setseverity("error");
-      }
-    });
+		if (props.type === "worker" && !jobsState.length) return setValidateWorks(true);
+		props.stepperCb(3);
+    dispatch(finishUserCreation(props.authID, data, jobsState))
+			.then( res => {
+				if(res.status === 200) {
+					loginWithRedirect();
+				}
+			});
   };
 
   return (
@@ -134,6 +129,7 @@ const User = (props) => {
           helperText={validator(errors.location?.type, "location")}
           placeholder="San miguel.."
           select
+					onChange={ () => props.stepperCb(2)}
           defaultValue=""
           {...register("location", {
             required: true,

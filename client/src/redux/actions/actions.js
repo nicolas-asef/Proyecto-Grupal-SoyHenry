@@ -384,13 +384,34 @@ export function getUserId(id) {
 };
 }
 
-export function testAction(user) {
+export function finishUserCreation(id, data, jobs) {
   return async function (dispatch) {
-    const payload = {
-      ID: user.sub,
-      email: user.email,
-      img: user.picture
+    const {name, lastName,phone, dni, location } = data;
+    const toSend = {
+      name,
+      lastName,
+      phone,
+      dni,
+      countryId: location,
+      onBoarded: true
     }
-    dispatch(createUser(payload))
-  }
+
+    const user = await axios.put(`http://localhost:3001/users/${id}`, toSend);
+
+    if(jobs.length) {
+      const worker = {
+        user_id: id,
+        jobs,
+
+      }
+      const res = await axios.post("http://localhost:3001/worker", worker);
+    }
+
+    dispatch({
+      type: POST_USER,
+    });
+
+     return user;
+  };
+
 }

@@ -23,6 +23,8 @@
   width: 100%;
   color: #ffffff;
   letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .stepper {
@@ -53,6 +55,13 @@
 .userForm {
   padding: 15px;
   height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.metadata {
   display: flex;
   flex-direction: column;
   justify-content: center;
