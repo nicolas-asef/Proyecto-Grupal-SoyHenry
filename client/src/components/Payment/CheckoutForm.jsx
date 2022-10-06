@@ -69,7 +69,7 @@ export default function CheckoutForm() {
 
     return (
         <div className={s.cardPayment}>
-            <div className={s.forPayment}>
+            <div className={s.formPayment}>
                 <div className={s.textPaymentContainer}>
                     <h1>¿Why choose to be premium?</h1>
                     <p>JobsOffice is a totally free platform. Our dream is that informal workers from all over the country can form a network of clients, give greater visibility to their work, be inspired and connect with colleagues.</p>
