@@ -72,3 +72,14 @@
     width: 10%;
     padding-right: 4rem;
   }
+  .UploadIMGDIV{
+    display: flex;
+    align-items: center;
+  }
+  .imgName{
+    margin-left:15px;
+    margin-right:15px;
+  }
+  .SuccessIMG{
+    color: green;
+  }

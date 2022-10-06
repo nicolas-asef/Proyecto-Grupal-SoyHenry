@@ -406,14 +406,17 @@ export function premiumPay(payload) {
   } 
 }
 
-export const uploadImage = (formData) => dispatch => {
-         axios.post("https://api.cloudinary.com/v1_1/dh0mqr8fy/image/upload", formData)
+export const uploadImage = (formData) => (dispatch) => {
+        axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_KEY}/image/upload`, formData)
         .then((res) =>res.data)
-        .then(data =>{
-            console.log(data.url)
-          
+        .then(res =>{
+/*             console.log(res.url) */
+            dispatch({
+              type: UPLOAD_IMAGE,
+              payload: res
+          });
         } )
-      }
+}
 
 
 /* export function uploadImage(formData){

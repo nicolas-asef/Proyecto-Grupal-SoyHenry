@@ -186,7 +186,7 @@ const reducer = (state = initialState, action) => {
       }
     }
     case UPLOAD_IMAGE:{
-      console.log(action.payload)
+/*       console.log(action.payload) */
       return{
         ...state, uploadedImg: action.payload
       }
