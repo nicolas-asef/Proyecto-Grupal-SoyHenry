@@ -9,6 +9,7 @@ const router = Router();
 
 router.post("/", async (req, res, next) => {
     const { paymentMethod } = req.body
+    console.log("post por el back")
     console.log(paymentMethod)
     try {        
             const payment = await stripe.paymentIntents.create({

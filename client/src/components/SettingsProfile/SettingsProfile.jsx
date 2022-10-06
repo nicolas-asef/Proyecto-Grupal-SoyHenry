@@ -7,15 +7,17 @@ import { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
 import {  useNavigate } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function SettingProfile(){
 
     const dispatch = useDispatch()
+    const { user: { sub } } = useAuth0();
     const user = useSelector((state) => state.users)
     const userAuth = useSelector((state) => state.authState)
     const navigate = useNavigate()
-
-    const id = userAuth.user.id
+    const id = sub;
+    //const id = userAuth.user.id
     const [input, setInput] = useState({
         email: user.email,
         password: user.password,
@@ -25,16 +27,15 @@ export default function SettingProfile(){
         
     })
     
-
     useEffect(() => {       
-        dispatch(getUserId(userAuth.user.id))
+        dispatch(getUserId(id))
         
     },[dispatch])
 
     const onSubmit = (e) => {
         e.preventDefault()
         console.log(input)
-        dispatch(updateUser(input, userAuth.user.id))
+        dispatch(updateUser(input, id))
     }
     
     function handleChange(e) {
