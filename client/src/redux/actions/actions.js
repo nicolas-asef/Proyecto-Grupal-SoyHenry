@@ -427,16 +427,15 @@ export function updateWorker(payload, payloadId) {
     });
     return worker;
   } 
+}
 
 export const uploadImage = (formData) => (dispatch) => {
         axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_KEY}/image/upload`, formData)
         .then((res) =>res.data)
-        .then(res =>{
-/*             console.log(res.url) */
+        .then(res => { 
             dispatch({
               type: UPLOAD_IMAGE,
               payload: res
           });
         } )
-
 }
