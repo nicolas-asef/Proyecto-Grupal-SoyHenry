@@ -417,33 +417,3 @@ export const uploadImage = (formData) => (dispatch) => {
           });
         } )
 }
-
-
-/* export function uploadImage(formData){
-
-  return async function(dispatch) {
-    await axios.post("https://api.cloudinary.com/v1_1/dh0mqr8fy/image/upload", formData)
-    .then((res) => {
-      dispatch({
-        type: UPLOAD_IMAGE,
-      payload: res.data.url
-    });
-  })
-  .catch((err) => {
-    console.log(err)
-  })
-}
-
-} */
-/* export function uploadImage(formData) {
-  return function(dispatch) {
-      return axios.post("https://api.cloudinary.com/v1_1/dh0mqr8fy/image/upload", formData)
-      .then(res => res.data)
-      .then (res =>{
-        dispatch({
-          type:UPLOAD_IMAGE,
-          payload: res
-        })
-      })
-  };
-} */
