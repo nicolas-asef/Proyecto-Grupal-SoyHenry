@@ -1,6 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap'); 
 
-.card-payment {
+.cardPayment {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,17 +8,17 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.form-payment-title {
+.formPaymentTitle {
     font-size: 2.5vh;
     margin: 1%;
 }
 
-.form-payment-subtitle {
+.formPaymentSubtitle {
     color: gray;
     margin: 0 0 4% 0;
 }
 
-.form-payment {
+.formPayment {
     display: flex;
     flex-direction: row;
     height: fit-content;
@@ -31,7 +31,7 @@
     justify-content: center;
 }
 
-.text-payment-container {
+.textPaymentContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,7 +42,7 @@
     padding: 0 3% 0 3%;
 }
 
-.form-payment-container{
+.formPaymentContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,7 +51,7 @@
     padding: 0 3% 2% 3%;
 }
 
-.opciones-payment {
+.opcionesPayment {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -59,7 +59,7 @@
     margin-bottom: 1rem;
 }
 
-.form-check-payment {
+.formCheckPayment {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -69,21 +69,21 @@
     font-weight: bolder;
 }
 
-.form-label-payment {
+.formLabelPayment {
     display: flex;
 }
 
 
-.donation-image {
+.donationImage {
     width: 380px;
 }
 
-.card-element-payment {
+.cardElementPayment {
     width: 20rem;
     margin: 4% 25% 1% 25%;
 }
 
-.btn-payment {
+.btnPayment {
     width: 51%;
     padding: 10px;
     border: none;
@@ -97,7 +97,7 @@
     margin-top: 1.5rem;
 }
 
-.btn-payment:hover {
+.btnPayment:hover {
     border: none;
     background-color: #224a7b;
     border-radius: 4px;
@@ -106,7 +106,7 @@
     letter-spacing: 1px;
 }
 
-.payment-error{
+.paymentError{
     font: smaller;
     color: rgba(255, 0, 0, 0.8);
 }

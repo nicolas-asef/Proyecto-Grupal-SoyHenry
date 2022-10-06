@@ -57,13 +57,13 @@ const cards = [
 const theme = createTheme();
   
 export default function Album() {
+ 
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getWorkers())
   }, [])
   return (
-    <ThemeProvider theme={theme}>
-      
+    <ThemeProvider theme={theme}>    
       <CssBaseline />
       <main>
         {/* Hero unit */}
