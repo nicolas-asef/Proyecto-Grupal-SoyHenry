@@ -36,14 +36,11 @@ function Stats({finishedJobs,promedioRating,texto}) {
             <p>Cantidad de trabajos {texto}: {contratosTerminados}</p>
         </div>
         <div className="s-right">
-          {/* <p>Rating</p> */}
           <Typography component="legend">Valoracion</Typography>
           <div className="rating">
           <Rating name="read-only" value={value} readOnly  precision={0.1}/>
           <Box sx={{ ml: 2 }}>{calificacion}</Box>
           </div>
-          
-            {/* <img src={Estrella} alt="Estrellita donde esta" /> */}
         </div>
     </div>
   )

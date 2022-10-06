@@ -4,3 +4,17 @@
     justify-content: center;
     width: 100%;
 }
+
+.emptyStyle {
+    flex: 6;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all .5s;
+    background: #ffffff;
+    display: flex;
+    box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
+    justify-content: start;
+    align-items: center;
+    margin: 17px 0;
+}
