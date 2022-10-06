@@ -59,12 +59,11 @@ route.get('/worker', async (req, res) => {
 //Importante, cuando se cree un contrato se debe usar el id del user del worker, no el id del worker
 route.post('/', async (req,res) => {
     
-    const {id_user, id_worker, location,date,description} = req.body
+    const {id_user, id_worker, location,date} = req.body
     try {
         const contrato = await Contract.create({
             location:location,
-            date:date,
-            description:description
+            date:date
         })
         contrato.setWorker(id_worker)
         contrato.setUser(id_user)
