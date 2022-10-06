@@ -27,17 +27,17 @@
   margin-left: -350px;
   transition: 0.4s ease-out;
   position: relative;
-  left: 0px;  
-  align-items: center;  
+  left: 0px;
+  align-items: center;
 }
 
 .card:not(:first-child) {
-    margin-left: -50px;
+  margin-left: -50px;
 }
 
 .card:hover {
   transform: translateY(-20px);
-  transition: 0.6s ease-out; 
+  transition: 0.6s ease-out;
   background-color: rgba(2, 41, 116, 0.8);
 }
 
@@ -47,15 +47,14 @@
   transition: 0.4s ease-out;
 }
 
-
-.card img{
+.card img {
   width: 135px;
   border-radius: 15%;
   margin: 5%;
   margin-top: 8%;
 }
 
-.card img:hover{
+.card img:hover {
   border-radius: 20%;
 }
 
@@ -65,8 +64,8 @@
   color: white;
 }
 
-.job{ 
-  font-size: 1.0rem;  
+.job {
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   margin-right: 20%;
@@ -74,7 +73,7 @@
   font-family: "Montserrat", sans-serif;
 }
 
-.rating{  
+.rating {
   position: absolute;
   bottom: 16%;
 }
@@ -85,16 +84,16 @@
   position: relative;
   text-decoration: none;
   color: #fff;
-  text-transform: capitalize; 
+  text-transform: capitalize;
   font-family: "Montserrat", sans-serif;
-  font-size: 18px;    
+  font-size: 18px;
 }
 
-.btn{
+.btn {
   margin-left: 18%;
   margin-right: 90%;
 }
-.btn a{   
+.btn a {
   background-color: #0a419a;
   height: 22px;
   width: 125px;
@@ -103,34 +102,34 @@
   bottom: 6%;
 }
 
-.btn:hover a{  
+.btn:hover a {
   background-color: #558fee;
 }
 
-.btns{
+.btns {
   display: flex;
   flex-direction: row;
   margin-top: 110%;
 }
 
-.btnLeft { 
+.btnLeft {
   margin: 8px;
   transition: all 1.2s ease;
-  box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.3); 
+  box-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btnLeft:hover {
   transform: translateY(4px);
-  box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.3);
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.3);
 }
 
 .btnRight {
-  margin: 8px;  
+  margin: 8px;
   transition: all 1.2s ease;
-  box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.3); 
+  box-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btnRight:hover {
   transform: translateY(4px);
-  box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.3);
+  box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.3);
 }
