@@ -45,6 +45,9 @@ import EmptyContainer from './EmptyContainer';
 //   )
 // }
 
+const Opinion2 = styled.div`
+height: ${ (props) => props.altura}rem;
+`;
 
 export default function Opinion({contratos,tipo}) {
   let requerido = "requeridos"
@@ -54,17 +57,10 @@ export default function Opinion({contratos,tipo}) {
   if(contratos.length > 0)
     altura = contratos.length*13
   let key = 0
-  const Opinion2 = styled.div`
-  height: ${altura}rem;
-`;
+
   return (
-
-    <Opinion2 className='opinion'>      
+    <Opinion2 altura={altura} className='opinion'>      
     {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox id={e.id} rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <EmptyContainer texto = {requerido}/>}
-
-    
-
-
   </Opinion2>
   )
 }

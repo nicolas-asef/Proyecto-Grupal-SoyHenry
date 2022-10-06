@@ -1,8 +1,8 @@
 import'./SettingsProfile.css'
-import { getJobs, getUserId, updateUser, updateWorker, get_countries } from '../../redux/actions/actions'
+import { getJobs, getUserId, updateUser, updateWorker, get_countries, uploadImage  } from '../../redux/actions/actions'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import  TextField  from '@mui/material/TextField';
+import TextField from '@mui/material/TextField';
 import { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
@@ -10,7 +10,7 @@ import {  useNavigate } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 import MenuItem from "@mui/material/MenuItem";
 
-export default function SettingProfile(){
+export default function SettingProfile() {
 
     const dispatch = useDispatch()
     const { user: { sub } } = useAuth0();
@@ -18,6 +18,7 @@ export default function SettingProfile(){
     const countries = useSelector((state) => state.allCountries);
     const user = useSelector((state) => state.users)
     const userAuth = useSelector((state) => state.authState)
+    const uploadedImage = useSelector(state => state.uploadedImg)
     const navigate = useNavigate()
     const id = sub;
     //const id = userAuth.user.id
@@ -33,6 +34,36 @@ export default function SettingProfile(){
         description: user.Worker.description,
         jobs: user.Worker.Jobs
     })
+
+    //////////////////CLOUDINARY STUFF//////////////////////
+    const [image, setImage] = useState("")
+    const [uploaded, setUploaded] = useState(false)
+    useEffect(() => {
+        setInput((prevState) => ({
+            ...prevState, img: uploadedImage.url
+        }))
+    }, [uploadedImage])
+
+    const formData = new FormData()
+    formData.append("file", image)
+    formData.append("upload_preset", "jobplatform")
+
+    const handleImgChange = (e) => {
+        if (e.target.files !== undefined){
+            setImage(e.target.files[0])
+            console.log(image)
+        }
+        else{
+            setImage("")
+        }
+    }
+    const uploadImageHandler = () => {
+        if (image !== "" && image !== undefined) {
+            dispatch(uploadImage(formData))
+            setImage("")
+        }
+    }
+    ////////////////////////////////////////////////////////
     
     useEffect(() => {       
         dispatch(getUserId(id))
@@ -46,7 +77,7 @@ export default function SettingProfile(){
         dispatch(updateUser(input, id))
         dispatch(updateWorker(inputWork, user.Worker.ID))
     }
-    
+
     function handleChange(e) {
         setInput({
             ...input,
@@ -60,8 +91,8 @@ export default function SettingProfile(){
             [e.target.name]: e.target.value
         })
     }
-    
-    function handlePremium(){
+
+    function handlePremium() {
         navigate('/profile/settings/premium')
     }
 
@@ -90,19 +121,19 @@ export default function SettingProfile(){
                             ))}
                         </TextField>
                     </div>
-                    <hr/>
+                    <hr />
                     <div className='bloke'>
                         <h3 className='pad'>Phone</h3>
-                        <TextField          
-                        id="outlined-required"
-                        label="Phone" 
-                        name="phone" 
-                        value={input.phone}
-                        /* defaultValue={user.phone}  */ 
-                        onChange={handleChange}       
+                        <TextField
+                            id="outlined-required"
+                            label="Phone"
+                            name="phone"
+                            value={input.phone}
+                            /* defaultValue={user.phone}  */
+                            onChange={handleChange}
                         />
                     </div>
-                    <hr/>
+                    <hr />
                     <div className='bloke'>
                         <h3 className='pad'>Image</h3>
                         <TextField          
@@ -170,11 +201,21 @@ export default function SettingProfile(){
                     </div>
                         </>
                     )}
-                    
+                        <div className='UploadIMGDIV'>
+                            <Button variant="contained" component="label">
+                                Selecionar archivo
+                                <input name='img' hidden accept="image/*" multiple type="file" onChange={handleImgChange} />
+                            </Button>
+                             <span className='imgName'>{`${image === "" || image === undefined  ? "" : image.name.length < 15 ? image.name : `${image.name.slice(0, 15)}...`}`}</span>
+                            {image === "" || image === undefined ? "" : <Button variant="contained" color="success" onClick={uploadImageHandler}>Subir Imagen</Button>}
+                            {uploaded === true ? <span className='SuccessIMG'>Imagen subida correctamente, persiona el botón Send para guardar los cambios</span> : ""}
+                        </div>
+                    </div>
+                    <hr />
                     <Button type="submit" variant="contained" endIcon={<SendIcon />}>
                         Send
                     </Button>
-                </form>              
+                </form>
             </div>
             <div>
                 <Button type="submit" variant="contained" onClick={handlePremium}>
