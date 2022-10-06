@@ -40,6 +40,19 @@ export function getWorkers(query, search){
 //   })
 // }
 
+
+export function createContract(data){
+  fetch(baseURL+'contract',{
+    method:'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+  })
+  .then(data => alert('Contrato creado'))
+  .catch(data => alert(data))
+}
+
 export function getContractUsers(ids){
 
   let ides = ids.reduce((acum,e) => acum+"&arr="+e,"arr=")
