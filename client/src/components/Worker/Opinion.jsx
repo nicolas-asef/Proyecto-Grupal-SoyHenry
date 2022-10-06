@@ -46,7 +46,7 @@ import EmptyContainer from './EmptyContainer';
 // }
 
 const Opinion2 = styled.div`
-  height: ${ (props) => props.altura}rem;
+  height: ${ (props) => props.height}rem;
 `;
 
 export default function Opinion({contratos,tipo}) {
