@@ -1,7 +1,8 @@
 // export const action = () => async (dispatch) => {}
+import { Action } from "@remix-run/router";
 import axios from "axios";
 
-import {PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
+import {PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, UPLOAD_IMAGE } from './actions_vars'
 
 
 const baseURL = "http://localhost:3001/" //Esto se cambia por localhost:3001 para usarlo local
@@ -404,3 +405,42 @@ export function premiumPay(payload) {
     return worker;
   } 
 }
+
+export const uploadImage = (formData) => dispatch => {
+         axios.post("https://api.cloudinary.com/v1_1/dh0mqr8fy/image/upload", formData)
+        .then((res) =>res.data)
+        .then(data =>{
+            console.log(data.url)
+          
+        } )
+      }
+
+
+/* export function uploadImage(formData){
+
+  return async function(dispatch) {
+    await axios.post("https://api.cloudinary.com/v1_1/dh0mqr8fy/image/upload", formData)
+    .then((res) => {
+      dispatch({
+        type: UPLOAD_IMAGE,
+      payload: res.data.url
+    });
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
+} */
+/* export function uploadImage(formData) {
+  return function(dispatch) {
+      return axios.post("https://api.cloudinary.com/v1_1/dh0mqr8fy/image/upload", formData)
+      .then(res => res.data)
+      .then (res =>{
+        dispatch({
+          type:UPLOAD_IMAGE,
+          payload: res
+        })
+      })
+  };
+} */

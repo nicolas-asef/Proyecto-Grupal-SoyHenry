@@ -1,5 +1,5 @@
 import'./SettingsProfile.css'
-import { getJobs, getUserId, updateUser } from '../../redux/actions/actions'
+import { getJobs, getUserId, updateUser, uploadImage } from '../../redux/actions/actions'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import  TextField  from '@mui/material/TextField';
@@ -7,14 +7,16 @@ import { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import Button from '@mui/material/Button';
 import {  useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 export default function SettingProfile(){
 
     const dispatch = useDispatch()
     const user = useSelector((state) => state.users)
     const userAuth = useSelector((state) => state.authState)
+    const uploadedImage = useSelector(state => state.uploadedImg)
     const navigate = useNavigate()
-
+/*     const [image, setImage] = useState("") */
     const id = userAuth.user.id
     const [input, setInput] = useState({
         email: user.email,
@@ -24,7 +26,65 @@ export default function SettingProfile(){
         img: user.img
         
     })
+/*     const uploadImage = async(e) => {
+        const formData = new FormData()
+        formData.append("file", image)
+        formData.append("upload_preset", "jobplatform")
+
+       await axios.post("https://api.cloudinary.com/v1_1/dh0mqr8fy/image/upload", formData)
+        .then((res) =>res.data)
+        .then(data =>{
+            console.log(data.url)
+            setInput((prevState) => ({
+                ...prevState, img: data.url
+            }))
+        } )
+/*         https://res.cloudinary.com/dh0mqr8fy/image/upload/w_250,h_250,c_scale
+        https://api.cloudinary.com/v1_1/dh0mqr8fy/image/upload 
+    }
+    const handleImgChange = (e) => {
+        setImage(e.target.files[0])
+    } */
+
+
+    //////////////////CLOUDINARY STUFF//////////////////////
+      const [image, setImage] = useState("")
     
+    const formData = new FormData()
+    formData.append("file", image)
+    formData.append("upload_preset", "jobplatform")
+    
+    const handleImgChange = (e) => {
+        setImage(e.target.files[0])
+    }
+    const uploadImage = () => {
+         dispatch(uploadImage(formData)) 
+        console.log(formData)
+/*          setInput((prevState)=> ({
+            ...prevState, img: uploadedImage
+        })) */
+    }  
+    ////////////////////////////////////////////////////////
+
+    // ///////SECOND ATTEPMT/////////
+/*          const [image, setImage] = useState("")
+    
+    const formData = new FormData()
+    formData.append("file", image)
+    formData.append("upload_preset", "jobplatform")
+    
+    const handleImgChange = (e) => {
+        setImage(e.target.files[0])
+    }
+    const uploadImage = () => {
+        dispatch(uploadImage(formData))
+        console.log(uploadedImage)
+         setInput((prevState)=> ({
+            ...prevState, img: uploadedImage
+        }))
+    } */
+    ////////////////////////////////////
+
 
     useEffect(() => {       
         dispatch(getUserId(userAuth.user.id))
@@ -107,15 +167,15 @@ export default function SettingProfile(){
                     <hr/>
                     <div className='bloke'>
                         <h3 className='pad'>Image</h3>
-                        <TextField          
-                        id="outlined-required"
-                        label="Image"
-                        name="img"
-                        value={input.img}
-                        /* defaultValue={user.img}  */
-                        onChange={handleChange}          
-                        />
-                    </div>    
+
+                            <Button variant="contained" component="label">
+                                Selecionar archivo
+                                <input name='img' hidden accept="image/*" multiple type="file" onChange={handleImgChange} />
+                            </Button>
+                                <span>{`${image === "" ? "" : image.name.length < 15 ? image.name : `${image.name.slice(0,15)}...`}`}</span>
+                        <button type='button' onClick={uploadImage}>Upload</button>
+
+                    </div>  
                     <hr/>
                     <Button type="submit" variant="contained" endIcon={<SendIcon />}>
                         Send

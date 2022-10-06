@@ -19,3 +19,4 @@ export const GET_WORKER_CONTRACTS = "GET_WORKER_CONTRACTS";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const PAY = "PAY" ;
 export const PUT_WORKER_PREMIUM = "PUT_WORKER_PREMIUM";
+export const UPLOAD_IMAGE = "UPLOAD_IMAGE"
