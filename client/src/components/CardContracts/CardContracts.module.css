@@ -1,0 +1,5 @@
+.cardContracts{
+    border: 3px solid #4df30c;
+    width: fit-content;
+    display: flex;
+}

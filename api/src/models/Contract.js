@@ -24,7 +24,6 @@ module.exports = (sequelize) => {
     },
     date:{
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW
     },
     confirmed: {
       type: DataTypes.BOOLEAN,
@@ -36,6 +35,9 @@ module.exports = (sequelize) => {
     },
     comment_W: {
       type: DataTypes.STRING
+    },
+    description: {
+      type:DataTypes.TEXT
     }
 
   },{
