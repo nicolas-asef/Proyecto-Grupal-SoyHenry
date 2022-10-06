@@ -1,11 +1,12 @@
 .conteiner {
     background-image: url(https://www.riouruguay.com.ar/sites/default/files/2021-08/Banner-RUS.jpg);
     width: 100vh;
-    height: 150px;
+    height: auto;
     display: grid;
     border-radius: 10px;
     grid-template-columns: repeat(10, 1fr);
     margin: 15px;
+    padding: 10px;
 }
 
 .divImg{
@@ -33,7 +34,7 @@
 .divRating{
     grid-column: 9/11;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
@@ -56,15 +57,32 @@
 }
 
 .h3{
-    font-weight: 300;
-    margin: 0;
+    font-weight: 500;
+    margin: 5px 0;
     font-size:15px;
+
 }
 
 .divTop{
     display: flex;
     align-items: center;
     border-bottom: 1px solid white;
+    padding: 10px 0;
+}
+
+.information {
+    margin-top: 5px;
+}
+
+.chip:nth-child(1) {
+    margin: 0;
+}
+
+.chip {
+    margin: 0 7px;
+    color: white !important;
+    background-color: rgba(128, 128, 128, 0.705) !important;
+
 }
 
 .job{
@@ -82,4 +100,16 @@
 }
 .divRating a:hover{
     background-color: transparent;
+}
+
+.profileRating {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileRating Button {
+    margin-bottom: 10px;
+    width: 120px !important;
 }
