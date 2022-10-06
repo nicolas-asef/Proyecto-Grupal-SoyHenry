@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardsContainer {
+  position: absolute;
+  height: 300px;
+  width: 650px;
+  top: 80px;
+  left: calc(50% - 300px);
+  display: flex;
+  margin-left: 6%;
+  margin-top: 9%;
+  align-items: center;
+}
+
+.card {
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+  width: 300px;
+  background-color: rgba(31, 105, 244, 0.8);
+  border-radius: 10px;
+  box-shadow: -1rem 0 2rem #000;
+  margin-left: -350px;
+  transition: 0.4s ease-out;
+  position: relative;
+  left: 0px;  
+  align-items: center;  
+}
+
+.card:not(:first-child) {
+    margin-left: -50px;
+}
+
+.card:hover {
+  transform: translateY(-20px);
+  transition: 0.6s ease-out; 
+  background-color: rgba(2, 41, 116, 0.8);
+}
+
+.card:hover ~ .card {
+  position: relative;
+  left: 50px;
+  transition: 0.4s ease-out;
+}
+
+
+.card img{
+  width: 135px;
+  border-radius: 15%;
+  margin: 5%;
+  margin-top: 8%;
+}
+
+.card img:hover{
+  border-radius: 20%;
+}
+
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.job{ 
+  font-size: 1.0rem;  
+  display: flex;
+  flex-direction: column;
+  margin-right: 20%;
+  color: aliceblue;
+  font-family: "Montserrat", sans-serif;
+}
+
+.rating{  
+  position: absolute;
+  bottom: 16%;
+}
+
+.effect {
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  text-transform: capitalize; 
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;    
+}
+
+.btn{
+  margin-left: 18%;
+  margin-right: 90%;
+}
+.btn a{   
+  background-color: #0a419a;
+  height: 22px;
+  width: 125px;
+  border-radius: 6%;
+  position: absolute;
+  bottom: 6%;
+}
+
+.btn:hover a{  
+  background-color: #558fee;
+}
+
+.btns{
+  display: flex;
+  flex-direction: row;
+  margin-top: 110%;
+}
+
+.btnLeft { 
+  margin: 8px;
+  transition: all 1.2s ease;
+  box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.3); 
+}
+
+.btnLeft:hover {
+  transform: translateY(4px);
+  box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.3);
+}
+
+.btnRight {
+  margin: 8px;  
+  transition: all 1.2s ease;
+  box-shadow: 2px 4px 5px 2px rgba(0,0,0,0.3); 
+}
+
+.btnRight:hover {
+  transform: translateY(4px);
+  box-shadow: 10px 10px 15px 0px rgba(0,0,0,0.3);
+}
