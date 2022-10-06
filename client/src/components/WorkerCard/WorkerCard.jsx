@@ -7,6 +7,9 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import { Link } from 'react-router-dom'
 import s from './WorkerCard.module.css'
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -61,21 +64,25 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
                 <h2 className={s.h2}>{`${User.name} ${User.lastName}`}</h2>
               </div>
               <div className={s.divTop}>
-              {Jobs && Jobs.map(job =><h3 key={job.id} className={`${s.h3} ${s.job}`}>{job.name}</h3>)}
+              {Jobs && Jobs.map(job =><Chip key={job.id} className={s.chip} label={job.name} />)}
               </div>
-                <h3 className={s.h3}>Ubicación: {User.Country.name}</h3>
-                <h3 className={s.h3}>Estado: {User.status === false ? 'Desconectado' : 'Conectado'}</h3>
-                <h3 className={s.h3}>Trabajos hechos: {finishedContracts.length}</h3>
+                <div className={s.information}>
+                  <h3 className={s.h3}>Ubicación: {User.Country.name}</h3>
+                  <h3 className={s.h3}>Estado: {User.status === false ? 'Desconectado' : 'Conectado'}</h3>
+                  <h3 className={s.h3}>Trabajos realizados: {finishedContracts.length}</h3>
+                </div>
             </div>
             <div className={s.divRating}>
-            <Link className={s.perfilLink} to={`/profile/${Worker.User.ID}`}> <h3 className={s.h3}>Perfil</h3> </Link>
-            <Rating
-        name="read-only"
-        value={Worker.rating}
-        readOnly
-        precision={0.5}
-        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-      />
+            <div className={s.profileRating}>
+              <Link className={s.perfilLink} to={`/profile/${Worker.User.ID}`}> <Button color='warning' variant='contained'>Perfil</Button> </Link>
+              <Rating
+                name="read-only"
+                value={Worker.rating}
+                readOnly
+                precision={0.5}
+                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+              />
+            </div>
             </div>
             
         </div>
