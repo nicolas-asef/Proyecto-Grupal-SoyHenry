@@ -13,7 +13,7 @@ import "./TestimonialsSlider.css";
 const TestiMonials = () => {  
 
     const workersState = useSelector((state) => state.workers);
-    const workersToShow = workersState.slice(0, 10)
+    const workersToShow = workersState < 8 ? info.examples.slice(0,10) : workersState.slice(0,10);
 
     const options = info.opt
     const userPic = info.pic
@@ -53,7 +53,7 @@ const TestiMonials = () => {
               {workersToShow.length === 0 ? (
                 <div class="item">
                   <div class="shadow-effect">
-                    <img class="img-circle" src={userPic} alt="pic2" />
+                    <img class="img-circle" src={`${userPic}`} alt="pic2" />
 
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -71,7 +71,9 @@ const TestiMonials = () => {
                   return (
                     <div class="item">
                       <div class="shadow-effect">
-                        <img class="img-circle" src={t.User.img} alt="pics" />
+                        <div class="img-circle" >
+                          <img src={t.User.img} alt="pics"/>
+                        </div>
                         <p>{t.Contracts.comment_U}</p>
                       </div>
                       <div class="testimonial-name">
@@ -82,8 +84,7 @@ const TestiMonials = () => {
                   );
                 })
               )}
-            </OwlCarousel>
-            <hr />
+            </OwlCarousel>            
           </div>
         </div>
       </div>

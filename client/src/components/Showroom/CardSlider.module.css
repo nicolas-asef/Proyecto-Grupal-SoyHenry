@@ -19,26 +19,36 @@
   border: 1px solid white;
   display: flex;
   flex-direction: column;
-  height: 280px;
-  width: 300px;
-  background-color: rgba(31, 105, 244, 0.8);
+  height: 270px;
+  width: 350px;
+  background-color:#fdfdfd ;
   border-radius: 10px;
   box-shadow: -1rem 0 2rem #000;
   margin-left: -350px;
-  transition: 0.4s ease-out;
+  transition: 3s ease-out;
   position: relative;
   left: 0px;
-  align-items: center;
+  align-items: center;  
 }
 
 .card:not(:first-child) {
-  margin-left: -50px;
+  margin-left: -30px;
 }
 
 .card:hover {
   transform: translateY(-20px);
   transition: 0.6s ease-out;
-  background-color: rgba(2, 41, 116, 0.8);
+  background-color: #00406d;
+  width: 400px;
+}
+
+.card:hover .title {
+  color: #f3f3f3;
+  font-size: large;  
+}
+
+.card:hover .job1 {
+  color: #f3f3f3;
 }
 
 .card:hover ~ .card {
@@ -48,10 +58,9 @@
 }
 
 .card img {
-  width: 135px;
+  width: 100px;
   border-radius: 15%;
-  margin: 5%;
-  margin-top: 8%;
+  margin-top: 4%;
 }
 
 .card img:hover {
@@ -59,19 +68,21 @@
 }
 
 .title {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.9rem;
-  color: white;
+  font-family: Oswald;
+  font-size: 1.1rem;
+  color: #000000;
+  transition: 0.5s ease-out;
 }
 
-.job {
+.job1 {
   font-size: 1rem;
   display: flex;
-  flex-direction: column;
-  margin-right: 20%;
-  color: aliceblue;
-  font-family: "Montserrat", sans-serif;
+  justify-content: center;
+  align-items: center;  
+  color: #000000;
+  font-family: Oswald;
 }
+
 
 .rating {
   position: absolute;
@@ -85,8 +96,8 @@
   text-decoration: none;
   color: #fff;
   text-transform: capitalize;
-  font-family: "Montserrat", sans-serif;
-  font-size: 18px;
+  font-family: Oswald;
+  font-size: 20px;
 }
 
 .btn {

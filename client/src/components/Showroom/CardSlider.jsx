@@ -1,21 +1,28 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
+import info from "./data.js";
+
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import style from "./CardSlider.module.css";
 
 const CardSlider = () => {
-  const workers = useSelector((state) => state.workersPremium);
+  // const workers = useSelector((state) => state.workersPremium);
+  const workers = info.examples;
+  console.log("trabajadores traidos desde el archivo data", workers);
   const workersPerPage = 8;
+
   const [position, setPosition] = useState(1);
 
   const lastWorker = position * workersPerPage;
   const firstWorker = lastWorker - workersPerPage;
   var workersToShow = workers.slice(firstWorker, lastWorker);
+  console.log("8 trabajadores para mostrar", workersToShow);
 
   var quantity = workers.slice(lastWorker, workers.length);
+  console.log("cantidad de trabajadores sobrantes", quantity.length);
 
   const positionLess = function () {
     setTimeout(() => {
@@ -36,15 +43,13 @@ const CardSlider = () => {
           workersToShow.map((w) => {
             return (
               <div className={style.card}>
-                <img src={w.User.img} alt="imagW" />
+                <div className={style.imagen}>
+                  <img src={w.User.img} alt="imagW" />
+                </div>
                 <div className={style.title}>
-                  <h3>
-                    {w.User.name} {w.User.lastName}
-                  </h3>
+                  <h3>{w.User.name}</h3>
                 </div>
-                <div className={style.job}>
-                  {w.Jobs && w.Jobs.map((j) => <li>* {j.name}</li>)}
-                </div>
+                <div className={style.job1}>{<li> {w.Jobs[0].name}</li>}</div>
                 <div className={style.rating}>
                   <Stack spacing={1}>
                     <Rating
