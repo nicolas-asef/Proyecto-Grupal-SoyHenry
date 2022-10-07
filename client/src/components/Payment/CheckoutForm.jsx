@@ -18,7 +18,7 @@ export default function CheckoutForm() {
 
     const [error, setError] = useState("");
     const [cargando, setCargando] = useState(false);
-    const [compraConcretada, setCompraConcretada] = useState("");
+    const [compraConcretada, setCompraConcretada] = useState(false);
     
     
     const authUser = useSelector((state) => state.authState)
@@ -58,10 +58,11 @@ export default function CheckoutForm() {
         console.log(data)
         setCargando(false)
         if ( data.status === "succeeded") {
-            setCompraConcretada(data.payment)
+            setCompraConcretada(true)
             dispatch(premiumPay(workerId))
             elements.getElement(CardElement).clear()
-            navigate('/popUpSuccess')
+            //navigate('/popUpSuccess')
+
         } else {
             setError("Sorry, something as wrong ")
         }
@@ -91,6 +92,9 @@ export default function CheckoutForm() {
                     {cargando && <div >Loading...</div>}
                 </form>
             </div>
+            {compraConcretada &&  (
+                <NestedModal/>
+            )}
         </div>
     )
 }

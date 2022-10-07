@@ -1,7 +1,7 @@
 // export const action = () => async (dispatch) => {}
 import axios from "axios";
 
-import {PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
+import {PUT_WORKER, PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES } from './actions_vars'
 
 
 const baseURL = "http://localhost:3001/" //Esto se cambia por localhost:3001 para usarlo local
@@ -400,6 +400,17 @@ export function premiumPay(payload) {
     const worker = await axios.put("http://localhost:3001/worker/" + payload, {premium: true});
     dispatch({
       type: PUT_WORKER_PREMIUM,
+    });
+    return worker;
+  } 
+}
+
+export function updateWorker(payload, payloadId) {
+  return async function(dispatch){
+    console.log(payload)
+    const worker = await axios.put(baseURL+"worker/" + payloadId , payload);
+    dispatch({
+      type: PUT_WORKER,
     });
     return worker;
   } 

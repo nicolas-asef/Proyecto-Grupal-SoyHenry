@@ -10,7 +10,7 @@ export function MessageSuccess(){
         navigate('/home')
       };
     return(
-        <div>
+        <div className={s.globalCont}>
             <div id={s.containerM}>
             <div id={s.successBox}>
                 <div className={s.dot}></div>

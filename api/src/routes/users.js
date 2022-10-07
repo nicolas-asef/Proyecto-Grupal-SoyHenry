@@ -107,10 +107,11 @@ router.put('/:id', async (req, res, next) => {
         const us = await updatedUser.update({
             name: info.name,
             lastName: info.lastName,
-            email: info.email,
+            img: info.img,
             phone: info.phone,
             dni: info.dni,
-            onBoarded: info.onBoarded
+            onBoarded: info.onBoarded,
+            location: info.location
         })
         us.setCountry(info.countryId)
         res.status(200).json(us)       

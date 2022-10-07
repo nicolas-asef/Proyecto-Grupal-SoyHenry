@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 
 
-body {
+.globalCont {
   display: grid;
   overflow: hidden;
   font-family: "Lato", sans-serif;
