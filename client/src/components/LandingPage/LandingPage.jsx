@@ -3,9 +3,10 @@ import { getWorkers } from '../../redux/actions/actions';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-// import TestimonialShower from '../Showroom/TestimonialSlider.jsx'
+
 import Footer from '../Footer/Footer';
 import Payment from '../Payment/Payment'
+import TestiMonials from "../Showroom/TestimonialsSlider.jsx";
 
 
 import Button from '@mui/material/Button';
@@ -121,31 +122,7 @@ export default function Album() {
             </div>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map((card, index) => (
-              <Grid item key={index} xs={12} sm={6} md={4}>
-                <Card sx={{ maxWidth: 345 }}>
-                  <Rating name="read-only" value={card.value} readOnly />
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {card.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Lizards are a widespread group of squamate reptiles, with
-                      over 6,000 species, ranging across all continents except
-                      Antarctica
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small">Mas info...</Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
+        <TestiMonials />
       </main>
       {/* Footer */}
       <Box sx={{ bgcolor: "background.paper", p: 6 }} component="footer">
