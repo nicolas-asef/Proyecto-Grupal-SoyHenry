@@ -1,0 +1,36 @@
+.sidebar{
+    height: 90vh;
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    padding: 0;
+}
+
+.top{
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.logo{
+    font-size: 20px;
+    font-weight: bold;
+    color: #6439ff;
+}
+
+.center{
+    padding-left: 0px;
+}
+
+.li{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.li:hover{
+    background-color: rgb(234, 234, 234);
+}

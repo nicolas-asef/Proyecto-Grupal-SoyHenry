@@ -7,6 +7,7 @@ import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import OnBoarding from './components/OnBoarding/OnBoarding';
 import Payment from './components/Payment/Payment';
+import DashHome from './components/Dashboard/DashHome/DashHome';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path='/profile/settings/premium' element={<Payment/>}/>
         <Route path='/catalog' element={<Catalog/>}/>
         <Route path='/onboarding' element={ <OnBoarding /> } />
+        <Route path='/dashboard' element= { <DashHome />} />
       </Routes>
     </div>
   );

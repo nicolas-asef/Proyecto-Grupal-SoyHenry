@@ -1,0 +1,90 @@
+.widgets{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+    padding: 10px;
+    width: 300px;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.4); 
+    box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.4);
+    border-radius: 10px;
+    height: 180px;
+}
+
+.left ,.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title{
+    font-weight: 500;
+    font-size: 20px;
+    color: rgb(160, 160, 160);
+}
+
+.counter{
+    font-size: 50px;
+    font-weight: 200;
+}
+
+.link{
+    width: max-content;
+    font-size: 17px;
+    border-bottom: 1px solid gray;
+}
+
+.porcentage{
+    font-size: 20px;
+    color: green;
+    display: flex;
+    align-items: center;
+}
+
+.circle{
+    font-size: 13px;
+    padding: 10px;
+}
+
+.access{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 0;
+}
+
+.users{
+    align-self: flex-end;
+    font-size: 25px;
+    color: rgb(129, 0, 0);
+    padding: 3px;
+    border-radius: 10px;
+    background-color: rgb(255, 184, 184);
+}
+
+.workers{
+    align-self: flex-end;
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+    padding: 3px;
+    border-radius: 10px;
+    background-color: rgb(162, 162, 162);
+}
+
+.online{
+    align-self: flex-end;
+    font-size: 25px;
+    color: green;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: rgb(133, 209, 133);
+}
+
+.premium{
+    align-self: flex-end;
+    font-size: 25px;
+    color: orange;
+    padding: 3px;
+    border-radius: 10px;
+    background-color: rgb(255, 215, 140);
+}
