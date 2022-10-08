@@ -9,20 +9,19 @@ import Button from "@mui/material/Button";
 import style from "./CardSlider.module.css";
 
 const CardSlider = () => {
-  // const workers = useSelector((state) => state.workersPremium);
-  const workers = info.examples;
-  console.log("trabajadores traidos desde el archivo data", workers);
+
+  const workersState = useSelector((state) => state.workersPremium);
+  const workers =  workersState.length < 8 ? info.examples : workersState;
+  
   const workersPerPage = 8;
 
   const [position, setPosition] = useState(1);
 
   const lastWorker = position * workersPerPage;
   const firstWorker = lastWorker - workersPerPage;
-  var workersToShow = workers.slice(firstWorker, lastWorker);
-  console.log("8 trabajadores para mostrar", workersToShow);
+  var workersToShow = workers.slice(firstWorker, lastWorker);  
 
-  var quantity = workers.slice(lastWorker, workers.length);
-  console.log("cantidad de trabajadores sobrantes", quantity.length);
+  var quantity = workers.slice(lastWorker, workers.length);  
 
   const positionLess = function () {
     setTimeout(() => {
