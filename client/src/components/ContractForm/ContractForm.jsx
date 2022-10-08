@@ -1,10 +1,10 @@
 import React from 'react'
 import s from './ContractForm.module.css'
-import { TextareaAutosize, TextField } from '@mui/material'
+import { Button, TextField } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { createContract } from '../../redux/actions/actions'
 
-function ContractForm({toggleModal,id,worker_id}) {
+function ContractForm({toggleModal,id,worker_id,closeCB}) {
 
     // const { user: { sub } } = useAuth0();
     
@@ -30,7 +30,54 @@ function ContractForm({toggleModal,id,worker_id}) {
 
   return (
     <form onSubmit={handleSubmit} className={s.contract}>
-        <h3>Formulario de contrato</h3>
+        <h1 className={s.titleForm}>Formulario de contrato</h1>
+        <div className={s.textFieldContainer}>
+          <TextField 
+            fullWidth
+            type="date"
+            name='date'
+            required
+            className={s.inputField}
+            onChange={handeInputChange}
+          />
+          <TextField 
+            label="Ubicacion"
+            fullWidth
+            required
+            name='location'
+            className={s.inputField}
+            onChange={handeInputChange}
+          />
+          <TextField 
+            label="Descripcion del trabajo"
+            multiline
+            rows={5}
+            variant="outlined"
+            fullWidth
+            className={s.inputField}
+            required
+            name='description'
+            onChange={handeInputChange}
+          />
+        </div>
+        <div className={s.submitCloseButtons}>
+          <Button
+            variant="contained"
+            fullWidth
+            type='submit'
+          >
+            Contratar
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            fullWidth
+            onClick={closeCB}
+          >
+            Salir
+          </Button>
+        </div>
+       {/*  <h3>Formulario de contrato</h3>
         <div className={s.inputContainer}>
             <h4>Descripcion del trabajo</h4>
         <TextareaAutosize
@@ -65,7 +112,7 @@ function ContractForm({toggleModal,id,worker_id}) {
         <div className={s.inputContainer}>
         <button onClick={toggleModal} className='worker-button' style={{marginTop:"5%"}}><span>Enviar</span></button> 
         </div>
-        
+         */}
     </form>
 
 
