@@ -46,11 +46,20 @@ const Profile = () => {
     navigate('/profile/settings')
   }
   
+  const handleContracts = () => {
+    navigate("/contracts/user/"+sub);
+    setAnchorElUser(null);
+  }
+
   const settings = [
     {
       name: 'Profile',
       handler: handleOpenProfile
     }, 
+    {
+      name: "Contratos",
+      handler: handleContracts
+    },
     {
       name: "Settings",
       handler: handleSettings
@@ -62,8 +71,8 @@ const Profile = () => {
     {
       name: "Logout",
       handler: handleLogout
-    }];
-
+    }
+    ];
   return (
     <>
       <Tooltip title="Open settings">
