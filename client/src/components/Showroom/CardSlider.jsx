@@ -40,7 +40,7 @@ const CardSlider = () => {
         {workersToShow &&
           workersToShow.map((w) => {
             return (
-              <div className={style.card}>
+              <div className={style.card} key={w.User.ID}>
                 <div className={style.imagen}>
                   <img src={w.User.img} alt="imagW" />
                 </div>

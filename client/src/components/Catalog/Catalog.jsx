@@ -1,32 +1,34 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
+import workersDB from "./workersdb.js";
 import WorkerCard from "../WorkerCard/WorkerCard";
+
+import Pagination from "@mui/material/Pagination";
 import s from "./Catalog.module.css";
-import Pagination from '@mui/material/Pagination';
 
 const Catalog = () => {
-  const workers = useSelector((state) => state.workers); // el array de workers real sacado de redux (se utilizaría una vez que haya trabajadores en la base de datos)
-  const allWorkers = useSelector((state) => state.allWorkers);
+  // const workers = useSelector((state) => state.workers); // el array de workers real sacado de redux (se utilizaría una vez que haya trabajadores en la base de datos)
+  const workers = workersDB;
+  console.log(workers)
 
   const [page, setPage] = useState(1);
 
   const lastIndex = page * 4;
   const firstIndex = lastIndex - 4; //0
 
-  const numberPages = Math.ceil((workers.length/4))
+  const numberPages = Math.ceil(workers.length / 4);
 
   let currentWorkers = workers.slice(firstIndex, lastIndex);
-  
 
   const pagesNumber = (event, value) => {
-    console.log(value)
     setPage(value);
   };
 
   return (
     <div className={s.OutterCardsDIV}>
       <div className={s.CardsDIV}>
-        {workers.length === 0 ? (
+        {currentWorkers.length === 0 ? (
           <h1>Loading...</h1>
         ) : (
           currentWorkers.map((worker) => (
@@ -41,7 +43,14 @@ const Catalog = () => {
           ))
         )}
         <div className={s.paginationContainer}>
-            <Pagination defaultPage={1} color="primary" count={numberPages} page={page} onChange={pagesNumber} shape="rounded"/>
+          <Pagination
+            defaultPage={1}
+            color="primary"
+            count={numberPages}
+            page={page}
+            onChange={pagesNumber}
+            shape="rounded"
+          />
         </div>
       </div>
     </div>
