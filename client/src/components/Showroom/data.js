@@ -336,6 +336,7 @@ const info = {
     },
     Chats: [ ]
   }
-]}
+],
+}
 
 export default info;

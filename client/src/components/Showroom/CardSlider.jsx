@@ -9,19 +9,18 @@ import Button from "@mui/material/Button";
 import style from "./CardSlider.module.css";
 
 const CardSlider = () => {
-
   const workersState = useSelector((state) => state.workersPremium);
-  const workers =  workersState.length < 8 ? info.examples : workersState;
-  
+  const workers = workersState.length < 8 ? info.examples : workersState;
+
   const workersPerPage = 8;
 
   const [position, setPosition] = useState(1);
 
   const lastWorker = position * workersPerPage;
   const firstWorker = lastWorker - workersPerPage;
-  var workersToShow = workers.slice(firstWorker, lastWorker);  
+  var workersToShow = workers.slice(firstWorker, lastWorker);
 
-  var quantity = workers.slice(lastWorker, workers.length);  
+  var quantity = workers.slice(lastWorker, workers.length);
 
   const positionLess = function () {
     setTimeout(() => {
@@ -46,7 +45,9 @@ const CardSlider = () => {
                   <img src={w.User.img} alt="imagW" />
                 </div>
                 <div className={style.title}>
-                  <h3>{w.User.name}</h3>
+                  <h3>
+                    {w.User.name} {w.User.lastName}
+                  </h3>
                 </div>
                 <div className={style.job1}>{<li> {w.Jobs[0].name}</li>}</div>
                 <div className={style.rating}>
@@ -55,6 +56,7 @@ const CardSlider = () => {
                       name="half-rating-read"
                       defaultValue={3}
                       precision={0.5}
+                      size="small"
                       readOnly
                     />{" "}
                     {/* CAMBIAR defaultValue=w.rating* Cuando haya DB con contratos hechos*/}
@@ -63,7 +65,7 @@ const CardSlider = () => {
                 <div className={style.btn}>
                   <a
                     className={style.effect}
-                    href={`http://localhost:3000/worker/${w.id}`}
+                    href={`http://localhost:3000/worker/${w.ID}`}
                     title="View Profile"
                   >
                     View Profile
