@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import  SearchBar  from '../SearchBar/SearchBar'
 import { getJobs, getWorkers } from '../../redux/actions/actions'
 import { useDispatch, useSelector } from 'react-redux';
-import Footer from '../Footer/Footer';
+import FooterS from '../Footer/Footer';
 import Filters from '../Filters/Filters';
 import Catalog from '../Catalog/Catalog'
 import CardSlider from '../Showroom/CardSlider.jsx'
@@ -30,9 +30,7 @@ const Home = () => {
       <div className={s.container}>
         <Catalog />
       </div>
-      <div className={s.footer}>
-        <Footer />
-      </div>
+      <FooterS />
     </div>
   );
 };

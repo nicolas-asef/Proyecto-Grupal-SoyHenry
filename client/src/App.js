@@ -9,6 +9,7 @@ import OnBoarding from './components/OnBoarding/OnBoarding';
 import Payment from './components/Payment/Payment';
 import DashBoardUser from './components/DashboardUser/DashBoardUser';
 import CardContracts from './components/CardContracts/CardContracts';
+import { NestedModal } from './components/Payment/NestedModal';
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
         <Route path = '/dashboard/user/:id' element = {<DashBoardUser/>}/>
         <Route path = '/contracts/user/:id' element = {<CardContracts/>}/>
         <Route path='/onboarding' element={ <OnBoarding /> } />
+        <Route path='/popUpSuccess' element={ <NestedModal/>}/>
+        <Route path='/popUpError' element={ <NestedModal/>}/>
       </Routes>
     </div>
   );

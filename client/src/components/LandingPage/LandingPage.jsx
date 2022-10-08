@@ -1,4 +1,13 @@
 import * as React from 'react';
+import { getWorkers } from '../../redux/actions/actions';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+
+// import TestimonialShower from '../Showroom/TestimonialSlider.jsx'
+import Footer from '../Footer/Footer';
+import Payment from '../Payment/Payment'
+
+
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,11 +20,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Footer from '../Footer/Footer';
-import Payment from '../Payment/Payment'
-import { getWorkers } from '../../redux/actions/actions';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import s from './LandingPage.module.css'
 
 const options = [
@@ -57,13 +61,13 @@ const cards = [
 const theme = createTheme();
   
 export default function Album() {
+ 
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getWorkers())
   }, [])
   return (
-    <ThemeProvider theme={theme}>
-      
+    <ThemeProvider theme={theme}>    
       <CssBaseline />
       <main>
         {/* Hero unit */}

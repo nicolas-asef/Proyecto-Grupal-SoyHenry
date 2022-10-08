@@ -1,133 +1,265 @@
-import'./SettingsProfile.css'
-import { getJobs, getUserId, updateUser } from '../../redux/actions/actions'
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import  TextField  from '@mui/material/TextField';
-import { useState } from 'react';
-import SendIcon from '@mui/icons-material/Send';
-import Button from '@mui/material/Button';
-import {  useNavigate } from 'react-router-dom';
+import "./SettingsProfile.css";
+import {
+  getJobs,
+  getUserId,
+  updateUser,
+  updateWorker,
+  get_countries,
+  uploadImage,
+} from "../../redux/actions/actions";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
+import SendIcon from "@mui/icons-material/Send";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import MenuItem from "@mui/material/MenuItem";
 
-export default function SettingProfile(){
+export default function SettingProfile() {
+  const dispatch = useDispatch();
+  const {
+    user: { sub },
+  } = useAuth0();
+  const { jobs } = useSelector((state) => state);
+  const countries = useSelector((state) => state.allCountries);
+  const user = useSelector((state) => state.users);
+  const userAuth = useSelector((state) => state.authState);
+  const uploadedImage = useSelector((state) => state.uploadedImg);
+  const navigate = useNavigate();
+  const id = sub;
+  //const id = userAuth.user.id
+  const [input, setInput] = useState({
+    email: user.email,
+    location: user.location,
+    phone: user.phone,
+    img: user.img,
+  });
 
-    const dispatch = useDispatch()
-    const user = useSelector((state) => state.users)
-    const userAuth = useSelector((state) => state.authState)
-    const navigate = useNavigate()
+  const [inputWork, setInputWork] = useState({
+    certification: user.Worker.certification,
+    description: user.Worker.description,
+    jobs: user.Worker.Jobs,
+  });
 
-    const id = userAuth.user.id
-    const [input, setInput] = useState({
-        email: user.email,
-        password: user.password,
-        location: user.location,
-        phone: user.phone,
-        img: user.img
-        
-    })
-    
+  //////////////////CLOUDINARY STUFF//////////////////////
+  const [image, setImage] = useState("");
+  const [uploaded, setUploaded] = useState(false);
+  useEffect(() => {
+    setInput((prevState) => ({
+      ...prevState,
+      img: uploadedImage.url,
+    }));
+  }, [uploadedImage]);
 
-    useEffect(() => {       
-        dispatch(getUserId(userAuth.user.id))
-        
-    },[dispatch])
+  const formData = new FormData();
+  formData.append("file", image);
+  formData.append("upload_preset", "jobplatform");
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-        console.log(input)
-        dispatch(updateUser(input, userAuth.user.id))
+  const handleImgChange = (e) => {
+    if (e.target.files !== undefined) {
+      setImage(e.target.files[0]);
+      console.log(image);
+    } else {
+      setImage("");
     }
-    
-    function handleChange(e) {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value  
-            
-        })       
+  };
+  const uploadImageHandler = () => {
+    if (image !== "" && image !== undefined) {
+      dispatch(uploadImage(formData));
+      setImage("");
     }
+  };
+  ////////////////////////////////////////////////////////
 
-    function handlePremium(){
-        navigate('/profile/settings/premium')
-    }
+  useEffect(() => {
+    dispatch(getUserId(id));
+    dispatch(getJobs());
+    dispatch(get_countries());
+  }, [dispatch]);
 
-    return (
-        <div className='container-setting'>
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(input);
+    dispatch(updateUser(input, id));
+    dispatch(updateWorker(inputWork, user.Worker.ID));
+  };
 
-            <div>
-                <form onSubmit={onSubmit}>
-                    <h1>Edit profile</h1>
-                    <div className='bloke'>
-                        <h3 className='pad'>Email</h3>
-                        <TextField          
-                        id="outlined-required"
-                        label="Email"
-                        name="email"
-                        value={input.email}
-                        /* defaultValue={user.email} */  
-                        onChange={handleChange}         
-                        />
-                    </div>
-                    <hr/>
-                    <div className='bloke'>
-                        <h3 className='pad'>Password</h3>
-                        <TextField          
-                        id="outlined-required"
-                        label="Password"
-                        name="password"
-                        type="password"
-                        value={input.password}
-                        placeholder={user.password}
-                        /* defaultValue={user.password} */ 
-                        onChange={handleChange}          
-                        />
-                    </div>
-                    <hr/>
-                    <div className='bloke'>
-                        <h3 className='pad'>Location</h3>
-                        <TextField          
-                        id="outlined-required"
-                        label="Location"
-                        name="location"
-                        value={input.location}
-                        /* defaultValue={user.location} */
-                        onChange={handleChange}           
-                        />
-                    </div>
-                    <hr/>
-                    <div className='bloke'>
-                        <h3 className='pad'>Phone</h3>
-                        <TextField          
-                        id="outlined-required"
-                        label="Phone" 
-                        name="phone" 
-                        value={input.phone}
-                        /* defaultValue={user.phone}  */ 
-                        onChange={handleChange}       
-                        />
-                    </div>
-                    <hr/>
-                    <div className='bloke'>
-                        <h3 className='pad'>Image</h3>
-                        <TextField          
-                        id="outlined-required"
-                        label="Image"
-                        name="img"
-                        value={input.img}
-                        /* defaultValue={user.img}  */
-                        onChange={handleChange}          
-                        />
-                    </div>    
-                    <hr/>
-                    <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-                        Send
-                    </Button>
-                </form>
+  function handleChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  }
 
+  function handleChangeWork(e) {
+    setInputWork({
+      ...inputWork,
+      [e.target.name]: e.target.value,
+    });
+  }
 
-                
+  function handlePremium() {
+    navigate("/profile/settings/premium");
+  }
+
+  return (
+    <div className="container-setting">
+      <div>
+        <form onSubmit={onSubmit}>
+          <h1>Edit profile</h1>
+          <div className="bloke">
+            <h3 className="pad">Location</h3>
+            <TextField
+              id="outlined-required"
+              label="Location"
+              name="location"
+              select
+              value={input.location.name}
+              /* defaultValue={user.location} */
+              onChange={handleChange}
+            >
+              {countries &&
+                countries.map((country) => (
+                  <MenuItem key={country.id} value={country.name}>
+                    {country.name}
+                  </MenuItem>
+                ))}
+            </TextField>
+          </div>
+          <hr />
+          <div className="bloke">
+            <h3 className="pad">Phone</h3>
+            <TextField
+              id="outlined-required"
+              label="Phone"
+              name="phone"
+              value={input.phone}
+              /* defaultValue={user.phone}  */
+              onChange={handleChange}
+            />
+          </div>
+          <hr />
+          <div className="bloke">
+            <h3 className="pad">Image</h3>
+            <TextField
+              id="outlined-required"
+              label="Image"
+              name="img"
+              value={input.img}
+              /* defaultValue={user.img}  */
+              onChange={handleChange}
+            />
+          </div>
+          <hr />
+          {/* renderizado condicional para el worker solamente */}
+          <div>
+            {user.Worker && (
+              <>
+                <hr />
+                <div className="bloke">
+                  <h3 className="pad">Description</h3>
+                  <TextField
+                    id="outlined-required"
+                    label="Description"
+                    name="description"
+                    type="text"
+                    value={inputWork.description}
+                    placeholder={user.Worker.description}
+                    /* defaultValue={user.password} */
+                    onChange={handleChangeWork}
+                  />
+                </div>
+                <hr />
+                <div className="bloke">
+                  <h3 className="pad">Certification</h3>
+                  <TextField
+                    id="outlined-required"
+                    label="Certification"
+                    name="certification"
+                    type="text"
+                    value={inputWork.certification}
+                    placeholder={user.Worker.certification}
+                    /* defaultValue={user.password} */
+                    onChange={handleChangeWork}
+                  />
+                </div>
+                <hr />
+                <div className="bloke">
+                  <h3 className="pad">Jobs</h3>
+                  <TextField
+                    id="outlined-required"
+                    label="Jobs"
+                    name="jobs"
+                    type="text"
+                    select
+                    value={inputWork.jobs}
+                    placeholder="Select your jobs"
+                    defaultValue="Select your jobs"
+                    onChange={handleChangeWork}
+                  >
+                    {jobs &&
+                      jobs.map((job) => (
+                        <MenuItem key={job.id} value={job.name}>
+                          {job.name}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                </div>
+              </>
+            )}
+            <div className="UploadIMGDIV">
+              <Button variant="contained" component="label">
+                Selecionar archivo
+                <input
+                  name="img"
+                  hidden
+                  accept="image/*"
+                  multiple
+                  type="file"
+                  onChange={handleImgChange}
+                />
+              </Button>
+              <span className="imgName">{`${
+                image === "" || image === undefined
+                  ? ""
+                  : image.name.length < 15
+                  ? image.name
+                  : `${image.name.slice(0, 15)}...`
+              }`}</span>
+              {image === "" || image === undefined ? (
+                ""
+              ) : (
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={uploadImageHandler}
+                >
+                  Subir Imagen
+                </Button>
+              )}
+              {uploaded === true ? (
+                <span className="SuccessIMG">
+                  Imagen subida correctamente, persiona el botón Send para
+                  guardar los cambios
+                </span>
+              ) : (
+                ""
+              )}
             </div>
-            <div>
-                <button onClick={handlePremium}>PREMIUM</button>
-            </div>
-        </div>
-    )
+          </div>
+          <hr />
+          <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+            Send
+          </Button>
+        </form>
+      </div>
+      <div>
+        <Button type="submit" variant="contained" onClick={handlePremium}>
+          PREMIUM hermano premiuuuum
+        </Button>
+      </div>
+    </div>
+  );
 }
