@@ -1,8 +1,7 @@
 const { Router } = require("express");
 const nodemailer = require("nodemailer");
 const sgMail = require("@sendgrid/mail");
-const { User } = require("../db.js");
-const { transporter } = require("../controllers/transporterCreate.js");
+const { transporter, emailValidation } = require("../controllers/transporterCreate.js");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const router = Router();
@@ -10,17 +9,7 @@ const router = Router();
 router.post("/", async (req, res) => {
   try {
     let { email, type } = req.body;
-    var validate = await User.findOne({ where: { email } })
-      .then((result) => {
-        if (result.ID) {
-          if (result.email.length) {
-            return result.ID;
-          }
-        }
-      })
-      .catch((error) => {
-        return { Error: error, Response: "Fallo la busqueda del mail" };
-      });
+    let validate = await emailValidation(email)
     if (typeof validate !== "object") {
       try {
         await transporter.sendMail({
