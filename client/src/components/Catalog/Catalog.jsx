@@ -10,8 +10,7 @@ import s from "./Catalog.module.css";
 const Catalog = () => {
   // const workers = useSelector((state) => state.workers); // el array de workers real sacado de redux (se utilizaría una vez que haya trabajadores en la base de datos)
   const workers = workersDB;
-  console.log(workers)
-
+  
   const [page, setPage] = useState(1);
 
   const lastIndex = page * 4;
@@ -24,7 +23,6 @@ const Catalog = () => {
   const pagesNumber = (event, value) => {
     setPage(value);
   };
-
   return (
     <div className={s.OutterCardsDIV}>
       <div className={s.CardsDIV}>
