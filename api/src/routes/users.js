@@ -101,7 +101,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {   
     const info = req.body;
     const {id} = req.params; 
-    const salt = await bcrypt.genSalt(10);    
+    //const salt = await bcrypt.genSalt(10);    
     try {
         const updatedUser = await User.findOne({where: {ID: id}});        
         const us = await updatedUser.update({

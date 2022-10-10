@@ -16,6 +16,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import MenuItem from "@mui/material/MenuItem";
+import ButtonGroup from "@mui/material/ButtonGroup"
 
 export default function SettingProfile() {
   const dispatch = useDispatch();
@@ -39,9 +40,30 @@ export default function SettingProfile() {
 
   const [inputWork, setInputWork] = useState({
     certification: user.Worker.certification,
-    description: user.Worker.description,
-    jobs: user.Worker.Jobs,
+    description: user.Worker.description
+    // jobs: [user.Worker.Jobs]
   });
+  const [inputJobs, setInputJobs] = useState([])
+  const [workMax, setWorkMax] = useState(false);
+  const [validateWorks, setValidateWorks] = useState(false);
+  
+  const handleJob = (e) => {
+    const exist = inputJobs.find((job) => job === e.target.value);
+      if (!exist) {
+        setInputJobs([...inputJobs, e.target.value]);
+        // setInputWork((prevState) => ({
+        //   ...prevState,
+        //   jobs: inputJobs,
+        // }))
+       
+      }
+  };
+
+  const handleDelete = (e) => {
+    setInputJobs([
+      ...inputJobs.filter((job, index) => index !== parseInt(e.target.id)),
+    ]);
+  };
 
   //////////////////CLOUDINARY STUFF//////////////////////
   const [image, setImage] = useState("");
@@ -82,8 +104,10 @@ export default function SettingProfile() {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(input);
+    console.log(id)
+    console.log(inputWork.jobs)
     dispatch(updateUser(input, id));
-    dispatch(updateWorker(inputWork, user.Worker.ID));
+    dispatch(updateWorker(inputWork, inputJobs, user.Worker.ID));
   };
 
   function handleChange(e) {
@@ -194,18 +218,29 @@ export default function SettingProfile() {
                     name="jobs"
                     type="text"
                     select
-                    value={inputWork.jobs}
+                    value={inputJobs}
                     placeholder="Select your jobs"
                     defaultValue="Select your jobs"
-                    onChange={handleChangeWork}
+                    onChange={handleJob}
                   >
                     {jobs &&
                       jobs.map((job) => (
-                        <MenuItem key={job.id} value={job.name}>
+                        <MenuItem key={job.id} id={job.id} value={job.name}>
                           {job.name}
                         </MenuItem>
                       ))}
                   </TextField>
+                </div>
+                <div className="inputContainer jobsStyle">
+                  <ButtonGroup fullWidth variant="outlined">
+                    {inputJobs.length
+                      ? inputJobs.map((job, index) => (
+                          <Button size="large" onClick={handleDelete} id={index} key={job}>
+                            {job}
+                          </Button>
+                        ))
+                      : null}
+                  </ButtonGroup>
                 </div>
               </>
             )}
@@ -257,7 +292,7 @@ export default function SettingProfile() {
       </div>
       <div>
         <Button type="submit" variant="contained" onClick={handlePremium}>
-          PREMIUM hermano premiuuuum
+          PREMIUM
         </Button>
       </div>
     </div>

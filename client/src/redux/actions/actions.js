@@ -413,21 +413,35 @@ export function premiumPay(payload) {
     dispatch({
       type: PUT_WORKER_PREMIUM,
     });
-    return worker;
+    return "worker";
   } 
 }
 
 
-export function updateWorker(payload, payloadId) {
+export function updateWorker(payload, payload2, payloadId) {
   return async function(dispatch){
+    payload.jobs = payload2
     console.log(payload)
-    const worker = await axios.put(baseURL+"worker/" + payloadId , payload);
+    console.log("accions")
+    const worker = await axios.put("http://localhost:3001/worker/" + payloadId , payload);
+    console.log(worker)
     dispatch({
       type: PUT_WORKER,
     });
     return worker;
   } 
 }
+
+// export async function updateWorkerJobs(payload, payloadId) {
+//   return async function(dispatch){
+//   console.log(payload)
+//     const worker = await axios.put(baseURL+"worker/" + payloadId , payload);
+//     dispatch({
+//       type: PUT_WORKER,
+//     });
+//     return worker; 
+//   }
+// }
 
 export const uploadImage = (formData) => (dispatch) => {
         axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_KEY}/image/upload`, formData)

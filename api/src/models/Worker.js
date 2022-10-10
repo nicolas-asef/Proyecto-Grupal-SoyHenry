@@ -11,8 +11,8 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     certification:{
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true,
+      type: DataTypes.STRING,
+      allowNull: true
     },
     premium:{
       type: DataTypes.BOOLEAN,
