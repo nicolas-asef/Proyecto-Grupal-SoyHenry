@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import Banner from '../../img/banner.png';
 import './Worker.css'
 import Profile from './Profile';
@@ -7,14 +7,14 @@ import Stats from './Stats';
 import Opinion from './Opinion';
 import { Pagination, Skeleton } from '@mui/material';
 import Filters from './Filters';
-import { getUserDetail,getContractUsers, getContractWorker } from '../../redux/actions/actions';
+import { getUserDetail,getContractUsers, getContractWorker, cleanDetail } from '../../redux/actions/actions';
 import { useParams } from 'react-router-dom';
 import Buttons from './Buttons';
 import Footer from '../Footer/Footer';
 import cardContracts from '../CardContracts/CardContracts';
 import CardContracts from '../CardContracts/CardContracts';
 
-export const Worker = ({authState,getUserDetail,getContractWorker,getContractUsers,user,users,isLoading}) => {
+export const Worker = ({authState,getUserDetail,getContractWorker,getContractUsers,user,users,isLoading, cleanDetail}) => {
 
   const id = useParams().id
   const [pag,setPag] = useState(1)
@@ -31,6 +31,10 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
 
   useEffect(() =>{
     getUserDetail(id)
+
+    return () => {
+      cleanDetail();
+    }    
   },[])
 
 
@@ -187,8 +191,8 @@ function mapDispatchToProps (dispatch) {
 
   getUserDetail : (id) => dispatch(getUserDetail(id)),
   getContractUsers : (ids) => dispatch(getContractUsers(ids)),
-  getContractWorker: (ids) => dispatch(getContractWorker(ids))
-
+  getContractWorker: (ids) => dispatch(getContractWorker(ids)),
+  cleanDetail: () => dispatch(cleanDetail()) 
   }
 }
 
