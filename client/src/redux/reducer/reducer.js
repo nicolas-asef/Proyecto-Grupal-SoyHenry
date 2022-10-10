@@ -23,7 +23,8 @@ import {
   PUT_USER,
   GET_USER_ID,
   GET_COUNTRIES,
-  UPLOAD_IMAGE
+  UPLOAD_IMAGE,
+  CLEAN_DETAIL
 } from '../actions/actions_vars'
 
 
@@ -217,6 +218,13 @@ const reducer = (state = initialState, action) => {
       return{
         ...state, uploadedImg: action.payload
 
+      }
+    }
+    case CLEAN_DETAIL: {
+      return {
+        ...state,
+        userDetail: {},
+        selectedContracts: []
       }
     }
     default:
