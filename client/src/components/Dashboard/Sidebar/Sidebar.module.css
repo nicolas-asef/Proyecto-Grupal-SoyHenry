@@ -1,0 +1,52 @@
+.sidebar{
+    height: 90vh;
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    padding: 0;
+}
+
+.top{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.logo{
+    font-size: 30px;
+    font-weight: 500;
+    color: blue;
+    padding: 20px;
+}
+
+.center{
+    padding-left: 0px;
+}
+
+.li{
+    display: flex;
+    margin: 0;
+    align-items: center;
+    padding-left: 35px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.li:hover{
+    background-color: rgb(234, 234, 234);
+}
+
+.title{
+    padding-left: 20px;
+    margin: 0;
+    color: rgb(200, 200, 200);
+    font-weight: 600;
+    font-size: 17px;
+}
+
