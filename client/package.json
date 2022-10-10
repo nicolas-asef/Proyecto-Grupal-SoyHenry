@@ -20,11 +20,8 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.0.2",
     "react": "^18.2.0",
-<<<<<<< HEAD
     "react-circular-progressbar": "^2.1.0",
-=======
     "react-bootstrap": "^1.6.1",
->>>>>>> 05448d32cd9ff403c79d3e204a5037c0ccea4bcd
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.1",
     "react-owl-carousel": "^2.3.3",
