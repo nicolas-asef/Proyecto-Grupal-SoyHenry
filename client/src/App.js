@@ -7,17 +7,14 @@ import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import OnBoarding from './components/OnBoarding/OnBoarding';
 import Payment from './components/Payment/Payment';
-<<<<<<< HEAD
 import DashHome from './components/Dashboard/Pages/DashHome/DashHome';
 import DashAnalytics from './components/Dashboard/Pages/DashAnalytics/DashAnalytics';
 import DashBalance from './components/Dashboard/Pages/DashBalance/DashBalance';
 import DashUsers from './components/Dashboard/Pages/DashUsers/DashUsers';
 import DashWorker from './components/Dashboard/Pages/DashWorkers/DashWorker';
-=======
 import DashBoardUser from './components/DashboardUser/DashBoardUser';
 import CardContracts from './components/CardContracts/CardContracts';
 import { NestedModal } from './components/Payment/NestedModal';
->>>>>>> 05448d32cd9ff403c79d3e204a5037c0ccea4bcd
 
 
 function App() {
@@ -39,17 +36,14 @@ function App() {
         <Route path = '/dashboard/user/:id' element = {<DashBoardUser/>}/>
         <Route path = '/contracts/user/:id' element = {<CardContracts/>}/>
         <Route path='/onboarding' element={ <OnBoarding /> } />
-<<<<<<< HEAD
         <Route path='/dashboard' element= { <DashHome />} />
         <Route path='/dashboard/analytics' element= { <DashAnalytics />} />
         <Route path='/dashboard/balance' element= { <DashBalance />} />
         <Route path='/dashboard/users' element= { <DashUsers />} />
         <Route path='/dashboard/workers' element= { <DashWorker />} />
 
-=======
         <Route path='/popUpSuccess' element={ <NestedModal/>}/>
         <Route path='/popUpError' element={ <NestedModal/>}/>
->>>>>>> 05448d32cd9ff403c79d3e204a5037c0ccea4bcd
       </Routes>
     </div>
   );
