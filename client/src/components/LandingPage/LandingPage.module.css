@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap');
+
+
 .landing-container{
     background-color: #bbccbc;
 }
@@ -39,14 +42,19 @@
     margin-top: 50px;
 }
 
-.title {
-	background-image: linear-gradient(
-		0,
-		#d7d9db 45%,
-		transparent 45%
-	);
+.titletypo {    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
     border-radius: 4px;
-    padding: 5px 15px;
+    padding: 5px 20px;
+    text-shadow: 10px 10px 10px black;
+    font-family: 'Anton', sans-serif;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 180px;
+    color: white;
+    opacity: 0.8;
 }
 
 .card {
@@ -76,8 +84,6 @@
 	);
 }
 
-
-
 .description {
     font-weight: 500;
     font-size: 20px;
@@ -89,3 +95,19 @@
 .desc {
     margin: 10px;
 }
+
+.carousel  {
+    display: flex;
+    position: absolute;  
+}
+
+.titleUp{
+    display: flex;
+    position: relative;   
+}
+
+.testimonial{
+    margin-top: 20%;
+    margin-bottom: 2%;    
+}
+
