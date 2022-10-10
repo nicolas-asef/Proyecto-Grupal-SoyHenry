@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const nodemailer = require("nodemailer");
 const sgMail = require("@sendgrid/mail");
-const { transporter, emailValidation } = require("../controllers/transporterCreate.js");
+const { transporter, emailValidation } = require("../controllers/authMail.js");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const router = Router();

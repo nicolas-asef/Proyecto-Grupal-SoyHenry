@@ -18,20 +18,11 @@ const TestiMonials = () => {
 
   return (
     <section id="testimonial" className="testimonials pt-70 pb-70">
-      <div className="container mt-5">
-        <hr />
+      <div className="container mt-5">        
         <Container maxWidth="string" align="center">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            width="max-content"
-            color="text.primary"
-            gutterBottom
-            className="title"
-          >
-            Testimonials about our workers
-          </Typography>
+            <div className="title">
+              Testimonials about our workers
+            </div>          
         </Container>
         <Typography
           variant="h5"

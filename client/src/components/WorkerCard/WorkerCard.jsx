@@ -12,8 +12,7 @@ import Chip from "@mui/material/Chip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    backgroundColor: "#44b700",
+  "& .MuiBadge-badge": {    
     color: "#44b700",
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
     "&::after": {

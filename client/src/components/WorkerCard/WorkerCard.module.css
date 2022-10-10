@@ -1,5 +1,6 @@
 .conteiner {
-    background-image: url(https://www.riouruguay.com.ar/sites/default/files/2021-08/Banner-RUS.jpg);
+    background-color:rgb(160, 160, 160) ;
+    border: 3px solid grey;
     width: 100vh;
     height: auto;
     display: grid;
@@ -7,6 +8,7 @@
     grid-template-columns: repeat(10, 1fr);
     margin: 15px;
     padding: 10px;
+    box-shadow: 0px 19px 18px rgba(0, 0, 0, 0.12), 0px 5px 7px rgba(0, 0, 0, 0.5);
 }
 
 .divImg{
@@ -24,11 +26,13 @@
 }
 
 .divDescription{
-    color: gainsboro;
+    color: #000000;
     grid-column: 3/9;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    font-family: 'Anton', sans-serif;
+    font-family: 'Bebas Neue', cursive;    
 }
 
 .divRating{
@@ -39,7 +43,7 @@
     flex-direction: column;
 }
 .divRating h3{
-    background-color: rgb(237, 147, 29);
+    background-color: #f3f3f3;
     padding: 2px 7px;
     margin-top: 2vh;
     margin-bottom: 10px;
@@ -48,19 +52,17 @@
     font-weight: 400;
 }
 
-.h2{
-    font-weight: 500;
-    font-size: 25   px;
+.h2{    
+    font-weight: 500;    
     margin: 0;
-    color: white;
+    color: #000000;
     margin-bottom: -5px;
 }
 
 .h3{
     font-weight: 500;
     margin: 5px 0;
-    font-size:15px;
-
+    font-size: 1.3rem;    
 }
 
 .divTop{
@@ -82,21 +84,19 @@
     margin: 0 7px;
     color: white !important;
     background-color: rgba(128, 128, 128, 0.705) !important;
-
 }
 
-.job{
-    
+.job{    
     padding: 3px;
     border-radius: 5px;
     margin-right: 10px;
     margin-bottom: 5px;
-    background-color: white;
-    color: #086cf4;
+    background-color: white;    
 }
 
 .divName{
     display: flex;
+    font-size: 1.3rem;
 }
 .divRating a:hover{
     background-color: transparent;
@@ -106,10 +106,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
 }
 
 .profileRating Button {
     margin-bottom: 10px;
+    background-color: white;
+    color: #000000;
     width: 120px !important;
+    font-family: 'Anton', sans-serif;
+    font-family: 'Bebas Neue', cursive;    
+    font-size: 1.3rem;
+    text-decoration: none;
 }
