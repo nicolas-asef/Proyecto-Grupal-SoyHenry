@@ -1,5 +1,16 @@
 .card{
-    width: 35vw;
-    border: 3px solid #24fafa;
-    overflow-x: visible;
+    flex:1;
+    /* border: 3px solid #24fafa; */
+    box-shadow: 5px 5px 5px 5px rgba(2, 0,2, 0.1);
+    border-radius: 10px;
+    height: 15vh;
+    width: 32vw;
+    overflow-y: hidden;
+    background-color: rgb(255, 255, 255);
+    transition: all 2s;
+}
+
+.card:hover{
+    flex:500px;
+
 }

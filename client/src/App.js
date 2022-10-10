@@ -7,6 +7,8 @@ import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import OnBoarding from './components/OnBoarding/OnBoarding';
 import Payment from './components/Payment/Payment';
+import DashBoardUser from './components/DashboardUser/DashBoardUser';
+import CardContracts from './components/CardContracts/CardContracts';
 import { NestedModal } from './components/Payment/NestedModal';
 
 
@@ -26,6 +28,8 @@ function App() {
         <Route path='/profile/settings' element={<SettingsProfile/>} />
         <Route path='/profile/settings/premium' element={<Payment/>}/>
         <Route path='/catalog' element={<Catalog/>}/>
+        <Route path = '/dashboard/user/:id' element = {<DashBoardUser/>}/>
+        <Route path = '/contracts/user/:id' element = {<CardContracts/>}/>
         <Route path='/onboarding' element={ <OnBoarding /> } />
         <Route path='/popUpSuccess' element={ <NestedModal/>}/>
         <Route path='/popUpError' element={ <NestedModal/>}/>

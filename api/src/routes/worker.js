@@ -1,96 +1,86 @@
-const { Router } = require('express');
-const { Op,Worker, Job, Contract, User, Chat, Country } = require("../db.js")
-
-
-
-
-
-
+const { Router } = require("express");
+const { Op, Worker, Job, Contract, User, Chat, Country } = require("../db.js");
 
 const router = Router();
 
 // Funcion consultadora de datos a la DB
 
-
-router.get('/', async (req, res, next) =>{
-
-    try {
-
-        // const creacionJob = await Job.create({name:"Ingeniero"})
-        // await Job.create({name:"Zapatero"})
-        // await Job.create({name:"Zarp"})
-        // const creacionWorker = await Worker.create({description:"hola"})
-        // const creacionUser = await User.create({name:"Inge niero",lastName:"Gonzales",email:"gonza",password:32,location:"San Luis"})
-        // const creacionContract = await Contract.create({finished:false,confirmed:false})
-        // creacionWorker.addJob(creacionJob.id)
-        //creacionWorker.setUser(creacionUser)
-        // creacionWorker.addContract(creacionContract.id)
-        // creacionUser.addContract(creacionContract.id)
-        let {name, job} = req.query;
-        if(!job)
-            job = ""
-        if(!name)
-            name = ""
-        //Detalle, si no se tiene un job o un usuario el worker, el findall no los trae, estos son campos 
-        //obligatorios
-        let workers = await Worker.findAll({
-            include:[{model:Job, where:{
-                name:{
-                    [Op.iLike] : `%${job}%`
-                }
-            }
-        },{model:User, where:{
-                name:{
-                    [Op.iLike] : `%${name}%`
-                },
+router.get("/", async (req, res, next) => {
+  try {
+    // const creacionJob = await Job.create({name:"Ingeniero"})
+    // await Job.create({name:"Zapatero"})
+    // await Job.create({name:"Zarp"})
+    // const creacionWorker = await Worker.create({description:"hola"})
+    // const creacionUser = await User.create({name:"Inge niero",lastName:"Gonzales",email:"gonza",password:32,location:"San Luis"})
+    // const creacionContract = await Contract.create({finished:false,confirmed:false})
+    // creacionWorker.addJob(creacionJob.id)
+    //creacionWorker.setUser(creacionUser)
+    // creacionWorker.addContract(creacionContract.id)
+    // creacionUser.addContract(creacionContract.id)
+    let { name, job } = req.query;
+    if (!job) job = "";
+    if (!name) name = "";
+    //Detalle, si no se tiene un job o un usuario el worker, el findall no los trae, estos son campos
+    //obligatorios
+    let workers = await Worker.findAll({
+      include: [
+        {
+          model: Job,
+          where: {
+            name: {
+              [Op.iLike]: `%${job}%`,
             },
-            include:[{model:Country}]
-        },Contract,Chat]});  
-        
-        
-        res .status(200)
-            .send(workers)
-    } catch (error) {
-        res .send("Error en la operacion: "+error.message)
-            .status(400)
-    }
-})
-
-router.get('/:id', async (req, res, next) =>{
-
-    try {
-        const { id } = req.params;
-        let worker = await Worker.findAll({
-            where:{
-                ID:id
+          },
+        },
+        {
+          model: User,
+          where: {
+            name: {
+              [Op.iLike]: `%${name}%`,
             },
-            include:[Job,User,Contract,Chat]
-        });  
-        if(worker.length <1)
-            throw new Error("El id es invalido")
-        res .status(200)
-            .send(worker[0])
+          },
+          include: [{ model: Country }],
+        },
+        Contract,
+        Chat,
+      ],
+    });
 
-    } catch (error) {
-        res .send("Error en la operacion: "+error.message)
-            .status(400)
-    }
-})
+    res.status(200).send(workers);
+  } catch (error) {
+    res.send("Error en la operacion: " + error.message).status(400);
+  }
+});
 
+router.get("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    let worker = await Worker.findAll({
+      where: {
+        ID: id,
+      },
+      include: [Job, User, Contract, Chat],
+    });
+    if (worker.length < 1) throw new Error("El id es invalido");
+    res.status(200).send(worker[0]);
+  } catch (error) {
+    res.send("Error en la operacion: " + error.message).status(400);
+  }
+});
 
-router.post('/', async (req, res) => {
-
-try {
-    const {certification, description,jobs,user_id} = req.body;
+router.post("/", async (req, res) => {
+  try {
+    const { certification, description, jobs, user_id } = req.body;
     const worker = await Worker.create({
         certification: certification, 
         description :"Agregar descripcion...",
     })
     for (let job = 0; job < jobs.length; job++) {
-        const element = jobs[job];
-        const seleccionado = await Job.findAll({where:{name:element}})
-        worker.addJob(seleccionado)
+      const element = jobs[job];
+      const seleccionado = await Job.findAll({ where: { name: element } });
+      worker.addJob(seleccionado);
     }
+
     worker.setUser(user_id)
     res.status(201).send(worker)
 
@@ -198,25 +188,23 @@ try {
 // })
 
 
+
 //El delete tiene que ser logico, por lo que solamente se cambiar un campo dentro de la instancia
 //El campo de la instancia se llamaria "deleted(booleano)"
-router.delete('/:id', async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        const deletedWorker = await Worker.destroy({
-            where: { id: id }
-        });
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deletedWorker = await Worker.destroy({
+      where: { id: id },
+    });
 
-        if (deletedWorker) {
-            return res.status(200).send('Trabajador eliminado de manera exitosa.');
-        }
-        throw new Error('No se encontro ningun trabajador con ese id.');
-
-    } catch (error) {
-        res .send("Error en la operacion: "+error.message)
-            .status(400)
+    if (deletedWorker) {
+      return res.status(200).send("Trabajador eliminado de manera exitosa.");
     }
-})
-
+    throw new Error("No se encontro ningun trabajador con ese id.");
+  } catch (error) {
+    res.send("Error en la operacion: " + error.message).status(400);
+  }
+});
 
 module.exports = router;

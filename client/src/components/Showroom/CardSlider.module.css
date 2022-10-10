@@ -1,44 +1,54 @@
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;    
 }
 
-.cardsContainer {
-  position: absolute;
+.cardsContainer {  
+  /* position: absolute; */
   height: 300px;
-  width: 650px;
-  top: 80px;
+  width: 650px;  
   left: calc(50% - 300px);
-  display: flex;
-  margin-left: 6%;
-  margin-top: 9%;
-  align-items: center;
+  display: flex;    
+  align-items: center;  
 }
 
 .card {
-  border: 1px solid white;
+  border: 4px solid grey;
   display: flex;
   flex-direction: column;
-  height: 280px;
-  width: 300px;
-  background-color: rgba(31, 105, 244, 0.8);
+  height: 270px;
+  width: 350px;
+  background-color:rgb(160, 160, 160) ;
   border-radius: 10px;
   box-shadow: -1rem 0 2rem #000;
   margin-left: -350px;
-  transition: 0.4s ease-out;
+  transition: 3s ease-out;
   position: relative;
   left: 0px;
-  align-items: center;
+  align-items: center;  
 }
 
 .card:not(:first-child) {
-  margin-left: -50px;
+  margin-left: -30px;
 }
 
 .card:hover {
   transform: translateY(-20px);
   transition: 0.6s ease-out;
-  background-color: rgba(2, 41, 116, 0.8);
+  background-color: #00406d;
+  width: 400px;
+  
+}
+
+.card:hover .title {
+  color: #f3f3f3;
+  font-size: 1.3rem;  
+  transition: 1s ease;
+}
+
+.card:hover .job1 {
+  color: #f3f3f3;  
+  transition: 1s ease;
 }
 
 .card:hover ~ .card {
@@ -48,30 +58,43 @@
 }
 
 .card img {
-  width: 135px;
-  border-radius: 15%;
-  margin: 5%;
-  margin-top: 8%;
+  width: 120px;
+  height: 90px;
+  border-radius: 50%;
+  margin-top: 16%;
+  transition: all 1s ease;
 }
 
 .card img:hover {
+  margin-top: 14%;
   border-radius: 20%;
+  width: 140px;  
 }
 
 .title {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.9rem;
-  color: white;
+  height: 60px;
+  display: flex;
+  justify-content: center;  
+  width: 180px;
+  font-family: 'Anton', sans-serif;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1rem;
+  color: #000000;
+  transition: 0.5s ease-out;
 }
 
-.job {
-  font-size: 1rem;
+.job1 {
+  text-decoration:underline ;
+  font-size: 1.3rem;
   display: flex;
-  flex-direction: column;
-  margin-right: 20%;
-  color: aliceblue;
-  font-family: "Montserrat", sans-serif;
+  justify-content: center;
+  align-items: center;  
+  color: #000000;
+  font-family: 'Anton', sans-serif;
+  font-family: 'Bebas Neue', cursive;
+  transition: 0.5s ease-out;
 }
+
 
 .rating {
   position: absolute;
@@ -83,37 +106,46 @@
   display: inline-block;
   position: relative;
   text-decoration: none;
-  color: #fff;
+  color: #000000;
   text-transform: capitalize;
-  font-family: "Montserrat", sans-serif;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .btn {
-  margin-left: 18%;
-  margin-right: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn a {
-  background-color: #0a419a;
-  height: 22px;
-  width: 125px;
+  box-sizing: border-box;
+  background-color: #f3f3f3;
+  height: 8%;
+  width: 55%;
   border-radius: 6%;
   position: absolute;
   bottom: 6%;
+  transition: all 2s ease;
+  font-family: 'Anton', sans-serif;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.1rem;
+  padding-top: 0.5%;
 }
 
 .btn:hover a {
-  background-color: #558fee;
+  background-color: #f3f3f3;
+  color:#000;
+  text-shadow: 2px 4px 5px 2px rgba(0,0,0,0.3);  ;
 }
 
 .btns {
   display: flex;
   flex-direction: row;
-  margin-top: 110%;
+  justify-content: center;
+  align-items: center;
 }
 
 .btnLeft {
-  margin: 8px;
+  margin: 4px;
   transition: all 1.2s ease;
   box-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.3);
 }
@@ -124,7 +156,7 @@
 }
 
 .btnRight {
-  margin: 8px;
+  margin: 4px;
   transition: all 1.2s ease;
   box-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.3);
 }
