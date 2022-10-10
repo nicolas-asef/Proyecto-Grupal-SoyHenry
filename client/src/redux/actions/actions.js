@@ -40,6 +40,20 @@ export function getWorkers(query, search){
 // }
 
 
+export function modifyContract(data,id){
+  console.log(id)
+  console.log(data)
+  fetch(baseURL+'contract/'+id,{
+    method:'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+  })
+  .then(data => console.log(data))
+  .catch(error => alert(error))
+}
+
 export function createContract(data){
   fetch(baseURL+'contract',{
     method:'POST',
@@ -48,7 +62,7 @@ export function createContract(data){
           },
           body: JSON.stringify(data)
   })
-  .then(data => alert('Contrato creado'))
+  .then(data => console.log(data))
   .catch(data => alert(data))
 }
 

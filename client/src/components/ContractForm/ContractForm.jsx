@@ -25,7 +25,7 @@ function ContractForm({toggleModal,id,worker_id,closeCB}) {
     const handleSubmit = (e) =>{
         console.log(input)
         createContract(input)
-        alert(input)
+        alert("Sali")
     }
 
   return (
