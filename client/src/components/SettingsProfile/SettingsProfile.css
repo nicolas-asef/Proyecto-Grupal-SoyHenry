@@ -83,3 +83,14 @@
   .SuccessIMG{
     color: green;
   }
+  .inputContainer{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .jobsStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

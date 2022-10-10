@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
       certification: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       premium: {

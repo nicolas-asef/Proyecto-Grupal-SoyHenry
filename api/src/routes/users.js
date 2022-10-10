@@ -71,8 +71,28 @@ router.get("/", async (req, res, next) => {
         ? res.status(200).send(userName)
         : res.status(404).send({ message: "El usuario no existe" }); // aca deberia mandar
     }
-  } catch (error) {
-    next(error);
+})
+
+
+router.put('/:id', async (req, res, next) => {   
+    const info = req.body;
+    const {id} = req.params; 
+    //const salt = await bcrypt.genSalt(10);    
+    try {
+        const updatedUser = await User.findOne({where: {ID: id}});        
+        const us = await updatedUser.update({
+            name: info.name,
+            lastName: info.lastName,
+            img: info.img,
+            phone: info.phone,
+            dni: info.dni,
+            onBoarded: info.onBoarded,
+            location: info.location
+        })
+        us.setCountry(info.countryId)
+        res.status(200).json(us)       
+    } catch (error) {
+        res.status(500).send("entro al catch")        
   }
 });
 

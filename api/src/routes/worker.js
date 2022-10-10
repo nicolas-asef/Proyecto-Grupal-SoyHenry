@@ -72,47 +72,122 @@ router.post("/", async (req, res) => {
   try {
     const { certification, description, jobs, user_id } = req.body;
     const worker = await Worker.create({
-      certificacion: certification,
-      description: "Agregar descripcion...",
-    });
+        certification: certification, 
+        description :"Agregar descripcion...",
+    })
     for (let job = 0; job < jobs.length; job++) {
       const element = jobs[job];
       const seleccionado = await Job.findAll({ where: { name: element } });
       worker.addJob(seleccionado);
     }
-    worker.setUser(user_id);
-    res.status(201).send(worker);
-  } catch (error) {
-    res.send("Error en la operacion: " + error.message).status(400);
-  }
-});
 
-router.put("/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { certification, description, jobs, premium, available } = req.body;
-    const worker = await Worker.findByPk(id);
-    certification ? (worker.certificacion = certification) : certification;
-    description ? (worker.description = description) : description;
-    premium ? (worker.premium = true) : false;
-    available ? (worker.available = available) : available;
+    worker.setUser(user_id)
+    res.status(201).send(worker)
 
-    if (jobs) {
-      const nuevos_jobs = []; //En jobs se deben pasar todos los jobs actuales y agregados, porque asi se pueden tambien
-      //eliminar estos jobs
-      for (let job = 0; job < jobs.length; job++) {
-        const element = jobs[job];
-        const seleccionado = await Job.findOne({ where: { name: element } });
-        nuevos_jobs.push(seleccionado);
-      }
-      worker.setJobs(nuevos_jobs);
-    }
-    const valor = await worker.save();
-    res.status(200).send(valor);
-  } catch (error) {
-    res.send("Error en la operacion: " + error.message).status(400);
-  }
-});
+} catch (error) {
+    res .send("Error en la operacion: "+error.message)
+            .status(400)
+}
+
+} )
+
+// router.put('/:id', async (req, res, next) =>{ 
+//     const { id } = req.params;
+//     const { certification , description, jobs } = req.body;
+//     try {
+        
+//     } catch (error) {
+//         res.status(500).send("entro al catch") 
+//     }
+// })
+ router.put('/:id', async (req, res, next) => {   
+     const { id } = req.params;
+     const {certification, description, jobs, premium} = req.body; 
+     console.log("hola req.body abajo")
+     console.log(req.body) 
+     try {
+        const worker = await Worker.findOne({where: {ID: id}})
+        //  .then((w)=>{
+        //      w.update({
+        //          certification: certification
+        //      })
+        //  })
+        console.log(worker)
+        //premium ? worker.premium = true : false
+        premium ? await worker.update({
+            premium: true
+        }) : "no premium"
+          certification ? await worker.update({
+              certification: certification
+          }) : certification = "no updatie el certification"
+          description ? await worker.update({
+              description: description
+          }) : console.log("no updatie el description") 
+          if(jobs){
+                const nuevos_jobs = [] //En jobs se deben pasar todos los jobs actuales y agregados, porque asi se pueden tambien
+                //eliminar estos jobs
+                for (let job = 0; job < jobs.length; job++) {
+                    const element = jobs[job];
+                    const seleccionado = await Job.findOne({where:{name:element}})
+                    nuevos_jobs.push( seleccionado)
+                }
+                worker.setJobs(nuevos_jobs)
+            }
+        //   if(jobs){
+        //       await worker.setJobs(jobs)
+        //   }
+        //   jobs ? await worker.update({
+        //     Jobs: jobs
+        //   }) : "hola"
+        //   const w = await worker.update({
+        //       certification: certification,
+        //       description: description
+        //        premium: premium,
+        //        available: available
+        //   })
+        //   console.log(w)
+        //    worker.set({
+        //        certification: certification,
+        //        description: description
+        //    })
+        //   await w.addJob(jobs)
+        //  const valor = await w.save()
+        //const h = await worker.save()
+         res.status(200).send("anda")      
+     } catch (error) {
+         res.status(500).send("entro al catch")        
+     }
+ })
+// router.put('/:id', async (req, res, next) => {
+//     try {
+//         const { id } = req.params;
+//         const {certification, description, jobs, premium, available} = req.body;
+//         const worker = await Worker.findByPk(id);
+//         certification ? worker.certification = certification : certification
+//         description ? worker.description = description : description
+//         premium ? worker.premium = true : false
+//         available ? worker.available = available : available
+        
+//         if(jobs){
+//             const nuevos_jobs = [] //En jobs se deben pasar todos los jobs actuales y agregados, porque asi se pueden tambien
+//             //eliminar estos jobs
+//             for (let job = 0; job < jobs.length; job++) {
+//                 const element = jobs[job];
+//                 const seleccionado = await Job.findOne({where:{name:element}})
+//                 nuevos_jobs.push( seleccionado)
+//             }
+//             worker.setJobs(nuevos_jobs)
+//         }
+//         const valor = await worker.save()
+//         res .status(200)
+//             .send(valor)
+//     } catch (error) {
+//         res .send("Error en la operacion: "+error.message)
+//             .status(400)
+//     }
+// })
+
+
 
 //El delete tiene que ser logico, por lo que solamente se cambiar un campo dentro de la instancia
 //El campo de la instancia se llamaria "deleted(booleano)"
