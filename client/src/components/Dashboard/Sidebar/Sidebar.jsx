@@ -1,84 +1,78 @@
 import s from "./Sidebar.module.css"
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import SettingsIcon from '@mui/icons-material/Settings';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import WorkIcon from '@mui/icons-material/Work';
+import PublicIcon from '@mui/icons-material/Public';
 import LogoutIcon from '@mui/icons-material/Logout';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import HomeIcon from '@mui/icons-material/Home';
+import DescriptionIcon from '@mui/icons-material/Description';
+import { Link } from "react-router-dom"
 
 
 export default function Sidebar (){
     return (
         <div className={s.sidebar}>
             <div className={s.top}>
-                <span className={s.logo}>PFHenry</span>
+                <span className={s.logo}>PANEL ADMIN</span>
             </div>
             <div className={s.dashboard}>
-                <h1>Dashboard</h1>
+                <h1 className={s.title}>Dashboard</h1>
+                <ul>
+                    <Link to='/dashboard'>
+                        <li className={s.li}>
+                            <HomeIcon />
+                            <span>Home</span>
+                        </li>
+                    </Link>
+                    <Link to='/dashboard/analytics'>
+                        <li className={s.li}>
+                            <TrendingUpIcon />
+                            <span>Analytics</span>
+                        </li>
+                    </Link>
+                    <Link to='/dashboard/balance'>
+                        <li className={s.li}>
+                            <TrendingUpIcon />
+                            <span>Balance</span>
+                        </li>
+                    </Link>
+                </ul>
+                <h1 className={s.title}>Quick Menu</h1>
+                <ul>
+                    <Link to='/dashboard/users'>
+                        <li className={s.li}>
+                            <PersonOutlineIcon />
+                            <span>Users</span>
+                        </li>
+                    </Link>
+                    <Link to='/dashboard/workers'>
+                    <li className={s.li}>
+                        <EngineeringIcon />
+                        <span>Workers</span>
+                    </li>
+                    </Link>
+                    <li className={s.li}>
+                        <DescriptionIcon />
+                        <span>Contracts</span>
+                    </li>
+                    <li className={s.li}>
+                        <BarChartIcon />
+                        <span>Reports</span>
+                    </li>
+                </ul>
+                    <h1 className={s.title}>Settings</h1>
                 <ul>
                     <li className={s.li}>
-                        <DashboardIcon />
-                        <span>Home</span>
+                        <WorkIcon />
+                        <span>New Job</span>
                     </li>
                     <li className={s.li}>
-                        <DashboardIcon />
-                        <span>Analytics</span>
-                    </li>
-                    <li className={s.li}>
-                        <DashboardIcon />
-                        <span>Analytics</span>
+                        <PublicIcon />
+                        <span>New Country</span>
                     </li>
                 </ul>
-            </div>
-            <div className={s.center}>
-                <ul className={s.ul}>
-                    <li className={s.li}>
-                        <DashboardIcon />
-                        <span>Dashboard</span>
-                    </li>
-                </ul>
-                <ul>
-                    <li className={s.li}>
-                        <PeopleOutlineIcon />
-                        <span>Users</span>
-                    </li>
-                </ul>
-                <ul>
-                    <li className={s.li}>
-                        <AssessmentIcon />
-                        <span>Stats</span>
-                    </li>
-                </ul>
-                <ul>
-                    <li className={s.li}>
-                        <NotificationsNoneIcon />
-                        <span>Notifications</span>
-                    </li>
-                </ul>
-                <ul>
-                    <li className={s.li}>
-                        <SettingsIcon />
-                        <span>Settings</span>
-                    </li>
-                </ul>
-                <ul>
-                    <li className={s.li}>
-                        <AccountCircleIcon />
-                        <span>Profile</span>
-                    </li>
-                </ul>
-                <ul>
-                    <li className={s.li}>
-                        <LogoutIcon />
-                        <span>Logout</span>
-                    </li>
-                </ul>
-                
-            </div>
-            <div className={s.bottom}>
-                Option
             </div>
         </div>
     )

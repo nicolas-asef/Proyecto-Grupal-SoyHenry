@@ -1,0 +1,20 @@
+.home{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: white;
+    height: 100%;
+}
+
+.divSidebar{
+    grid-column: 1/2;
+}
+
+.homeContainer{
+    display: flex;
+    flex-direction: column;
+    grid-column: 2/7;
+}
+
+.table{
+    margin-top: 50px;
+}

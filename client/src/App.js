@@ -7,7 +7,11 @@ import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import OnBoarding from './components/OnBoarding/OnBoarding';
 import Payment from './components/Payment/Payment';
-import DashHome from './components/Dashboard/DashHome/DashHome';
+import DashHome from './components/Dashboard/Pages/DashHome/DashHome';
+import DashAnalytics from './components/Dashboard/Pages/DashAnalytics/DashAnalytics';
+import DashBalance from './components/Dashboard/Pages/DashBalance/DashBalance';
+import DashUsers from './components/Dashboard/Pages/DashUsers/DashUsers';
+import DashWorker from './components/Dashboard/Pages/DashWorkers/DashWorker';
 
 
 function App() {
@@ -28,6 +32,11 @@ function App() {
         <Route path='/catalog' element={<Catalog/>}/>
         <Route path='/onboarding' element={ <OnBoarding /> } />
         <Route path='/dashboard' element= { <DashHome />} />
+        <Route path='/dashboard/analytics' element= { <DashAnalytics />} />
+        <Route path='/dashboard/balance' element= { <DashBalance />} />
+        <Route path='/dashboard/users' element= { <DashUsers />} />
+        <Route path='/dashboard/workers' element= { <DashWorker />} />
+
       </Routes>
     </div>
   );

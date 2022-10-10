@@ -43,14 +43,28 @@ const rows = [
         workerName: "Nicolas",
         userName: "Micaela",
         date: "07/08/2022",
-        status: "cancel"
+        status: "Cancel"
     }
 ];
 
 
+  const styled1 = (target) => {
+    if (target === "Cancel"){
+      return s.cancel
+    }
+    if (target === "In Progress"){
+      return s.progress
+    }
+    if (target === "Finish"){
+      return s.finish
+    }
+  }
+
 export default function BasicTable() {
+
   return (
     <TableContainer component={Paper}>
+      <h1 className={s.title}>Workers Premium</h1>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -74,7 +88,7 @@ export default function BasicTable() {
               <TableCell className={s.tableCell}>{row.workerName}</TableCell>
               <TableCell className={s.tableCell}>{row.userName}</TableCell>
               <TableCell className={s.tableCell}>{row.date}</TableCell>
-              <TableCell className={s.tableCell}>{row.status}</TableCell>
+              <TableCell className={s.tableCell}><div className={styled1(row.status)}>{row.status}</div></TableCell>
               <TableCell className={s.tableCell}>Show details</TableCell>
             </TableRow>
           ))}
@@ -83,3 +97,4 @@ export default function BasicTable() {
     </TableContainer>
   );
 }
+

@@ -1,10 +1,8 @@
 import s from "./DashHome.module.css"
-import Sidebar from "../Sidebar/Sidebar";
-import DashNavBar from "../DashNavBar/DashNavBar";
-import Widgets from "../Widgets/Widgets";
-import Featured from "../Featured/Featured";
-import Chart from "../Chart/Chart";
-import BasicTable from "../Table/Table";
+import Sidebar from "../../Sidebar/Sidebar";
+import Widgets from "../../Widgets/Widgets";
+import Chart from "../../Chart/Chart";
+import BasicTable from "../../Table/Table";
 
 
 export default function DashHome(){
@@ -22,7 +20,7 @@ export default function DashHome(){
                 </div>
                 <div className={s.charts}>
                     <Chart />
-                    <Featured />
+                    {/* <Featured /> */}
                 </div>
                 <div className={s.table}>
                     <BasicTable />
