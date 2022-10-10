@@ -1,0 +1,24 @@
+.home{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: white;
+    height: 100%;
+}
+
+.divSidebar{
+    grid-column: 1/2;
+}
+
+.homeContainer{
+    display: flex;
+    flex-direction: column;
+    grid-column: 2/7;
+}
+
+.charts{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    gap: 30px;
+    display: flex;
+    padding: 5px 20px;
+}

@@ -1,0 +1,44 @@
+.home{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: white;
+    height: 100%;
+}
+
+.divSidebar{
+    grid-column: 1/2;
+}
+
+.homeContainer{
+    display: flex;
+    flex-direction: column;
+    grid-column: 2/7;
+}
+
+.widgets{
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 20px
+}
+
+.charts{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    gap: 30px;
+    display: flex;
+    padding: 5px 20px;
+}
+
+.table{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 100px;
+    -webkit-box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.4); 
+    box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.4);
+    width: 1300px;
+}
+
