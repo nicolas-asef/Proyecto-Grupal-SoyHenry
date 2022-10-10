@@ -7,18 +7,20 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import {  getUserId } from '../../redux/actions/actions'
-import {  useNavigate } from 'react-router-dom';
+import { getUserId } from '../../redux/actions/actions'
+import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react'
+import { style } from '@mui/system';
+import Chip from '@mui/material/Chip';
+import s from './Profile.module.css'
 
 const Profile = () => {
   const dispatch = useDispatch();
   const { user: { sub } } = useAuth0();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const userinfo = useSelector(state=> state.authState)
   const users = useSelector(state => state.users)
   const navigate = useNavigate()
-  const { logout } = useAuth0();
+  const { logout, user: {picture} } = useAuth0();
 
 
   useEffect(()=>{
@@ -46,11 +48,20 @@ const Profile = () => {
     navigate('/profile/settings')
   }
   
+  const handleContracts = () => {
+    navigate("/contracts/user/"+sub);
+    setAnchorElUser(null);
+  }
+
   const settings = [
     {
       name: 'Profile',
       handler: handleOpenProfile
     }, 
+    {
+      name: "Contratos",
+      handler: handleContracts
+    },
     {
       name: "Settings",
       handler: handleSettings
@@ -62,15 +73,18 @@ const Profile = () => {
     {
       name: "Logout",
       handler: handleLogout
-    }];
-
+    }
+    ];
   return (
     <>
-      <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" /* src={userinfo.user.img} */ />
-        </IconButton>
-      </Tooltip>
+      <div>
+        <Chip className={s.name} label={`${users.name} ${users.lastName}`} variant="outlined" />
+        <Tooltip title="Open settings">
+          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+            <Avatar alt="Remy Sharp" src={picture} />
+          </IconButton>
+        </Tooltip>
+      </div>
       <Menu
         sx={{ mt: "45px" }}
         id="menu-appbar"

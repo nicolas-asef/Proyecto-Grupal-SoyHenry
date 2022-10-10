@@ -9,10 +9,26 @@ li {
     bottom: 0;
     list-style: none;
     text-decoration: none;
+    margin-top: 20px;
 }
 link {
     text-decoration: none;
 }
-a:visited {
-    color: #000;
+.footerContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+.social {
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.social ul li {
+    margin-right: 15px;
 }

@@ -1,0 +1,9 @@
+.pict{ 
+    display: flex;   
+    height: 900px;    
+    opacity: 0.9;    
+    display: flex;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}

@@ -12,8 +12,6 @@ html {
     text-align: start;
     color: #6f6d78;
     font-weight: 400;
-    font-style: italic;
-    
 }
 
 
@@ -87,7 +85,7 @@ html {
     border: 1px solid var(--orange);
   }
 
-.filters{
+.filters-worker{
     width: 97.5%;
     padding: 1vh;
     padding-top: 1.5vw;
@@ -102,4 +100,15 @@ html {
 
 .w-buttons{
     height: 3vh;
+}
+
+.contracts-worker{
+    width: 97.5%;
+    padding: 1vh;
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
+    margin-top: 2vh;
+    box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
+    background: #ffffff;
+    overflow-x: scroll ;
 }

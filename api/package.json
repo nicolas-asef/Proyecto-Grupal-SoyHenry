@@ -13,6 +13,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^1.12.0",
     "@stripe/stripe-js": "^1.38.1",
+    "@sendgrid/mail": "^7.7.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
@@ -22,6 +23,7 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.8.0",
     "nodemon": "^2.0.20",
     "pg": "^8.8.0",
     "postgres": "^3.2.4",

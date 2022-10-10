@@ -1,29 +1,27 @@
-const axios = require('axios');
-require('dotenv').config();
-const { Router } = require('express');
-const Stripe = require("stripe")
-const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
-const stripe = new Stripe(STRIPE_SECRET_KEY)
+const axios = require("axios");
+require("dotenv").config();
+const { Router } = require("express");
+const Stripe = require("stripe");
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
+const stripe = new Stripe(STRIPE_SECRET_KEY);
 const router = Router();
 
-
 router.post("/", async (req, res, next) => {
-    const { paymentMethod } = req.body
-    console.log(paymentMethod)
-    try {        
-            const payment = await stripe.paymentIntents.create({
-                payment_method: paymentMethod.id,
-                currency: "USD",               
-                amount: 100,
-                confirm: true,
-            })
-            console.log(payment)
-            return res.send(payment);
-    }
-    catch (err) {
-        return res.status(404).send("hola")
-    }
+  const { paymentMethod } = req.body;
+  console.log("post por el back");
+  console.log(paymentMethod);
+  try {
+    const payment = await stripe.paymentIntents.create({
+      payment_method: paymentMethod.id,
+      currency: "USD",
+      amount: 100,
+      confirm: true,
+    });
+    console.log(payment);
+    return res.send(payment);
+  } catch (err) {
+    return res.status(404).send("hola");
+  }
 });
 
-
-module.exports = router
+module.exports = router;

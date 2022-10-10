@@ -1,0 +1,34 @@
+.cardContracts{
+    margin-top: 2vh;
+    /* border: 3px solid #4df30c; */
+    display: flex;
+    flex-direction: column;
+}
+
+.columnContainer{
+    display: flex;
+    flex-direction: column;
+    gap:1vw;
+}
+
+.cardContainer{
+    display: flex;
+    gap: 1vw;
+    /* border: 3px solid #4df30c; */
+    height: 100vh;
+}
+
+.filters{
+    gap: 1px;
+    width: 60vw;
+    /* border: 3px solid #4df30c; */
+    margin-left: 18vw;
+    box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-bottom: 2vh;
+    background-color: rgb(255, 255, 255);
+}
