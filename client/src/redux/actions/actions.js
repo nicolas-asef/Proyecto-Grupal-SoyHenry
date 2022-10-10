@@ -1,7 +1,7 @@
 // export const action = () => async (dispatch) => {}
 import { Action } from "@remix-run/router";
 import axios from "axios";
-import {PUT_WORKER, PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, UPLOAD_IMAGE } from './actions_vars'
+import {PUT_WORKER, PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, UPLOAD_IMAGE, CLEAN_DETAIL } from './actions_vars'
 
 const baseURL = "http://localhost:3001/" //Esto se cambia por localhost:3001 para usarlo local
 
@@ -466,4 +466,8 @@ export const uploadImage = (formData) => (dispatch) => {
               payload: res
           });
         } )
+}
+
+export const cleanDetail = () => (dispatch) => {
+  dispatch({type: CLEAN_DETAIL})
 }
