@@ -60,13 +60,26 @@
   }
   .container-setting{
     text-align: center;
+    justify-content: center;
+    align-items: center;
     width: 50%;
-  
+    margin: auto;
+    margin-top: 4rem;
+    padding: 20px;
+    border: 1px  black;
+    border-radius: 1rem;
+    box-shadow: 3px -2px 48px 21px rgba(143,139,139,0.75);
+    -webkit-box-shadow: 3px -2px 48px 21px rgba(143,139,139,0.75);
+    -moz-box-shadow: 3px -2px 48px 21px rgba(143,139,139,0.75);
+    background-color: #e5e7ed;
+
   }
   .bloke{
     display: flex;
     flex-direction: row;
-    
+    padding-left: 10rem;
+    width: auto;
+    margin: 1rem;
   }
   .pad{
     width: 10%;
@@ -75,6 +88,7 @@
   .UploadIMGDIV{
     display: flex;
     align-items: center;
+    padding: 1rem;
   }
   .imgName{
     margin-left:15px;

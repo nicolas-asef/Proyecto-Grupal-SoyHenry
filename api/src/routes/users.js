@@ -71,16 +71,9 @@ router.get("/", async (req, res, next) => {
         ? res.status(200).send(userName)
         : res.status(404).send({ message: "El usuario no existe" }); // aca deberia mandar
     }
-<<<<<<< HEAD
-
-  } catch (error) {
-      res.status(500).send("entro al catch")        
-    }
-=======
   } catch (error) {
     res.status(500).send("entro al catch")
   }
->>>>>>> 004f141f83cd23a7bc1fd40e72ba21e0cad18452
 })
 
 
