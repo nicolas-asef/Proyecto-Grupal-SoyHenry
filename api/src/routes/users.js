@@ -48,6 +48,7 @@ const getUsers = async () => {
       Worker: u.Worker,
       Contracts: u.Contracts,
       Chats: u.Chats,
+      Country: u.Country
     };
   });
   return dataUser;
@@ -80,8 +81,7 @@ router.get("/", async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {   
     const info = req.body;
-    const {id} = req.params; 
-    //const salt = await bcrypt.genSalt(10);    
+    const {id} = req.params;     
     try {
         const updatedUser = await User.findOne({where: {ID: id}});        
         const us = await updatedUser.update({
@@ -93,7 +93,15 @@ router.put('/:id', async (req, res, next) => {
             onBoarded: info.onBoarded,
             location: info.location
         })
-        us.setCountry(info.countryId)
+        let countryDb = await Country.findAll({
+          where: {
+              name: info.location
+          }
+        }) 
+        info.countryId ? us.setCountry(info.countryId) :
+        us.setCountry(countryDb[0])
+      //console.log(countryDb)    
+      //us.setCountry(countryDb[0])
         res.status(200).json(us)       
     } catch (error) {
         res.status(500).send("entro al catch")        
