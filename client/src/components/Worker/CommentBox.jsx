@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function CommentBox({descripcion,imagen,nombre,rating,id}) {
   return (
-      <p>
+      <div className="commentBoxContainer">
         
           <div className="c-left">
             {/* <img className='o-img' src={imagen} alt='nose'/> */}
@@ -23,7 +23,7 @@ function CommentBox({descripcion,imagen,nombre,rating,id}) {
 
  
         
-    </p>
+    </div>
   )
 }
 

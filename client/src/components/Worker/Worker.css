@@ -52,8 +52,7 @@ html {
 }
 
 .pagination{
-    width: 53vw;
-    padding: 1vh;
+    width: 100%;
     padding-top: 1.5vw;
     padding-bottom: 1.5vw;
     box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
@@ -86,8 +85,8 @@ html {
   }
 
 .filters-worker{
-    width: 97.5%;
-    padding: 1vh;
+    width: 100%;
+    max-width: 1000px;
     padding-top: 1.5vw;
     padding-bottom: 1.5vw;
     margin-top: 2vh;

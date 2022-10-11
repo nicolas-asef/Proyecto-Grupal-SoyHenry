@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { useParams } from 'react-router-dom';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -24,6 +25,7 @@ function Profile({id,ocultarFilters,img,name,jobs,description,available,status})
   // const available = "Mi disponibilidad es cuando te pinte a vos papa, vos me avisa y yo estoy ahi, pero sino solo los lunes a las 14"
   // const status = "Online✅"
   const login = useAuth0()
+  const params = useParams()
   let sub = false
   if(login.isAuthenticated) sub = login.user.sub;
 
@@ -66,7 +68,7 @@ function Profile({id,ocultarFilters,img,name,jobs,description,available,status})
         </div>   
         <div className="contactar">
           <Button className="buttonStyled" variant="contained" size="large">Mensaje</Button>
-          {jobs && jobs.length && <Button className="buttonStyled"  onClick={handleOpen} variant="contained" size="large">Contratar</Button>}
+          {jobs && jobs.length && <Button className="buttonStyled" disabled={params.id === sub ? true : false} onClick={handleOpen} variant="contained" size="large">Contratar</Button>}
           
           <Modal
             open={open}
