@@ -15,7 +15,6 @@ import DashWorker from './components/Dashboard/Pages/DashWorkers/DashWorker';
 import DashBoardUser from './components/DashboardUser/DashBoardUser';
 import CardContracts from './components/CardContracts/CardContracts';
 import { NestedModal } from './components/Payment/NestedModal';
-import SettingPrueba from './components/SettingsProfile/SettingPrueba'
 
 function App() {
   return (

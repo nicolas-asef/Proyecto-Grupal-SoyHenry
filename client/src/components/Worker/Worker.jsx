@@ -14,7 +14,7 @@ import Footer from '../Footer/Footer';
 import cardContracts from '../CardContracts/CardContracts';
 import CardContracts from '../CardContracts/CardContracts';
 
-export const Worker = ({authState,getUserDetail,getContractWorker,getContractUsers,user,users,isLoading, cleanDetail}) => {
+export const Worker = ({authState,getUserDetail,getContractWorker,getContractUsers, user ,users,isLoading, cleanDetail}) => {
 
   const id = useParams().id
   const [pag,setPag] = useState(1)
@@ -34,7 +34,7 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
 
     return () => {
       cleanDetail();
-    }    
+    } 
   },[])
 
 
@@ -49,10 +49,10 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
         nuevoObjeto.User.name = user.lastName + " " + user.name  
         nuevoObjeto.User.img = user.img
       if(user.Worker){
+        console.log("entro linea 52")
         nuevoObjeto.Jobs = user.Worker.Jobs[0].name? user.Worker.Jobs.map(e => e.name) : user.Worker.Jobs
         getContractUsers(contratos)
-        
-      }else {
+      } else {
         getContractWorker(contratos)
       }
       setWorker(nuevoObjeto)
@@ -145,7 +145,7 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
       </div>
       <div className="w-content">
         <div className="w-left" >
-        {worker.User && worker.User.name ? <Profile id={user.Worker.ID} ocultarFilters={ocultarFilters} img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {authState.isLoggedIn}/> : <Skeleton variant = "circular">
+        {worker.User && worker.User.name ? <Profile /* id={user.Worker.ID} */ ocultarFilters={ocultarFilters} img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {authState.isLoggedIn}/> : <Skeleton variant = "circular">
 
           </Skeleton> }
           </div>

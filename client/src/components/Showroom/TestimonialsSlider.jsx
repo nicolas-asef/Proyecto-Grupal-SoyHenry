@@ -40,9 +40,9 @@ const TestiMonials = () => {
               {...options}
             >
               {workersToShow.length === 0 ? (
-                <div class="item">
-                  <div class="shadow-effect">
-                    <img class="img-circle" src={`${info.pic}`} alt="pic2" />
+                <div className="item">
+                  <div className="shadow-effect">
+                    <img className="img-circle" src={`${info.pic}`} alt="pic2" />
 
                     <p>
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -52,7 +52,7 @@ const TestiMonials = () => {
                       magna."
                     </p>
                   </div>
-                  <div class="testimonial-name">
+                  <div className="testimonial-name">
                     <h5>Gustavo Cerati</h5>
                     <small>PROGRAMADOR</small>
                   </div>
@@ -60,14 +60,14 @@ const TestiMonials = () => {
               ) : (
                 workersToShow.map((t) => {
                   return (
-                    <div class="item">
-                      <div class="shadow-effect">
-                        <div class="img-circle">
+                    <div className="item">
+                      <div className="shadow-effect">
+                        <div className="img-circle">
                           <img src={t.User.img} alt="pics" />
                         </div>
                         <p>{t.Contracts.comment_U}</p>
                       </div>
-                      <div class="testimonial-name">
+                      <div className="testimonial-name">
                         <h5>
                           {t.User.name} {t.User.lastName}
                         </h5>

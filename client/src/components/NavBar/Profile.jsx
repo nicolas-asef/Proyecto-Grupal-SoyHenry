@@ -25,9 +25,9 @@ const Profile = () => {
 
   useEffect(()=>{
     if (users.length === 0) {
-    dispatch(getUserId(sub))
+      dispatch(getUserId(sub))
     }
-  },[dispatch])
+  },[dispatch, users.img])
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -81,7 +81,7 @@ const Profile = () => {
         <Chip className={s.name} label={`${users.name} ${users.lastName}`} variant="outlined" />
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src={picture} />
+            <Avatar alt="Remy Sharp" src={users.img} />
           </IconButton>
         </Tooltip>
       </div>
