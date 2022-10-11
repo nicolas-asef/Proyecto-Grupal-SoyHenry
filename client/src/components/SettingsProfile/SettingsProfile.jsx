@@ -137,7 +137,7 @@ export default function SettingProfile() {
             <h3 className="pad">Location</h3>
             <TextField
               id="outlined-required"
-              label="Location"
+              
               name="location"
               select
               value={input.location.name}
@@ -152,99 +152,28 @@ export default function SettingProfile() {
                 ))}
             </TextField>
           </div>
-          <hr />
+          
           <div className="bloke">
             <h3 className="pad">Phone</h3>
             <TextField
               id="outlined-required"
-              label="Phone"
               name="phone"
               value={input.phone}
               /* defaultValue={user.phone}  */
               onChange={handleChange}
             />
           </div>
-          <hr />
+         
           <div className="bloke">
             <h3 className="pad">Image</h3>
             <TextField
               id="outlined-required"
-              label="Image"
               name="img"
               value={input.img}
               /* defaultValue={user.img}  */
               onChange={handleChange}
             />
-          </div>
-          <hr />
-          {/* renderizado condicional para el worker solamente */}
-          <div>
-            {user.Worker && (
-              <>
-                <hr />
-                <div className="bloke">
-                  <h3 className="pad">Description</h3>
-                  <TextField
-                    id="outlined-required"
-                    label="Description"
-                    name="description"
-                    type="text"
-                    value={inputWork.description}
-                    placeholder={user.Worker.description}
-                    /* defaultValue={user.password} */
-                    onChange={handleChangeWork}
-                  />
-                </div>
-                <hr />
-                <div className="bloke">
-                  <h3 className="pad">Certification</h3>
-                  <TextField
-                    id="outlined-required"
-                    label="Certification"
-                    name="certification"
-                    type="text"
-                    value={inputWork.certification}
-                    placeholder={user.Worker.certification}
-                    /* defaultValue={user.password} */
-                    onChange={handleChangeWork}
-                  />
-                </div>
-                <hr />
-                <div className="bloke">
-                  <h3 className="pad">Jobs</h3>
-                  <TextField
-                    id="outlined-required"
-                    label="Jobs"
-                    name="jobs"
-                    type="text"
-                    select
-                    value={inputJobs}
-                    placeholder="Select your jobs"
-                    defaultValue="Select your jobs"
-                    onChange={handleJob}
-                  >
-                    {jobs &&
-                      jobs.map((job) => (
-                        <MenuItem key={job.id} id={job.id} value={job.name}>
-                          {job.name}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                </div>
-                <div className="inputContainer jobsStyle">
-                  <ButtonGroup fullWidth variant="outlined">
-                    {inputJobs.length
-                      ? inputJobs.map((job, index) => (
-                          <Button size="large" onClick={handleDelete} id={index} key={job}>
-                            {job}
-                          </Button>
-                        ))
-                      : null}
-                  </ButtonGroup>
-                </div>
-              </>
-            )}
-            <div className="UploadIMGDIV">
+             <div className="UploadIMGDIV">
               <Button variant="contained" component="label">
                 Selecionar archivo
                 <input
@@ -284,13 +213,84 @@ export default function SettingProfile() {
               )}
             </div>
           </div>
-          <hr />
+         
+          {/* renderizado condicional para el worker solamente */}
+          <div>
+            {user.Worker && (
+              <>
+                
+                <div className="bloke">
+                  <h3 className="pad">Description</h3>
+                  <TextField
+                    id="outlined-required"
+                    
+                    name="description"
+                    type="text"
+                    value={inputWork.description}
+                    placeholder={user.Worker.description}
+                    /* defaultValue={user.password} */
+                    onChange={handleChangeWork}
+                  />
+                </div>
+                
+                <div className="bloke">
+                  <h3 className="pad">Certification</h3>
+                  <TextField
+                    id="outlined-required"
+                    
+                    name="certification"
+                    type="text"
+                    value={inputWork.certification}
+                    placeholder={user.Worker.certification}
+                    /* defaultValue={user.password} */
+                    onChange={handleChangeWork}
+                  />
+                </div>
+                
+                <div className="bloke">
+                  <h3 className="pad">Jobs</h3>
+                  <TextField
+                    id="outlined-required"
+                    label="Jobs"
+                    name="jobs"
+                    type="text"
+                    select
+                    value={inputJobs}
+                    placeholder="Select your jobs"
+                    defaultValue="Select your jobs"
+                    onChange={handleJob}
+                  >
+                    {jobs &&
+                      jobs.map((job) => (
+                        <MenuItem key={job.id} id={job.id} value={job.name}>
+                          {job.name}
+                        </MenuItem>
+                      ))}
+                  </TextField>
+                </div>
+                <div className="inputContainer jobsStyle">
+                  <ButtonGroup fullWidth variant="outlined">
+                    {inputJobs.length
+                      ? inputJobs.map((job, index) => (
+                          <Button size="large" onClick={handleDelete} id={index} key={job}>
+                            {job}
+                          </Button>
+                        ))
+                      : null}
+                  </ButtonGroup>
+                </div>
+              </>
+            )}
+           
+          </div>
+          
           <Button type="submit" variant="contained" endIcon={<SendIcon />}>
             Send
           </Button>
         </form>
       </div>
       <div>
+        <h3>You want to be a premium worker? PUNCHASE HERE</h3>
         <Button type="submit" variant="contained" onClick={handlePremium}>
           PREMIUM
         </Button>
