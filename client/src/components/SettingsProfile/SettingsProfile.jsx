@@ -1,3 +1,4 @@
+import * as React from 'react';
 import "./SettingsProfile.css";
 import {
   getJobs,
@@ -17,6 +18,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import MenuItem from "@mui/material/MenuItem";
 import ButtonGroup from "@mui/material/ButtonGroup"
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function SettingProfile() {
   const dispatch = useDispatch();
@@ -30,6 +37,7 @@ export default function SettingProfile() {
   const uploadedImage = useSelector((state) => state.uploadedImg);
   const navigate = useNavigate();
   const id = sub;
+  const [openLogin, setOpenLogin] = useState(false);
   //const id = userAuth.user.id
   const [input, setInput] = useState({
     email: user.email,
@@ -108,6 +116,7 @@ export default function SettingProfile() {
     console.log(inputWork.jobs)
     dispatch(updateUser(input, id));
     dispatch(updateWorker(inputWork, inputJobs, user.Worker.ID));
+    setOpenLogin(true)
   };
 
   function handleChange(e) {
@@ -126,6 +135,10 @@ export default function SettingProfile() {
 
   function handlePremium() {
     navigate("/profile/settings/premium");
+  }
+  
+  const handleClosePopUp = () => {
+    setOpenLogin(false)
   }
 
   return (
@@ -295,6 +308,11 @@ export default function SettingProfile() {
           PREMIUM
         </Button>
       </div>
+      <Snackbar open={openLogin} autoHideDuration={3000} onClose={handleClosePopUp}>
+        <Alert onClose={handleClosePopUp} severity="success" sx={{ width: '100%' }}>
+          Your information was successfully modified
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
