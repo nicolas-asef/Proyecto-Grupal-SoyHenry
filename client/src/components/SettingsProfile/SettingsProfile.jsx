@@ -32,8 +32,7 @@ export default function SettingProfile() {
   const id = sub;
   //const id = userAuth.user.id
   const [input, setInput] = useState({
-    email: user.email,
-    location: user.location,
+    location: user.location.name,
     phone: user.phone,
     img: user.img,
   });
@@ -136,11 +135,10 @@ export default function SettingProfile() {
           <div className="bloke">
             <h3 className="pad">Location</h3>
             <TextField
-              id="outlined-required"
-              
+              id="outlined-required"      
               name="location"
               select
-              value={input.location.name}
+              value={input.location}
               /* defaultValue={user.location} */
               onChange={handleChange}
             >

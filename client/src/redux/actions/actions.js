@@ -346,7 +346,8 @@ export function get_countries() {
 
 export function updateUser(payload, payloadId) {
   return async function(dispatch){
-    console.log(payload)
+    // console.log("abajo el payload")
+    // console.log(payload)
     const user = await axios.put(baseURL+"users/" + payloadId , payload);
     dispatch({
       type: PUT_USER,

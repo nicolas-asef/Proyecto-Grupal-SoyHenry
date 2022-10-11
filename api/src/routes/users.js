@@ -48,6 +48,7 @@ const getUsers = async () => {
       Worker: u.Worker,
       Contracts: u.Contracts,
       Chats: u.Chats,
+      Country: u.Country
     };
   });
   return dataUser;
@@ -78,27 +79,47 @@ router.get("/", async (req, res, next) => {
 
 
 
-router.put('/:id', async (req, res, next) => {   
-    const info = req.body;
-    const {id} = req.params; 
-    //const salt = await bcrypt.genSalt(10);    
-    try {
-        const updatedUser = await User.findOne({where: {ID: id}});        
-        const us = await updatedUser.update({
-            name: info.name,
-            lastName: info.lastName,
-            img: info.img,
-            phone: info.phone,
-            dni: info.dni,
-            onBoarded: info.onBoarded,
-            location: info.location
-        })
-        us.setCountry(info.countryId)
-        res.status(200).json(us)       
-    } catch (error) {
-        res.status(500).send("entro al catch")        
-  }
-});
+// router.put('/:id', async (req, res, next) => {   
+//     const info = req.body;
+//     const {id} = req.params; 
+//     console.log(info)
+//     //const salt = await bcrypt.genSalt(10); 
+//     try {
+//       const user = await User.findOne({where: {ID: id}});
+//       console.log(user)
+//       const paisDB = await Country.findAll({
+//         where : {
+//           name: info.location
+//         }
+//       })
+      
+//       // await user.setCountry(null)
+//       await user.setCountry(info.location)
+//       res.status(200).json(user)
+//     } catch (error) {
+//       console.log(error)
+//     }   
+  //   try {
+  //     const updatedUser = await User.findOne({where: {ID: id}});    
+  //     console.log(updatedUser)    
+  //     let countryDb = await Country.findAll({
+  //       where: {
+  //           name: info.location
+  //       }
+  //   })
+  //     const us = await updatedUser.update({    
+  //         img: info.img,
+  //         phone: info.phone,
+  //         onBoarded: info.onBoarded
+  //     })
+
+      
+  //       await us.addCountries(countryDb)
+  //       res.status(200).json(us)       
+  //   } catch (error) {
+  //       res.status(500).send("entro al catch")        
+  // }
+//});
 
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
@@ -136,6 +157,7 @@ router.put("/:id", async (req, res, next) => {
   const info = req.body;
   const { id } = req.params;
   const salt = await bcrypt.genSalt(10);
+  console.log(info)
   try {
     const updatedUser = await User.findOne({ where: { ID: id } });
     const us = await updatedUser.update({
@@ -145,9 +167,15 @@ router.put("/:id", async (req, res, next) => {
       phone: info.phone,
       dni: info.dni,
       onBoarded: info.onBoarded,
-      location: info.location,
+      
     });
-    us.setCountry(info.countryId);
+
+    let countryDb = await Country.findAll({
+          where: {
+              name: info.location
+          }
+      })
+    us.addCountry(countryDb);
     res.status(200).json(us);
   } catch (error) {
     res.status(500).send("entro al catch");
