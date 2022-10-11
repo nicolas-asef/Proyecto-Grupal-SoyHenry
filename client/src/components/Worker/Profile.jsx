@@ -59,7 +59,7 @@ function Profile({id,ocultarFilters,img,name,jobs,description,available,status})
           </div>
           <label className='label-description' htmlFor="description">Descripción</label>
           <p className="text-info">{description? description : "No se ha realizado una descripcion aun."}</p>
-          <label className='label-description' htmlFor="disponibility">Disponible</label>
+          {jobs && jobs.length ? <label className='label-description' htmlFor="disponibility">Disponible</label> : ""}
           {jobs && jobs.length ? <p className="text-info">{available? available : "Disponibilidad no registrada aun"}</p> : "" }
           <label className='label-description' htmlFor="disponibility">Estado</label>
           <div className="text-info">{status ? <Status text="Conectado"/> : <Status text="Desconectado"/>}</div>
