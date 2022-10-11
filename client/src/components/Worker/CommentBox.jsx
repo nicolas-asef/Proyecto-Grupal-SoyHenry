@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 function CommentBox({descripcion,imagen,nombre,rating,id}) {
   return (
-      <div className="commentBoxContainer">
-        
+    <Link to = {'/profile/user/'+id}>
+        <div className="commentBoxContainer">
           <div className="c-left">
             {/* <img className='o-img' src={imagen} alt='nose'/> */}
             <Avatar alt={nombre} src={imagen} sx={{ width: 94, height: 94, marginLeft:2}} />
@@ -20,10 +20,9 @@ function CommentBox({descripcion,imagen,nombre,rating,id}) {
             </div>
             <span className="c-description">{descripcion}</span>
           </div>
-
- 
+       </div>
+    </Link>
         
-    </div>
   )
 }
 

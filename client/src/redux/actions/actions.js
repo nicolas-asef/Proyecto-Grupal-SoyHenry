@@ -95,7 +95,7 @@ export function getContractWorker(ids){
     .then(data =>{ 
       return data.json()})
     .then(json => {
-      
+      console.log("el jacky----------->",json)
       dispatch({type:GET_USERS_CONTRACTS,payload:json})
     })
     .catch(error => {dispatch({type:GET_USERS_CONTRACTS,payload:{}})

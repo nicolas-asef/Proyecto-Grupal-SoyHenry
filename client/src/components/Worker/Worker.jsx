@@ -14,7 +14,7 @@ import Footer from '../Footer/Footer';
 import cardContracts from '../CardContracts/CardContracts';
 import CardContracts from '../CardContracts/CardContracts';
 
-export const Worker = ({authState,getUserDetail,getContractWorker,getContractUsers, user ,users,isLoading, cleanDetail}) => {
+export const Worker = ({type,authState,getUserDetail,getContractWorker,getContractUsers, user ,users,isLoading, cleanDetail}) => {
 
   const id = useParams().id
   const [pag,setPag] = useState(1)
@@ -44,14 +44,16 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
     let nuevoObjeto = {}
     if(Object.keys(user).length !== 0 ){
       const contratos = []
-      user.Contracts.forEach(e => contratos.push(e.id))
       nuevoObjeto.User= {}
-        nuevoObjeto.User.name = user.lastName + " " + user.name  
-        nuevoObjeto.User.img = user.img
-      if(user.Worker){
+      nuevoObjeto.User.name = user.lastName + " " + user.name  
+      nuevoObjeto.User.img = user.img
+      console.log(user)
+      if(type === 'worker'){
+        user.Worker.Contracts.forEach(e => contratos.push(e.id))
         nuevoObjeto.Jobs = user.Worker.Jobs[0].name? user.Worker.Jobs.map(e => e.name) : user.Worker.Jobs
         getContractUsers(contratos)
       } else {
+        user.Contracts.forEach(e => contratos.push(e.id))
         getContractWorker(contratos)
       }
       setWorker(nuevoObjeto)
@@ -60,6 +62,7 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
 
 
   useEffect(() =>{
+    console.log("----------------->",users)
     if(users && Array.isArray(users)){
       setListaValoraciones(users)
     }
@@ -75,11 +78,14 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
       let variableComent = "comment_W"
       let variableRating = "rating_W"
       let variableId = "WorkerID"
-      if(user.Worker){
+      if(type === 'worker'){
+        console.log("Entree---->")
         variableComent = "comment_U"
         variableRating = "rating_U"
         variableId = "UserID"
       }
+      
+      console.log(listaValoraciones)
       listaValoraciones.forEach(e => {
       const elemento = {
         id: e[variableId],
@@ -131,7 +137,7 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
     else 
     setDisplaying("none")
   }
-
+  console.log(user.Worker === true)
   return (
     <>
     {isLoading? 
@@ -144,7 +150,7 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
       </div>
       <div className="w-content">
         <div className="w-left" >
-        {worker.User && worker.User.name ? <Profile /* id={user.Worker.ID} */ ocultarFilters={ocultarFilters} img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {authState.isLoggedIn}/> : <Skeleton variant = "circular">
+        {worker.User && worker.User.name ? <Profile id={user.Worker? user.Worker.ID : false} ocultarFilters={ocultarFilters} img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {authState.isLoggedIn}/> : <Skeleton variant = "circular">
 
           </Skeleton> }
           </div>

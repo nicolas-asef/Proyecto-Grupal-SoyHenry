@@ -25,7 +25,7 @@ const router = Router();
 const getUsers = async () => {
   const info = await User.findAll({
     include: [
-      { model: Worker, include: [Job] },
+      { model: Worker, include: [Job,Contract] },
       { model: Contract },
       { model: Chat },
       { model: Country },
@@ -104,7 +104,7 @@ router.put('/:id', async (req, res, next) => {
       //us.setCountry(countryDb[0])
         res.status(200).json(us)       
     } catch (error) {
-        res.status(500).send("entro al catch")        
+        res.send(error)        
   }
 });
 
@@ -146,6 +146,7 @@ router.put("/:id", async (req, res, next) => {
   const salt = await bcrypt.genSalt(10);
   try {
     const updatedUser = await User.findOne({ where: { ID: id } });
+    console.log(updatedUser)
     const us = await updatedUser.update({
       name: info.name,
       lastName: info.lastName,
