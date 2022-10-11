@@ -49,7 +49,6 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
         nuevoObjeto.User.name = user.lastName + " " + user.name  
         nuevoObjeto.User.img = user.img
       if(user.Worker){
-        console.log("entro linea 52")
         nuevoObjeto.Jobs = user.Worker.Jobs[0].name? user.Worker.Jobs.map(e => e.name) : user.Worker.Jobs
         getContractUsers(contratos)
       } else {

@@ -58,9 +58,9 @@ const TestiMonials = () => {
                   </div>
                 </div>
               ) : (
-                workersToShow.map((t) => {
+                workersToShow.map((t, index) => {
                   return (
-                    <div className="item">
+                    <div key={index} className="item">
                       <div className="shadow-effect">
                         <div className="img-circle">
                           <img src={t.User.img} alt="pics" />
