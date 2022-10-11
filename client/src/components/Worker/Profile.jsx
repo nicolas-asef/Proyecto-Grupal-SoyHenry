@@ -80,7 +80,7 @@ function Profile({id,ocultarFilters,img,name,jobs,description,available,status})
           </Modal>
         </div>
         <Snackbar open={openLogin} autoHideDuration={3000} onClose={handleClosePopUp}>
-        <Alert onClose={handleClosePopUp} severity="warning" sx={{ width: '100%' }}>
+        <Alert onClose={handleClosePopUp} severity="warning" style={{height:'10vh',display:'flex',alignItems:'center'}} sx={{ width: '100%' }}>
           Debe ingresar a la plataforma para poder contratar
         </Alert>
       </Snackbar>
