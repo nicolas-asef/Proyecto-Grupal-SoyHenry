@@ -69,6 +69,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
   }
 
   const changeType = (e) =>{
+    setPage(1)
     setType(e.target.value)
   }
 
