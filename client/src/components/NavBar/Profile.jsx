@@ -33,7 +33,7 @@ const Profile = () => {
     setAnchorElUser(null);
   };
   const handleOpenProfile = () => {
-    navigate(`/profile/${sub}`)
+    navigate(`/profile/user/${sub}`)
     setAnchorElUser(null);
   }
   
