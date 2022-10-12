@@ -81,28 +81,41 @@ router.get("/", async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {   
     const info = req.body;
-    const {id} = req.params;     
+    const {id} = req.params;  
     try {
-        const updatedUser = await User.findOne({where: {ID: id}});        
-        const us = await updatedUser.update({
-            name: info.name,
-            lastName: info.lastName,
-            img: info.img,
-            phone: info.phone,
-            dni: info.dni,
-            onBoarded: info.onBoarded,
-            location: info.location
-        })
-        let countryDb = await Country.findAll({
-          where: {
-              name: info.location
-          }
-        }) 
-        info.countryId ? us.setCountry(info.countryId) :
-        us.setCountry(countryDb[0])
-      //console.log(countryDb)    
-      //us.setCountry(countryDb[0])
-        res.status(200).json(us)       
+        const updatedUser = await User.findOne({where: {ID: id}}); 
+        console.log(updatedUser)     
+        
+        info.name ? await updatedUser.update({
+          name: info.name
+        }) : "no updatie el name"
+        info.lastName ? await updatedUser.update({
+          lastName: info.lastName
+        }) : "no updatie el lastName"
+        info.img ? await updatedUser.update({
+          img: info.img
+        }) : "no updatie el img"
+        info.phone ? await updatedUser.update({
+          phone: info.phone
+        }) : "no updatie el phone"
+        info.dni ? await updatedUser.update({
+          dni: info.dni
+        }) : "no updatie el dni"
+        info.onBoarded ? await updatedUser.update({
+          onBoarded: info.onBoarded
+        }) : "no updatie el onBoarded"
+        if(info.countryId){
+          await updatedUser.setCountry(info.countryId)
+        } 
+        if(info.location){
+          let countryDb = await Country.findAll({
+               where: {
+                   name: info.location
+               }
+             }) 
+          await updatedUser.setCountry(countryDb[0])
+        }
+        res.status(200).json(updatedUser)       
     } catch (error) {
         res.send(error)        
   }
@@ -140,28 +153,28 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
-  const info = req.body;
-  const { id } = req.params;
-  const salt = await bcrypt.genSalt(10);
-  try {
-    const updatedUser = await User.findOne({ where: { ID: id } });
-    console.log(updatedUser)
-    const us = await updatedUser.update({
-      name: info.name,
-      lastName: info.lastName,
-      img: info.img,
-      phone: info.phone,
-      dni: info.dni,
-      onBoarded: info.onBoarded,
-      location: info.location,
-    });
-    us.setCountry(info.countryId);
-    res.status(200).json(us);
-  } catch (error) {
-    res.status(500).send("entro al catch");
-  }
-});
+
+// router.put("/:id", async (req, res, next) => {
+//   const info = req.body;
+//   const { id } = req.params;
+//   const salt = await bcrypt.genSalt(10);
+//   try {
+//     const updatedUser = await User.findOne({ where: { ID: id } });
+//     const us = await updatedUser.update({
+//       name: info.name,
+//       lastName: info.lastName,
+//       img: info.img,
+//       phone: info.phone,
+//       dni: info.dni,
+//       onBoarded: info.onBoarded,
+//       location: info.location,
+//     });
+//     us.setCountry(info.countryId);
+//     res.status(200).json(us);
+//   } catch (error) {
+//     res.status(500).send("entro al catch");
+//   }
+// });
 
 router.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
