@@ -41,7 +41,6 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
 
 
   useEffect(() =>{ 
-    console.log(user)
     let nuevoObjeto = {}
     if(Object.keys(user).length !== 0 ){
       const contratos = []
@@ -73,11 +72,11 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
     
     let auxiliarTerminados = 0
     let auxiliarPromedio = 0
-    setMaxPag(Math.ceil(users.length/5))
+    
     if(Object.keys(listaValoraciones).length !== 0){
       let variableComent = "comment_W"
       let variableRating = "rating_W"
-      let variableId = "UserID"
+      let variableId = null
       if(type === 'worker'){
         variableComent = "comment_U"
         variableRating = "rating_U"
@@ -85,21 +84,25 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
       }
       
       listaValoraciones.forEach(e => {
-      const elemento = {
-        id: e[variableId],
-        name : e.User.lastName + " "+ e.User.name,
-        img : e.User.img,
-        comment: e[variableComent],
-        rating: e[variableRating]
-      }
-
-      auxiliarTerminados++
-      auxiliarPromedio = (elemento.rating+auxiliarPromedio)
-      contractsVisualized.push(elemento)
-      })}
+        if(e[variableComent]){
+          const elemento = {
+            id: variableId ? e[variableId] : e.Worker.UserID,
+            name : e.User ? e.User.lastName + " "+ e.User.name : e.Worker.User.lastName + " "+ e.Worker.User.name  ,
+            img : e.User? e.User.img : e.Worker.User.img,
+            comment: e[variableComent],
+            rating: e[variableRating]
+          }
+    
+          auxiliarTerminados++
+          auxiliarPromedio = (elemento.rating+auxiliarPromedio)
+          contractsVisualized.push(elemento)
+        }
+      })
+    }
       auxiliarPromedio = auxiliarPromedio/auxiliarTerminados
       setFinishedJobs(auxiliarTerminados)
       setpromedioRating(auxiliarPromedio)
+      setMaxPag(Math.ceil(contractsVisualized.length/5))
       setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
   },[listaValoraciones,forzarCambio,pag])
 

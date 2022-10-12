@@ -50,8 +50,8 @@ route.get("/worker", async (req, res) => {
       include: [{ model: Worker, include: User }],
     });
 
-    const workers = contracts.map((elem) => elem.Worker);
-    res.send(workers);
+
+    res.send(contracts);
   } catch (error) {
     res.send("Error en la operacion: " + error.message);
   }
