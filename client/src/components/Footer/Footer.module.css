@@ -1,0 +1,34 @@
+li {
+    list-style: none;
+}
+.footer{
+    margin: 0px;
+    padding: 0px;
+    left:0;
+    right: 0;
+    bottom: 0;
+    list-style: none;
+    text-decoration: none;
+    margin-top: 20px;
+}
+link {
+    text-decoration: none;
+}
+.footerContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+.social {
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.social ul li {
+    margin-right: 15px;
+}
