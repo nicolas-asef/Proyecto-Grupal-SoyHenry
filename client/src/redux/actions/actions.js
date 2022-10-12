@@ -351,7 +351,7 @@ export function updateUser(payload, payloadId) {
     dispatch({
       type: PUT_USER,
     });
-    return user;
+    //return user;
   } 
 }
 
