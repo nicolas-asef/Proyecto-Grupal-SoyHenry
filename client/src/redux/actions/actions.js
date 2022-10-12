@@ -423,11 +423,13 @@ export function pay( paymentMethod ) {
 
 export function premiumPay(payload) {
   return async function(dispatch){
+    console.log(payload)
     const worker = await axios.put("http://localhost:3001/worker/" + payload, {premium: true});
     dispatch({
       type: PUT_WORKER_PREMIUM,
     });
-    return "worker";
+    console.log("te hiciste premium pa")
+    //return worker;
   } 
 }
 

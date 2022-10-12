@@ -148,7 +148,7 @@ export default function SettingProfile() {
 
   return (
     <div className="container-setting">
-      <div>
+      <div >
         <form onSubmit={onSubmit}>
           <h1>Edit profile</h1>
           <div className="bloke">
@@ -214,10 +214,10 @@ export default function SettingProfile() {
                 ""
               ) : (
                 <Button
-                  variant="contained"
+                variant="contained"
                   color="success"
                   onClick={uploadImageHandler}
-                >
+                  >
                   Subir Imagen
                 </Button>
               )}
@@ -233,86 +233,90 @@ export default function SettingProfile() {
           </div>
          
           {/* renderizado condicional para el worker solamente */}
-          <div>
+          <div className='workRend'>
             {user.Worker && (
-              <>
-                
-                <div className="bloke">
-                  <h3 className="pad">Description</h3>
-                  <TextField
-                    id="outlined-required"
-                    
-                    name="description"
-                    type="text"
-                    value={inputWork.description}
-                    placeholder={user.Worker.description}
-                    /* defaultValue={user.password} */
-                    onChange={handleChangeWork}
-                  />
+              <>               
+                <div>
+                  <div className="bloke">
+                    <h3 className="pad">Description</h3>
+                    <TextField
+                      id="outlined-required"
+                      
+                      name="description"
+                      type="text"
+                      value={inputWork.description}
+                      placeholder={user.Worker.description}
+                      /* defaultValue={user.password} */
+                      onChange={handleChangeWork}
+                    />
+                  </div>
+                  
+                  <div className="bloke">
+                    <h3 className="pad">Certification</h3>
+                    <TextField
+                      id="outlined-required"
+                      
+                      name="certification"
+                      type="text"
+                      value={inputWork.certification}
+                      placeholder={user.Worker.certification}
+                      /* defaultValue={user.password} */
+                      onChange={handleChangeWork}
+                    />
+                  </div>
+                  
+                  <div className="bloke">
+                    <h3 className="pad">Jobs</h3>
+                    <TextField
+                      id="outlined-required"
+                      label="Jobs"
+                      name="jobs"
+                      type="text"
+                      select
+                      value={inputJobs}
+                      placeholder="Select your jobs"
+                      defaultValue="Select your jobs"
+                      onChange={handleJob}
+                    >
+                      {jobs &&
+                        jobs.map((job) => (
+                          <MenuItem key={job.id} id={job.id} value={job.name}>
+                            {job.name}
+                          </MenuItem>
+                        ))}
+                    </TextField>
+                  </div>
+                  <div className="inputContainer jobsStyle">
+                    <ButtonGroup fullWidth variant="outlined">
+                      {inputJobs.length
+                        ? inputJobs.map((job, index) => (
+                            <Button size="large" onClick={handleDelete} id={index} key={job}>
+                              {job}
+                            </Button>
+                          ))
+                        : null}
+                    </ButtonGroup>
+                  </div>
                 </div>
-                
-                <div className="bloke">
-                  <h3 className="pad">Certification</h3>
-                  <TextField
-                    id="outlined-required"
-                    
-                    name="certification"
-                    type="text"
-                    value={inputWork.certification}
-                    placeholder={user.Worker.certification}
-                    /* defaultValue={user.password} */
-                    onChange={handleChangeWork}
-                  />
-                </div>
-                
-                <div className="bloke">
-                  <h3 className="pad">Jobs</h3>
-                  <TextField
-                    id="outlined-required"
-                    label="Jobs"
-                    name="jobs"
-                    type="text"
-                    select
-                    value={inputJobs}
-                    placeholder="Select your jobs"
-                    defaultValue="Select your jobs"
-                    onChange={handleJob}
-                  >
-                    {jobs &&
-                      jobs.map((job) => (
-                        <MenuItem key={job.id} id={job.id} value={job.name}>
-                          {job.name}
-                        </MenuItem>
-                      ))}
-                  </TextField>
-                </div>
-                <div className="inputContainer jobsStyle">
-                  <ButtonGroup fullWidth variant="outlined">
-                    {inputJobs.length
-                      ? inputJobs.map((job, index) => (
-                          <Button size="large" onClick={handleDelete} id={index} key={job}>
-                            {job}
-                          </Button>
-                        ))
-                      : null}
-                  </ButtonGroup>
+                <div>
+                  <div>
+                    <h3>You want to be a premium worker? PUNCHASE HERE</h3>
+                    <Button className='premiumButton' type="submit" variant="contained" onClick={handlePremium}>
+                      PREMIUM
+                    </Button>
+                  </div>
                 </div>
               </>
             )}
            
           </div>
           
-          <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+          <Button className='sendButton' type="submit" variant="contained" endIcon={<SendIcon />}>
             Send
           </Button>
         </form>
       </div>
-      <div>
-        <h3>You want to be a premium worker? PUNCHASE HERE</h3>
-        <Button type="submit" variant="contained" onClick={handlePremium}>
-          PREMIUM
-        </Button>
-      </div>
+      
       <Snackbar open={openLogin} autoHideDuration={3000} onClose={handleClosePopUp}>
         <Alert onClose={handleClosePopUp} severity="success" sx={{ width: '100%' }}>
           Your information was successfully modified
