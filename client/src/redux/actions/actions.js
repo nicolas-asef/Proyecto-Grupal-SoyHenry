@@ -87,18 +87,22 @@ export function getContractWorker(ids){
 
   let ides = ids.reduce((acum,e) => acum+"&arr="+e,"arr=")
   ides = ides.slice(5,ides.length)
+  console.log(ides === "")
+  if(ides !== "")
   return function(dispatch){
     dispatch({ type: LOADING });
     return fetch(baseURL+"contract/worker?"+ides)
     .then(data =>{ 
-      console.log("la data----------->",data)
       return data.json()})
     .then(json => {
-      console.log("el jacky----------->",json)
       dispatch({type:GET_USERS_CONTRACTS,payload:json})
     })
     .catch(error => {console.log("error------>",error)})
   }
+  else 
+    return function(dispatch){
+      dispatch({type:GET_USERS_CONTRACTS,payload:[]})
+    }
 }
 
 

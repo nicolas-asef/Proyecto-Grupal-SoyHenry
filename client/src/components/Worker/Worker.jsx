@@ -63,7 +63,6 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
 
 
   useEffect(() =>{
-    console.log("valoraciones-------->",users)
     if(users && Array.isArray(users)){
       setListaValoraciones(users)
     }
@@ -101,7 +100,6 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
       auxiliarPromedio = auxiliarPromedio/auxiliarTerminados
       setFinishedJobs(auxiliarTerminados)
       setpromedioRating(auxiliarPromedio)
-      console.log("---------------------------->",contractsVisualized)
       setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
   },[listaValoraciones,forzarCambio,pag])
 

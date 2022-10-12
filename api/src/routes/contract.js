@@ -37,6 +37,7 @@ route.get("/user", async (req, res) => {
 route.get("/worker", async (req, res) => {
   try {
     let id = req.query.arr;
+    console.log(id);
     if (!id.isArray) {
       id = [id];
     }
@@ -48,6 +49,7 @@ route.get("/worker", async (req, res) => {
       },
       include: [{ model: Worker, include: User }],
     });
+
     const workers = contracts.map((elem) => elem.Worker);
     res.send(workers);
   } catch (error) {
