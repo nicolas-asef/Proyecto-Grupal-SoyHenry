@@ -47,13 +47,14 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
       nuevoObjeto.User= {}
       nuevoObjeto.User.name = user.lastName + " " + user.name  
       nuevoObjeto.User.img = user.img
-      console.log(user)
       if(type === 'worker'){
         user.Worker.Contracts.forEach(e => contratos.push(e.id))
         nuevoObjeto.Jobs = user.Worker.Jobs[0].name? user.Worker.Jobs.map(e => e.name) : user.Worker.Jobs
         getContractUsers(contratos)
       } else {
+        
         user.Contracts.forEach(e => contratos.push(e.id))
+        console.log(contratos)
         getContractWorker(contratos)
       }
       setWorker(nuevoObjeto)
@@ -62,7 +63,7 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
 
 
   useEffect(() =>{
-    console.log("----------------->",users)
+    console.log("valoraciones-------->",users)
     if(users && Array.isArray(users)){
       setListaValoraciones(users)
     }
@@ -77,15 +78,13 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
     if(Object.keys(listaValoraciones).length !== 0){
       let variableComent = "comment_W"
       let variableRating = "rating_W"
-      let variableId = "WorkerID"
+      let variableId = "UserID"
       if(type === 'worker'){
-        console.log("Entree---->")
         variableComent = "comment_U"
         variableRating = "rating_U"
         variableId = "UserID"
       }
       
-      console.log(listaValoraciones)
       listaValoraciones.forEach(e => {
       const elemento = {
         id: e[variableId],
@@ -102,6 +101,7 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
       auxiliarPromedio = auxiliarPromedio/auxiliarTerminados
       setFinishedJobs(auxiliarTerminados)
       setpromedioRating(auxiliarPromedio)
+      console.log("---------------------------->",contractsVisualized)
       setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
   },[listaValoraciones,forzarCambio,pag])
 
@@ -137,7 +137,6 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
     else 
     setDisplaying("none")
   }
-  console.log(user.Worker === true)
   return (
     <>
     {isLoading? 

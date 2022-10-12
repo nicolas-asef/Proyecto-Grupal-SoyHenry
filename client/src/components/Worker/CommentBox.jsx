@@ -4,9 +4,9 @@ import './CommentBox.css'
 import { Typography, Rating,Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-function CommentBox({descripcion,imagen,nombre,rating,id}) {
+function CommentBox({descripcion,imagen,nombre,rating,type,id}) {
   return (
-    <Link to = {'/profile/user/'+id}>
+    <Link to = {'/profile/'+type+id}>
         <div className="commentBoxContainer">
           <div className="c-left">
             {/* <img className='o-img' src={imagen} alt='nose'/> */}

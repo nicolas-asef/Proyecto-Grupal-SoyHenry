@@ -57,10 +57,10 @@ export default function Opinion({contratos,tipo}) {
   if(contratos.length > 0)
     altura = contratos.length*13
   let key = 0
-
+  console.log(contratos)
   return (
     <Opinion2 altura={altura} className='opinion'>      
-    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox id={e.id} rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <EmptyContainer texto = {requerido}/>}
+    {contratos && contratos.length >0  ? contratos.map(e => {key+=1; return <CommentBox type={requerido !=='requeridos'? 'user/' : ''} id={e.id} rating={e.rating} key={key} descripcion={e.comment} nombre={e.name} imagen={e.img}/>}): <EmptyContainer texto = {requerido}/>}
   </Opinion2>
   )
 }

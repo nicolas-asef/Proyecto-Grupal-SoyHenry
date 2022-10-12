@@ -37,7 +37,9 @@ route.get("/user", async (req, res) => {
 route.get("/worker", async (req, res) => {
   try {
     let id = req.query.arr;
-
+    if (!id.isArray) {
+      id = [id];
+    }
     const contracts = await Contract.findAll({
       where: {
         id: {
@@ -46,9 +48,7 @@ route.get("/worker", async (req, res) => {
       },
       include: [{ model: Worker, include: User }],
     });
-    console.log("-------------->Workers",contracts)
     const workers = contracts.map((elem) => elem.Worker);
-    
     res.send(workers);
   } catch (error) {
     res.send("Error en la operacion: " + error.message);
