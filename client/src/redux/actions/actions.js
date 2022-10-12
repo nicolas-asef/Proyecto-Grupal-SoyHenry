@@ -19,8 +19,12 @@ export function getWorkers(query, search){
     console.log(err)
   })
 }
-
 }
+export function sendNotification (email, type) {
+  const info = {email, type}
+  return function () {
+    axios.post(`${baseURL}mailNotifications`, info)     
+}}
 
 // export function getContractUsers(ids){
 //   return function(dispatch){
