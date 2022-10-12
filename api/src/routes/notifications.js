@@ -15,10 +15,10 @@ router.post("/", async (req, res) => {
         await transporter.sendMail({
           from: '"Proyecto Grupal - Changuitas ✔',
           to: `${email}`,
-          subject: "Email",
-          html: `<b>Email Verification ! ${type}</b>`,
+          subject: "Verification Email !",
+          html: `<b>  ${type} !!</b>`,
         });
-        return res.status(200).json(`Email de verificacion: ${type}`);
+        return res.status(200).json(`Success: ${type}`);
       } catch (error) {
         return res
           .status(400)
@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(`Error aca papa: ${error}`);
+    console.log(error);
     return res.status(400).send(error);
   }
 });
