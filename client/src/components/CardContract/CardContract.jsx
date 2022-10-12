@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom'
 import { modifyContract } from '../../redux/actions/actions'
 import { connect } from 'react-redux'
 
+
 function CardContract({date,location,state,description,worker,type,id,force}) {
 
+
   const confirmar = () => {
-    console.log(id)
     modifyContract({confirmed:true},id)
     force()
   }
