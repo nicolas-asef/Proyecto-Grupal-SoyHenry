@@ -67,6 +67,7 @@ const User = (props) => {
   const onSubmit = (data) => {
 		if (props.type === "worker" && !jobsState.length) return setValidateWorks(true);
 		props.stepperCb(3);
+    console.log(data)
     dispatch(finishUserCreation(props.authID, data, jobsState))
 			.then( res => {
 				if(res.status === 200) {

@@ -40,15 +40,14 @@ export default function SettingProfile() {
   const [openLogin, setOpenLogin] = useState(false);
   //const id = userAuth.user.id
   const [input, setInput] = useState({
-    email: user.email,
     location: user.location,
     phone: user.phone,
     img: user.img,
   });
 
   const [inputWork, setInputWork] = useState({
-    certification: user.Worker.certification,
-    description: user.Worker.description
+    certification: "",
+    description: ""
     // jobs: [user.Worker.Jobs]
   });
   const [inputJobs, setInputJobs] = useState([])
@@ -107,6 +106,12 @@ export default function SettingProfile() {
     dispatch(getUserId(id));
     dispatch(getJobs());
     dispatch(get_countries());
+    if(user.Worker.certification){
+      setInputWork({...inputWork, [inputWork.certification]: user.Worker.certification})
+    }
+    if(user.Worker.description){
+      setInputWork({...inputWork, [inputWork.description]: user.Worker.description})
+    }
   }, [dispatch]);
 
   const onSubmit = (e) => {
