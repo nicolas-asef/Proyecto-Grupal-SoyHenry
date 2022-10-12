@@ -14,7 +14,7 @@ import Footer from '../Footer/Footer';
 import cardContracts from '../CardContracts/CardContracts';
 import CardContracts from '../CardContracts/CardContracts';
 
-export const Worker = ({authState,getUserDetail,getContractWorker,getContractUsers, user ,users,isLoading, cleanDetail}) => {
+export const Worker = ({type,authState,getUserDetail,getContractWorker,getContractUsers, user ,users,isLoading, cleanDetail}) => {
 
   const id = useParams().id
   const [pag,setPag] = useState(1)
@@ -44,14 +44,16 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
     let nuevoObjeto = {}
     if(Object.keys(user).length !== 0 ){
       const contratos = []
-      user.Contracts.forEach(e => contratos.push(e.id))
       nuevoObjeto.User= {}
-        nuevoObjeto.User.name = user.lastName + " " + user.name  
-        nuevoObjeto.User.img = user.img
-      if(user.Worker){
+      nuevoObjeto.User.name = user.lastName + " " + user.name  
+      nuevoObjeto.User.img = user.img
+      if(type === 'worker'){
+        user.Worker.Contracts.forEach(e => contratos.push(e.id))
         nuevoObjeto.Jobs = user.Worker.Jobs[0].name? user.Worker.Jobs.map(e => e.name) : user.Worker.Jobs
         getContractUsers(contratos)
       } else {
+        
+        user.Contracts.forEach(e => contratos.push(e.id))
         getContractWorker(contratos)
       }
       setWorker(nuevoObjeto)
@@ -70,32 +72,37 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
     
     let auxiliarTerminados = 0
     let auxiliarPromedio = 0
-    setMaxPag(Math.ceil(users.length/5))
+    
     if(Object.keys(listaValoraciones).length !== 0){
       let variableComent = "comment_W"
       let variableRating = "rating_W"
-      let variableId = "WorkerID"
-      if(user.Worker){
+      let variableId = null
+      if(type === 'worker'){
         variableComent = "comment_U"
         variableRating = "rating_U"
         variableId = "UserID"
       }
+      
       listaValoraciones.forEach(e => {
-      const elemento = {
-        id: e[variableId],
-        name : e.User.lastName + " "+ e.User.name,
-        img : e.User.img,
-        comment: e[variableComent],
-        rating: e[variableRating]
-      }
-
-      auxiliarTerminados++
-      auxiliarPromedio = (elemento.rating+auxiliarPromedio)
-      contractsVisualized.push(elemento)
-      })}
+        if(e[variableComent]){
+          const elemento = {
+            id: variableId ? e[variableId] : e.Worker.UserID,
+            name : e.User ? e.User.lastName + " "+ e.User.name : e.Worker.User.lastName + " "+ e.Worker.User.name  ,
+            img : e.User? e.User.img : e.Worker.User.img,
+            comment: e[variableComent],
+            rating: e[variableRating]
+          }
+    
+          auxiliarTerminados++
+          auxiliarPromedio = (elemento.rating+auxiliarPromedio)
+          contractsVisualized.push(elemento)
+        }
+      })
+    }
       auxiliarPromedio = auxiliarPromedio/auxiliarTerminados
       setFinishedJobs(auxiliarTerminados)
       setpromedioRating(auxiliarPromedio)
+      setMaxPag(Math.ceil(contractsVisualized.length/5))
       setValoraciones(contractsVisualized.slice(5*(pag-1),5*pag))
   },[listaValoraciones,forzarCambio,pag])
 
@@ -131,7 +138,6 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
     else 
     setDisplaying("none")
   }
-
   return (
     <>
     {isLoading? 
@@ -144,7 +150,7 @@ export const Worker = ({authState,getUserDetail,getContractWorker,getContractUse
       </div>
       <div className="w-content">
         <div className="w-left" >
-        {worker.User && worker.User.name ? <Profile /* id={user.Worker.ID} */ ocultarFilters={ocultarFilters} img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {authState.isLoggedIn}/> : <Skeleton variant = "circular">
+        {worker.User && worker.User.name ? <Profile id={user.Worker? user.Worker.ID : false} ocultarFilters={ocultarFilters} img = {worker.User.img} name = {worker.User.name} jobs = {worker.Jobs} description={worker.description} status = {authState.isLoggedIn}/> : <Skeleton variant = "circular">
 
           </Skeleton> }
           </div>

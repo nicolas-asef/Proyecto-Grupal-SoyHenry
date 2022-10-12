@@ -25,7 +25,7 @@ const router = Router();
 const getUsers = async () => {
   const info = await User.findAll({
     include: [
-      { model: Worker, include: [Job] },
+      { model: Worker, include: [Job,Contract] },
       { model: Contract },
       { model: Chat },
       { model: Country },
@@ -117,7 +117,7 @@ router.put('/:id', async (req, res, next) => {
         }
         res.status(200).json(updatedUser)       
     } catch (error) {
-        res.status(500).send("entro al catch")        
+        res.send(error)        
   }
 });
 

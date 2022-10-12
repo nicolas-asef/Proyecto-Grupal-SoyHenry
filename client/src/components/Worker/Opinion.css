@@ -2,6 +2,7 @@
 .opinion {
     width: 100%;
     max-width: 1000px;
+    min-height: 20vh;
     border-radius: 4px;
     display: flex;
     gap: 5px;

@@ -41,8 +41,6 @@ export function getWorkers(query, search){
 
 
 export function modifyContract(data,id){
-  console.log(id)
-  console.log(data)
   fetch(baseURL+'contract/'+id,{
     method:'PUT',
           headers: {
@@ -51,7 +49,7 @@ export function modifyContract(data,id){
           body: JSON.stringify(data)
   })
   .then(data => console.log(data))
-  .catch(error => alert(error))
+  .catch(error => console.log(error))
 }
 
 export function createContract(data){
@@ -89,18 +87,22 @@ export function getContractWorker(ids){
 
   let ides = ids.reduce((acum,e) => acum+"&arr="+e,"arr=")
   ides = ides.slice(5,ides.length)
+  console.log(ides === "")
+  if(ides !== "")
   return function(dispatch){
     dispatch({ type: LOADING });
     return fetch(baseURL+"contract/worker?"+ides)
     .then(data =>{ 
       return data.json()})
     .then(json => {
-      
       dispatch({type:GET_USERS_CONTRACTS,payload:json})
     })
-    .catch(error => {dispatch({type:GET_USERS_CONTRACTS,payload:{}})
-    })
+    .catch(error => {console.log("error------>",error)})
   }
+  else 
+    return function(dispatch){
+      dispatch({type:GET_USERS_CONTRACTS,payload:[]})
+    }
 }
 
 
