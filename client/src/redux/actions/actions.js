@@ -473,3 +473,7 @@ export const uploadImage = (formData) => (dispatch) => {
 export const cleanDetail = () => (dispatch) => {
   dispatch({type: CLEAN_DETAIL})
 }
+
+export const changeStatus =  (payload, status) => async (dispatch) => {
+  const online = await axios.put("http://localhost:3001/users/" + payload, {isOnline: status});
+}

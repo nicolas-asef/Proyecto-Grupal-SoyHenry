@@ -13,12 +13,13 @@ import Modal from '@mui/material/Modal';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-function Profile({id,ocultarFilters,img,name,jobs,description,available,status}) {
+function Profile({id,ocultarFilters,img,name,jobs,description,available}) {
   // const name = "Barroso Carlos Gonzalo"
   // let jobs = ["Electricista","Gasista","Plomero","Programador"]
   // const description = "La verdad me considero un capo de capos de masters de to, no ve la sonrisa de capo que tengo, ademas, te sigo por toda la pagina jeje"
@@ -29,6 +30,7 @@ function Profile({id,ocultarFilters,img,name,jobs,description,available,status})
   let sub = false
   if(login.isAuthenticated) sub = login.user.sub;
 
+  const status = useSelector(state => state.userDetail.isOnline);
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
   const handleOpen = () => {

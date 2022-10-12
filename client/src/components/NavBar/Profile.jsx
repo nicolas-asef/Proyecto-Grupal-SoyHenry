@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getUserId } from '../../redux/actions/actions'
+import { getUserId, changeStatus } from '../../redux/actions/actions'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react'
 import { style } from '@mui/system';
@@ -42,7 +42,7 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    logout();
+    dispatch(changeStatus(sub, false)).then( data => logout())  
   }
   const handleSettings = () => {
     navigate('/profile/settings')
