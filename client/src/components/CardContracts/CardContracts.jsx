@@ -60,6 +60,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
       num = num%3
     }
     setColumns(columnas_aux)
+    console.log(columnas_aux)
   },[page,type,isLoading])
 
 
@@ -88,6 +89,8 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         state = {e.finished ? "Terminado" : e.confirmed? "Confirmado" : "Pendiente de confirmacion"}
         description = {e.description}
         worker = {e.type}
+        cu ={e.comment_U}
+        cw ={e.comment_W}
         type = {type}
         force = {forceUpdate}
         /> ):<h3>No hay contratos para mostrar...</h3>}
@@ -98,6 +101,8 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         description = {e.description}
         worker = {e.type}
         type = {type}
+        cu ={e.comment_U}
+        cw ={e.comment_W}
         force = {forceUpdate}
         /> )}
         </div>
@@ -107,6 +112,8 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         state = {e.finished ? "Terminado" : e.confirmed? "Confirmado" : "Pendiente de confirmacion"}
         description = {e.description}
         worker = {e.type}
+        cu ={e.comment_U}
+        cw ={e.comment_W}
         type = {type}
         force = {forceUpdate}
         /> )

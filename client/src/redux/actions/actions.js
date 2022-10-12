@@ -49,7 +49,7 @@ export function modifyContract(data,id){
           body: JSON.stringify(data)
   })
   .then(data => console.log(data))
-  .catch(error => alert(error))
+  .catch(error => console.log(error))
 }
 
 export function createContract(data){

@@ -41,6 +41,7 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
 
 
   useEffect(() =>{ 
+    console.log(user)
     let nuevoObjeto = {}
     if(Object.keys(user).length !== 0 ){
       const contratos = []
@@ -54,7 +55,6 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
       } else {
         
         user.Contracts.forEach(e => contratos.push(e.id))
-        console.log(contratos)
         getContractWorker(contratos)
       }
       setWorker(nuevoObjeto)

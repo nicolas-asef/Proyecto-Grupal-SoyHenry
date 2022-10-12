@@ -3,10 +3,33 @@ import s from './CardContract.module.css'
 import { Link } from 'react-router-dom'
 import { modifyContract } from '../../redux/actions/actions'
 import { connect } from 'react-redux'
+import { Modal ,Button} from '@mui/material'
+import { useAuth0 } from '@auth0/auth0-react'
+import FormOpinion from '../FormOpinion/FormOpinion'
 
 
-function CardContract({date,location,state,description,worker,type,id,force}) {
+function CardContract({cu,cw,date,location,state,description,worker,type,id,force}) {
 
+  const [open, setOpen] = React.useState(false);
+  const [controlable, setControlable] = React.useState(false);
+  const login = useAuth0()
+  let sub = false
+
+  //Esto es para que el boton solo permite dejar una opinion si no hay opinion
+  React.useEffect(()=>{
+    if(worker && cw) 
+      setControlable(true)
+    if(!worker && cu)
+      setControlable(true)
+    },[controlable])
+
+  if(login.isAuthenticated) sub = login.user.sub;
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => setOpen(false);
 
   const confirmar = () => {
     modifyContract({confirmed:true},id)
@@ -34,9 +57,17 @@ function CardContract({date,location,state,description,worker,type,id,force}) {
             </li>
             
             {worker? type == 'p' ? <li><h4><button onClick={confirmar} >Confirmar</button><p></p><button onClick={cancelar}>Cancelar</button></h4></li> :
-                     type == 'c' ? <li><h4><button onClick={terminar}>Marcar como terminado</button></h4></li> : 
-                     type == 't' ? <li><h4><button onClick={opinar}>Dejar opinion(deberia saltar un formulario modal)</button></h4></li> : <></>
+                     type == 'c' ? <li><h4><button onClick={terminar}>Marcar como terminado</button></h4></li> : <></>
             : <></> }
+            {type == 't' ? <li><h4><Button disabled = {controlable} onClick={handleOpen}>Dejar opinion(deberia saltar un formulario modal)</Button></h4></li> : <></>}
+            <Modal
+            open={open}
+            onClose={handleClose}
+          >
+            <>
+              <FormOpinion id={id} worker={worker} closeCB={handleClose} />
+            </>
+          </Modal>
         </ul>
     </div>
   )

@@ -1,0 +1,39 @@
+.contract{
+    width: 500px;
+    height: auto;
+    border-radius: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color:rgb(255, 255, 255);
+    transform: translate(-50%, -50%);
+}
+
+.titleForm {
+    margin: 0;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    background-color: #1976d2;
+    color: white;
+    padding: 5px 0;
+    font-weight: 400;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.textFieldContainer {
+    padding: 20px;
+}
+
+.inputField {
+    margin-bottom: 15px !important;
+}
+
+.submitCloseButtons {
+    padding: 20px;
+}
+
+.submitCloseButtons button {
+    margin-bottom: 15px !important;
+}
