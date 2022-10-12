@@ -158,7 +158,7 @@ export default function SettingProfile() {
               
               name="location"
               select
-              value={input.location.name}
+              value={input.location}
               /* defaultValue={user.location} */
               onChange={handleChange}
             >
