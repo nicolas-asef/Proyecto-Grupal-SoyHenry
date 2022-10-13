@@ -11,9 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "@stripe/react-stripe-js": "^1.12.0",
     "@stripe/stripe-js": "^1.38.1",
-    "@sendgrid/mail": "^7.7.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
@@ -28,6 +28,7 @@
     "pg": "^8.8.0",
     "postgres": "^3.2.4",
     "sequelize": "^6.23.1",
+    "socket.io": "^4.5.2",
     "stripe": "^10.12.0"
   }
 }
