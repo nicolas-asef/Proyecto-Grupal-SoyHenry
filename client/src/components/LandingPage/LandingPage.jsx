@@ -1,6 +1,6 @@
 import * as React from "react";
-import { getWorkers } from "../../redux/actions/actions";
-import { useDispatch } from "react-redux";
+import { getUserId, getWorkers,changeStatus } from "../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import Footer from "../Footer/Footer";
@@ -11,12 +11,24 @@ import options from "./options.js";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import s from "./LandingPage.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Album() {
+  const userRedux = useSelector( state => state.users);
+  const {isAuthenticated, user} = useAuth0();
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWorkers());
-  }, []);
+
+  }, [dispatch]);
+
+  useEffect(() => {
+    if(isAuthenticated) {
+      dispatch(changeStatus(user.sub, true));
+    }
+  }, [dispatch, userRedux.isOnline]);
+
 
   return (
     <div className={s.container}>

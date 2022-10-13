@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import s from './ContractForm.module.css'
 import { Button, TextField } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import { createContract } from '../../redux/actions/actions'
+import { agregarSocker, createContract } from '../../redux/actions/actions'
+import { useDispatch,useSelector } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function ContractForm({toggleModal,id,worker_id,closeCB}) {
 
-    // const { user: { sub } } = useAuth0();
+    const dispatch = useDispatch();
+    const socket = useSelector(state => state.socket)
+    const { user: { sub } } = useAuth0();
     
     const [input,setInput] = React.useState({
         id_worker: worker_id,
@@ -14,8 +18,20 @@ function ContractForm({toggleModal,id,worker_id,closeCB}) {
 
     })
 
+    // useEffect(()=>{
+    //   if(sub)
+    //   dispatch(agregarSocker(sub))
+    // },[sub])
+
+
+    useEffect(()=>{
+      console.log(socket)
+    },[socket])
+
+
     const handeInputChange = function(e){
         // console.log(input.id_user)
+        //socket?.emmit("enviarNotificacion",{receptor_id:id,emisor_id:sub,tipo:"contrato"})
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -25,6 +41,9 @@ function ContractForm({toggleModal,id,worker_id,closeCB}) {
     const handleSubmit = (e) =>{
         console.log(input)
         createContract(input)
+        console.log("Emitiendo---",id,sub)
+        alert("pausa")
+        socket?.emit("enviarNotificacion",{receptor_id:id,emisor_id:sub,tipo:"contrato"})
         alert("Sali")
     }
 

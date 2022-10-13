@@ -38,6 +38,8 @@ const getUsers = async () => {
       name: u.name,
       lastName: u.lastName,
       onBoarded: u.onBoarded,
+      isOnline: u.isOnline,
+      isAdmin: u.isAdmin,
       img: u.img,
       email: u.email,
       password: u.password,
@@ -104,9 +106,17 @@ router.put('/:id', async (req, res, next) => {
         info.onBoarded ? await updatedUser.update({
           onBoarded: info.onBoarded
         }) : "no updatie el onBoarded"
+        info.isOnline ? await updatedUser.update({
+          isOnline : info.isOnline
+        }) : await updatedUser.update({
+          isOnline : info.isOnline
+        })
+        info.isAdmin ? await updatedUser.update({
+          isAdmin: info.isAdmin
+        }) : "no updatie el admin"
         if(info.countryId){
           await updatedUser.setCountry(info.countryId)
-        } 
+        }
         if(info.location){
           let countryDb = await Country.findAll({
                where: {

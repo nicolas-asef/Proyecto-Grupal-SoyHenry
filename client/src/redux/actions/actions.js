@@ -1,7 +1,8 @@
 // export const action = () => async (dispatch) => {}
 import { Action } from "@remix-run/router";
 import axios from "axios";
-import {PUT_WORKER, PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, UPLOAD_IMAGE, CLEAN_DETAIL } from './actions_vars'
+import {AGREGAR_SOCKET,PUT_WORKER, PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, UPLOAD_IMAGE, CLEAN_DETAIL } from './actions_vars'
+import {io} from "socket.io-client"
 
 const baseURL = "http://localhost:3001/" //Esto se cambia por localhost:3001 para usarlo local
 
@@ -19,6 +20,17 @@ export function getWorkers(query, search){
     console.log(err)
   })
 }
+}
+
+export function agregarSocker(id){
+  
+  return async function(dispatch){
+    console.log("--------->id",id)
+    const socket = await io(baseURL)
+    await socket.emit("addUser",(id))
+    console.log(socket)
+    dispatch({type:AGREGAR_SOCKET,payload:socket})
+  }
 }
 
 export function sendNotification (email, type) {
@@ -477,4 +489,8 @@ export const uploadImage = (formData) => (dispatch) => {
 
 export const cleanDetail = () => (dispatch) => {
   dispatch({type: CLEAN_DETAIL})
+}
+
+export const changeStatus =  (payload, status) => async (dispatch) => {
+  const online = await axios.put("http://localhost:3001/users/" + payload, {isOnline: status});
 }

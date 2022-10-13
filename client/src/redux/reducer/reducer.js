@@ -24,7 +24,8 @@ import {
   GET_USER_ID,
   GET_COUNTRIES,
   UPLOAD_IMAGE,
-  CLEAN_DETAIL
+  CLEAN_DETAIL,
+  AGREGAR_SOCKET
 } from '../actions/actions_vars'
 
 
@@ -50,10 +51,17 @@ const initialState = {
   allCountries: [],
   allWorkers: [],
   filtrado: [],
-  uploadedImg: ""
+  uploadedImg: "",
+  socket: null
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+
+    case AGREGAR_SOCKET:
+      return{
+        ...state,
+        socket:action.payload
+      }
 
     case GET_USER_DETAIL:
       return{

@@ -7,12 +7,16 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getUserId } from '../../redux/actions/actions'
+import { getUserId, changeStatus } from '../../redux/actions/actions'
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react'
 import { style } from '@mui/system';
 import Chip from '@mui/material/Chip';
 import s from './Profile.module.css'
+import { agregarSocker } from '../../redux/actions/actions';
+import { Badge } from '@mui/material';
+import NotificationsNoneTwoToneIcon from '@mui/icons-material/NotificationsNoneTwoTone';
+import { useState } from 'react';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -21,13 +25,29 @@ const Profile = () => {
   const users = useSelector(state => state.users)
   const navigate = useNavigate()
   const { logout, user: {picture} } = useAuth0();
-
+  const socket = useSelector(state => state.socket)
+  const [cantNotificaciones,setcantNotificaciones] = useState(0)
 
   useEffect(()=>{
     if (users.length === 0) {
       dispatch(getUserId(sub))
     }
   },[dispatch, users.img])
+
+  useEffect(()=>{
+    console.log(sub)
+    if(sub)
+    dispatch(agregarSocker(sub))
+  },[sub])
+
+  useEffect(()=>{
+    console.log("wtfffffffffffff")
+    socket?.on("obtenerNotificacion",({emisor_id,tipo}) => {
+      setcantNotificaciones(cantNotificaciones+1)
+    })
+  },[socket])
+
+
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -42,7 +62,7 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    logout();
+    dispatch(changeStatus(sub, false)).then( data => logout())  
   }
   const handleSettings = () => {
     navigate('/profile/settings')
@@ -77,7 +97,13 @@ const Profile = () => {
     ];
   return (
     <>
-      <div>
+    <div className={s.contenedor}>
+    <div className={s.badge}>
+    <Badge badgeContent={cantNotificaciones} color="primary">
+  <NotificationsNoneTwoToneIcon/>
+</Badge>
+    </div>
+    <div>
         <Chip className={s.name} label={`${users.name} ${users.lastName}`} variant="outlined" />
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -107,6 +133,8 @@ const Profile = () => {
           </MenuItem>
         ))}
       </Menu>
+    </div>
+
     </>
   );
 };
