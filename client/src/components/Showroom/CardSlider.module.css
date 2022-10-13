@@ -1,15 +1,14 @@
 .container {
   display: flex;
-  flex-direction: column;    
+  flex-direction: column;
 }
 
-.cardsContainer {  
-  /* position: absolute; */
+.cardsContainer {
   height: 300px;
-  width: 650px;  
+  width: 650px;
   left: calc(50% - 300px);
-  display: flex;    
-  align-items: center;  
+  display: flex;
+  align-items: center;
 }
 
 .card {
@@ -18,14 +17,14 @@
   flex-direction: column;
   height: 270px;
   width: 350px;
-  background-color:rgb(160, 160, 160) ;
+  background-color: rgb(160, 160, 160);
   border-radius: 10px;
   box-shadow: -1rem 0 2rem #000;
   margin-left: -350px;
   transition: 3s ease-out;
   position: relative;
   left: 0px;
-  align-items: center;  
+  align-items: center;
 }
 
 .card:not(:first-child) {
@@ -37,17 +36,16 @@
   transition: 0.6s ease-out;
   background-color: #00406d;
   width: 400px;
-  
 }
 
 .card:hover .title {
   color: #f3f3f3;
-  font-size: 1.3rem;  
+  font-size: 1.3rem;
   transition: 1s ease;
 }
 
 .card:hover .job1 {
-  color: #f3f3f3;  
+  color: #f3f3f3;
   transition: 1s ease;
 }
 
@@ -68,33 +66,32 @@
 .card img:hover {
   margin-top: 14%;
   border-radius: 20%;
-  width: 140px;  
+  width: 140px;
 }
 
 .title {
   height: 60px;
   display: flex;
-  justify-content: center;  
+  justify-content: center;
   width: 180px;
-  font-family: 'Anton', sans-serif;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
   font-size: 1rem;
   color: #000000;
   transition: 0.5s ease-out;
 }
 
 .job1 {
-  text-decoration:underline ;
+  text-decoration: underline;
   font-size: 1.3rem;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   color: #000000;
-  font-family: 'Anton', sans-serif;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
   transition: 0.5s ease-out;
 }
-
 
 .rating {
   position: absolute;
@@ -125,16 +122,16 @@
   position: absolute;
   bottom: 6%;
   transition: all 2s ease;
-  font-family: 'Anton', sans-serif;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
   font-size: 1.1rem;
   padding-top: 0.5%;
 }
 
 .btn:hover a {
   background-color: #f3f3f3;
-  color:#000;
-  text-shadow: 2px 4px 5px 2px rgba(0,0,0,0.3);  ;
+  color: #000;
+  text-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .btns {
