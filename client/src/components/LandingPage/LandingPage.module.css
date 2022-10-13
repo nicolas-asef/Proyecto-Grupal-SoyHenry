@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap");
 
 .container {
-  background-color: rgb(192, 191, 191);
+  margin-top: 3%;
+  background-color: rgb(255, 255, 255);
   position: relative;
   z-index: 1;
 }

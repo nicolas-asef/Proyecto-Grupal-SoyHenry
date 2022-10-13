@@ -1,25 +1,25 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import { useSelector } from 'react-redux'
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import Profile from './Profile';
-import {Link, useLocation} from 'react-router-dom'
-import { useAuth0 } from '@auth0/auth0-react'
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import { useSelector } from "react-redux";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import Profile from "./Profile";
+import { Link, useLocation } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const pages = ['Home', 'About', 'FAQ'];
+const pages = ["Home", "About", "FAQ"];
 
 const NavBar = () => {
   const location = useLocation();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const loggedState = useSelector( state => state.authState);
+  const loggedState = useSelector((state) => state.authState);
   const { loginWithRedirect, isAuthenticated } = useAuth0();
 
   const handleOpenNavMenu = (event) => {
@@ -30,32 +30,40 @@ const NavBar = () => {
     setAnchorElNav(null);
   };
 
-  if(location.pathname === '/onboarding') return;
+  if (location.pathname === "/onboarding") return;
 
   return (
-    <AppBar style={{ background: '#121213' }} position="static">
+    <AppBar style={{ background: "gray" }} position="static">
       <Container maxWidth="xl">
-        <Toolbar  disableGutters>
+        <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
             component={Link}
-            to='/'
+            to="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'poppins',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "poppins",
               fontWeight: 700,
-              letterSpacing: '.2rem',
-              color: 'inherit',
-              textDecoration: 'none',
-              '&:hover': { background: 'none', color: 'white'}
+              letterSpacing: ".3rem",
+              color: "white",
+              textShadow: "4px 4px 4px black;",
+              fontSize: "2rem",
+              textDecoration: "none",
+              left: "0",
+              transition: "all 2s ease",
+              "&:hover": {
+                background: "none",
+                color: "white",
+                textShadow: "4px 4px 4px black;",
+              },
             }}
           >
-            PFHenry
+            Changuitas
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -70,23 +78,25 @@ const NavBar = () => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{fontWeight: 700}} textAlign="center">{page}</Typography>
+                  <Typography sx={{ fontWeight: 700 }} textAlign="center">
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -98,24 +108,31 @@ const NavBar = () => {
             href=""
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'poppins',
+              fontFamily: "poppins",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "black",
+              textDecoration: "none",
             }}
           >
-            PFHenry
+            Changuitas
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', '&:hover': { color: 'white' }, display: 'block' }}
-                component={Link} 
+                sx={{
+                  my: 2,
+                  color: "black",
+                  "&:hover": { color: "black" },
+                  display: "block",
+                  margin: "0.2%",
+                  textShadow: "1px 1px 1px black;",
+                }}
+                component={Link}
                 to={`/${page}`}
               >
                 {page}
@@ -124,10 +141,22 @@ const NavBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {isAuthenticated ?
-              <Profile /> : 
-                <Button onClick={loginWithRedirect} sx={{ my: 1, color: 'white','&:hover': { color: 'white' }, display: 'flex' }}>Ingresar</Button>
-            }
+            {isAuthenticated ? (
+              <Profile />
+            ) : (
+              <Button
+                onClick={loginWithRedirect}
+                sx={{
+                  my: 1,
+                  color: "black",
+                  "&:hover": { color: "black" },
+                  display: "flex",
+                  textShadow: "1px 1px 1px black;",
+                }}
+              >
+                Ingresar
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>

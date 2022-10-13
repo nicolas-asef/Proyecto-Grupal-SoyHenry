@@ -37,12 +37,6 @@ const TestiMonials = () => {
               {workersToShow.length === 0 ? (
                 <div className="item">
                   <div className="shadow-effect">
-                    <img
-                      className="img-circle"
-                      src={`${info.pic}`}
-                      alt="pic2"
-                    />
-
                     <p>
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore
