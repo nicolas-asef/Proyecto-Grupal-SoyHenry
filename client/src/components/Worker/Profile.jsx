@@ -77,7 +77,7 @@ function Profile({id,ocultarFilters,img,name,jobs,description,available}) {
             onClose={handleClose}
           >
             <>
-              <ContractForm id={sub} worker_id={id} closeCB={handleClose} />
+              <ContractForm id={params.id} worker_id={id} closeCB={handleClose} />
             </>
           </Modal>
         </div>
