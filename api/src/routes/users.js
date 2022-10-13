@@ -83,8 +83,7 @@ router.put('/:id', async (req, res, next) => {
     const info = req.body;
     const {id} = req.params;  
     try {
-        const updatedUser = await User.findOne({where: {ID: id}}); 
-        console.log(updatedUser)     
+        const updatedUser = await User.findOne({where: {ID: id}});     
         
         info.name ? await updatedUser.update({
           name: info.name
@@ -177,7 +176,6 @@ router.post("/", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   try {
     const deleted = await User.destroy({
       where: { id: id },

@@ -52,7 +52,8 @@ const initialState = {
   allWorkers: [],
   filtrado: [],
   uploadedImg: "",
-  socket: null
+  socket: null,
+  popUps: []
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -60,7 +61,7 @@ const reducer = (state = initialState, action) => {
     case AGREGAR_SOCKET:
       return{
         ...state,
-        socket:action.payload
+        socket:!state.socket? action.payload : state.socket
       }
 
     case GET_USER_DETAIL:
