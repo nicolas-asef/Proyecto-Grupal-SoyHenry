@@ -1,137 +1,112 @@
-.container {
+.containerCards {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
-.cardsContainer {
-  height: 300px;
-  width: 650px;
-  left: calc(50% - 300px);
+.boxContainer {
   display: flex;
+  width: 90%;
+  flex-flow: row nowrap;
+  justify-content: center;
   align-items: center;
+  background: #fff;
 }
-
 .card {
-  border: 4px solid grey;
-  display: flex;
-  flex-direction: column;
-  height: 270px;
-  width: 350px;
-  background-color: rgb(160, 160, 160);
+  position: relative;
+  width: 250px;
+  height: 350px;
   border-radius: 10px;
-  box-shadow: -1rem 0 2rem #000;
-  margin-left: -350px;
-  transition: 3s ease-out;
-  position: relative;
-  left: 0px;
-  align-items: center;
+  overflow: hidden;
+  background: #f5f6fa;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+}
+.card:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 0;
+  background: #256d85;
+  transition: all 0.5s ease;
+}
+.box-container .card:hover {
+  /* %% Card on hover %% */
 }
 
-.card:not(:first-child) {
-  margin-left: -30px;
+.card:hover:before {
+  height: 165px;
 }
 
-.card:hover {
-  transform: translateY(-20px);
-  transition: 0.6s ease-out;
-  background-color: #00406d;
-  width: 400px;
+.card:hover .social {
+  margin-top: 50px;
 }
-
-.card:hover .title {
-  color: #f3f3f3;
-  font-size: 1.3rem;
-  transition: 1s ease;
-}
-
-.card:hover .job1 {
-  color: #f3f3f3;
-  transition: 1s ease;
-}
-
-.card:hover ~ .card {
-  position: relative;
-  left: 50px;
-  transition: 0.4s ease-out;
-}
-
-.card img {
+.card:hover .pic {
   width: 120px;
-  height: 90px;
-  border-radius: 50%;
-  margin-top: 16%;
-  transition: all 1s ease;
+  height: 120px;
+  margin-top: 50px;
+  box-shadow: 0px 0px 10px 1px #888;
 }
-
-.card img:hover {
-  margin-top: 14%;
-  border-radius: 20%;
-  width: 140px;
+.card:hover .content {
+  margin-top: 60px;
 }
-
-.title {
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  width: 180px;
-  font-family: "Anton", sans-serif;
-  font-family: "Bebas Neue", cursive;
-  font-size: 1rem;
-  color: #000000;
-  transition: 0.5s ease-out;
-}
-
-.job1 {
-  text-decoration: underline;
-  font-size: 1.3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #000000;
-  font-family: "Anton", sans-serif;
-  font-family: "Bebas Neue", cursive;
-  transition: 0.5s ease-out;
-}
-
-.rating {
+.social {
   position: absolute;
-  bottom: 16%;
-}
-
-.effect {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 0;
+  margin-top: -30px;
   text-align: center;
-  display: inline-block;
-  position: relative;
+  transition: margin-top 0.5s ease;
+}
+.social div {
   text-decoration: none;
-  color: #000000;
-  text-transform: capitalize;
-  font-size: 20px;
+  color: #2d3436;
+  padding: 2px;
+  font-size: 18px;
+  color: #fff;
 }
-
-.btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.pic {
+  position: relative;
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
 }
-.btn a {
-  box-sizing: border-box;
-  background-color: #f3f3f3;
-  height: 8%;
-  width: 55%;
-  border-radius: 6%;
-  position: absolute;
-  bottom: 6%;
-  transition: all 2s ease;
-  font-family: "Anton", sans-serif;
-  font-family: "Bebas Neue", cursive;
-  font-size: 1.1rem;
-  padding-top: 0.5%;
+.pic img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
-
-.btn:hover a {
-  background-color: #f3f3f3;
-  color: #000;
-  text-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.3);
+.content {
+  margin-top: 90px;
+  text-align: center;
+  padding: 0 30px;
+  color: #2d3436;
+  transition: margin-top 0.5s ease;
+}
+.title {
+  margin-bottom: 0;
+  font-family: "Yantramanav", sans-serif;
+  font-size: 22px;
+}
+.content span {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+.content a {
+  margin: 20px 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #b0b0b0;
 }
 
 .btns {
@@ -161,4 +136,9 @@
 .btnRight:hover {
   transform: translateY(4px);
   box-shadow: 10px 10px 15px 0px rgba(0, 0, 0, 0.3);
+}
+
+.rating span {
+  justify-content: center;
+  font-size: 1.5rem;
 }

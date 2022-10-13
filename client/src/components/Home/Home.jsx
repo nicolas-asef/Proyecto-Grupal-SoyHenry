@@ -1,31 +1,34 @@
-import React from 'react';
-import { useEffect, useState } from "react"
-import  SearchBar  from '../SearchBar/SearchBar'
-import { getJobs, getWorkers } from '../../redux/actions/actions'
-import { useDispatch, useSelector } from 'react-redux';
-import FooterS from '../Footer/Footer';
-import Filters from '../Filters/Filters';
-import Catalog from '../Catalog/Catalog'
-import CardSlider from '../Showroom/CardSlider.jsx'
-import s from './Home.module.css';
+import React from "react";
+import { useEffect, useState } from "react";
+import SearchBar from "../SearchBar/SearchBar";
+import { getJobs, getWorkers } from "../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+
+import FooterS from "../Footer/Footer";
+import Filters from "../Filters/Filters";
+import Catalog from "../Catalog/Catalog";
+import CardSlider from "../Showroom/CardSlider.jsx";
+
+import s from "./Home.module.css";
 
 const Home = () => {
   let dispatch = useDispatch();
-	useEffect(() => {
-      dispatch(getJobs());
-      dispatch(getWorkers())
+  useEffect(() => {
+    dispatch(getJobs());
+    dispatch(getWorkers());
   }, [dispatch]);
-      
-	return (
+
+  return (
     <div className={s.all}>
       <div className={s.container}>
-        <SearchBar/>
+        <SearchBar />
       </div>
       <div className={s.filterContainer}>
         <Filters />
       </div>
-      <div className={s.carousel}>
-        <CardSlider/>
+      <div className={s.containerTitle}>Premium Workers</div>
+      <div className={s.carouselNew}>
+        <CardSlider />
       </div>
       <div className={s.container}>
         <Catalog />
@@ -36,4 +39,3 @@ const Home = () => {
 };
 
 export default Home;
-

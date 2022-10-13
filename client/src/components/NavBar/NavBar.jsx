@@ -33,7 +33,7 @@ const NavBar = () => {
   if (location.pathname === "/onboarding") return;
 
   return (
-    <AppBar style={{ background: "gray" }} position="static">
+    <AppBar style={{ background: "#06283D" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -44,9 +44,9 @@ const NavBar = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "poppins",
+              fontFamily: "Bebas Neue",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: "7px",
               color: "white",
               textShadow: "4px 4px 4px black;",
               fontSize: "2rem",
@@ -110,11 +110,15 @@ const NavBar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "poppins",
+              fontFamily: "Bebas Neue",
               fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "black",
+              letterSpacing: "7px",
+              color: "white",
+              textShadow: "4px 4px 4px black;",
               textDecoration: "none",
+              fontSize: "1rem",
+              transition: "all 2s ease",
+              left: "0",
             }}
           >
             Changuitas
@@ -126,11 +130,11 @@ const NavBar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
-                  color: "black",
+                  color: "white",
                   "&:hover": { color: "black" },
                   display: "block",
                   margin: "0.2%",
-                  textShadow: "1px 1px 1px black;",
+                  textShadow: "2px 2px 2px black;",
                 }}
                 component={Link}
                 to={`/${page}`}
@@ -148,10 +152,10 @@ const NavBar = () => {
                 onClick={loginWithRedirect}
                 sx={{
                   my: 1,
-                  color: "black",
+                  color: "white",
                   "&:hover": { color: "black" },
                   display: "flex",
-                  textShadow: "1px 1px 1px black;",
+                  textShadow: "4px 4px 4px black;",
                 }}
               >
                 Ingresar
