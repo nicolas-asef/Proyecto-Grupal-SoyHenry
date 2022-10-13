@@ -35,9 +35,9 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// En sequelize.models están todos los modelos importados como propiedades
+// En sequelize.models están todos los modelos importados, PopUp como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Admin, Chat, Contract, Job, User, Worker, Country } = sequelize.models;
+const { Admin, Chat, Contract, Job, User, Worker, Country, PopUp } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -65,6 +65,13 @@ Worker.belongsTo(User);
 
 Job.belongsToMany(Worker, { through: "Works_Jobs" });
 Worker.belongsToMany(Job, { through: "Works_Jobs" });
+
+// User.hasMany(PopUp)
+PopUp.belongsTo(User,{as:"Emiter"})
+PopUp.belongsTo(User,{as:"Receiver"})
+
+
+
 
 // let probando = async () => {
 //   const agregando = await Videogame.create({nombre:'juanchito',descripcion:'alto',rating: 3.2,plataformas: 'Playstation'})

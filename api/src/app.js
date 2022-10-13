@@ -5,8 +5,9 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const socketio = require('socket.io');
 const http = require("http");
+const e = require('express');
 require('./db.js');
-
+const { Op, Worker, Job, Contract, User, Chat, Country,PopUp } = require("./db.js");
 const app = express();
 
 
@@ -47,7 +48,12 @@ const io = socketio(server, {
 let users = []
 
 const addUser = (userId, socketId) => {
-  !users.some(u => u.userId === userId) && users.push({userId, socketId})
+  if(!users.some(u => u.userId === userId))
+    users.push({userId,socketId})
+  else{
+    
+  }
+  
 }
 
 const removeUser = (socketId) => {
@@ -63,19 +69,29 @@ io.on("connection", socket => {
   console.log("Se ha conectado un usuario")
   
     socket.on("addUser", (userId) => {
-      console.log("------------------------------------->",users)
+      
       addUser(userId, socket.id)
       io.emit("getUsers", users)
     })
 
-    socket.on("enviarNotificacion",({receptor_id,emisor_id,tipo})=>{
-      console.log("--------------------------------------------->Estoy emitiendo?",{receptor_id,emisor_id,tipo})
-      const recepcion = getUser(receptor_id)
-      console.log("--------------------------------------------->Estoy emitiendo?22",{receptor_id,emisor_id,tipo})
-      io.emit("obtenerNotificacion",{emisor_id,tipo})
-      console.log("--------------------------------------------->Estoy emitiendo?33",{receptor_id,emisor_id,tipo})
-    })
+    
 
+    socket.on("enviarNotificacion",async ({receptor_id,emisor_id,tipo})=>{
+
+      const recepcion = getUser(receptor_id)
+      io.to(recepcion.socketId).emit("obtenerNotificacion",{emisor_id,tipo});
+      const recibidor = await User.findByPk(receptor_id)
+      const emisor = await User.findByPk(emisor_id)
+      const notificacion = await PopUp.create({
+        type:tipo,
+      })
+      await notificacion.setEmiter(emisor_id)
+      await notificacion.setReceiver(receptor_id)
+      console.log(recibidor)
+      console.log(notificacion)
+      
+    })
+    
     socket.on("disconnect", () => {
       console.log("Usuario desconectado")
       removeUser(socket.id)
