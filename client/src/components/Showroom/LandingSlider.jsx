@@ -1,37 +1,54 @@
-import React from 'react';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
+import React from "react";
 
-import img1 from '../../assets/costura.jpg';
-import img2 from '../../assets/pintor.jpg';
-import img3 from '../../assets/obra.jpg';
-import img4 from '../../assets/pintor2.jpg';
-import img5 from '../../assets/soldadura.jpg';
+import img1 from "../../assets/pintoreditada.jpg";
+import img2 from "../../assets/costuraEditada.jpg";
+import img3 from "../../assets/soldadura.jpg";
 
-import style from './LandingSlider.module.css'
+import style from "./LandingSlider.module.css";
 
-const  DemoCarousel = () => {
-
-    return (
-        <div className={style.container}>
-            <Carousel  autoPlay={true} >                
-                    <div className={style.pict}>
-                        <img src={img1} alt='pic1'/>                        
-                    </div>
-                    <div className={style.pict}>
-                        <img src={img2} alt='pic2' />                       
-                    </div>
-                    <div className={style.pict}>
-                        <img src={img3} alt='pic3'/>                        
-                    </div>                
-                    <div className={style.pict}>
-                        <img src={img4} alt='pic4'/>                        
-                    </div>     
-                    <div className={style.pict}>
-                        <img src={img5} alt='pic5'/>                        
-                    </div>    
-            </Carousel>
+const DemoCarousel = () => {
+  return (
+    <div className={style.container}>
+      <div
+        id="carouselB5"
+        class="carousel slide carousel-fade"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselB5"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselB5"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselB5"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
         </div>
-        )
-}
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src={img1} alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src={img2} alt="..." />
+          </div>
+          <div class="carousel-item">
+            <img src={img3} alt="..." />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 export default DemoCarousel;
