@@ -29,6 +29,7 @@ const getUsers = async () => {
       { model: Contract },
       { model: Chat },
       { model: Country },
+      { model: Worker , as : "Favorites"}
     ],
   });
 
@@ -50,7 +51,8 @@ const getUsers = async () => {
       Worker: u.Worker,
       Contracts: u.Contracts,
       Chats: u.Chats,
-      Country: u.Country
+      Country: u.Country,
+      Favorites: u.Favorites
     };
   });
   return dataUser;
@@ -86,8 +88,8 @@ router.put('/:id', async (req, res, next) => {
     const {id} = req.params;  
     try {
         const updatedUser = await User.findOne({where: {ID: id}}); 
-        console.log(updatedUser)     
-        
+        console.log(info.favorites)     
+        info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
         info.name ? await updatedUser.update({
           name: info.name
         }) : "no updatie el name"

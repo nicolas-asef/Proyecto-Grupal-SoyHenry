@@ -13,7 +13,11 @@ import Modal from '@mui/material/Modal';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import Checkbox from '@mui/material/Checkbox';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import { useDispatch, useSelector } from "react-redux"
+import { addFavorite } from "../../redux/actions/actions"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -45,7 +49,24 @@ function Profile({id,ocultarFilters,img,name,jobs,description,available}) {
   const handleClosePopUp = () => {
     setOpenLogin(false)
   }
-
+ 
+  const dispatch = useDispatch();
+  const favWorker = useSelector(state => state.users.Favorites)
+  const userID = useSelector(state => state.users)
+  const idWorkerFav = useSelector(state => state.userDetail)
+  // console.log(idWorkerFav.Worker.ID)
+  // console.log(userID)
+  const handleFav = (e) => {
+          
+       dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID)) 
+      //  let exist2 = favWorker.find(w => userDetail.id === w.id)
+      //   if(!exist2){ 
+      //     console.log(exist2)
+      //     dispatch(addFavorite(userID, idWorkerFav))
+      //   } else {
+      //     console.log("no entra")
+      //   }
+     }
   return (
     <div className="profile-card">
       <div className="card-img">
@@ -68,6 +89,11 @@ function Profile({id,ocultarFilters,img,name,jobs,description,available}) {
           <label className='label-description' htmlFor="disponibility">Estado</label>
           <div className="text-info">{status ? <Status text="Conectado"/> : <Status text="Desconectado"/>}</div>
         </div>   
+        {/* favoritos */}
+        <div>
+              <Checkbox icon={<FavoriteBorder />} id={id} checkedIcon={<Favorite />} onClick={handleFav}/>
+            </div>
+          {/* favoritos */}
         <div className="contactar">
           <Button className="buttonStyled" variant="contained" size="large">Mensaje</Button>
           {jobs && jobs.length && <Button className="buttonStyled" disabled={params.id === sub ? true : false} onClick={handleOpen} variant="contained" size="large">Contratar</Button>}

@@ -1,7 +1,7 @@
 // export const action = () => async (dispatch) => {}
 import { Action } from "@remix-run/router";
 import axios from "axios";
-import {AGREGAR_SOCKET,PUT_WORKER, PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, UPLOAD_IMAGE, CLEAN_DETAIL } from './actions_vars'
+import {ADD_FAVORITE,AGREGAR_SOCKET,PUT_WORKER, PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, UPLOAD_IMAGE, CLEAN_DETAIL } from './actions_vars'
 import {io} from "socket.io-client"
 
 const baseURL = "http://localhost:3001/" //Esto se cambia por localhost:3001 para usarlo local
@@ -493,4 +493,15 @@ export const cleanDetail = () => (dispatch) => {
 
 export const changeStatus =  (payload, status) => async (dispatch) => {
   const online = await axios.put("http://localhost:3001/users/" + payload, {isOnline: status});
+}
+
+export function addFavorite(userID, idWorkerFav) {
+  console.log(idWorkerFav)  
+  return async function(dispatch){
+    await axios.put("http://localhost:3001/users/" + userID , {favorites: idWorkerFav});
+    dispatch({
+      type: ADD_FAVORITE,
+      payload: idWorkerFav
+    })
+  } 
 }
