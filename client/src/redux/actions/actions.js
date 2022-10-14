@@ -63,7 +63,9 @@ export function sendNotification(email, type) {
   return function () {
     axios.post(`${baseURL}mailNotifications`, info);
   };
+
 }
+
 
 // export function getContractUsers(ids){
 //   return function(dispatch){
@@ -164,6 +166,7 @@ export function getContractWorker(ids) {
 // };
 // }
 
+
 export function getUserDetail(id) {
   return function (dispatch) {
     dispatch({ type: LOADING });
@@ -225,15 +228,6 @@ export function createUser(payload, jobs) {
   return async function (dispatch) {
     const user = await axios.post(baseURL + "users", payload);
     const user_id = await user.data.ID;
-    /* if(jobs.length) {
-      const worker = {
-        user_id,
-        jobs,
-
-      }
-      const res = await axios.post(baseURL+"worker", worker);
-    }
-      */
 
     dispatch({
       type: POST_USER,
@@ -254,7 +248,6 @@ export function getJobs() {
 }
 
 export function orderByRating(array, orderBy) {
-  console.log(array);
   function order(a, b) {
     if (a.rating < b.rating) {
       return 1;
@@ -325,7 +318,8 @@ export function filter(array, job, disponibilidad, zona) {
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map((el) => {
         console.log(el);
-        if (el.name === job && array[i].User.isOnline === disponibilidad) {
+      if (el.name === job && array[i].User.isOnline === disponibilidad) {
+
           filterArray.push(array[i]);
         }
       });
@@ -334,6 +328,7 @@ export function filter(array, job, disponibilidad, zona) {
   if (job === "all" && disponibilidad !== "all" && zona !== "all") {
     for (let i = 0; i < array.length; i++) {
       if (
+
         array[i].User.isOnline === disponibilidad &&
         array[i].User.Country.name === zona
       ) {
@@ -414,31 +409,47 @@ export function getUserId(id) {
 
 export function finishUserCreation(id, data, jobs) {
   return async function (dispatch) {
-    const { name, lastName, phone, dni, location } = data;
-    const toSend = {
-      name,
-      lastName,
-      phone,
-      dni,
-      countryId: location,
-      onBoarded: true,
-    };
+    const { name, lastName, phone, dni, location, city, street, address } =
+      data;
 
-    const user = await axios.put(`http://localhost:3001/users/${id}`, toSend);
+    const coordinate = await axios.get(
+      `https://nominatim.openstreetmap.org/search?q=${address},${street},${city},${location}&format=json`
+    );
 
-    if (jobs.length) {
-      const worker = {
-        user_id: id,
-        jobs,
+    if (!coordinate.data.length) {
+      return { res: { status: 404 } };
+    } else {
+      const toSend = {
+        name,
+        lastName,
+        phone,
+        dni,
+        city,
+        street,
+        address,
+        location,
+        coordinates: [coordinate.data[0].lat, coordinate.data[0].lon],
+        onBoarded: true,
       };
-      const res = await axios.post("http://localhost:3001/worker", worker);
+      const user = await axios.put(`http://localhost:3001/users/${id}`, toSend);
+
+      if (jobs.length) {
+        const worker = {
+          user_id: id,
+          jobs,
+        };
+        const res = await axios.post("http://localhost:3001/worker", worker);
+      }
+
+
+      dispatch({
+        type: POST_USER,
+      });
+
+      console.log(user);
+      return user;
     }
 
-    dispatch({
-      type: POST_USER,
-    });
-
-    return user;
   };
 }
 
@@ -490,18 +501,6 @@ export function updateWorker(payload, payload2, payloadId) {
     return worker;
   };
 }
-
-// export async function updateWorkerJobs(payload, payloadId) {
-//   return async function(dispatch){
-//   console.log(payload)
-//     const worker = await axios.put(baseURL+"worker/" + payloadId , payload);
-//     dispatch({
-//       type: PUT_WORKER,
-//     });
-//     return worker;
-//   }
-// }
-
 export const uploadImage = (formData) => (dispatch) => {
   axios
     .post(
