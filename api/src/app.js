@@ -74,8 +74,51 @@ io.on("connection", socket => {
       const notificaciones = await PopUp.findAll({where:{ReceiverID:userId},include:{model:User,as:"Emiter"}})
       io.emit("getUsers", notificaciones)
     })
-
     
+    socket.on('messageCreation', async ({worker_id,worker_user_id,user_id,texto,emisor}) => {
+      //Variable type_r y type_e que dice por ejemplo type_r = "worker" y type_e = "user"
+      // para saber si el receptor es worker o user y saber si el emisor es worker o user 
+
+      let receptor
+      if(emisor === "worker")
+        receptor = getUser(user_id)
+      else
+        receptor = getUser(worker_user_id)
+
+        
+        
+      //Enviar evento con el mensaje a el socket apropiado al receptor
+      io.to(receptor.socketId).emit("createMessage", texto);
+      //Crear mensaje
+      const message = await Message.create({
+        text:texto,
+      })
+      if(emisor === "worker")
+        message.setWorker(worker_id)
+      else
+        message.setUser(user_id)
+    
+      //    socket.on("sendMessage", ({senderId, receiverId, text}) => {
+    //   const user = getUser(receiverId);
+    //   io.to(user?.socketId).emit("getMessage", {
+    //     senderId,
+    //     text
+    //   })
+    // })
+
+      //Buscar chat que este el receptor y el emisor y si no existe crearlo
+      //finorcreate{where : workerID: receptor_id}
+      const chat = await Chat.findOrcreate({
+        where:{
+          workerId: worker_id,
+          userId: user_id
+        }
+      })
+      //Asociar mensaje al receptor
+      //Asociar mensaje al chat
+      await message.setChat(chat)
+    })
+
 
     socket.on("enviarNotificacion",async ({receptor_id,emisor_id,tipo})=>{
 
