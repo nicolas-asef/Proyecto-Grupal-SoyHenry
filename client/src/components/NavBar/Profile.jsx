@@ -18,6 +18,7 @@ import { Badge } from '@mui/material';
 import NotificationsNoneTwoToneIcon from '@mui/icons-material/NotificationsNoneTwoTone';
 import { useState } from 'react';
 
+
 const Profile = () => {
   const dispatch = useDispatch();
   const { user: { sub } } = useAuth0();
@@ -27,7 +28,8 @@ const Profile = () => {
   const { logout, user: {picture} } = useAuth0();
   const socket = useSelector(state => state.socket)
   const [cantNotificaciones,setcantNotificaciones] = useState(0)
-  const [unicaVez,setUnicaVez] = useState(0)
+
+
   useEffect(()=>{
     if (users.length === 0) {
       dispatch(getUserId(sub))
@@ -42,7 +44,9 @@ const Profile = () => {
   },[sub])
 
   useEffect(()=>{
-    console.log("wtfffffffffffff")
+    socket?.on("getUsers",(notificacion) => {
+      console.log(notificacion)
+    })
     socket?.on("obtenerNotificacion",({emisor_id,tipo}) => {
       setcantNotificaciones(cantNotificaciones+1)
     })
