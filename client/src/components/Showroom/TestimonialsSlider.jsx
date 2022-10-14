@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 import OwlCarousel from "react-owl-carousel";
 import info from "./data.js";
 
-import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -14,16 +13,12 @@ const TestiMonials = () => {
   const workersState = useSelector((state) => state.workers);
   const workersToShow = workersState;
 
-  const options = info.opt;  
+  const options = info.opt;
 
   return (
     <section id="testimonial" className="testimonials pt-70 pb-70">
-      <div className="container mt-5">        
-        <Container maxWidth="string" align="center">
-            <div className="title">
-              Testimonials about our workers
-            </div>          
-        </Container>
+      <div>
+        <div className="title">Testimonials about our workers</div>
         <Typography
           variant="h5"
           align="center"
@@ -42,13 +37,17 @@ const TestiMonials = () => {
               {workersToShow.length === 0 ? (
                 <div className="item">
                   <div className="shadow-effect">
-                    <img className="img-circle" src={`${info.pic}`} alt="pic2" />
+                    <img
+                      className="img-circle"
+                      src={`${info.pic}`}
+                      alt="pic2"
+                    />
 
                     <p>
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore
-                      magna.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
+                      magna.Lorem ipsum dolor sit amet, consectetur adipiscing
+                      elit, sed do eiusmod tempor incididunt ut labore et dolore
                       magna."
                     </p>
                   </div>
@@ -62,9 +61,6 @@ const TestiMonials = () => {
                   return (
                     <div key={index} className="item">
                       <div className="shadow-effect">
-                        <div className="img-circle">
-                          <img src={t.User.img} alt="pics" />
-                        </div>
                         <p>{t.Contracts.comment_U}</p>
                       </div>
                       <div className="testimonial-name">

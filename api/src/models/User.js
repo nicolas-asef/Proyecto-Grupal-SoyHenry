@@ -37,16 +37,18 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      /* status:{
-      type:DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    }, */
       onBoarded: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
       },
+      isOnline: {
+        type: DataTypes.BOOLEAN,
+      },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      }
     },
     {
       timestamps: false,
