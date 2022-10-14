@@ -2,7 +2,13 @@
 
 .container {
   /* margin-top: 3%; */
-  background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+
+  background: rgb(0, 48, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 48, 255, 0.19931722689075626) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
   position: relative;
   z-index: 1;
 }
