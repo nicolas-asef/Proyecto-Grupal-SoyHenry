@@ -26,3 +26,5 @@ export const AGREGAR_SOCKET = "AGREGAR_SOCKET";
 export const ELIMINAR_SOCKET = "ELIMINAR_SOCKET";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const DELETED_FAVORITE = "DELETED_FAVORITE";
+export const GET_USER = "GET_USER";
+

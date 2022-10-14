@@ -48,7 +48,23 @@ module.exports = (sequelize) => {
       isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-      }
+      },
+      address: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      street: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      coordinates: {
+        type: DataTypes.JSON,
+        allowNull: true,
+      },
     },
     {
       timestamps: false,

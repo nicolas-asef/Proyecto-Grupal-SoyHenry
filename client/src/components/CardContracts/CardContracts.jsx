@@ -60,7 +60,6 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
       num = num%3
     }
     setColumns(columnas_aux)
-    console.log(columnas_aux)
   },[page,type,isLoading])
 
 

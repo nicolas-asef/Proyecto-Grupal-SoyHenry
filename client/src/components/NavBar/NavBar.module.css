@@ -37,3 +37,10 @@ a:hover {
 .test:hover {
     background-color: none;
 }
+
+@media (max-width: 1350px) {
+    .recipesDiv{
+
+    }
+}
+ 

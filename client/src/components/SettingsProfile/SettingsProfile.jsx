@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import "./SettingsProfile.css";
 import {
   getJobs,
@@ -17,9 +17,9 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import MenuItem from "@mui/material/MenuItem";
-import ButtonGroup from "@mui/material/ButtonGroup"
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,23 +47,22 @@ export default function SettingProfile() {
 
   const [inputWork, setInputWork] = useState({
     certification: "",
-    description: ""
+    description: "",
     // jobs: [user.Worker.Jobs]
   });
-  const [inputJobs, setInputJobs] = useState([])
+  const [inputJobs, setInputJobs] = useState([]);
   const [workMax, setWorkMax] = useState(false);
   const [validateWorks, setValidateWorks] = useState(false);
-  
+
   const handleJob = (e) => {
     const exist = inputJobs.find((job) => job === e.target.value);
-      if (!exist) {
-        setInputJobs([...inputJobs, e.target.value]);
-        // setInputWork((prevState) => ({
-        //   ...prevState,
-        //   jobs: inputJobs,
-        // }))
-       
-      }
+    if (!exist) {
+      setInputJobs([...inputJobs, e.target.value]);
+      // setInputWork((prevState) => ({
+      //   ...prevState,
+      //   jobs: inputJobs,
+      // }))
+    }
   };
 
   const handleDelete = (e) => {
@@ -89,7 +88,7 @@ export default function SettingProfile() {
   const handleImgChange = (e) => {
     if (e.target.files !== undefined) {
       setImage(e.target.files[0]);
-      console.log(image);
+
     } else {
       setImage("");
     }
@@ -106,22 +105,28 @@ export default function SettingProfile() {
     dispatch(getUserId(id));
     dispatch(getJobs());
     dispatch(get_countries());
-    if(user.Worker.certification){
-      setInputWork({...inputWork, [inputWork.certification]: user.Worker.certification})
+    if (user.Worker.certification) {
+      setInputWork({
+        ...inputWork,
+        [inputWork.certification]: user.Worker.certification,
+      });
     }
-    if(user.Worker.description){
-      setInputWork({...inputWork, [inputWork.description]: user.Worker.description})
+    if (user.Worker.description) {
+      setInputWork({
+        ...inputWork,
+        [inputWork.description]: user.Worker.description,
+      });
     }
   }, [dispatch]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(input);
-    console.log(id)
-    console.log(inputWork.jobs)
+    console.log(id);
+    console.log(inputWork.jobs);
     dispatch(updateUser(input, id));
     dispatch(updateWorker(inputWork, inputJobs, user.Worker.ID));
-    setOpenLogin(true)
+    setOpenLogin(true);
   };
 
   function handleChange(e) {
@@ -141,10 +146,10 @@ export default function SettingProfile() {
   function handlePremium() {
     navigate("/profile/settings/premium");
   }
-  
+
   const handleClosePopUp = () => {
-    setOpenLogin(false)
-  }
+    setOpenLogin(false);
+  };
 
   return (
     <div className="container-setting">
@@ -155,7 +160,6 @@ export default function SettingProfile() {
             <h3 className="pad">Location</h3>
             <TextField
               id="outlined-required"
-              
               name="location"
               select
               value={input.location}
@@ -170,7 +174,7 @@ export default function SettingProfile() {
                 ))}
             </TextField>
           </div>
-          
+
           <div className="bloke">
             <h3 className="pad">Phone</h3>
             <TextField
@@ -181,7 +185,7 @@ export default function SettingProfile() {
               onChange={handleChange}
             />
           </div>
-         
+
           <div className="bloke">
             <h3 className="pad">Image</h3>
             <TextField
@@ -191,7 +195,7 @@ export default function SettingProfile() {
               /* defaultValue={user.img}  */
               onChange={handleChange}
             />
-             <div className="UploadIMGDIV">
+            <div className="UploadIMGDIV">
               <Button variant="contained" component="label">
                 Selecionar archivo
                 <input
@@ -231,17 +235,15 @@ export default function SettingProfile() {
               )}
             </div>
           </div>
-         
+
           {/* renderizado condicional para el worker solamente */}
           <div>
             {user.Worker && (
               <>
-                
                 <div className="bloke">
                   <h3 className="pad">Description</h3>
                   <TextField
                     id="outlined-required"
-                    
                     name="description"
                     type="text"
                     value={inputWork.description}
@@ -250,12 +252,11 @@ export default function SettingProfile() {
                     onChange={handleChangeWork}
                   />
                 </div>
-                
+
                 <div className="bloke">
                   <h3 className="pad">Certification</h3>
                   <TextField
                     id="outlined-required"
-                    
                     name="certification"
                     type="text"
                     value={inputWork.certification}
@@ -264,7 +265,7 @@ export default function SettingProfile() {
                     onChange={handleChangeWork}
                   />
                 </div>
-                
+
                 <div className="bloke">
                   <h3 className="pad">Jobs</h3>
                   <TextField
@@ -290,7 +291,12 @@ export default function SettingProfile() {
                   <ButtonGroup fullWidth variant="outlined">
                     {inputJobs.length
                       ? inputJobs.map((job, index) => (
-                          <Button size="large" onClick={handleDelete} id={index} key={job}>
+                          <Button
+                            size="large"
+                            onClick={handleDelete}
+                            id={index}
+                            key={job}
+                          >
                             {job}
                           </Button>
                         ))
@@ -299,9 +305,8 @@ export default function SettingProfile() {
                 </div>
               </>
             )}
-           
           </div>
-          
+
           <Button type="submit" variant="contained" endIcon={<SendIcon />}>
             Send
           </Button>
@@ -313,8 +318,16 @@ export default function SettingProfile() {
           PREMIUM
         </Button>
       </div>
-      <Snackbar open={openLogin} autoHideDuration={3000} onClose={handleClosePopUp}>
-        <Alert onClose={handleClosePopUp} severity="success" sx={{ width: '100%' }}>
+      <Snackbar
+        open={openLogin}
+        autoHideDuration={3000}
+        onClose={handleClosePopUp}
+      >
+        <Alert
+          onClose={handleClosePopUp}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           Your information was successfully modified
         </Alert>
       </Snackbar>

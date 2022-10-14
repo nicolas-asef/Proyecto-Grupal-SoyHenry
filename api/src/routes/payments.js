@@ -8,8 +8,6 @@ const router = Router();
 
 router.post("/", async (req, res, next) => {
   const { paymentMethod } = req.body;
-  console.log("post por el back");
-  console.log(paymentMethod);
   try {
     const payment = await stripe.paymentIntents.create({
       payment_method: paymentMethod.id,
@@ -17,7 +15,6 @@ router.post("/", async (req, res, next) => {
       amount: 100,
       confirm: true,
     });
-    console.log(payment);
     return res.send(payment);
   } catch (err) {
     return res.status(404).send("hola");

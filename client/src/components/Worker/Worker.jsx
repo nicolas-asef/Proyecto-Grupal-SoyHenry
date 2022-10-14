@@ -48,12 +48,12 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
       nuevoObjeto.User.name = user.lastName + " " + user.name  
       nuevoObjeto.User.img = user.img
       if(type === 'worker'){
-        user.Worker.Contracts?.forEach(e => contratos.push(e.id))
-        nuevoObjeto.Jobs = user.Worker.Jobs[0].name? user.Worker.Jobs.map(e => e.name) : user.Worker.Jobs
+        user.Worker?.Contracts.forEach(e => contratos.push(e.id))
+        nuevoObjeto.Jobs = user.Worker?.Jobs[0].name? user.Worker?.Jobs.map(e => e.name) : user.Worker?.Jobs
         getContractUsers(contratos)
       } else {
         
-        user.Contracts.forEach(e => contratos.push(e.id))
+        user.Contracts?.forEach(e => contratos.push(e.id))
         getContractWorker(contratos)
       }
       setWorker(nuevoObjeto)

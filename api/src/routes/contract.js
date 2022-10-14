@@ -15,7 +15,7 @@ route.get("/", async (req, res) => {
 route.get("/user", async (req, res) => {
   try {
     let id = req.query.arr;
-    console.log(id);
+
     if (!id.isArray) {
       id = [id];
     }
@@ -37,7 +37,7 @@ route.get("/user", async (req, res) => {
 route.get("/worker", async (req, res) => {
   try {
     let id = req.query.arr;
-    console.log(id);
+
     if (!id.isArray) {
       id = [id];
     }
@@ -80,18 +80,17 @@ route.put("/:id", async (req, res, next) => {
     const { id } = req.params;
     const { finished, rating_U, rating_W, confirmed, comment_U, comment_W } =
       req.body;
-      console.log("--------->Entre",req.body)
+
     const contract = await Contract.findByPk(id);
-    console.log("--------->Entre",id)
+
     finished ? (contract.finished = finished) : finished;
     rating_U ? (contract.rating_U = rating_U) : rating_U;
     rating_W ? (contract.rating_W = rating_W) : rating_W;
     confirmed ? (contract.confirmed = confirmed) : confirmed;
     comment_U ? (contract.comment_U = comment_U) : comment_U;
     comment_W ? (contract.comment_W = comment_W) : comment_W;
-    console.log(req.body)
+
     const valor = await contract.save();
-    console.log("------------>",valor)
     res.status(200).send(valor);
   } catch (error) {
     res.send("Error en la operacion: " + error.message).status(400);

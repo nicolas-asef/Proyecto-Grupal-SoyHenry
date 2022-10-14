@@ -106,7 +106,6 @@ export default function TableUserWorker({name}) {
     let buscar = user.filter(el => el.user !== e)
     setUser(buscar)
   }
-  console.log(user)
     return (
       <div>
         <h1 className={s.title}>{name}</h1>

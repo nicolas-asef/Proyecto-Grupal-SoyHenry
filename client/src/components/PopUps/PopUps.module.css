@@ -1,0 +1,21 @@
+.popUps{
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    /* border: 3px solid #73AD21; */
+    color: black;
+    margin-top: 10px;
+    margin-left: -30%;
+    height: auto;
+    padding-bottom: 5vh;
+    max-height: 60vh;
+    width: 31vw ;
+    border-radius: 10px;
+    border: 1px solid grey;
+    z-index: 99999;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.titulo{
+    margin-left: 1vw;
+}

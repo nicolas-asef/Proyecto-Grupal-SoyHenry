@@ -103,8 +103,7 @@ router.post("/", async (req, res) => {
  router.put('/:id', async (req, res, next) => {   
      const { id } = req.params;
      const {certification, description, jobs, premium} = req.body; 
-     console.log("hola req.body abajo")
-     console.log(req.body) 
+
      try {
         const worker = await Worker.findOne({where: {ID: id}})
         //  .then((w)=>{
@@ -112,7 +111,6 @@ router.post("/", async (req, res) => {
         //          certification: certification
         //      })
         //  })
-        console.log(worker)
         //premium ? worker.premium = true : false
         premium ? await worker.update({
             premium: true

@@ -27,7 +27,9 @@ import {
   CLEAN_DETAIL,
   AGREGAR_SOCKET,
   ADD_FAVORITE,
-  DELETED_FAVORITE
+  DELETED_FAVORITE,
+  GET_USER
+
 } from '../actions/actions_vars'
 
 
@@ -50,19 +52,27 @@ const initialState = {
   selectedContracts: [],
   isLoading: false,
   userDetail: {},
+  user: {},
   allCountries: [],
   allWorkers: [],
   filtrado: [],
   uploadedImg: "",
-  socket: null
+  socket: null,
+  popUps: []
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
 
+    case GET_USER:
+      return{
+        ...state,
+        user:action.payload
+      }
+
     case AGREGAR_SOCKET:
       return{
         ...state,
-        socket:action.payload
+        socket:!state.socket? action.payload : state.socket
       }
 
     case GET_USER_DETAIL:

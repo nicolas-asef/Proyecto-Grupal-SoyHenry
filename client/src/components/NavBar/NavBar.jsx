@@ -15,6 +15,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FaHeart } from "react-icons/fa";
 
+
 const pages = ["Home", "About", "FAQ"];
 
 const NavBar = () => {
@@ -34,7 +35,8 @@ const NavBar = () => {
   if (location.pathname === "/onboarding") return;
 
   return (
-    <AppBar style={{ background: "#121213" }} position="static">
+
+    <AppBar style={{ background: "#06283D" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -45,15 +47,23 @@ const NavBar = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "poppins",
+              fontFamily: "Bebas Neue",
               fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "inherit",
+              letterSpacing: "7px",
+              color: "white",
+              textShadow: "4px 4px 4px black;",
+              fontSize: "2rem",
               textDecoration: "none",
-              "&:hover": { background: "none", color: "white" },
+              left: "0",
+              transition: "all 2s ease",
+              "&:hover": {
+                background: "none",
+                color: "white",
+                textShadow: "4px 4px 4px black;",
+              },
             }}
           >
-            PFHenry
+            Changuitas
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -103,14 +113,19 @@ const NavBar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "poppins",
+
+              fontFamily: "Bebas Neue",
               fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
+              letterSpacing: "7px",
+              color: "white",
+              textShadow: "4px 4px 4px black;",
               textDecoration: "none",
+              fontSize: "1rem",
+              transition: "all 2s ease",
+              left: "0",
             }}
           >
-            PFHenry
+            Changuitas
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
@@ -120,8 +135,10 @@ const NavBar = () => {
                 sx={{
                   my: 2,
                   color: "white",
-                  "&:hover": { color: "white" },
+                  "&:hover": { color: "black" },
                   display: "block",
+                  margin: "0.2%",
+                  textShadow: "2px 2px 2px black;",
                 }}
                 component={Link}
                 to={`/${page}`}
@@ -139,8 +156,9 @@ const NavBar = () => {
                 sx={{
                   my: 1,
                   color: "white",
-                  "&:hover": { color: "white" },
+                  "&:hover": { color: "black" },
                   display: "flex",
+                  textShadow: "4px 4px 4px black;",
                 }}
               >
                 Ingresar

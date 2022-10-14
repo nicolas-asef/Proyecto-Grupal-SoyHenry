@@ -26,6 +26,7 @@ fs.readdirSync(path.join(__dirname, "/models"))
   });
 
 // Injectamos la conexion (sequelize) a todos los modelos
+
 modelDefiners.forEach((model) => model(sequelize));
 // Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
@@ -35,9 +36,9 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// En sequelize.models están todos los modelos importados como propiedades
+// En sequelize.models están todos los modelos importados, PopUp como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Admin, Chat, Contract, Job, User, Worker, Country } = sequelize.models;
+const { Admin, Chat, Message, Contract, Job, User, Worker, Country, PopUp } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -47,12 +48,6 @@ Contract.belongsTo(User);
 
 Worker.hasMany(Contract);
 Contract.belongsTo(Worker);
-
-User.hasMany(Chat);
-Chat.belongsTo(User);
-
-Worker.hasMany(Chat);
-Chat.belongsTo(Worker);
 
 Country.hasMany(User);
 User.belongsTo(Country);
@@ -66,8 +61,36 @@ Worker.belongsTo(User);
 Job.belongsToMany(Worker, { through: "Works_Jobs" });
 Worker.belongsToMany(Job, { through: "Works_Jobs" });
 
+
 User.belongsToMany(Worker, { as: "Favorites", through: "Fav" });
 Worker.belongsToMany(User, { as: "Favorites", through: "Fav" });
+
+// User.hasMany(PopUp)
+
+
+User.hasMany(PopUp, {as: "Emiter"})
+PopUp.belongsTo(User,{as:"Emiter"})
+
+
+// User.hasMany(PopUp,{as:"Receiver"})
+User.hasMany(PopUp, {as: "Receiver"})
+PopUp.belongsTo(User,{as:"Receiver"})
+
+User.hasMany(Chat);
+Chat.belongsTo(User);
+
+Worker.hasMany(Chat);
+Chat.belongsTo(Worker);
+
+User.hasMany(Message);
+Message.belongsTo(User);
+
+Worker.hasMany(Message);
+Message.belongsTo(Worker);
+
+Chat.hasMany(Message);
+Message.belongsTo(Chat)
+
 
 
 // let probando = async () => {

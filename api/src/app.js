@@ -5,8 +5,9 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const socketio = require('socket.io');
 const http = require("http");
+const e = require('express');
 require('./db.js');
-
+const { Op, Worker, Job, Contract, User, Chat, Message, Country,PopUp } = require("./db.js");
 const app = express();
 
 
@@ -27,7 +28,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/', routes);
-
 // Error catching endware.
 app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
@@ -47,7 +47,12 @@ const io = socketio(server, {
 let users = []
 
 const addUser = (userId, socketId) => {
-  !users.some(u => u.userId === userId) && users.push({userId, socketId})
+  if(!users.some(u => u.userId === userId))
+    users.push({userId,socketId})
+  else{
+    
+  }
+  
 }
 
 const removeUser = (socketId) => {
@@ -62,18 +67,86 @@ const getUser = (receiverId) => {
 io.on("connection", socket => {
   console.log("Se ha conectado un usuario")
   
-    socket.on("addUser", (userId) => {
-      console.log("------------------------------------->",users)
+    socket.on("addUser",async (userId) => {
+      
       addUser(userId, socket.id)
-      io.emit("getUsers", users)
+      const notificaciones = await PopUp.findAll({where:{ReceiverID:userId},include:{model:User,as:"Emiter"}})
+      io.emit("getUsers", notificaciones)
     })
 
-    socket.on("enviarNotificacion",({receptor_id,emisor_id,tipo})=>{
-      console.log("--------------------------------------------->Estoy emitiendo?",{receptor_id,emisor_id,tipo})
+    socket.on('messageCreation', async ({worker_id,worker_user_id,user_id,texto,emisor}) => {
+      //Variable type_r y type_e que dice por ejemplo type_r = "worker" y type_e = "user"
+      // para saber si el receptor es worker o user y saber si el emisor es worker o user 
+
+      let receptor
+      if(emisor === "worker")
+        receptor = getUser(user_id)
+      else
+        receptor = getUser(worker_user_id)
+
+        
+        
+      //Enviar evento con el mensaje a el socket apropiado al receptor
+      io.to(receptor.socketId).emit("createMessage", texto);
+      //Crear mensaje
+      const message = await Message.create({
+        text:texto,
+      })
+      if(emisor === "worker")
+        message.setWorker(worker_id)
+      else
+        message.setUser(user_id)
+    
+      //    socket.on("sendMessage", ({senderId, receiverId, text}) => {
+    //   const user = getUser(receiverId);
+    //   io.to(user?.socketId).emit("getMessage", {
+    //     senderId,
+    //     text
+    //   })
+    // })
+
+      //Buscar chat que este el receptor y el emisor y si no existe crearlo
+      //finorcreate{where : workerID: receptor_id}
+      const chat = await Chat.findOrcreate({
+        where:{
+          workerId: worker_id,
+          userId: user_id
+        }
+      })
+      //Asociar mensaje al receptor
+      //Asociar mensaje al chat
+      await message.setChat(chat)
+    })
+
+
+    socket.on("enviarNotificacion",async ({receptor_id,emisor_id,tipo})=>{
+      //Enviar evento con el mensaje del emisor y el tipo
       const recepcion = getUser(receptor_id)
-      console.log("--------------------------------------------->Estoy emitiendo?22",{receptor_id,emisor_id,tipo})
-      io.emit("obtenerNotificacion",{emisor_id,tipo})
-      console.log("--------------------------------------------->Estoy emitiendo?33",{receptor_id,emisor_id,tipo})
+      
+      //Crear notificacion
+
+
+      const emisor = await User.findByPk(emisor_id)
+      const receptor = await User.findByPk(receptor_id)
+      const notificacion = await PopUp.create({
+        type:tipo,
+      })
+
+      //Asociar notificacion al emisor
+      await notificacion.setEmiter(emisor_id)
+
+      //Asociar notificacion al receptor
+      await notificacion.setReceiver(receptor_id)
+
+      const img = emisor.img
+      const nombre_emisor = emisor.name
+      const id = notificacion.id
+      if(recepcion)
+        io.to(recepcion.socketId).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo});
+    })
+    
+    socket.on("seen",async elementos => {
+      await PopUp.update({viewed:true},{where:{id:elementos}})
     })
 
     socket.on("disconnect", () => {

@@ -7,8 +7,8 @@ import Button from "@mui/material/Button";
 import BadgeIcon from "@mui/icons-material/Badge";
 import PersonIcon from "@mui/icons-material/Person";
 import User from "./User/User";
-import Avatar from '@mui/material/Avatar';
-import { useAuth0 } from '@auth0/auth0-react';
+import Avatar from "@mui/material/Avatar";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const steps = [
   "Seleccionar tipo de usuario",
@@ -17,8 +17,8 @@ const steps = [
 ];
 
 const OnBoarding = () => {
-	const { user : { picture, email, sub }} = useAuth0();
-	const [step, setStep] = useState(0);
+  const { user } = useAuth0();
+  const [step, setStep] = useState(0);
   const [selected, setSelected] = useState({
     type: "",
     isSelected: false,
@@ -30,7 +30,7 @@ const OnBoarding = () => {
       type: e.target.name,
       isSelected: true,
     });
-		setStep(1);
+    setStep(1);
   };
 
   return (
@@ -49,10 +49,14 @@ const OnBoarding = () => {
           </Stepper>
           {!selected.type && (
             <div className={style.userType}>
-							<div className={style.metadata}>
-								<Avatar alt="userImage" src={picture}  sx={{ width: 76, height: 76 }} />
-								<h2>¡Hola, {email.split('@')[0]}!</h2>
-							</div>
+              <div className={style.metadata}>
+                <Avatar
+                  alt="userImage"
+                  src={user?.picture}
+                  sx={{ width: 76, height: 76 }}
+                />
+                <h2>¡Hola, {user?.email.split("@")[0]}!</h2>
+              </div>
               <Button
                 fullWidth
                 endIcon={<PersonIcon />}
@@ -73,11 +77,16 @@ const OnBoarding = () => {
               </Button>
             </div>
           )}
-				{selected.type !== "" && (
-					<div className={style.userForm}>
-						<User type={selected.type} stepperCb={setStep} authID={sub} selectedCb={setSelected}/>
-					</div>
-					)}
+          {selected.type !== "" && (
+            <div className={style.userForm}>
+              <User
+                type={selected.type}
+                stepperCb={setStep}
+                authID={user?.sub}
+                selectedCb={setSelected}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

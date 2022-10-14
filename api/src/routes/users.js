@@ -10,29 +10,26 @@ const {
   User,
   Worker,
   Country,
+  PopUp
 } = require("../db.js");
-
-// importarme los modelos
-
-// const Stripe = require("stripe")
-
-// const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY
-
-// const stripe = new Stripe(STRIPE_SECRET_KEY)
 
 const router = Router();
 
 const getUsers = async () => {
+
+
+
   const info = await User.findAll({
     include: [
-      { model: Worker, include: [Job,Contract] },
+      { model: Worker, include: [Job, Contract] },
       { model: Contract },
       { model: Chat },
       { model: Country },
       { model: Worker , as : "Favorites"}
+      { model:PopUp , as : "Emiter"},
+
     ],
   });
-
   const dataUser = info?.map((u) => {
     return {
       id: u.ID,
@@ -53,6 +50,10 @@ const getUsers = async () => {
       Chats: u.Chats,
       Country: u.Country,
       Favorites: u.Favorites
+      address: u.address,
+      street: u.street,
+      city: u.city,
+      coordinates: u.coordinates,
     };
   });
   return dataUser;
@@ -77,63 +78,103 @@ router.get("/", async (req, res, next) => {
         : res.status(404).send({ message: "El usuario no existe" }); // aca deberia mandar
     }
   } catch (error) {
-    res.status(500).send("entro al catch")
+    res.status(500).send("entro al catch");
   }
-})
+});
 
-
-
-router.put('/:id', async (req, res, next) => {   
-    const info = req.body;
-    const {id} = req.params;  
-    try {
-        const updatedUser = await User.findOne({where: {ID: id}});
-        // falta que aca le llegue, pero no capta el ID del worker al cual representa el boton de eliminar 
+router.put("/:id", async (req, res, next) => {
+  const info = req.body;
+  // return console.log(info);
+  const { id } = req.params;
+  try {
+          // falta que aca le llegue, pero no capta el ID del worker al cual representa el boton de eliminar 
         console.log(info.deleted) 
 
         // si le paso un "id" al remove lo remueve bien de la tabla Favorites 
-        info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
+  
+    const updatedUser = await User.findOne({ where: { ID: id } });
+            info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
         info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
-        info.name ? await updatedUser.update({
-          name: info.name
-        }) : "no updatie el name"
-        info.lastName ? await updatedUser.update({
-          lastName: info.lastName
-        }) : "no updatie el lastName"
-        info.img ? await updatedUser.update({
-          img: info.img
-        }) : "no updatie el img"
-        info.phone ? await updatedUser.update({
-          phone: info.phone
-        }) : "no updatie el phone"
-        info.dni ? await updatedUser.update({
-          dni: info.dni
-        }) : "no updatie el dni"
-        info.onBoarded ? await updatedUser.update({
-          onBoarded: info.onBoarded
-        }) : "no updatie el onBoarded"
-        info.isOnline ? await updatedUser.update({
-          isOnline : info.isOnline
-        }) : await updatedUser.update({
-          isOnline : info.isOnline
+    console.log(updatedUser);
+    info.name
+      ? await updatedUser.update({
+          name: info.name,
         })
-        info.isAdmin ? await updatedUser.update({
-          isAdmin: info.isAdmin
-        }) : "no updatie el admin"
-        if(info.countryId){
-          await updatedUser.setCountry(info.countryId)
-        }
-        if(info.location){
-          let countryDb = await Country.findAll({
-               where: {
-                   name: info.location
-               }
-             }) 
-          await updatedUser.setCountry(countryDb[0])
-        }
-        res.status(200).json(updatedUser)       
-    } catch (error) {
-        res.send(error)        
+      : "no updatie el name";
+    info.lastName
+      ? await updatedUser.update({
+          lastName: info.lastName,
+        })
+      : "no updatie el lastName";
+    info.img
+      ? await updatedUser.update({
+          img: info.img,
+
+        })
+      : "no updatie el img";
+    info.phone
+      ? await updatedUser.update({
+          phone: info.phone,
+        })
+      : "no updatie el phone";
+    info.dni
+      ? await updatedUser.update({
+          dni: info.dni,
+        })
+      : "no updatie el dni";
+    info.onBoarded
+      ? await updatedUser.update({
+          onBoarded: info.onBoarded,
+        })
+      : "no updatie el onBoarded";
+    info.isOnline
+      ? await updatedUser.update({
+          isOnline: info.isOnline,
+        })
+      : await updatedUser.update({
+          isOnline: info.isOnline,
+        });
+    info.isAdmin
+      ? await updatedUser.update({
+          isAdmin: info.isAdmin,
+        })
+      : "no updatie el admin";
+    info.countryId
+      ? await updatedUser.update({
+          countryId: info.countryId,
+        })
+      : "no updatie el admin";
+    info.street
+      ? await updatedUser.update({
+          street: info.street,
+        })
+      : "no updatie el admin";
+    info.address
+      ? await updatedUser.update({
+          address: info.address,
+        })
+      : "no updatie el admin";
+    info.city
+      ? await updatedUser.update({
+          city: info.city,
+        })
+      : "no updatie el admin";
+    info.coordinates
+      ? await updatedUser.update({
+          coordinates: info.coordinates,
+        })
+      : "no updatie el admin";
+    if (info.location) {
+      let countryDb = await Country.findAll({
+        where: {
+          name: info.location,
+        },
+      });
+      await updatedUser.setCountry(countryDb[0]);
+    }
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.send(error);
   }
 });
 
@@ -144,6 +185,9 @@ router.get("/:id", async (req, res, next) => {
     if (id) {
       let user = users.find((u) => u.id === id);
       if (user) {
+        const popUps = await PopUp.findAll({where : {ReceiverID:id},include:{model:User,as:"Emiter"}})
+        user.popUps = popUps
+        console.log(user)
         res.status(200).json(user);
       } else {
         res.status(404).json({ message: "no existe el user" });
@@ -169,31 +213,8 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// router.put("/:id", async (req, res, next) => {
-//   const info = req.body;
-//   const { id } = req.params;
-//   const salt = await bcrypt.genSalt(10);
-//   try {
-//     const updatedUser = await User.findOne({ where: { ID: id } });
-//     const us = await updatedUser.update({
-//       name: info.name,
-//       lastName: info.lastName,
-//       img: info.img,
-//       phone: info.phone,
-//       dni: info.dni,
-//       onBoarded: info.onBoarded,
-//       location: info.location,
-//     });
-//     us.setCountry(info.countryId);
-//     res.status(200).json(us);
-//   } catch (error) {
-//     res.status(500).send("entro al catch");
-//   }
-// });
-
 router.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
   try {
     const deleted = await User.destroy({
       where: { id: id },
