@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import info from "./data.js";
+import img1 from "../../assets/lokito.jpg";
 
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
@@ -45,27 +47,56 @@ const CardSlider = () => {
                   <div class="uk-panel">
                     <div className={style.boxContainer}>
                       <div className={style.card}>
-                        <div class={style.social}>
-                          <div className={style.rating}>
-                            <Stack spacing={1}>
-                              <Rating
-                                name="read-only"
-                                defaultValue={3}
-                                precision={0.5}
-                                readOnly
-                              />{" "}
-                              {/* CAMBIAR defaultValue=w.rating* Cuando haya DB con contratos hechos*/}
-                            </Stack>
+                        <div className={style.face}>
+                          <div className={style.front}>
+                            <div className={style.pic}>
+                              <img src={img1} alt="picture" />
+                            </div>
+                            <div class={style.contentWorker}>
+                              <h3 class={style.title}>
+                                {w.User.name} {w.User.lastName}
+                              </h3>
+                              <span>{w.Jobs[0].name}</span>
+                              <div className={style.rating}>
+                                <Stack spacing={1}>
+                                  <Rating
+                                    name="read-only"
+                                    defaultValue={3}
+                                    precision={0.5}
+                                    readOnly
+                                  />{" "}
+                                  {/* CAMBIAR defaultValue=w.rating* Cuando haya DB con contratos hechos*/}
+                                </Stack>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className={style.pic}>
-                          <img src={w.User.img} alt="picture" />
-                        </div>
-                        <div class={style.content}>
-                          <h3 class={style.title}>
-                            {w.User.name} {w.User.lastName}
-                          </h3>
-                          <span>{w.Jobs[0].name}</span>
+                          <div className={style.back}>
+                            <div class={style.social}>
+                              <div className={style.state}>
+                                {w.User.status ? (
+                                  <a className={style.online}>Online</a>
+                                ) : (
+                                  <a className={style.disconnected}>
+                                    Disconnected
+                                  </a>
+                                )}
+                              </div>
+                              {w.Contracts.comment_U ? (
+                                w.Contracts.comment_U
+                              ) : (
+                                <p>
+                                  " Lorem ipsum dolor sit amet, consectetur
+                                  adipisicing elit. Perspiciatis provident eum
+                                  reiciendis iste dicta. Ab non eaque quaerat
+                                  neque nulla, natus illo nisi aliquam est earum
+                                  facilis corporis ut in."
+                                </p>
+                              )}
+                              <Link to={`/profile/${w.User.ID}`}>
+                                <button>Ver Perfil</button>
+                              </Link>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -82,7 +113,7 @@ const CardSlider = () => {
             </button>
           </div>
           <div className={style.btnRight}>
-            <button variant="contained" onClick={positionMore}>
+            <button href="" variant="contained" onClick={positionMore}>
               View More
             </button>
           </div>

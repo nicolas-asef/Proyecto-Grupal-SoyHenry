@@ -20,15 +20,15 @@ const Home = () => {
 
   return (
     <div className={s.all}>
+      <div className={s.containerTitle}>Trabajadores Premium</div>
+      <div className={s.carouselNew}>
+        <CardSlider />
+      </div>
       <div className={s.container}>
         <SearchBar />
       </div>
       <div className={s.filterContainer}>
         <Filters />
-      </div>
-      <div className={s.containerTitle}>Premium Workers</div>
-      <div className={s.carouselNew}>
-        <CardSlider />
       </div>
       <div className={s.container}>
         <Catalog />

@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
 }
 .about-card {
   background-color: red;
@@ -23,12 +24,9 @@
   font-family: "Bebas Neue", cursive;
   font-size: 6rem;
   width: fit-content;
-  padding-left: 30px;
-  padding-right: 30px;
   margin: 1%;
-  filter: drop-shadow(9px 9px 2px rgba(0, 0, 0, 0.3))
-    drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3))
-    drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(3px 3px 1px #256d85) drop-shadow(3px 3px 2px #256d85)
+    drop-shadow(3px 3px 2px #256d85);
 }
 
 .carouselNew {
