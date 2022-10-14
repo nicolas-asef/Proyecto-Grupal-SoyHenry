@@ -35,6 +35,9 @@ export default function Album() {
     <div className={s.container}>
       <div className={s.carouselContainer}>
         <div className={s.titletypo}>La nueva era del oficio</div>
+        <div className={s.subTitletypo}>
+          Solos podemos hacer poco, juntos podemos hacer mucho.
+        </div>
         <DemoCarousel className={s.carousel} />
       </div>
       <div className={s.testimonials}>
