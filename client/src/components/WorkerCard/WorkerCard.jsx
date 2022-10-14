@@ -12,7 +12,7 @@ import Chip from "@mui/material/Chip";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {    
+  "& .MuiBadge-badge": {
     color: "#44b700",
     boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
     "&::after": {
@@ -82,7 +82,7 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
         <div className={s.information}>
           <h3 className={s.h3}>Ubicación: {User.Country.name}</h3>
           <h3 className={s.h3}>
-            Estado: {User.status === false ? "Desconectado" : "Conectado"}
+            Estado: {User.isOnline === false ? "Desconectado" : "Conectado"}
           </h3>
           <h3 className={s.h3}>
             Trabajos realizados: {finishedContracts.length}
