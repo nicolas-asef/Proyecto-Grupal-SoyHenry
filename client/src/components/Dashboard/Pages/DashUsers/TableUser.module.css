@@ -16,6 +16,12 @@
     cursor: pointer;
 }
 
+.return{
+    color: green;
+    font-size: 35px;
+    cursor: pointer;
+}
+
 .flex{
     display: flex;
     justify-content: center;

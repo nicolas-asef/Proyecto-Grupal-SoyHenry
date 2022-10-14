@@ -33,6 +33,7 @@ const getUsers = async () => {
   });
 
   const dataUser = info?.map((u) => {
+    console.log(u)
     return {
       id: u.ID,
       name: u.name,
@@ -48,6 +49,7 @@ const getUsers = async () => {
       Worker: u.Worker,
       Contracts: u.Contracts,
       Chats: u.Chats,
+      isDeleted: u.isDeleted
     };
   });
   return dataUser;
@@ -99,6 +101,24 @@ router.put('/:id', async (req, res, next) => {
         res.status(500).send("entro al catch")        
   }
 });
+
+router.delete('/:id', async (req, res) => {
+  const {deleted} = req.query
+  console.log(deleted)
+  const {id} = req.params
+  try {
+    await User.update ({
+      isDeleted : deleted
+    },{
+      where: {ID: id}
+    })
+    res.send("cambio")
+  } catch (error) {
+    res.send(error)
+
+  }
+})
+
 
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;

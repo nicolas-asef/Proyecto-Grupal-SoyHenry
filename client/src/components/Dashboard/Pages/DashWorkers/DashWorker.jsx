@@ -1,9 +1,9 @@
 import Sidebar from "../../Sidebar/Sidebar";
-import TableUserWorker from "../../Table/TableUserWorker";
+import TableWorker from "./TableWorker";
 import s from "./DashWorker.module.css"
 
-
 export default function DashWorker (){
+
     return (
         <div className={s.home}>
             <div className={s.divSidebar}>
@@ -11,7 +11,7 @@ export default function DashWorker (){
             </div>
             <div className={s.homeContainer}>
                 <div className={s.table}>
-                    <TableUserWorker name={"Worker"}/>
+                    <TableWorker />
                 </div>
             </div>
         </div>

@@ -24,7 +24,12 @@ import {
   GET_USER_ID,
   GET_COUNTRIES,
   UPLOAD_IMAGE,
-  CLEAN_DETAIL
+  CLEAN_DETAIL,
+  POST_COUNTRY,
+  POST_JOB,
+  DELETE_USER,
+  DELETE_JOB,
+  DELETE_COUNTRY
 } from '../actions/actions_vars'
 
 
@@ -39,6 +44,7 @@ const storagedData = localStorageAuth();
 
 const initialState = {
   workers: [],
+  newUser:[],
   users: [],
   jobs: [],
   workersPremium: [],
@@ -90,7 +96,8 @@ const reducer = (state = initialState, action) => {
     case GET_USERS:
         return {
           ...state,            
-          users: action.payload            
+          users: action.payload,
+          newUser: action.payload     
         }
     case GET_USERNAME:
       return {
@@ -225,6 +232,31 @@ const reducer = (state = initialState, action) => {
         ...state,
         userDetail: {},
         selectedContracts: []
+      }
+    }
+    case POST_COUNTRY: {
+      return {
+        ...state,
+      }
+    }
+    case POST_JOB: {
+      return {
+        ...state,
+      }
+    }
+    case DELETE_USER:{
+      return {
+        ...state
+      }
+    }
+    case DELETE_JOB:{
+      return {
+        ...state
+      }
+    }
+    case DELETE_COUNTRY:{
+      return {
+        ...state
       }
     }
     default:
