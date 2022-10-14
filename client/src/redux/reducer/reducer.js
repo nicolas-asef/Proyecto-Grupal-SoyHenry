@@ -25,8 +25,11 @@ import {
   GET_COUNTRIES,
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
-  AGREGAR_SOCKET,//LO puse en español srry jaja
+  AGREGAR_SOCKET,
+  ADD_FAVORITE,
+  DELETED_FAVORITE,
   GET_USER
+
 } from '../actions/actions_vars'
 
 
@@ -242,6 +245,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         userDetail: {},
         selectedContracts: []
+      }
+    }
+    case ADD_FAVORITE: {
+      //const exist = state.favoritesWorkers.find(e => e.ID)        
+      // const newF = [...state.favoritesWorkers, action.payload]
+      // console.log(newF)
+      return {
+        ...state           
+      }
+    }
+    case DELETED_FAVORITE: {
+      console.log("pase por el reducer")
+      return {
+        ...state
       }
     }
     default:

@@ -61,6 +61,10 @@ Worker.belongsTo(User);
 Job.belongsToMany(Worker, { through: "Works_Jobs" });
 Worker.belongsToMany(Job, { through: "Works_Jobs" });
 
+
+User.belongsToMany(Worker, { as: "Favorites", through: "Fav" });
+Worker.belongsToMany(User, { as: "Favorites", through: "Fav" });
+
 // User.hasMany(PopUp)
 
 
@@ -89,9 +93,6 @@ Message.belongsTo(Chat)
 
 
 
-
-
-
 // let probando = async () => {
 //   const agregando = await Videogame.create({nombre:'juanchito',descripcion:'alto',rating: 3.2,plataformas: 'Playstation'})
 // }
@@ -101,3 +102,4 @@ module.exports = {
   conn: sequelize,
   Op, // para importart la conexión { conn } = require('./db.js');
 };
+

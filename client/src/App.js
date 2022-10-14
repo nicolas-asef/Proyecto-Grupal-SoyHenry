@@ -15,6 +15,7 @@ import DashWorker from './components/Dashboard/Pages/DashWorkers/DashWorker';
 import DashBoardUser from './components/DashboardUser/DashBoardUser';
 import CardContracts from './components/CardContracts/CardContracts';
 import { NestedModal } from './components/Payment/NestedModal';
+import Favorites from './components/Favorites/Favorites'
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path='/dashboard/balance' element= { <DashBalance />} />
         <Route path='/dashboard/users' element= { <DashUsers />} />
         <Route path='/dashboard/workers' element= { <DashWorker />} />
+        <Route path='/fav' element= { <Favorites />} />
       </Routes>
     </div>
   );

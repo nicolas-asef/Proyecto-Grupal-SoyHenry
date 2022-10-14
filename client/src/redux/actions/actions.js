@@ -2,6 +2,8 @@
 import { Action } from "@remix-run/router";
 import axios from "axios";
 import {
+  DELETED_FAVORITE,
+  ADD_FAVORITE,
   AGREGAR_SOCKET,
   PUT_WORKER,
   PUT_WORKER_PREMIUM,
@@ -520,8 +522,29 @@ export const cleanDetail = () => (dispatch) => {
   dispatch({ type: CLEAN_DETAIL });
 };
 
-export const changeStatus = (payload, status) => async (dispatch) => {
-  const online = await axios.put("http://localhost:3001/users/" + payload, {
-    isOnline: status,
-  });
-};
+export const changeStatus =  (payload, status) => async (dispatch) => {
+  const online = await axios.put("http://localhost:3001/users/" + payload, {isOnline: status});
+}
+
+export function addFavorite(userID, idWorkerFav) {
+  console.log(idWorkerFav)  
+  return async function(dispatch){
+    await axios.put("http://localhost:3001/users/" + userID , {favorites: idWorkerFav});
+    dispatch({
+      type: ADD_FAVORITE,
+      payload: idWorkerFav
+    })
+  } 
+}
+export function deletedFavorite(userID, workDeleted) {
+  console.log("pase por la accion, esto va para el back")
+  console.log(workDeleted)  
+  return async function(dispatch){
+    await axios.put("http://localhost:3001/users/" + userID , {deleted: workDeleted});
+    dispatch({
+      type: DELETED_FAVORITE,
+      payload: workDeleted
+    })
+  } 
+}
+

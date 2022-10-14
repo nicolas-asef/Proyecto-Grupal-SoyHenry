@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
@@ -13,16 +14,30 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { style } from '@mui/system';
 import Chip from '@mui/material/Chip';
 import s from './Profile.module.css'
+import { FaHeart } from "react-icons/fa";
+import Favorites from "../Favorites/Favorites";
 import { agregarSocker } from '../../redux/actions/actions';
 import { Badge, ClickAwayListener } from '@mui/material';
 import NotificationsNoneTwoToneIcon from '@mui/icons-material/NotificationsNoneTwoTone';
 import { useState } from 'react';
 import PopUps from '../PopUps/PopUps';
 
-
+const st = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "auto",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 const Profile = () => {
   const dispatch = useDispatch();
-  const { user: { sub } } = useAuth0();
+  const {
+    user: { sub },
+  } = useAuth0();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const users = useSelector(state => state.users)
   const user = useSelector(state => state.user)
@@ -34,7 +49,7 @@ const Profile = () => {
   const [popUps, setPopUps] = useState([])
   const [forceUpdate,setForceUpdate] = useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
     if (users.length === 0) {
       dispatch(getUserId(sub))
       dispatch(getUserDetail(sub,"GET_USER"))
@@ -68,7 +83,10 @@ const Profile = () => {
       
   },[user])
 
-
+  useEffect(() => {
+    console.log(sub);
+    if (sub) dispatch(agregarSocker(sub));
+  }, [sub]);
 
   useEffect(()=>{
     let cantidadAuxiliar = 0
@@ -95,25 +113,27 @@ const Profile = () => {
     setAnchorElUser(null);
   };
   const handleOpenProfile = () => {
-    navigate(`/profile/user/${sub}`)
+    navigate(`/profile/user/${sub}`);
     setAnchorElUser(null);
-  }
-  
+  };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleLogout = () => {
-    dispatch(changeStatus(sub, false)).then( data => logout())  
-  }
+    dispatch(changeStatus(sub, false)).then((data) => logout());
+  };
   const handleSettings = () => {
-    navigate('/profile/settings')
-  }
-  
+    navigate("/profile/settings");
+  };
+
   const handleContracts = () => {
-    navigate("/contracts/user/"+sub);
+    navigate("/contracts/user/" + sub);
     setAnchorElUser(null);
-  }
+
+  };
+
   
   const showPopUps = () => {
     setPopUpsEnabled(!popUpsEnabled)
@@ -130,26 +150,29 @@ const Profile = () => {
 
   const settings = [
     {
-      name: 'Profile',
-      handler: handleOpenProfile
-    }, 
+      name: "Profile",
+      handler: handleOpenProfile,
+    },
     {
       name: "Contratos",
-      handler: handleContracts
+      handler: handleContracts,
     },
     {
       name: "Settings",
-      handler: handleSettings
+      handler: handleSettings,
     },
     {
       name: "Dashboard",
-      handler: handleCloseUserMenu
+      handler: handleCloseUserMenu,
     },
     {
       name: "Logout",
-      handler: handleLogout
-    }
-    ];
+      handler: handleLogout,
+    },
+  ];
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <>
     <div className={s.contenedor}>
@@ -164,6 +187,21 @@ const Profile = () => {
       </div>
       </ClickAwayListener>
     </div>
+        <div className={s.but}>
+          <Button onClick={handleOpen}>
+            <FaHeart />
+          </Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={st}>
+              <Favorites />
+            </Box>
+          </Modal>
+        </div>
     <div>
         <Chip className={s.name} label={`${users.name} ${users.lastName}`} variant="outlined" />
         <Tooltip title="Open settings">
@@ -172,30 +210,6 @@ const Profile = () => {
           </IconButton>
         </Tooltip>
       </div>
-      <Menu
-        sx={{ mt: "45px" }}
-        id="menu-appbar"
-        anchorEl={anchorElUser}
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "right",
-        }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
-        {settings.map((setting) => (
-          <MenuItem key={setting.name} onClick={setting.handler}>
-            <Typography textAlign="center">{setting.name}</Typography>
-          </MenuItem>
-        ))}
-      </Menu>
-    </div>
-
     </>
   );
 };

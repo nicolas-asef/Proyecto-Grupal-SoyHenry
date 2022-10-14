@@ -13,6 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Profile from "./Profile";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { FaHeart } from "react-icons/fa";
+
 
 const pages = ["Home", "About", "FAQ"];
 
@@ -33,6 +35,7 @@ const NavBar = () => {
   if (location.pathname === "/onboarding") return;
 
   return (
+
     <AppBar style={{ background: "#06283D" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -110,6 +113,7 @@ const NavBar = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
+
               fontFamily: "Bebas Neue",
               fontWeight: 700,
               letterSpacing: "7px",
@@ -143,7 +147,6 @@ const NavBar = () => {
               </Button>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             {isAuthenticated ? (
               <Profile />

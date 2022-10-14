@@ -25,7 +25,9 @@ const getUsers = async () => {
       { model: Contract },
       { model: Chat },
       { model: Country },
+      { model: Worker , as : "Favorites"}
       { model:PopUp , as : "Emiter"},
+
     ],
   });
   const dataUser = info?.map((u) => {
@@ -47,6 +49,7 @@ const getUsers = async () => {
       Contracts: u.Contracts,
       Chats: u.Chats,
       Country: u.Country,
+      Favorites: u.Favorites
       address: u.address,
       street: u.street,
       city: u.city,
@@ -84,7 +87,14 @@ router.put("/:id", async (req, res, next) => {
   // return console.log(info);
   const { id } = req.params;
   try {
+          // falta que aca le llegue, pero no capta el ID del worker al cual representa el boton de eliminar 
+        console.log(info.deleted) 
+
+        // si le paso un "id" al remove lo remueve bien de la tabla Favorites 
+  
     const updatedUser = await User.findOne({ where: { ID: id } });
+            info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
+        info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
     console.log(updatedUser);
     info.name
       ? await updatedUser.update({
@@ -99,6 +109,7 @@ router.put("/:id", async (req, res, next) => {
     info.img
       ? await updatedUser.update({
           img: info.img,
+
         })
       : "no updatie el img";
     info.phone
