@@ -4,10 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("https://i.imgur.com/UaCROI7.jpg");
 }
 
 .middleContainer {
-  background-color: rgba(253, 253, 253, 0.486);
+  background-color: rgba(253, 253, 253, 0.514);
+  backdrop-filter: blur(10px);
   width: auto;
   border-radius: 4px;
   height: auto;
@@ -37,7 +39,7 @@
 
 .userType {
   width: 50%;
-  height: 500px;
+  min-height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,13 +50,13 @@
   height: 70px;
   font-weight: bold;
   letter-spacing: 2px;
-  margin: 20px;
+  margin: 20px ;
   font-size: 15px;
 }
 
 .userForm {
   padding: 15px;
-  height: 500px;
+  min-height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: center;
