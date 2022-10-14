@@ -26,7 +26,8 @@ import {
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
   AGREGAR_SOCKET,
-  ADD_FAVORITE
+  ADD_FAVORITE,
+  DELETED_FAVORITE
 } from '../actions/actions_vars'
 
 
@@ -242,6 +243,12 @@ const reducer = (state = initialState, action) => {
       // console.log(newF)
       return {
         ...state           
+      }
+    }
+    case DELETED_FAVORITE: {
+      console.log("pase por el reducer")
+      return {
+        ...state
       }
     }
     default:

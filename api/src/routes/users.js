@@ -87,8 +87,12 @@ router.put('/:id', async (req, res, next) => {
     const info = req.body;
     const {id} = req.params;  
     try {
-        const updatedUser = await User.findOne({where: {ID: id}}); 
-        console.log(info.favorites)     
+        const updatedUser = await User.findOne({where: {ID: id}});
+        // falta que aca le llegue, pero no capta el ID del worker al cual representa el boton de eliminar 
+        console.log(info.deleted) 
+
+        // si le paso un "id" al remove lo remueve bien de la tabla Favorites 
+        info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
         info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
         info.name ? await updatedUser.update({
           name: info.name
