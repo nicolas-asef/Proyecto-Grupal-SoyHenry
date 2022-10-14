@@ -13,11 +13,11 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { validator } from "../validator";
-import {useAuth0} from "@auth0/auth0-react"
+import { useAuth0 } from "@auth0/auth0-react";
 
 const User = (props) => {
   const dispatch = useDispatch();
-	const {loginWithRedirect} = useAuth0();
+  const { loginWithRedirect, isLoading } = useAuth0();
   const [jobsState, setJobsState] = useState([]);
   const [workMax, setWorkMax] = useState(false);
   const [validateWorks, setValidateWorks] = useState(false);
@@ -36,7 +36,7 @@ const User = (props) => {
 
   const handleJob = (e) => {
     setValidateWorks(false);
-		props.stepperCb(2)
+    props.stepperCb(2);
     const exist = jobsState.find((job) => job === e.target.value);
     if (jobsState.length < 3) {
       if (!exist) {
@@ -58,21 +58,24 @@ const User = (props) => {
 
   const handleSelection = (e) => {
     props.selectedCb({
-    type: "",
-    isSelected: false,
+      type: "",
+      isSelected: false,
     });
-    props.stepperCb(0)
+    props.stepperCb(0);
   };
 
   const onSubmit = (data) => {
-		if (props.type === "worker" && !jobsState.length) return setValidateWorks(true);
-		props.stepperCb(3);
-    dispatch(finishUserCreation(props.authID, data, jobsState))
-			.then( res => {
-				if(res.status === 200) {
-					loginWithRedirect();
-				}
-			});
+
+    if (props.type === "worker" && !jobsState.length)
+      return setValidateWorks(true);
+    props.stepperCb(3);
+    dispatch(finishUserCreation(props.authID, data, jobsState)).then((res) => {
+      if (res.status === 200) {
+        loginWithRedirect();
+      } else {
+        console.log("error en localidad");
+      }
+    });
   };
 
   return (
@@ -110,6 +113,7 @@ const User = (props) => {
           label="Numero de telefono"
           type="text"
           placeholder="123456789.."
+          fullWidth
           error={errors.phone ? true : false}
           helperText={validator(errors.phone?.type, "phone")}
           {...register("phone", {
@@ -120,6 +124,7 @@ const User = (props) => {
         <TextField
           label="Documento (DNI)"
           type="text"
+          fullWidth
           error={errors.dni ? true : false}
           helperText={validator(errors.dni?.type, "dni")}
           placeholder="123456789.."
@@ -131,13 +136,13 @@ const User = (props) => {
       </div>
       <div className={style.inputContainer}>
         <TextField
-          label="Ubicacion"
+          label="Pais"
           type="text"
           error={errors.location ? true : false}
           helperText={validator(errors.location?.type, "location")}
           placeholder="San miguel.."
           select
-					onChange={ () => props.stepperCb(2)}
+          onChange={() => props.stepperCb(2)}
           defaultValue=""
           {...register("location", {
             required: true,
@@ -146,12 +151,45 @@ const User = (props) => {
           {countries &&
             countries.map((countrie) => {
               return (
-                <MenuItem key={countrie.id} value={countrie.id}>
+                <MenuItem key={countrie.id} value={countrie.name}>
                   {countrie.name}
                 </MenuItem>
               );
             })}
         </TextField>
+      </div>
+      <div className={`${style.inputContainer} ${style.horizontal}`}>
+        <TextField
+          label="Localidad"
+          type="text"
+          fullWidth
+          placeholder="Buenos aires"
+          error={errors.city ? true : false}
+          helperText={validator(errors.city?.type, "city")}
+          {...register("city", {
+            required: true,
+          })}
+        />
+        <TextField
+          label="Direccion"
+          type="text"
+          fullWidth
+          error={errors.street ? true : false}
+          helperText={validator(errors.street?.type, "street")}
+          placeholder="Avenida siempreviva"
+          {...register("street", {
+            required: true,
+          })}
+        />
+        <TextField
+          label="Numero"
+          type="text"
+          placeholder="742"
+          {...register("address", {
+            required: true,
+            pattern: /^[0-9]*$/,
+          })}
+        />
       </div>
       {props.type === "worker" && (
         <>
@@ -184,7 +222,12 @@ const User = (props) => {
             <ButtonGroup fullWidth variant="outlined">
               {jobsState.length
                 ? jobsState.map((job, index) => (
-                    <Button size="large" onClick={handleDelete} id={index} key={job}>
+                    <Button
+                      size="large"
+                      onClick={handleDelete}
+                      id={index}
+                      key={job}
+                    >
                       {job}
                     </Button>
                   ))
@@ -193,10 +236,24 @@ const User = (props) => {
           </div>
         </>
       )}
-      <Button fullWidth size="large" type="submit" variant="contained" value="Registrarse">
+      <Button
+        fullWidth
+        size="large"
+        type="submit"
+        variant="contained"
+        value="Registrarse"
+      >
         Registrarse
       </Button>
-      <Button className={style.back} fullWidth variant="outlined" color="error" onClick={handleSelection}>Volver</Button>
+      <Button
+        className={style.back}
+        fullWidth
+        variant="outlined"
+        color="error"
+        onClick={handleSelection}
+      >
+        Volver
+      </Button>
     </form>
   );
 };
