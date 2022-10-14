@@ -16,3 +16,8 @@
 .badge:hover{
   cursor: pointer;
 }
+
+.but{
+  padding: auto;
+  margin: auto;
+}

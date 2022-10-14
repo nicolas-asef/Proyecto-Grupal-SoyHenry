@@ -40,23 +40,26 @@ export default function Favourite() {
   }, [dispatch]);
 
   const uId = useSelector((state) => state.userDetail.id);
-  const onClick = (e) => {
+  const onClick = (e, id) => {
     console.log(workersFavs);
-    const deleteFav = workersFavs.filter((w) => w.id === e.target.id);
+    const deleteFav = workersFavs.filter((w) => w.id === id);
     console.log(deleteFav);
     console.log(uId);
     // aca en deleteFav le tengo que mandar o el worker a eliminar o el id del worker (sequelize lo identifica si le mandas el worker entero o el id)
     // falta captarlo en el filter
     dispatch(deletedFavorite(uId, deleteFav));
   };
+  // let idd;
   return (
     <div>
       {/* hay que checkear que haya fav, me parece que el all worker esta porque antes no esperaba sino para renderizar, VER */}
+      <h3>My Favourites Workers</h3>
       {allWorker.length &&
         // asd aca tengo que mapear Usuarios Worker completos, con jobs contract
         workersFavs.map((worker, index) => (
           <>
             {console.log(worker)}
+            {/* {(idd = worker[0].ID)} */}
 
             <div>
               <WorkerCard
@@ -67,7 +70,11 @@ export default function Favourite() {
               />
               <IconButton aria-label="delete">
                 {/* este es el id que no estoy pudiendo captar en el onClick */}
-                <DeleteIcon id={worker[0].ID} name={index} onClick={onClick} />
+                <DeleteIcon
+                  id={worker[0].ID}
+                  name={index}
+                  onClick={onClick(id)}
+                />
               </IconButton>
             </div>
           </>
