@@ -19,10 +19,77 @@
   height: 350px;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6.4px);
   -webkit-backdrop-filter: blur(6.4px);
+}
+
+.cardLoader {
+  margin: 2%;
+  position: relative;
+  width: 250px;
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.08),
+    0 -1px 3px 0 rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.cardLoader:after {
+  content: "";
+  background-color: #333;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10%;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  animation-name: loader-animate;
+  animation-timing-function: linear;
+  background: -webkit-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 30%,
+    rgba(255, 255, 255, 0) 81%
+  );
+  background: -o-linear-gradient(
+    left,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 30%,
+    rgba(255, 255, 255, 0) 81%
+  );
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 30%,
+    rgba(255, 255, 255, 0) 81%
+  );
+  /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 ); */
+}
+
+.spinnerIcon {
+  margin-top: 40%;
+  margin-left: 45%;
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  border: solid 2px transparent;
+  border-top-color: #333;
+  border-left-color: #333;
+  border-radius: 10px;
+  animation: progress-spinner 400ms linear infinite;
+}
+
+@keyframes progress-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .face {
@@ -66,9 +133,9 @@
   transform: translateX(-50%);
   width: 140px;
   height: 140px;
+  border-radius: 50%;
   overflow: hidden;
   transition: all 0.5s ease;
-  border-radius: 50%;
   background: #fff;
   box-shadow: 5px 8px 8px #256d85;
 }
@@ -79,6 +146,10 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.picNone {
+  display: none;
 }
 
 .box-container .card:hover {
@@ -269,5 +340,36 @@
   .btnRight button {
     display: block;
     margin: 0.2em auto;
+  }
+}
+
+@keyframes loader-animate {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+@keyframes jump {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
   }
 }

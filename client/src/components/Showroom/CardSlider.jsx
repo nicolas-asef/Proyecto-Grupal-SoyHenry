@@ -45,15 +45,22 @@ const CardSlider = () => {
                 <li>
                   <div class="uk-panel">
                     <div className={style.boxContainer}>
-                      <div className={style.card}>
+                      <div className={!w ? style.cardLoader : style.card}>
                         <div className={style.face}>
                           <div className={style.front}>
-                            <div className={style.pic}>
-                              <img src={w.User.img} alt="picture" />
+                            <div className={style.spinnerIcon}></div>
+                            <div
+                              className={
+                                !w.User.img ? style.spinnerIcon : style.pic
+                              }
+                            >
+                              {!w ? null : (
+                                <img src={w.User.img} alt="picProfile" />
+                              )}
                             </div>
-                            <div class={style.contentWorker}>
-                              <h3 class={style.title}>
-                                {w.User.name} {w.User.lastName}
+                            <div className={style.contentWorker}>
+                              <h3 className={style.title}>
+                                {!w.User.name} {w.User.lastName}
                               </h3>
                               <span>{w.Jobs[0].name}</span>
                               <div className={style.rating}>
