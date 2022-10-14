@@ -11,6 +11,7 @@ const modelCountries = require("./countries");
 const stripeModel = require("./payments.js");
 const modelMail = require("./notifications.js");
 const modelPopUp = require("./popUps.js");
+const modelChat = require('./chat.js');
 
 const router = Router();
 
@@ -23,5 +24,6 @@ router.use("/auth", authRoute);
 router.use("/contract", modelContract);
 router.use("/countries", modelCountries);
 router.use("/payments", stripeModel);
+router.use("/chat", modelChat);
 
 module.exports = router;
