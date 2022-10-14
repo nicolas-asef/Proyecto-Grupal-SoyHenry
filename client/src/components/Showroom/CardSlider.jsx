@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import info from "./data.js";
-import img1 from "../../assets/lokito.jpg";
 
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
@@ -50,7 +49,7 @@ const CardSlider = () => {
                         <div className={style.face}>
                           <div className={style.front}>
                             <div className={style.pic}>
-                              <img src={img1} alt="picture" />
+                              <img src={w.User.img} alt="picture" />
                             </div>
                             <div class={style.contentWorker}>
                               <h3 class={style.title}>
@@ -93,7 +92,7 @@ const CardSlider = () => {
                                 </p>
                               )}
                               <Link to={`/profile/${w.User.ID}`}>
-                                <button>Ver Perfil</button>
+                                <button>VER PERFIL</button>
                               </Link>
                             </div>
                           </div>

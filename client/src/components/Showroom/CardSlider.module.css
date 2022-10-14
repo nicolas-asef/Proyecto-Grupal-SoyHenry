@@ -126,15 +126,19 @@
 .social button {
   width: fit-content;
   border: none;
-  font-size: 1rem;
+  margin-top: 10%;
+  font-size: 2rem;
   color: #fff;
-  text-shadow: 2px 4px 4px black;
-  margin-top: 12%;
+  text-shadow: 4px 6px 6px black;
   border-radius: 10px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   -webkit-backdrop-filter: blur(6.4px);
-  background-image: linear-gradient(to top, #a3bded 0%, #6991c7 100%);
+  background-color: transparent;
+  transition: all 2s ease;
+  letter-spacing: 4.5px;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
 }
+
 .contentWorker {
   display: flex;
   flex-direction: column;
@@ -228,13 +232,13 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   color: #ffffff;
-  background-color: #4eb5f1;
+  background-color: #256d85;
   text-align: center;
   transition: all 0.2s;
   border: none;
 }
 .btnLeft button:hover {
-  background-color: #4095c6;
+  background-color: #256d85;
 }
 @media all and (max-width: 30em) {
   .btnLeft button {
@@ -253,13 +257,13 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   color: #ffffff;
-  background-color: #4eb5f1;
+  background-color: #256d85;
   text-align: center;
   transition: all 0.2s;
   border: none;
 }
 .btnRight button:hover {
-  background-color: #4095c6;
+  background-color: #256d85;
 }
 @media all and (max-width: 30em) {
   .btnRight button {
