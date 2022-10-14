@@ -60,7 +60,7 @@ const CardSlider = () => {
                             </div>
                             <div className={style.contentWorker}>
                               <h3 className={style.title}>
-                                {!w.User.name} {w.User.lastName}
+                                {w.User.name} {w.User.lastName}
                               </h3>
                               <span>{w.Jobs[0].name}</span>
                               <div className={style.rating}>
