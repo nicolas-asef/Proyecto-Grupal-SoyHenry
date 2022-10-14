@@ -10,9 +10,11 @@ const modelContract = require("./contract.js");
 const modelCountries = require("./countries");
 const stripeModel = require("./payments.js");
 const modelMail = require("./notifications.js");
+const modelPopUp = require("./popUps.js");
 
 const router = Router();
 
+router.use("/popups", modelPopUp)
 router.use("/mailNotifications", modelMail)
 router.use("/jobs", modelJob);
 router.use("/worker", modelWorker);

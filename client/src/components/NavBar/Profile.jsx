@@ -27,7 +27,7 @@ const Profile = () => {
   const { logout, user: {picture} } = useAuth0();
   const socket = useSelector(state => state.socket)
   const [cantNotificaciones,setcantNotificaciones] = useState(0)
-
+  const [unicaVez,setUnicaVez] = useState(0)
   useEffect(()=>{
     if (users.length === 0) {
       dispatch(getUserId(sub))
@@ -35,9 +35,10 @@ const Profile = () => {
   },[dispatch, users.img])
 
   useEffect(()=>{
-    console.log(sub)
     if(sub)
-    dispatch(agregarSocker(sub))
+    {
+      dispatch(agregarSocker(sub))
+    }
   },[sub])
 
   useEffect(()=>{
@@ -101,6 +102,7 @@ const Profile = () => {
     <div className={s.badge}>
     <Badge badgeContent={cantNotificaciones} color="primary">
   <NotificationsNoneTwoToneIcon/>
+  
 </Badge>
     </div>
     <div>
