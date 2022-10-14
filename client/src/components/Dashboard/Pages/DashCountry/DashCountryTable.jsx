@@ -20,7 +20,7 @@ import { styled } from '@mui/material/styles';
 import { tableCellClasses } from '@mui/material/TableCell';
 import DeleteIcon from '@mui/icons-material/Delete';
 import s from "./DashCountryTable.module.css"
-import DeleteModal from '../../../DeleteModal/DeleteModal';
+import DeleteModal from '../../DeleteModal/DeleteModal';
 import { height } from '@mui/system';
 import { useState } from 'react';
 

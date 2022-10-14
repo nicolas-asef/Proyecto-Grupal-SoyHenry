@@ -45,6 +45,7 @@ const storagedData = localStorageAuth();
 const initialState = {
   workers: [],
   newUser:[],
+  onlyUser: [],
   users: [],
   jobs: [],
   workersPremium: [],
@@ -94,10 +95,12 @@ const reducer = (state = initialState, action) => {
         isLoading:false
       }
     case GET_USERS:
+        let onlyUser = action.payload.filter(el => el.Worker === null)
         return {
           ...state,            
           users: action.payload,
-          newUser: action.payload     
+          newUser: action.payload,
+          onlyUser: onlyUser
         }
     case GET_USERNAME:
       return {

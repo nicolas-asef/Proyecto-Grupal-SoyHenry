@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import s from "./DeleteModal.module.css"
 import { useDispatch } from 'react-redux';
-import { deleteJob, deleteCountry } from '../../redux/actions/actions';
+import { deleteJob, deleteCountry } from '../../../redux/actions/actions';
 import { useState } from 'react';
 import { callbackify } from 'util';
 
@@ -25,7 +25,6 @@ const style = {
 export default function DeleteModal({name, id, callbk}) {
   const dispatch = useDispatch()
   const [open, setOpen] = React.useState(false);
-  const [actualizar, setActualizar] = useState(false)
 
   const handleOpen = () => {
     setOpen(true);

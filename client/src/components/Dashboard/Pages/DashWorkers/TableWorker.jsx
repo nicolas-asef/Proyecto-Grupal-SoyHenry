@@ -22,7 +22,6 @@ export default function TableWorker() {
 
   const eliminar = (e) => {
     let buscar = array.filter(el => el.User.ID === e)
-    console.log(buscar)
     let deleted = false
     if (buscar[0].User.isDeleted === false){
       deleted = true
