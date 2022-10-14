@@ -10,6 +10,7 @@ const {
   User,
   Worker,
   Country,
+  PopUp
 } = require("../db.js");
 
 // importarme los modelos
@@ -23,15 +24,18 @@ const {
 const router = Router();
 
 const getUsers = async () => {
+
+
+
   const info = await User.findAll({
     include: [
       { model: Worker, include: [Job,Contract] },
       { model: Contract },
       { model: Chat },
       { model: Country },
+      { model:PopUp , as : "Emiter"},
     ],
   });
-
   const dataUser = info?.map((u) => {
     return {
       id: u.ID,
@@ -50,7 +54,7 @@ const getUsers = async () => {
       Worker: u.Worker,
       Contracts: u.Contracts,
       Chats: u.Chats,
-      Country: u.Country
+      Country: u.Country,
     };
   });
   return dataUser;
@@ -124,6 +128,7 @@ router.put('/:id', async (req, res, next) => {
              }) 
           await updatedUser.setCountry(countryDb[0])
         }
+        
         res.status(200).json(updatedUser)       
     } catch (error) {
         res.send(error)        
@@ -137,6 +142,9 @@ router.get("/:id", async (req, res, next) => {
     if (id) {
       let user = users.find((u) => u.id === id);
       if (user) {
+        const popUps = await PopUp.findAll({where : {ReceiverID:id}})
+        user.popUps = popUps
+        console.log(user)
         res.status(200).json(user);
       } else {
         res.status(404).json({ message: "no existe el user" });

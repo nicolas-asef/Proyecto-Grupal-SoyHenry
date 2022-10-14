@@ -68,10 +68,11 @@ const getUser = (receiverId) => {
 io.on("connection", socket => {
   console.log("Se ha conectado un usuario")
   
-    socket.on("addUser", (userId) => {
+    socket.on("addUser",async (userId) => {
       
       addUser(userId, socket.id)
-      io.emit("getUsers", users)
+      const notificaciones = await PopUp.findAll({where:{ReceiverID:userId},include:{model:User,as:"Emiter"}})
+      io.emit("getUsers", notificaciones)
     })
 
     
@@ -79,17 +80,18 @@ io.on("connection", socket => {
     socket.on("enviarNotificacion",async ({receptor_id,emisor_id,tipo})=>{
 
       const recepcion = getUser(receptor_id)
-      io.to(recepcion.socketId).emit("obtenerNotificacion",{emisor_id,tipo});
-      const recibidor = await User.findByPk(receptor_id)
+
       const emisor = await User.findByPk(emisor_id)
+      const receptor = await User.findByPk(receptor_id)
       const notificacion = await PopUp.create({
         type:tipo,
       })
       await notificacion.setEmiter(emisor_id)
       await notificacion.setReceiver(receptor_id)
-      console.log(recibidor)
-      console.log(notificacion)
-      
+      const img = emisor.img
+      const nombre_emisor = emisor.name
+      if(recepcion)
+      io.to(recepcion.socketId).emit("obtenerNotificacion",{img,nombre_emisor,tipo});
     })
     
     socket.on("disconnect", () => {
