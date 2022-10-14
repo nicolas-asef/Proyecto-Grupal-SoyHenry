@@ -25,7 +25,7 @@ const getUsers = async () => {
       { model: Contract },
       { model: Chat },
       { model: Country },
-      { model: Worker , as : "Favorites"}
+      { model: Worker , as : "Favorites"},
       { model:PopUp , as : "Emiter"},
 
     ],
@@ -49,7 +49,7 @@ const getUsers = async () => {
       Contracts: u.Contracts,
       Chats: u.Chats,
       Country: u.Country,
-      Favorites: u.Favorites
+      Favorites: u.Favorites,
       address: u.address,
       street: u.street,
       city: u.city,
