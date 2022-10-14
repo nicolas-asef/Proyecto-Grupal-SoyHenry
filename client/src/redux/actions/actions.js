@@ -63,7 +63,26 @@ export function sendNotification(email, type) {
   return function () {
     axios.post(`${baseURL}mailNotifications`, info);
   };
+
 }
+
+
+// export function getContractUsers(ids){
+//   return function(dispatch){
+//     dispatch({ type: LOADING });
+//     return fetch(baseURL+"contract/user",{
+//       method:'GET',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(ids)
+//       })
+//   }
+//   .then(data => data.json())
+//   .then(json => {
+//     dispatch({type:GET_WORKER_DETAIL,payload:json})
+//   })
+// }
 
 export function modifyContract(data, id) {
   fetch(baseURL + "contract/" + id, {
@@ -130,6 +149,23 @@ export function getContractWorker(ids) {
       dispatch({ type: GET_USERS_CONTRACTS, payload: [] });
     };
 }
+
+// export function getUserId(id) {
+//   return function (dispatch) {
+//     axios
+//         .get(baseURL+"users/" + id)
+//         .then((u) => {
+//             dispatch({
+//                 type: GET_USER_ID,
+//                 payload: u.data,
+//             });
+//         })
+//         .catch((err) => {
+//             console.log(err);
+//         });
+// };
+// }
+
 
 export function getUserDetail(id) {
   return function (dispatch) {
@@ -245,7 +281,7 @@ export function filter(array, job, disponibilidad, zona) {
       array[i].Jobs.map((el) => {
         if (
           el.name === job &&
-          array[i].User.status === disponibilidad &&
+          array[i].User.isOnline === disponibilidad &&
           array[i].User.Country.name === zona
         ) {
           filterArray.push(array[i]);
@@ -265,7 +301,7 @@ export function filter(array, job, disponibilidad, zona) {
   }
   if (job === "all" && disponibilidad !== "all" && zona === "all") {
     for (let i = 0; i < array.length; i++) {
-      if (array[i].User.status === disponibilidad) {
+      if (array[i].User.isOnline === disponibilidad) {
         filterArray.push(array[i]);
       }
     }
@@ -282,7 +318,8 @@ export function filter(array, job, disponibilidad, zona) {
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map((el) => {
         console.log(el);
-        if (el.name === job && array[i].User.status === disponibilidad) {
+      if (el.name === job && array[i].User.isOnline === disponibilidad) {
+
           filterArray.push(array[i]);
         }
       });
@@ -291,7 +328,8 @@ export function filter(array, job, disponibilidad, zona) {
   if (job === "all" && disponibilidad !== "all" && zona !== "all") {
     for (let i = 0; i < array.length; i++) {
       if (
-        array[i].User.status === disponibilidad &&
+
+        array[i].User.isOnline === disponibilidad &&
         array[i].User.Country.name === zona
       ) {
         filterArray.push(array[i]);
@@ -403,6 +441,7 @@ export function finishUserCreation(id, data, jobs) {
         const res = await axios.post("http://localhost:3001/worker", worker);
       }
 
+
       dispatch({
         type: POST_USER,
       });
@@ -410,6 +449,7 @@ export function finishUserCreation(id, data, jobs) {
       console.log(user);
       return user;
     }
+
   };
 }
 
@@ -461,7 +501,6 @@ export function updateWorker(payload, payload2, payloadId) {
     return worker;
   };
 }
-
 export const uploadImage = (formData) => (dispatch) => {
   axios
     .post(

@@ -11,7 +11,7 @@ import "./TestimonialsSlider.css";
 
 const TestiMonials = () => {
   const workersState = useSelector((state) => state.workers);
-  const workersToShow = workersState;
+  const workers = workersState ? workersState : info.examples;
 
   const options = info.opt;
 
@@ -34,15 +34,9 @@ const TestiMonials = () => {
               className="owl-carousel owl-theme"
               {...options}
             >
-              {workersToShow.length === 0 ? (
+              {workers.length === 0 ? (
                 <div className="item">
                   <div className="shadow-effect">
-                    <img
-                      className="img-circle"
-                      src={`${info.pic}`}
-                      alt="pic2"
-                    />
-
                     <p>
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore
@@ -57,7 +51,7 @@ const TestiMonials = () => {
                   </div>
                 </div>
               ) : (
-                workersToShow.map((t, index) => {
+                workers.map((t, index) => {
                   return (
                     <div key={index} className="item">
                       <div className="shadow-effect">
