@@ -208,13 +208,13 @@ export function getUsersName(search) {
         dispatch({
           type: GET_USERNAME,
           payload: u.data,
-        });
-      })
+        })
+      )}
       .catch((err) => {
         console.log(err);
       });
   };
-}
+
 
 export function getWorkersSearch(search) {
   return function (dispatch) {
