@@ -229,6 +229,28 @@ const Profile = () => {
             </IconButton>
           </Tooltip>
         </div>
+        <Menu
+          sx={{ mt: "45px" }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {settings.map((setting) => (
+            <MenuItem key={setting.name} onClick={setting.handler}>
+              <Typography textAlign="center">{setting.name}</Typography>
+            </MenuItem>
+          ))}
+        </Menu>
       </div>
     </>
   );
