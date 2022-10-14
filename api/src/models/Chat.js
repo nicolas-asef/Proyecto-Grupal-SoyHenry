@@ -5,11 +5,7 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
     "Chat",
-    {      id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },},
+    {},
     {
       timestamps: false,
     }
