@@ -48,14 +48,14 @@ export function getWorkers(query, search) {
   };
 }
 
-export function agregarSocker(id) {
-  return async function (dispatch) {
-    console.log("--------->id", id);
-    const socket = await io(baseURL);
-    await socket.emit("addUser", id);
-    console.log(socket);
-    dispatch({ type: AGREGAR_SOCKET, payload: socket });
-  };
+export function agregarSocker(id){
+  
+  return async function(dispatch){
+    const socket = await io(baseURL)
+    await socket.emit("addUser",(id))
+    dispatch({type:AGREGAR_SOCKET,payload:socket})
+  }
+
 }
 
 export function sendNotification(email, type) {
@@ -167,19 +167,19 @@ export function getContractWorker(ids) {
 // }
 
 
-export function getUserDetail(id) {
-  return function (dispatch) {
+export function getUserDetail(id,type=GET_USER_DETAIL){
+  return function(dispatch){
+    
     dispatch({ type: LOADING });
-
-    return fetch(baseURL + "users/" + id)
-      .then((data) => {
-        return data.json();
-      })
-      .then((json) => {
-        dispatch({ type: GET_USER_DETAIL, payload: json });
-        return json;
-      });
-  };
+    
+    return fetch(baseURL+"users/"+id)
+    .then(data => {
+      return data.json()})
+    .then(json => {
+      dispatch({type:type,payload:json})
+      return json;
+    })
+  }
 }
 
 export function getUsers() {
@@ -202,7 +202,7 @@ export function getUsersName(search) {
   return function (dispatch) {
     axios
       .get(baseURL + "users?name=" + search)
-      .then((u) => {
+      .then((u) => 
         dispatch({
           type: GET_USERNAME,
           payload: u.data,

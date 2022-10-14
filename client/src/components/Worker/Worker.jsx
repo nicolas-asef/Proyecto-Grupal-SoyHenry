@@ -42,7 +42,6 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
 
   useEffect(() =>{ 
     let nuevoObjeto = {}
-    console.log("----------------------------->",user)
     if(Object.keys(user).length !== 0 ){
       const contratos = []
       nuevoObjeto.User= {}

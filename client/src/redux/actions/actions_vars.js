@@ -24,3 +24,4 @@ export const UPLOAD_IMAGE = "UPLOAD_IMAGE"
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const AGREGAR_SOCKET = "AGREGAR_SOCKET";
 export const ELIMINAR_SOCKET = "ELIMINAR_SOCKET";
+export const GET_USER = "GET_USER";

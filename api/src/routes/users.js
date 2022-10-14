@@ -174,7 +174,7 @@ router.get("/:id", async (req, res, next) => {
     if (id) {
       let user = users.find((u) => u.id === id);
       if (user) {
-        const popUps = await PopUp.findAll({where : {ReceiverID:id}})
+        const popUps = await PopUp.findAll({where : {ReceiverID:id},include:{model:User,as:"Emiter"}})
         user.popUps = popUps
         console.log(user)
         res.status(200).json(user);

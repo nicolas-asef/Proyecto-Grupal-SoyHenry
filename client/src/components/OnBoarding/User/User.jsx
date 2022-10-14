@@ -65,6 +65,7 @@ const User = (props) => {
   };
 
   const onSubmit = (data) => {
+
     if (props.type === "worker" && !jobsState.length)
       return setValidateWorks(true);
     props.stepperCb(3);
