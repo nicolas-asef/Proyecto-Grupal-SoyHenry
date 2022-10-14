@@ -1,26 +1,45 @@
-.all{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+.all {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background: rgb(0, 48, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 48, 255, 0.19931722689075626) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
-.about-card{
-    background-color: red;
+.about-card {
+  background-color: red;
 }
 
 .container {
-    margin-top: 30px;
-    width: 45%;
+  margin-top: 30px;
+  width: 45%;
 }
 
 .filterContainer {
-    width: 45%;
+  width: 45%;
 }
 
-.all .carousel {  
-    width: 100%;   
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2%;
+.containerTitle {
+  color: aliceblue;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
+  font-size: 6rem;
+  width: fit-content;
+  margin: 1%;
+  filter: drop-shadow(3px 3px 1px #256d85) drop-shadow(3px 3px 2px #256d85)
+    drop-shadow(3px 3px 2px #256d85);
+}
+
+.carouselNew {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  width: 100%;
 }
