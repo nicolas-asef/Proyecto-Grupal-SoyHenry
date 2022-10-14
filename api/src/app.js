@@ -74,7 +74,7 @@ io.on("connection", socket => {
       io.emit("getUsers", notificaciones)
     })
 
-    socket.on('messageCreation'), async ({worker_id,worker_user_id,user_id,texto,emisor}) => {
+    socket.on('messageCreation', async ({worker_id,worker_user_id,user_id,texto,emisor}) => {
       //Variable type_r y type_e que dice por ejemplo type_r = "worker" y type_e = "user"
       // para saber si el receptor es worker o user y saber si el emisor es worker o user 
 
@@ -116,7 +116,7 @@ io.on("connection", socket => {
       //Asociar mensaje al receptor
       //Asociar mensaje al chat
       await message.setChat(chat)
-    }
+    })
 
 
     socket.on("enviarNotificacion",async ({receptor_id,emisor_id,tipo})=>{
