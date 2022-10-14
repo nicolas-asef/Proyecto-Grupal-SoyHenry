@@ -67,10 +67,11 @@ const getUser = (receiverId) => {
 io.on("connection", socket => {
   console.log("Se ha conectado un usuario")
   
-    socket.on("addUser", (userId) => {
+    socket.on("addUser",async (userId) => {
       
       addUser(userId, socket.id)
-      io.emit("getUsers", users)
+      const notificaciones = await PopUp.findAll({where:{ReceiverID:userId},include:{model:User,as:"Emiter"}})
+      io.emit("getUsers", notificaciones)
     })
 
     socket.on('messageCreation'), async ({worker_id,worker_user_id,user_id,texto,emisor}) => {
@@ -121,13 +122,12 @@ io.on("connection", socket => {
     socket.on("enviarNotificacion",async ({receptor_id,emisor_id,tipo})=>{
       //Enviar evento con el mensaje del emisor y el tipo
       const recepcion = getUser(receptor_id)
-      io.to(recepcion.socketId).emit("obtenerNotificacion",{emisor_id,tipo});
-      
-      //Esto no es necesario, pero busque el emisor y el receptor
-      const recibidor = await User.findByPk(receptor_id)
-      const emisor = await User.findByPk(emisor_id)
       
       //Crear notificacion
+
+
+      const emisor = await User.findByPk(emisor_id)
+      const receptor = await User.findByPk(receptor_id)
       const notificacion = await PopUp.create({
         type:tipo,
       })
@@ -137,6 +137,11 @@ io.on("connection", socket => {
 
       //Asociar notificacion al receptor
       await notificacion.setReceiver(receptor_id)
+
+      const img = emisor.img
+      const nombre_emisor = emisor.name
+      if(recepcion)
+      io.to(recepcion.socketId).emit("obtenerNotificacion",{img,nombre_emisor,tipo});
     })
     
     socket.on("disconnect", () => {

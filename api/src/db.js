@@ -62,7 +62,14 @@ Job.belongsToMany(Worker, { through: "Works_Jobs" });
 Worker.belongsToMany(Job, { through: "Works_Jobs" });
 
 // User.hasMany(PopUp)
+
+
+User.hasMany(PopUp, {as: "Emiter"})
 PopUp.belongsTo(User,{as:"Emiter"})
+
+
+// User.hasMany(PopUp,{as:"Receiver"})
+User.hasMany(PopUp, {as: "Receiver"})
 PopUp.belongsTo(User,{as:"Receiver"})
 
 User.hasMany(Chat);
@@ -79,6 +86,8 @@ Message.belongsTo(Worker);
 
 Chat.hasMany(Message);
 Message.belongsTo(Chat)
+
+
 
 
 
