@@ -90,10 +90,15 @@ io.on("connection", socket => {
       await notificacion.setReceiver(receptor_id)
       const img = emisor.img
       const nombre_emisor = emisor.name
+      const id = notificacion.id
       if(recepcion)
-      io.to(recepcion.socketId).emit("obtenerNotificacion",{img,nombre_emisor,tipo});
+        io.to(recepcion.socketId).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo});
     })
     
+    socket.on("seen",async elementos => {
+      await PopUp.update({viewed:true},{where:{id:elementos}})
+    })
+
     socket.on("disconnect", () => {
       console.log("Usuario desconectado")
       removeUser(socket.id)

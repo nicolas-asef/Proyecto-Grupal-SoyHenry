@@ -25,7 +25,6 @@ function ContractForm({toggleModal,id,worker_id,closeCB}) {
 
 
     useEffect(()=>{
-      console.log(socket)
     },[socket])
 
 
@@ -39,9 +38,7 @@ function ContractForm({toggleModal,id,worker_id,closeCB}) {
     }
 
     const handleSubmit = (e) =>{
-        console.log(input)
         createContract(input)
-        console.log("Emitiendo---",id,sub)
         alert("pausa")
         socket?.emit("enviarNotificacion",{receptor_id:id,emisor_id:sub,tipo:"contrato"})
         alert("Sali")

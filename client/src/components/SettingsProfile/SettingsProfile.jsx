@@ -89,7 +89,7 @@ export default function SettingProfile() {
   const handleImgChange = (e) => {
     if (e.target.files !== undefined) {
       setImage(e.target.files[0]);
-      console.log(image);
+
     } else {
       setImage("");
     }

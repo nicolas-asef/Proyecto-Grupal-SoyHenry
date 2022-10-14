@@ -24,7 +24,6 @@ function FormOpinion({id,closeCB,worker}) {
     },[input])
 
     const handeInputChange = function(e){
-        // console.log(input.id_user)
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -32,14 +31,12 @@ function FormOpinion({id,closeCB,worker}) {
     }
 
     const handleSubmit = (e) =>{
-        console.log(input)
         let comentario = "comment_U"
         let rating = "rating_U"
         if(worker){
             comentario = "comment_W"
             rating = "rating_W"
         }
-        console.log(worker)
         modifyContract({[comentario]:input.description,[rating]:+input.rating},id)
     }
 

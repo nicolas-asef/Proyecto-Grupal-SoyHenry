@@ -25,7 +25,8 @@ import {
   GET_COUNTRIES,
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
-  AGREGAR_SOCKET
+  AGREGAR_SOCKET,//LO puse en español srry jaja
+  GET_USER
 } from '../actions/actions_vars'
 
 
@@ -48,6 +49,7 @@ const initialState = {
   selectedContracts: [],
   isLoading: false,
   userDetail: {},
+  user: {},
   allCountries: [],
   allWorkers: [],
   filtrado: [],
@@ -57,6 +59,12 @@ const initialState = {
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+
+    case GET_USER:
+      return{
+        ...state,
+        user:action.payload
+      }
 
     case AGREGAR_SOCKET:
       return{
