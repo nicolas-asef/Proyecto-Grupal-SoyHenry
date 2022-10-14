@@ -11,7 +11,6 @@ import style from "./CardSlider.module.css";
 const CardSlider = () => {
   const workersState = useSelector((state) => state.workersPremium);
   const workers = workersState.length < 5 ? info.examples : workersState;
-  // const workers = info.examples;
 
   const workersPerPage = 5;
 
@@ -31,7 +30,7 @@ const CardSlider = () => {
 
   const positionMore = function () {
     setTimeout(() => {
-      setPosition(quantity.length < 8 ? position : position + 1);
+      setPosition(quantity.length < 5 ? position : position + 1);
     }, 500);
   };
 

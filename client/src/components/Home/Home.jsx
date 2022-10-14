@@ -33,7 +33,9 @@ const Home = () => {
       <div className={s.container}>
         <Catalog />
       </div>
-      <FooterS />
+      <div className={s.footer}>
+        <FooterS />
+      </div>
     </div>
   );
 };

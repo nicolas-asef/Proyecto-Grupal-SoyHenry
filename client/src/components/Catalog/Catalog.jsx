@@ -26,7 +26,9 @@ const Catalog = () => {
     <div className={s.OutterCardsDIV}>
       <div className={s.CardsDIV}>
         {currentWorkers.length === 0 ? (
-          <h1>Loading...</h1>
+          <div className={s.loader}>
+            <div class={s.loaderCircularSquare}></div>
+          </div>
         ) : (
           currentWorkers.map((worker) => (
             <div key={worker.User.ID}>
