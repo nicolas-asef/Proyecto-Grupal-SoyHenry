@@ -150,7 +150,11 @@ function Profile({
 
         {/* favoritos */}
         <div className="contactar">
-          <Button className="buttonStyled" variant="contained" size="large">
+          <Button 
+          className="buttonStyled" 
+          variant="contained" 
+          size="large" 
+          disabled={params.id === sub ? true : false}>
             Mensaje
           </Button>
           {jobs && jobs.length && (
