@@ -89,7 +89,6 @@ const Profile = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log(sub);
     if (sub) dispatch(agregarSocker(sub));
   }, [sub]);
 
