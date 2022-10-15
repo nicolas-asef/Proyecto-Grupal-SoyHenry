@@ -74,7 +74,7 @@ const Profile = () => {
   useEffect(() => {
     if (Object.keys(user).length !== 0) {
       let popUpsAux = [];
-      user.popUps.forEach((e) => {
+      user.popUps?.forEach((e) => {
         const popUpAux = {};
         popUpAux.img = e.Emiter.img;
         popUpAux.type = e.type;
