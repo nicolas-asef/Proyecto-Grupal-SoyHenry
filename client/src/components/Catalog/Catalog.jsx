@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-// import workersDB from "./workersdb.js";
+import workersDB from "./workersdb.js";
 import WorkerCard from "../WorkerCard/WorkerCard";
 
 import Pagination from "@mui/material/Pagination";
@@ -9,7 +9,7 @@ import s from "./Catalog.module.css";
 
 const Catalog = () => {
   const workers = useSelector((state) => state.workers); // el array de workers real sacado de redux (se utilizaría una vez que haya trabajadores en la base de datos)
-  // const workers = workersDB;
+  //const workers = workersDB;
   const [page, setPage] = useState(1);
 
   const lastIndex = page * 4;
