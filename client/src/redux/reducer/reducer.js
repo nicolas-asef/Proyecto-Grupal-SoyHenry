@@ -25,11 +25,19 @@ import {
   GET_COUNTRIES,
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
+<<<<<<< HEAD
+  POST_COUNTRY,
+  POST_JOB,
+  DELETE_USER,
+  DELETE_JOB,
+  DELETE_COUNTRY
+=======
   AGREGAR_SOCKET,
   ADD_FAVORITE,
   DELETED_FAVORITE,
   GET_USER
 
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
 } from '../actions/actions_vars'
 
 
@@ -44,6 +52,8 @@ const storagedData = localStorageAuth();
 
 const initialState = {
   workers: [],
+  newUser:[],
+  onlyUser: [],
   users: [],
   jobs: [],
   workersPremium: [],
@@ -108,9 +118,12 @@ const reducer = (state = initialState, action) => {
         isLoading:false
       }
     case GET_USERS:
+        let onlyUser = action.payload.filter(el => el.Worker === null)
         return {
           ...state,            
-          users: action.payload            
+          users: action.payload,
+          newUser: action.payload,
+          onlyUser: onlyUser
         }
     case GET_USERNAME:
       return {
@@ -247,6 +260,29 @@ const reducer = (state = initialState, action) => {
         selectedContracts: []
       }
     }
+<<<<<<< HEAD
+    case POST_COUNTRY: {
+      return {
+        ...state,
+      }
+    }
+    case POST_JOB: {
+      return {
+        ...state,
+      }
+    }
+    case DELETE_USER:{
+      return {
+        ...state
+      }
+    }
+    case DELETE_JOB:{
+      return {
+        ...state
+      }
+    }
+    case DELETE_COUNTRY:{
+=======
     case ADD_FAVORITE: {
       //const exist = state.favoritesWorkers.find(e => e.ID)        
       // const newF = [...state.favoritesWorkers, action.payload]
@@ -257,6 +293,7 @@ const reducer = (state = initialState, action) => {
     }
     case DELETED_FAVORITE: {
       console.log("pase por el reducer")
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
       return {
         ...state
       }

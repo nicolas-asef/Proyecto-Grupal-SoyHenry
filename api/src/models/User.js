@@ -42,6 +42,12 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: false,
       },
+<<<<<<< HEAD
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      }
+=======
       isOnline: {
         type: DataTypes.BOOLEAN,
       },
@@ -65,6 +71,7 @@ module.exports = (sequelize) => {
         type: DataTypes.JSON,
         allowNull: true,
       },
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
     },
     {
       timestamps: false,

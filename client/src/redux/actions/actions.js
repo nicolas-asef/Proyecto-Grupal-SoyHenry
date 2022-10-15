@@ -1,6 +1,9 @@
 // export const action = () => async (dispatch) => {}
 import { Action } from "@remix-run/router";
 import axios from "axios";
+<<<<<<< HEAD
+import {POST_COUNTRY, POST_JOB, PUT_WORKER, PUT_WORKER_PREMIUM, PAY,LOADING,GET_WORKER_CONTRACTS,GET_USERS_CONTRACTS,GET_USER_DETAIL,GET_WORKER_DETAIL, GET_WORKERS, GET_JOBS, GET_USERS, GET_USERNAME, POST_USER, LOGIN_SUCCES , GET_WORKERS_SEARCH, ORDER_BY_RATING, FILTER, RESET,TEMPORAL_LOGOUT, PUT_USER, GET_USER_ID,GET_COUNTRIES, UPLOAD_IMAGE, CLEAN_DETAIL, DELETE_USER, DELETE_JOB, DELETE_COUNTRY } from './actions_vars'
+=======
 import {
   DELETED_FAVORITE,
   ADD_FAVORITE,
@@ -31,6 +34,7 @@ import {
   CLEAN_DETAIL,
 } from "./actions_vars";
 import { io } from "socket.io-client";
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
 
 const baseURL = "http://localhost:3001/"; //Esto se cambia por localhost:3001 para usarlo local
 
@@ -186,6 +190,19 @@ export function getUserDetail(id,type=GET_USER_DETAIL){
 
 export function getUsers() {
   return function (dispatch) {
+<<<<<<< HEAD
+      axios
+          .get(baseURL+"users")
+          .then((u) => {
+              dispatch({
+                  type: GET_USERS,
+                  payload: u.data,
+              });
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+=======
     axios
       .get(baseURL + "users")
       .then((u) => {
@@ -197,6 +214,7 @@ export function getUsers() {
       .catch((err) => {
         console.log(err);
       });
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
   };
 }
 
@@ -548,3 +566,86 @@ export function deletedFavorite(userID, workDeleted) {
   } 
 }
 
+<<<<<<< HEAD
+// export async function updateWorkerJobs(payload, payloadId) {
+//   return async function(dispatch){
+//   console.log(payload)
+//     const worker = await axios.put(baseURL+"worker/" + payloadId , payload);
+//     dispatch({
+//       type: PUT_WORKER,
+//     });
+//     return worker; 
+//   }
+// }
+
+export const uploadImage = (formData) => (dispatch) => {
+        axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_KEY}/image/upload`, formData)
+        .then((res) =>res.data)
+        .then(res => { 
+            dispatch({
+              type: UPLOAD_IMAGE,
+              payload: res
+          });
+        } )
+}
+
+export const cleanDetail = () => (dispatch) => {
+  dispatch({type: CLEAN_DETAIL})
+}
+
+export function postCountry (obj){
+  return async function (dispatch){
+    try {
+      await axios.post("http://localhost:3001/countries", obj)
+      dispatch({type: POST_COUNTRY})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function postJob (obj){
+  return async function (dispatch){
+    try {
+      await axios.post("http://localhost:3001/jobs", obj)
+      dispatch({type: POST_JOB})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function deleteUser (id, deleted){
+  return async function (dispatch){
+    try {
+      await axios.delete(`http://localhost:3001/users/${id}?deleted=${deleted}`, deleted)
+      dispatch ({type: DELETE_USER})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function deleteJob(id){
+  return async function (dispatch){
+    try {
+      await axios.delete(`http://localhost:3001/jobs/${id}`)
+      dispatch({type: DELETE_JOB})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function deleteCountry(id){
+  return async function (dispatch){
+    try {
+      await axios.delete(`http://localhost:3001/countries/${id}`)
+      dispatch({type: DELETE_COUNTRY})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+=======
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f

@@ -1,0 +1,26 @@
+.top{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.bot{
+    display: flex;
+    justify-content: center;
+}
+
+.mid{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.h2{
+    margin-bottom: 0;
+}
+
+.delete{
+    color: red;
+    font-size: 35px;
+    cursor: pointer;
+}

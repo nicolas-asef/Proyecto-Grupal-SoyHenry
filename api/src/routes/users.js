@@ -31,6 +31,7 @@ const getUsers = async () => {
     ],
   });
   const dataUser = info?.map((u) => {
+    console.log(u)
     return {
       id: u.ID,
       name: u.name,
@@ -48,12 +49,16 @@ const getUsers = async () => {
       Worker: u.Worker,
       Contracts: u.Contracts,
       Chats: u.Chats,
+<<<<<<< HEAD
+      isDeleted: u.isDeleted
+=======
       Country: u.Country,
       Favorites: u.Favorites,
       address: u.address,
       street: u.street,
       city: u.city,
       coordinates: u.coordinates,
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
     };
   });
   return dataUser;
@@ -177,6 +182,24 @@ router.put("/:id", async (req, res, next) => {
     res.send(error);
   }
 });
+
+router.delete('/:id', async (req, res) => {
+  const {deleted} = req.query
+  console.log(deleted)
+  const {id} = req.params
+  try {
+    await User.update ({
+      isDeleted : deleted
+    },{
+      where: {ID: id}
+    })
+    res.send("cambio")
+  } catch (error) {
+    res.send(error)
+
+  }
+})
+
 
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
