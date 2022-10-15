@@ -158,9 +158,9 @@ io.on("connection", socket => {
       console.log("Usuario desconectado")
       
       const user = getSocket(socket.id)
-      console.log("---------------------------------------->",users,socket.id,user)
       removeUser(socket.id)
-      await User.update({isOnline:false},{where:{id:user.userId}})
+      if(user?.userId)
+      await User.update({isOnline:false},{where:{ID:user.userId}})
       io.emit("getUsers", users)
     })
 })

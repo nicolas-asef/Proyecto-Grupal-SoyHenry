@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
           {model:User,as:'Receiver'}
       ],
     });
-    console.log(popUps)
+
     res.status(200).send(popUps);
   } catch (error) {
     res.send("Error en la operacion: " + error.message).status(400);
