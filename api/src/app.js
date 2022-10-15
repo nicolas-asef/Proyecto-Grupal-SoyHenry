@@ -74,15 +74,11 @@ io.on("connection", socket => {
       io.emit("getUsers", notificaciones)
     })
 
-    socket.on('messageCreation', async ({worker_id,worker_user_id,user_id,texto,emisor}) => {
+    socket.on('messageCreation', async ({id_emisor, id_receptor, texto}) => {
       //Variable type_r y type_e que dice por ejemplo type_r = "worker" y type_e = "user"
       // para saber si el receptor es worker o user y saber si el emisor es worker o user 
 
-      let receptor
-      if(emisor === "worker")
-        receptor = getUser(user_id)
-      else
-        receptor = getUser(worker_user_id)
+      let receptor = getUser(id_receptor)
 
         
         
@@ -92,10 +88,8 @@ io.on("connection", socket => {
       const message = await Message.create({
         text:texto,
       })
-      if(emisor === "worker")
-        message.setWorker(worker_id)
-      else
-        message.setUser(user_id)
+        message.setEmitter(id_emisor)
+        message.setRecibidor(id_receptor)
     
       //    socket.on("sendMessage", ({senderId, receiverId, text}) => {
     //   const user = getUser(receiverId);
@@ -109,8 +103,8 @@ io.on("connection", socket => {
       //finorcreate{where : workerID: receptor_id}
       const chat = await Chat.findOrcreate({
         where:{
-          workerId: worker_id,
-          userId: user_id
+          EmitterID: id_emisor,
+          RecibidorID: id_receptor
         }
       })
       //Asociar mensaje al receptor
