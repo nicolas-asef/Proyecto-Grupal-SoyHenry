@@ -49,16 +49,13 @@ const getUsers = async () => {
       Worker: u.Worker,
       Contracts: u.Contracts,
       Chats: u.Chats,
-<<<<<<< HEAD
-      isDeleted: u.isDeleted
-=======
+      isDeleted: u.isDeleted,
       Country: u.Country,
       Favorites: u.Favorites,
       address: u.address,
       street: u.street,
       city: u.city,
       coordinates: u.coordinates,
->>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
     };
   });
   return dataUser;

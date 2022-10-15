@@ -15,12 +15,9 @@ import DashWorker from './components/Dashboard/Pages/DashWorkers/DashWorker';
 import DashBoardUser from './components/DashboardUser/DashBoardUser';
 import CardContracts from './components/CardContracts/CardContracts';
 import { NestedModal } from './components/Payment/NestedModal';
-<<<<<<< HEAD
 import DashCountry from './components/Dashboard/Pages/DashCountry/DashCountry';
 import DashJobs from './components/Dashboard/Pages/DashJobs/DashJobs';
-=======
 import Favorites from './components/Favorites/Favorites'
->>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
 
 function App() {
   return (
@@ -47,12 +44,9 @@ function App() {
         <Route path='/dashboard/balance' element= { <DashBalance />} />
         <Route path='/dashboard/users' element= { <DashUsers />} />
         <Route path='/dashboard/workers' element= { <DashWorker />} />
-<<<<<<< HEAD
         <Route path='/dashboard/country' element= {<DashCountry />} />
         <Route path='/dashboard/jobs'element= {<DashJobs />} />
-=======
         <Route path='/fav' element= { <Favorites />} />
->>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
       </Routes>
     </div>
   );
