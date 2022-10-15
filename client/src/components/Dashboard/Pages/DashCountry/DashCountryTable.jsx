@@ -153,7 +153,7 @@ export default function DashCountryTable({array, select, callbk}) {
                 {el.name}
               </TableCell>
               <TableCell style={{ width: 160 }} align="left">
-                <DeleteModal name={select} id={el.id} callbk={render}/>
+                <DeleteModal name={select} id={el.id} msg={el.name} callbk={render}/>
               </TableCell>
             </TableRow>
           ))}

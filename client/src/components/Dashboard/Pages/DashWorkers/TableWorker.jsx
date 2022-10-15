@@ -11,6 +11,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWorkers, deleteUser } from '../../../../redux/actions/actions';
 import ReplayIcon from '@mui/icons-material/Replay';
+import DeleteUserWorker from '../../DeleteUserWorker/DeleteUserWorker';
+
 
 
 
@@ -20,13 +22,7 @@ export default function TableWorker() {
   const [actualizar, setActualizar] = useState ()
   const dispatch = useDispatch()
 
-  const eliminar = (e) => {
-    let buscar = array.filter(el => el.User.ID === e)
-    let deleted = false
-    if (buscar[0].User.isDeleted === false){
-      deleted = true
-    }
-    dispatch(deleteUser(buscar[0].User.ID, deleted))
+  const reload = () => {
     setActualizar(actualizar === true ? false : true)
   }
   
@@ -59,7 +55,7 @@ export default function TableWorker() {
                   <TableCell component="th" scope="row" className={s.tableBot}>
                     {el.ID}
                   </TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.User.name} {el.lastName}</TableCell>
+                  <TableCell align="left" className={s.tableBot}>{el.User.name} {el.User.lastName}</TableCell>
                   <TableCell align="left" className={s.tableBot}>{el.User.dni}</TableCell>
                   <TableCell align="left" className={s.tableBot}>{el.User.email}</TableCell>
                   <TableCell align="left" className={s.tableBot}>{el.User.phone}</TableCell>
@@ -69,12 +65,8 @@ export default function TableWorker() {
                     )
                   })}
                   <TableCell align="left" className={`${s.tableBot} ${s.flex}`}>
-                    {
-                      el.User.isDeleted === false 
-                      ? <DeleteIcon className={s.delete} onClick={() => eliminar(el.User.ID)}/> 
-                      : <ReplayIcon className={s.return} onClick={() => eliminar(el.User.ID)}/>
-                    }
-                    </TableCell>
+                    <DeleteUserWorker name={`${el.User.name} ${el.User.lastName}`} id={el.User.ID} condition={el.User.isDeleted} callbk={reload}/>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -18,3 +18,9 @@
 .h2{
     margin-bottom: 0;
 }
+
+.delete{
+    color: red;
+    font-size: 35px;
+    cursor: pointer;
+}

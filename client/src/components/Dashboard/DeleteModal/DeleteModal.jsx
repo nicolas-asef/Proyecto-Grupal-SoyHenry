@@ -6,7 +6,7 @@ import s from "./DeleteModal.module.css"
 import { useDispatch } from 'react-redux';
 import { deleteJob, deleteCountry } from '../../../redux/actions/actions';
 import { useState } from 'react';
-import { callbackify } from 'util';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const style = {
   position: 'absolute',
@@ -22,7 +22,7 @@ const style = {
   pb: 3,
 };
 
-export default function DeleteModal({name, id, callbk}) {
+export default function DeleteModal({name, id, callbk, msg}) {
   const dispatch = useDispatch()
   const [open, setOpen] = React.useState(false);
 
@@ -46,7 +46,9 @@ export default function DeleteModal({name, id, callbk}) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Delete</Button>
+      <Button onClick={handleOpen}>
+        <DeleteIcon className={s.delete}/>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -55,10 +57,10 @@ export default function DeleteModal({name, id, callbk}) {
       >
         <Box sx={{ ...style, width: 400 }}>
           <div className={s.top}>
-            <h2 className={s.h2} id="parent-modal-title">Delete {name}?</h2>
+            <h2 className={s.h2} id="parent-modal-title">Delete {msg}?</h2>
           </div>
           <div className={s.mid}>
-            <p className={s.p}>Are you sure you want to delete {name}?</p>
+            <p className={s.p}>Are you sure you want to delete {msg}?</p>
           </div>
           <div className={s.bot}>
           <Button variant='contained' size='large' type='submit' className={s.button} onClick={handleDelete}>Si</Button>
