@@ -75,15 +75,13 @@ io.on("connection", socket => {
     })
 
     socket.on('messageCreation', async ({id_emisor, id_receptor, texto}) => {
-      //Variable type_r y type_e que dice por ejemplo type_r = "worker" y type_e = "user"
-      // para saber si el receptor es worker o user y saber si el emisor es worker o user 
 
       let receptor = getUser(id_receptor)
-
+      console.log(receptor)
         
         
       //Enviar evento con el mensaje a el socket apropiado al receptor
-      io.to(receptor.socketId).emit("createMessage", texto);
+       io.to(receptor.socketId).emit("createMessage", texto);
       //Crear mensaje
       const message = await Message.create({
         text:texto,
@@ -101,10 +99,10 @@ io.on("connection", socket => {
 
       //Buscar chat que este el receptor y el emisor y si no existe crearlo
       //finorcreate{where : workerID: receptor_id}
-      const chat = await Chat.findOrcreate({
+      const chat = await Chat.findOrCreate({
         where:{
-          EmitterID: id_emisor,
-          RecibidorID: id_receptor
+          HostID: id_emisor,
+          GuestID: id_receptor
         }
       })
       //Asociar mensaje al receptor
