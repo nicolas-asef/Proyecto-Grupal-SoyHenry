@@ -3,3 +3,21 @@
   color: white !important;
   text-transform: capitalize;
 }
+
+.contenedor{
+    display: flex;
+}
+
+.badge{
+  margin-top: 1vh;
+  margin-right: 2vh;
+}
+
+.badge:hover{
+  cursor: pointer;
+}
+
+.but{
+  padding: auto;
+  margin: auto;
+}

@@ -15,7 +15,7 @@ route.get("/", async (req, res) => {
 route.get("/user", async (req, res) => {
   try {
     let id = req.query.arr;
-    console.log(id);
+
     if (!id.isArray) {
       id = [id];
     }
@@ -38,6 +38,9 @@ route.get("/worker", async (req, res) => {
   try {
     let id = req.query.arr;
 
+    if (!id.isArray) {
+      id = [id];
+    }
     const contracts = await Contract.findAll({
       where: {
         id: {
@@ -47,8 +50,8 @@ route.get("/worker", async (req, res) => {
       include: [{ model: Worker, include: User }],
     });
 
-    const workers = contracts.map((elem) => elem.Worker);
-    res.send(workers);
+
+    res.send(contracts);
   } catch (error) {
     res.send("Error en la operacion: " + error.message);
   }
@@ -73,10 +76,13 @@ route.post("/", async (req, res) => {
 
 route.put("/:id", async (req, res, next) => {
   try {
+    
     const { id } = req.params;
     const { finished, rating_U, rating_W, confirmed, comment_U, comment_W } =
       req.body;
+
     const contract = await Contract.findByPk(id);
+
     finished ? (contract.finished = finished) : finished;
     rating_U ? (contract.rating_U = rating_U) : rating_U;
     rating_W ? (contract.rating_W = rating_W) : rating_W;

@@ -25,11 +25,19 @@ import {
   GET_COUNTRIES,
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
+<<<<<<< HEAD
   POST_COUNTRY,
   POST_JOB,
   DELETE_USER,
   DELETE_JOB,
   DELETE_COUNTRY
+=======
+  AGREGAR_SOCKET,
+  ADD_FAVORITE,
+  DELETED_FAVORITE,
+  GET_USER
+
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
 } from '../actions/actions_vars'
 
 
@@ -54,13 +62,28 @@ const initialState = {
   selectedContracts: [],
   isLoading: false,
   userDetail: {},
+  user: {},
   allCountries: [],
   allWorkers: [],
   filtrado: [],
-  uploadedImg: ""
+  uploadedImg: "",
+  socket: null,
+  popUps: []
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+
+    case GET_USER:
+      return{
+        ...state,
+        user:action.payload
+      }
+
+    case AGREGAR_SOCKET:
+      return{
+        ...state,
+        socket:!state.socket? action.payload : state.socket
+      }
 
     case GET_USER_DETAIL:
       return{
@@ -237,6 +260,7 @@ const reducer = (state = initialState, action) => {
         selectedContracts: []
       }
     }
+<<<<<<< HEAD
     case POST_COUNTRY: {
       return {
         ...state,
@@ -258,6 +282,18 @@ const reducer = (state = initialState, action) => {
       }
     }
     case DELETE_COUNTRY:{
+=======
+    case ADD_FAVORITE: {
+      //const exist = state.favoritesWorkers.find(e => e.ID)        
+      // const newF = [...state.favoritesWorkers, action.payload]
+      // console.log(newF)
+      return {
+        ...state           
+      }
+    }
+    case DELETED_FAVORITE: {
+      console.log("pase por el reducer")
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
       return {
         ...state
       }

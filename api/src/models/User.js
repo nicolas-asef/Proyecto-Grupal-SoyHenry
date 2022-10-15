@@ -37,20 +37,41 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      /* status:{
-      type:DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    }, */
       onBoarded: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
       },
+<<<<<<< HEAD
       isDeleted: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       }
+=======
+      isOnline: {
+        type: DataTypes.BOOLEAN,
+      },
+      isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      address: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      street: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      coordinates: {
+        type: DataTypes.JSON,
+        allowNull: true,
+      },
+>>>>>>> 100d0ad639e134e3ccd38f3b4ff7228f765e299f
     },
     {
       timestamps: false,

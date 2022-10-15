@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./styles/Filters.module.css";
-import { filter, getJobs, get_countries, orderByRating } from "../../redux/actions/actions";
+import {
+  filter,
+  getJobs,
+  get_countries,
+  orderByRating,
+} from "../../redux/actions/actions";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -12,11 +17,10 @@ const Filters = () => {
   const [job, setJob] = useState("all");
   const [available, setAvailable] = useState("all");
   const [zone, setZone] = useState("all");
-  const worker = useSelector(state => state.workers);
-  const filtrado = useSelector(state => state.filtrado);
-  const jobs = useSelector(state => state.jobs)
-  const countries = useSelector(state => state.allCountries)
-
+  const worker = useSelector((state) => state.workers);
+  const filtrado = useSelector((state) => state.filtrado);
+  const jobs = useSelector((state) => state.jobs);
+  const countries = useSelector((state) => state.allCountries);
 
   const orderBy = (e) => {
     dispatch(orderByRating(worker, e.target.value));
@@ -41,10 +45,10 @@ const Filters = () => {
     dispatch(filter(filtrado, job, available, e.target.value));
   };
 
-  useEffect (() => {
-    dispatch(getJobs())
-    dispatch(get_countries())
-  },[])
+  useEffect(() => {
+    dispatch(getJobs());
+    dispatch(get_countries());
+  }, []);
 
   return (
     <div className={styles.fieldContainer}>
@@ -70,15 +74,18 @@ const Filters = () => {
           size="small"
           label="Oficio"
           select
-					defaultValue=""
+          defaultValue=""
           onChange={filterjob}
         >
           <MenuItem value="all">All</MenuItem>
-          {jobs && jobs.map( job => {
-            return (
-              <MenuItem value={job.name} key={job.id}>{job.name}</MenuItem>
-            )
-          })}
+          {jobs &&
+            jobs.map((job) => {
+              return (
+                <MenuItem value={job.name} key={job.id}>
+                  {job.name}
+                </MenuItem>
+              );
+            })}
         </TextField>
       </div>
       <div className={styles.textField}>
@@ -87,13 +94,13 @@ const Filters = () => {
           variant="outlined"
           size="small"
           label="Disponibilidad"
-					defaultValue=""
+          defaultValue=""
           select
           onChange={filterAvailable}
         >
           <MenuItem value="all">all</MenuItem>
-          <MenuItem value={false}>Online</MenuItem>
-          <MenuItem value={true}>Offline</MenuItem>
+          <MenuItem value={true}>Online</MenuItem>
+          <MenuItem value={false}>Offline</MenuItem>
         </TextField>
       </div>
       <div className={styles.textField}>
@@ -102,16 +109,19 @@ const Filters = () => {
           variant="outlined"
           size="small"
           label="Ubicacion"
-					defaultValue=""
+          defaultValue=""
           select
           onChange={filterZone}
         >
           <MenuItem value="all">all</MenuItem>
-          {countries && countries.map( country => {
-            return (
-              <MenuItem value={country.name} key={country.id}>{country.name}</MenuItem>
-            )
-          })}
+          {countries &&
+            countries.map((country) => {
+              return (
+                <MenuItem value={country.name} key={country.id}>
+                  {country.name}
+                </MenuItem>
+              );
+            })}
         </TextField>
       </div>
     </div>
