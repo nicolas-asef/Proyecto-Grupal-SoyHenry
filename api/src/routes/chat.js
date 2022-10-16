@@ -7,8 +7,7 @@ router.get('/', async (req,res,next) => {
     try{
         let inbox = await Chat.findAll({
             include: [
-                {model:User},
-                {model: Worker},
+                {model:User, as:"Host"},
                 {model: Message}
             ]
         })
