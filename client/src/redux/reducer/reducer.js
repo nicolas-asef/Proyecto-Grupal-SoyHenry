@@ -140,7 +140,7 @@ const reducer = (state = initialState, action) => {
     case GET_WORKERS:
       let workers = action.payload      
       var totalrating = 0
-      let filteredByPremium = workers.filter((w) => w.premium === false)   //Cambiar a true cuando se pueda ser prermium
+      let filteredByPremium = workers.filter(w => w.premium === true)   //Cambiar a true cuando se pueda ser prermium
       for (let i = 0; i < workers.length; i++) {
         totalrating = 0
         workers[i].Contracts && workers[i].Contracts.map(contract => totalrating = totalrating + contract.rating_W)
@@ -169,12 +169,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authState
-      }
-
-    case GET_WORKERS:
-      return {
-        ...state,
-        users: action.payload 
       }
       case GET_WORKERS_SEARCH:
         let filtrado = state.workers.filter( (e) => e.User.name.toLowerCase().includes(action.payload.toLowerCase()))

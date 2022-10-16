@@ -45,6 +45,7 @@ function Profile({
   const status = useSelector((state) => state.userDetail.isOnline);
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
+  const socket = useSelector(state => state.socket)
   const handleOpen = () => {
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
@@ -73,6 +74,13 @@ function Profile({
   const handleFav = (e) => {
     setChecked(e.target.checked);
     dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
+  };
+  const handleChat = () => {
+    if (!login.isAuthenticated) {
+      return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
+    }
+    socket?.emit("messageCreation",{id_emisor: login.user.sub, id_receptor: params.id , texto:"hola"})
+
   };
 
   return (
@@ -150,7 +158,12 @@ function Profile({
 
         {/* favoritos */}
         <div className="contactar">
-          <Button className="buttonStyled" variant="contained" size="large">
+          <Button 
+          className="buttonStyled" 
+          variant="contained" 
+          size="large" 
+          disabled={params.id === sub ? true : false}
+          onClick={handleChat}>
             Mensaje
           </Button>
           {jobs && jobs.length && (

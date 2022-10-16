@@ -23,7 +23,7 @@ const getUsers = async () => {
     include: [
       { model: Worker, include: [Job, Contract] },
       { model: Contract },
-      { model: Chat },
+      { model: Chat, as: "Host" },
       { model: Country },
       { model: Worker , as : "Favorites"},
       { model:PopUp , as : "Emiter"},
