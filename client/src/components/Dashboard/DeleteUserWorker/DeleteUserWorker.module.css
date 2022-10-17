@@ -1,0 +1,57 @@
+.top{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+}
+
+.bot{
+    display: flex;
+    justify-content: center;
+}
+
+.mid{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.h2{
+    margin-bottom: 0;
+}
+
+.tableTop{
+    font-size: 25px;
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+.tableBot{
+    font-size: 20px;
+    font-weight: 200;
+    padding: 5px;
+}
+
+.delete{
+    color: red;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.return{
+    color: green;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-weight: 500;
+    font-size: 30px;
+    color: rgb(160, 160, 160);
+    margin-bottom: 60px;
+}

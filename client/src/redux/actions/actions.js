@@ -29,8 +29,16 @@ import {
   GET_COUNTRIES,
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
+  POST_COUNTRY, 
+  POST_JOB,
+  DELETE_USER, 
+  DELETE_JOB, 
+  DELETE_COUNTRY
 } from "./actions_vars";
 import { io } from "socket.io-client";
+
+//original = http://localhost:3001
+const URL = "https://databasepf.herokuapp.com/"
 
 const baseURL = "http://localhost:3001/"; //Esto se cambia por localhost:3001 para usarlo local
 
@@ -73,6 +81,7 @@ export function sendNotification(email, type) {
 //   return function(dispatch){
 //     dispatch({ type: LOADING });
 //     return fetch(baseURL+"contract/user",{
+//     return fetch(URL+"contract/user",{
 //       method:'GET',
 //       headers: {
 //         'Content-Type': 'application/json'
@@ -108,6 +117,7 @@ export function createContract(data) {
   })
     .then((data) => console.log(data))
     .catch((data) => alert(data));
+
 }
 
 export function getContractUsers(ids) {
@@ -156,6 +166,7 @@ export function getContractWorker(ids) {
 //   return function (dispatch) {
 //     axios
 //         .get(baseURL+"users/" + id)
+//         .get(URL+"users/" + id)
 //         .then((u) => {
 //             dispatch({
 //                 type: GET_USER_ID,
@@ -228,8 +239,16 @@ export function getWorkersSearch(search) {
 
 export function createUser(payload, jobs) {
   return async function (dispatch) {
-    const user = await axios.post(baseURL + "users", payload);
+    const user = await axios.post(URL+"users", payload);
     const user_id = await user.data.ID;
+    if(jobs.length) {
+      const worker = {
+        user_id,
+        jobs,
+
+      }
+      const res = await axios.post(URL+"worker", worker);
+    }
 
     dispatch({
       type: POST_USER,
@@ -239,10 +258,21 @@ export function createUser(payload, jobs) {
 }
 
 export function getJobs() {
+    return async function (dispatch) {
+        try {
+            let jobs = await axios.get(URL+"jobs");
+            return dispatch({ type: GET_JOBS, payload: jobs.data });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+}
+
+export function getWorkersPremium() {
   return async function (dispatch) {
     try {
-      let jobs = await axios.get(baseURL + "jobs");
-      return dispatch({ type: GET_JOBS, payload: jobs.data });
+      // let premium = await axios.get(URL+"workers_premium");
+      return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
     } catch (error) {
       console.log(error);
     }
@@ -548,3 +578,68 @@ export function deletedFavorite(userID, workDeleted) {
   } 
 }
 
+// export async function updateWorkerJobs(payload, payloadId) {
+//   return async function(dispatch){
+//   console.log(payload)
+//     const worker = await axios.put(baseURL+"worker/" + payloadId , payload);
+//     dispatch({
+//       type: PUT_WORKER,
+//     });
+//     return worker; 
+//   }
+// }
+
+export function postCountry (obj){
+  return async function (dispatch){
+    try {
+      await axios.post("http://localhost:3001/countries", obj)
+      dispatch({type: POST_COUNTRY})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function postJob (obj){
+  return async function (dispatch){
+    try {
+      await axios.post("http://localhost:3001/jobs", obj)
+      dispatch({type: POST_JOB})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function deleteUser (id, deleted){
+  return async function (dispatch){
+    try {
+      await axios.delete(`http://localhost:3001/users/${id}?deleted=${deleted}`, deleted)
+      dispatch ({type: DELETE_USER})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function deleteJob(id){
+  return async function (dispatch){
+    try {
+      await axios.delete(`http://localhost:3001/jobs/${id}`)
+      dispatch({type: DELETE_JOB})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export function deleteCountry(id){
+  return async function (dispatch){
+    try {
+      await axios.delete(`http://localhost:3001/countries/${id}`)
+      dispatch({type: DELETE_COUNTRY})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

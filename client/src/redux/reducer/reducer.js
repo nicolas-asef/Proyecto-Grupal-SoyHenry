@@ -25,6 +25,11 @@ import {
   GET_COUNTRIES,
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
+  POST_COUNTRY,
+  POST_JOB,
+  DELETE_USER,
+  DELETE_JOB,
+  DELETE_COUNTRY,
   AGREGAR_SOCKET,
   ADD_FAVORITE,
   DELETED_FAVORITE,
@@ -44,6 +49,8 @@ const storagedData = localStorageAuth();
 
 const initialState = {
   workers: [],
+  newUser:[],
+  onlyUser: [],
   users: [],
   jobs: [],
   workersPremium: [],
@@ -108,9 +115,12 @@ const reducer = (state = initialState, action) => {
         isLoading:false
       }
     case GET_USERS:
+        let onlyUser = action.payload.filter(el => el.Worker === null)
         return {
           ...state,            
-          users: action.payload            
+          users: action.payload,
+          newUser: action.payload,
+          onlyUser: onlyUser
         }
     case GET_USERNAME:
       return {
@@ -130,7 +140,7 @@ const reducer = (state = initialState, action) => {
     case GET_WORKERS:
       let workers = action.payload      
       var totalrating = 0
-      let filteredByPremium = workers.filter((w) => w.premium === false)   //Cambiar a true cuando se pueda ser prermium
+      let filteredByPremium = workers.filter(w => w.premium === true)   //Cambiar a true cuando se pueda ser prermium
       for (let i = 0; i < workers.length; i++) {
         totalrating = 0
         workers[i].Contracts && workers[i].Contracts.map(contract => totalrating = totalrating + contract.rating_W)
@@ -159,12 +169,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authState
-      }
-
-    case GET_WORKERS:
-      return {
-        ...state,
-        users: action.payload 
       }
       case GET_WORKERS_SEARCH:
         let filtrado = state.workers.filter( (e) => e.User.name.toLowerCase().includes(action.payload.toLowerCase()))
@@ -245,6 +249,31 @@ const reducer = (state = initialState, action) => {
         ...state,
         userDetail: {},
         selectedContracts: []
+      }
+    }
+    case POST_COUNTRY: {
+      return {
+        ...state,
+      }
+    }
+    case POST_JOB: {
+      return {
+        ...state,
+      }
+    }
+    case DELETE_USER:{
+      return {
+        ...state
+      }
+    }
+    case DELETE_JOB:{
+      return {
+        ...state
+      }
+    }
+    case DELETE_COUNTRY: {
+      return {
+        ...state
       }
     }
     case ADD_FAVORITE: {

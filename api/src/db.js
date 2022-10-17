@@ -79,8 +79,8 @@ PopUp.belongsTo(User,{as:"Receiver"})
 User.hasMany(Chat, {as:"Host"});
 Chat.belongsTo(User, {as:"Host"});
 
- User.hasMany(Chat, {as:"Guest"});
-Chat.belongsTo(User, {as:"Guest"}); 
+User.hasMany(Chat, {as:"Guest"});
+Chat.belongsTo(User, {as:"Guest"});
 /* 
 Worker.hasMany(Chat);
 Chat.belongsTo(Worker); */
