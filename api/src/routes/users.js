@@ -86,18 +86,18 @@ router.get("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   const info = req.body;
-  // return console.log(info);
+
   const { id } = req.params;
   try {
           // falta que aca le llegue, pero no capta el ID del worker al cual representa el boton de eliminar 
-        console.log(info.deleted) 
+
 
         // si le paso un "id" al remove lo remueve bien de la tabla Favorites 
   
     const updatedUser = await User.findOne({ where: { ID: id } });
             info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
         info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
-    console.log(updatedUser);
+
     info.name
       ? await updatedUser.update({
           name: info.name,
@@ -207,7 +207,7 @@ router.get("/:id", async (req, res, next) => {
       if (user) {
         const popUps = await PopUp.findAll({where : {ReceiverID:id},include:{model:User,as:"Emiter"}})
         user.popUps = popUps
-        console.log(user)
+  
         res.status(200).json(user);
       } else {
         res.status(404).json({ message: "no existe el user" });

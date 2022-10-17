@@ -63,12 +63,16 @@ const getUser = (receiverId) => {
   return users.find(user => user.userId === receiverId)
 }
 
+const getSocket = (socketId) => {
+  return users.find(user => user.socketId === socketId)
+}
 
 io.on("connection", socket => {
   console.log("Se ha conectado un usuario")
   
     socket.on("addUser",async (userId) => {
-      
+
+      await User.update({isOnline:true},{where:{ID:userId}})
       addUser(userId, socket.id)
       const notificaciones = await PopUp.findAll({where:{ReceiverID:userId},include:{model:User,as:"Emiter"}})
       io.emit("getUsers", notificaciones)
@@ -141,9 +145,14 @@ io.on("connection", socket => {
       await PopUp.update({viewed:true},{where:{id:elementos}})
     })
 
-    socket.on("disconnect", () => {
+    socket.on("disconnect", async () => {
+      
       console.log("Usuario desconectado")
+      
+      const user = getSocket(socket.id)
       removeUser(socket.id)
+      if(user?.userId)
+      await User.update({isOnline:false},{where:{ID:user.userId}})
       io.emit("getUsers", users)
     })
 })
