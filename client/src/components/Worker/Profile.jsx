@@ -58,20 +58,22 @@ function Profile({
   const handleClosePopUp = () => {
     setOpenLogin(false);
   };
-  const userD = useSelector((state) => state.users.Favorites);
+  const userD = useSelector((state) => state.userDetail.Favorites);
   const dispatch = useDispatch();
   const favWorker = useSelector((state) => state.users.Favorites);
   const userID = useSelector((state) => state.users);
+  // console.log(userID);
   const idWorkerFav = useSelector((state) => state.userDetail);
   const [checked, setChecked] = React.useState(false);
-
-  /*   const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID); */
+  // console.log(idWorkerFav);
+  // console.log(userD);
+  // const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID);
   // if (isFav) {
   //   setChecked(true);
   // }
 
   const handleFav = (e) => {
-    //setChecked(e.target.checked);
+    setChecked(!checked);
     dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
   };
   const handleChat = () => {
@@ -143,7 +145,6 @@ function Profile({
             )}
           </div>
         </div>
-        {/* favoritos (falta condicional para que no renderice si el user logeado es el mismo que esta viendo, osea para que no te lo puedas poner vos mismo :P*/}
         {img !== userID.img ? (
           <div>
             <Checkbox
@@ -155,10 +156,8 @@ function Profile({
             />
           </div>
         ) : (
-          "sos la misma persona"
+          ""
         )}
-
-        {/* favoritos */}
         <div className="contactar">
           <Button
             className="buttonStyled"

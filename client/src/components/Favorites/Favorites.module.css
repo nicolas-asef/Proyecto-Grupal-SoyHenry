@@ -1,0 +1,33 @@
+.super{
+    justify-content: center;
+    align-items: center;
+    min-width: auto;
+    height: fit-content;
+    width: fit-content;
+    
+    
+}
+.conteiner{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(61, 92, 120);
+    
+    width: 100%;   
+}
+.hijo{
+    display: flex;
+    flex-direction: row;
+}
+.boton{
+    width: 100px;
+    height: 100px;
+    padding: auto;
+    margin: auto;
+    background-color: red;
+    border-radius: 15%;
+    color: white;
+    font-size: large;
+
+}

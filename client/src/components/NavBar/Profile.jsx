@@ -202,7 +202,7 @@ const Profile = () => {
           </Button>
 
           {open && (
-            <Modal open={open} onClose={handleClose}>
+            <Modal open={open} onClick={handleClose}>
               <Box className={s.st}>
                 <Favorites />
               </Box>
