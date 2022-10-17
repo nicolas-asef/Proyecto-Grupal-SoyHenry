@@ -12,7 +12,7 @@ const MapView = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && user) {
       dispatch(getUserDetail(user.sub));
     }
   }, [dispatch, user]);
