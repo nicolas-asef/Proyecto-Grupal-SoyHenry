@@ -20,7 +20,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { style } from "@mui/system";
 import Chip from "@mui/material/Chip";
 import s from "./Profile.module.css";
-import { FaHeart } from "react-icons/fa";
+// import { FaHeart } from "react-icons/fa";
 import Favorites from "../Favorites/Favorites";
 import { agregarSocker } from "../../redux/actions/actions";
 import { Badge, ClickAwayListener } from "@mui/material";
@@ -74,7 +74,7 @@ const Profile = () => {
   useEffect(() => {
     if (Object.keys(user).length !== 0) {
       let popUpsAux = [];
-      user.popUps.forEach((e) => {
+      user.popUps?.forEach((e) => {
         const popUpAux = {};
         popUpAux.img = e.Emiter.img;
         popUpAux.type = e.type;
@@ -89,7 +89,7 @@ const Profile = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log(sub);
+    // console.log(sub);
     if (sub) dispatch(agregarSocker(sub));
   }, [sub]);
 
@@ -203,9 +203,7 @@ const Profile = () => {
           </ClickAwayListener>
         </div>
         <div className={s.but}>
-          <Button onClick={handleOpen}>
-            <FaHeart />
-          </Button>
+          <Button onClick={handleOpen}>{/* <FaHeart /> */}</Button>
           <Modal
             open={open}
             onClose={handleClose}

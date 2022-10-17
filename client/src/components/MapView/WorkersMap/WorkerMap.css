@@ -1,0 +1,31 @@
+.leaflet-popup-content-wrapper {
+  display: flex;
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+  display: flex;
+  width: auto;
+  margin: 0;
+  padding: 10px 25px 10px 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.leaflet-imgContainer {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.leaflet-imgContainer img {
+  max-width: 100%;
+  border-radius: 25px;
+  max-height: 100%;
+}
+
+.leaflet-text {
+  margin-left: 10px;
+  font-weight: bold;
+  align-self: flex-start;
+  margin-top: 10px;
+}
