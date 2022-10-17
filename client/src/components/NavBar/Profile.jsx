@@ -78,6 +78,7 @@ const Profile = () => {
   }, [user]);
 
   useEffect(() => {
+    console.log(sub);
     if (sub) dispatch(agregarSocker(sub));
   }, [sub]);
 
@@ -199,6 +200,7 @@ const Profile = () => {
           <Button onClick={handleOpen}>
             <FaHeart />
           </Button>
+
           {open && (
             <Modal open={open} onClose={handleClose}>
               <Box className={s.st}>
@@ -206,6 +208,7 @@ const Profile = () => {
               </Box>
             </Modal>
           )}
+
         </div>
         <div>
           <Chip
