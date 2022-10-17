@@ -5,7 +5,7 @@ import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Modal from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,17 +28,6 @@ import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneT
 import { useState } from "react";
 import PopUps from "../PopUps/PopUps";
 
-const st = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "auto",
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 const Profile = () => {
   const dispatch = useDispatch();
   const {
@@ -98,6 +87,11 @@ const Profile = () => {
     setcantNotificaciones(cantidadAuxiliar);
   }, [popUps, forceUpdate]);
 
+  useEffect(() => {
+    return () => {
+      handleClose();
+    };
+  }, []);
   useEffect(() => {
     socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo }) => {
       let popsAuxiliar = popUps;
@@ -205,16 +199,13 @@ const Profile = () => {
           <Button onClick={handleOpen}>
             <FaHeart />
           </Button>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <Box sx={st}>
-              <Favorites />
-            </Box>
-          </Modal>
+          {open && (
+            <Modal open={open} onClose={handleClose}>
+              <Box className={s.st}>
+                <Favorites />
+              </Box>
+            </Modal>
+          )}
         </div>
         <div>
           <Chip

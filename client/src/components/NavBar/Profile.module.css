@@ -21,3 +21,11 @@
   padding: auto;
   margin: auto;
 }
+.st{
+  margin-top: 30%;
+  color: white;
+  height: auto; 
+  overflow-y: scroll;
+  position: absolute;
+  
+}
