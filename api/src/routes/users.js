@@ -10,7 +10,9 @@ const {
   User,
   Worker,
   Country,
-  PopUp
+  PopUp,
+  Message,
+  Op
 } = require("../db.js");
 
 const router = Router();
@@ -24,12 +26,15 @@ const getUsers = async () => {
       { model: Worker, include: [Job, Contract] },
       { model: Contract },
       { model: Chat, as: "Host" },
+      {model: Chat, as : "Guest"},
+      { model: Message, as: "Emitter" },
       { model: Country },
       { model: Worker , as : "Favorites"},
       { model:PopUp , as : "Emiter"},
 
     ],
   });
+  
   const dataUser = info?.map((u) => {
     return {
       id: u.ID,
@@ -185,9 +190,12 @@ router.get("/:id", async (req, res, next) => {
     if (id) {
       let user = users.find((u) => u.id === id);
       if (user) {
+    
         const popUps = await PopUp.findAll({where : {ReceiverID:id},include:{model:User,as:"Emiter"}})
+        const chats = await Chat.findAll({where : {[Op.or]:[{GuestID:id},{HostID:id}]},include:{model:Message}})
         user.popUps = popUps
-        console.log(user)
+        user.chats = chats
+       /*  console.log(user) */
         res.status(200).json(user);
       } else {
         res.status(404).json({ message: "no existe el user" });

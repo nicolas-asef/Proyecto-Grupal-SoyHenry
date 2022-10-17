@@ -18,4 +18,17 @@ router.get('/', async (req,res,next) => {
     }
 })
 
+router.delete('/:id', async (req,res,next) => {
+    const {id} = req.params;
+    try{
+        await Chat.destroy({
+            where:{id:id}
+        })
+        res.status(200).send('the chat has been deleted')
+    } catch(error){
+        console.log(error)
+        next(error)
+    }
+})
+
 module.exports = router;

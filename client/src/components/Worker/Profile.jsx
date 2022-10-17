@@ -67,7 +67,7 @@ function Profile({
   //console.log(idWorkerFav.Worker.ID);
   // console.log(userID)
   const [checked, setChecked] = React.useState(false);
-  const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID);
+/*   const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID); */
   // if (isFav) {
   //   setChecked(true);
   // }
