@@ -78,6 +78,8 @@ function Profile({
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
     }
+    console.log(login.user.sub)
+    console.log(params.id)
     socket?.emit("messageCreation",{id_emisor: login.user.sub, id_receptor: params.id , texto:"hola"})
 
   };

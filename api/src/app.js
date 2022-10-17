@@ -105,16 +105,25 @@ io.on("connection", socket => {
 
       //Buscar chat que este el receptor y el emisor y si no existe crearlo
       //finorcreate{where : workerID: receptor_id}
-      const chat = await Chat.findOrCreate({
+      const [chat,created] = await Chat.findOrCreate({
         raw:true,
-        where:{
-            [Op.or]: [{HostID: id_emisor}, {HostID: id_receptor}],
-            [Op.or]: [{GuestID: id_receptor},{GuestID: id_emisor}]
-            },
+        where:{[Op.and]:[{[Op.or]: [
+        {
+        HostID: id_emisor}, {HostID: id_receptor}]},
+        {
+          [Op.or]: [{GuestID: id_receptor},{GuestID: id_emisor}]
+        }
+        ]    
+        },
       })
+      if(created){
+        chat.setGuest(id_receptor)
+        chat.setHost(id_emisor)
+      }
+      console.log("------------->",chat)
       //Asociar mensaje al receptor
       //Asociar mensaje al chat
-      await message.setChat(chat[0].id)
+      await message.setChat(chat.id)
     })
 
 
