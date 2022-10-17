@@ -7,6 +7,7 @@ import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import OnBoarding from './components/OnBoarding/OnBoarding';
 import Payment from './components/Payment/Payment';
+import Chat from './components/Chat/Chat/Chat';
 import DashHome from './components/Dashboard/Pages/DashHome/DashHome';
 import DashAnalytics from './components/Dashboard/Pages/DashAnalytics/DashAnalytics';
 import DashBalance from './components/Dashboard/Pages/DashBalance/DashBalance';
@@ -47,6 +48,7 @@ function App() {
         <Route path='/dashboard/country' element= {<DashCountry />} />
         <Route path='/dashboard/jobs'element= {<DashJobs />} />
         <Route path='/fav' element= { <Favorites />} />
+        <Route path='/chat' element= { <Chat />} />
       </Routes>
     </div>
   );
