@@ -56,7 +56,7 @@ const Filters = () => {
         <TextField
           fullWidth
           variant="outlined"
-          size="small"
+          size="medium"
           label="Rating"
           defaultValue=""
           select
@@ -71,7 +71,7 @@ const Filters = () => {
         <TextField
           fullWidth
           variant="outlined"
-          size="small"
+          size="medium"
           label="Oficio"
           select
           defaultValue=""
@@ -92,7 +92,7 @@ const Filters = () => {
         <TextField
           fullWidth
           variant="outlined"
-          size="small"
+          size="medium"
           label="Disponibilidad"
           defaultValue=""
           select
@@ -107,7 +107,7 @@ const Filters = () => {
         <TextField
           fullWidth
           variant="outlined"
-          size="small"
+          size="medium"
           label="Ubicacion"
           defaultValue=""
           select

@@ -15,7 +15,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FaHeart } from "react-icons/fa";
 
-
 const pages = ["Home", "About", "FAQ"];
 
 const NavBar = () => {
@@ -35,7 +34,6 @@ const NavBar = () => {
   if (location.pathname === "/onboarding") return;
 
   return (
-
     <AppBar style={{ background: "#06283D" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>

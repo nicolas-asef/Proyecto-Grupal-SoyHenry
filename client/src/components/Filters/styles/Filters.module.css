@@ -1,9 +1,9 @@
 .fieldContainer {
   display: flex;
-  justify-content: space-evenly;
-  margin-top: 10px;
+  justify-content: center;
+  margin-left: 5%;
 }
-
 .textField {
-  width: 20vh;
+  display: flex;
+  width: 150px;
 }
