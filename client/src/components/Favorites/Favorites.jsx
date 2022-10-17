@@ -52,6 +52,7 @@ export default function Favourite() {
         // asd aca tengo que mapear Usuarios Worker completos, con jobs contract
         workersFavs.map((worker, index) => (
           <>
+            {console.log(worker)}
             {/* {(idd = worker[0].ID)} */}
 
             <div>

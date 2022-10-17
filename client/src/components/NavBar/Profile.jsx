@@ -65,11 +65,11 @@ const Profile = () => {
     }
   }, [dispatch, users.img]);
 
-   useEffect(() => {
+  useEffect(() => {
     if (sub) {
       dispatch(agregarSocker(sub));
     }
-  }, []); 
+  }, []);
 
   useEffect(() => {
     if (Object.keys(user).length !== 0) {
@@ -88,11 +88,10 @@ const Profile = () => {
     }
   }, [user]);
 
-
   useEffect(() => {
-
+    console.log(sub);
     if (sub) dispatch(agregarSocker(sub));
-  }, [sub]); 
+  }, [sub]);
 
   useEffect(() => {
     let cantidadAuxiliar = 0;
@@ -213,10 +212,9 @@ const Profile = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-{/*             <Box sx={st}>
+            {/*             <Box sx={st}>
               <Favorites />
             </Box> */}
-
           </Modal>
         </div>
         <div>
