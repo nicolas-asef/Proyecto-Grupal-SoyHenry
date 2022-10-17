@@ -211,9 +211,9 @@ const Profile = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={st}>
-              <Favorites />
-            </Box>
+            {/* <Box sx={st}> */}
+              {/* <Favorites /> */}
+            {/* </Box> */}
           </Modal>
         </div>
         <div>

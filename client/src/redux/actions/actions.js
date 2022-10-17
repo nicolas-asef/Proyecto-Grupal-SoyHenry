@@ -45,7 +45,6 @@ export function getWorkers(query, search) {
         });
       })
       .catch((err) => {
-        console.log(err);
       });
   };
 }
@@ -94,8 +93,8 @@ export function modifyContract(data, id) {
     },
     body: JSON.stringify(data),
   })
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
+    .then((data) => data)
+    .catch((error) => data);
 }
 
 export function createContract(data) {
@@ -106,8 +105,8 @@ export function createContract(data) {
     },
     body: JSON.stringify(data),
   })
-    .then((data) => console.log(data))
-    .catch((data) => alert(data));
+    .then((data) => data)
+    .catch((data) => data);
 }
 
 export function getContractUsers(ids) {
@@ -131,7 +130,6 @@ export function getContractUsers(ids) {
 export function getContractWorker(ids) {
   let ides = ids.reduce((acum, e) => acum + "&arr=" + e, "arr=");
   ides = ides.slice(5, ides.length);
-  console.log(ides === "");
   if (ides !== "")
     return function (dispatch) {
       dispatch({ type: LOADING });
@@ -143,7 +141,6 @@ export function getContractWorker(ids) {
           dispatch({ type: GET_USERS_CONTRACTS, payload: json });
         })
         .catch((error) => {
-          console.log("error------>", error);
         });
     };
   else
@@ -163,7 +160,7 @@ export function getContractWorker(ids) {
 //             });
 //         })
 //         .catch((err) => {
-//             console.log(err);
+//    
 //         });
 // };
 // }
@@ -195,7 +192,6 @@ export function getUsers() {
         });
       })
       .catch((err) => {
-        console.log(err);
       });
   };
 }
@@ -211,7 +207,6 @@ export function getUsersName(search) {
         })
       )}
       .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -244,7 +239,7 @@ export function getJobs() {
       let jobs = await axios.get(baseURL + "jobs");
       return dispatch({ type: GET_JOBS, payload: jobs.data });
     } catch (error) {
-      console.log(error);
+  
     }
   };
 }
@@ -319,7 +314,6 @@ export function filter(array, job, disponibilidad, zona) {
   if (job !== "all" && disponibilidad !== "all" && zona === "all") {
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map((el) => {
-        console.log(el);
       if (el.name === job && array[i].User.isOnline === disponibilidad) {
 
           filterArray.push(array[i]);
@@ -376,7 +370,6 @@ export function get_countries() {
       let countries = await axios.get(baseURL + "countries");
       dispatch({ type: GET_COUNTRIES, payload: countries.data });
     } catch (error) {
-      console.log("------------------------->ENTRE");
       return error.response.status;
     }
   };
@@ -384,7 +377,6 @@ export function get_countries() {
 
 export function updateUser(payload, payloadId) {
   return async function (dispatch) {
-    console.log(payload);
     const user = await axios.put(baseURL + "users/" + payloadId, payload);
     dispatch({
       type: PUT_USER,
@@ -404,7 +396,6 @@ export function getUserId(id) {
         });
       })
       .catch((err) => {
-        console.log(err);
       });
   };
 }
@@ -448,7 +439,6 @@ export function finishUserCreation(id, data, jobs) {
         type: POST_USER,
       });
 
-      console.log(user);
       return user;
     }
 
@@ -490,13 +480,10 @@ export function premiumPay(payload) {
 export function updateWorker(payload, payload2, payloadId) {
   return async function (dispatch) {
     payload.jobs = payload2;
-    console.log(payload);
-    console.log("accions");
     const worker = await axios.put(
       "http://localhost:3001/worker/" + payloadId,
       payload
     );
-    console.log(worker);
     dispatch({
       type: PUT_WORKER,
     });
@@ -527,7 +514,6 @@ export const changeStatus =  (payload, status) => async (dispatch) => {
 }
 
 export function addFavorite(userID, idWorkerFav) {
-  console.log(idWorkerFav)  
   return async function(dispatch){
     await axios.put("http://localhost:3001/users/" + userID , {favorites: idWorkerFav});
     dispatch({
@@ -537,8 +523,6 @@ export function addFavorite(userID, idWorkerFav) {
   } 
 }
 export function deletedFavorite(userID, workDeleted) {
-  console.log("pase por la accion, esto va para el back")
-  console.log(workDeleted)  
   return async function(dispatch){
     await axios.put("http://localhost:3001/users/" + userID , {deleted: workDeleted});
     dispatch({
