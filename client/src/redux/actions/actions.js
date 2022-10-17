@@ -33,12 +33,13 @@ import {
   POST_JOB,
   DELETE_USER, 
   DELETE_JOB, 
-  DELETE_COUNTRY
+  DELETE_COUNTRY,
+  GET_WORKERS_PREMIUM
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
-//original = http://localhost:3001
-const URL = "https://databasepf.herokuapp.com/"
+const URL = "http://localhost:3001"
+//const URL = "https://databasepf.herokuapp.com/"
 
 const baseURL = "http://localhost:3001/"; //Esto se cambia por localhost:3001 para usarlo local
 
@@ -260,7 +261,7 @@ export function createUser(payload, jobs) {
 export function getJobs() {
     return async function (dispatch) {
         try {
-            let jobs = await axios.get(URL+"jobs");
+            let jobs = await axios.get(baseURL+"jobs");
             return dispatch({ type: GET_JOBS, payload: jobs.data });
         } catch (error) {
             console.log(error);
@@ -268,16 +269,16 @@ export function getJobs() {
     };
 }
 
-export function getWorkersPremium() {
-  return async function (dispatch) {
-    try {
-      // let premium = await axios.get(URL+"workers_premium");
-      return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
+// export function getWorkersPremium() {
+//   return async function (dispatch) {
+//     try {
+//       // let premium = await axios.get(URL+"workers_premium");
+//       return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
 
 export function orderByRating(array, orderBy) {
   function order(a, b) {
@@ -605,6 +606,7 @@ export function postJob (obj){
     try {
       await axios.post("http://localhost:3001/jobs", obj)
       dispatch({type: POST_JOB})
+      return obj
     } catch (error) {
       console.log(error)
     }
