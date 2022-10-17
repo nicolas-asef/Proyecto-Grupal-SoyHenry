@@ -13,9 +13,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Profile from "./Profile";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { FaHeart } from "react-icons/fa";
+// import { FaHeart } from "react-icons/fa";
 
-const pages = ["Home", "About", "FAQ"];
+
+const pages = ["Home", "About", "Map"];
+
 
 const NavBar = () => {
   const location = useLocation();
