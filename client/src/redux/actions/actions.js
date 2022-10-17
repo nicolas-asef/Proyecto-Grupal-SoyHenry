@@ -33,12 +33,13 @@ import {
   POST_JOB,
   DELETE_USER, 
   DELETE_JOB, 
-  DELETE_COUNTRY
+  DELETE_COUNTRY,
+  GET_WORKERS_PREMIUM
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
-//original = http://localhost:3001
-const URL = "https://databasepf.herokuapp.com/"
+const URL = "http://localhost:3001/"
+//const URL = "https://databasepf.herokuapp.com/"
 
 const baseURL = "http://localhost:3001/"; //Esto se cambia por localhost:3001 para usarlo local
 
@@ -272,7 +273,7 @@ export function getWorkersPremium() {
   return async function (dispatch) {
     try {
       // let premium = await axios.get(URL+"workers_premium");
-      return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
+      return dispatch({ type: GET_WORKERS_PREMIUM, payload: "premium" }); // payload: premium.data
     } catch (error) {
       console.log(error);
     }
