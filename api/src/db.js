@@ -76,17 +76,23 @@ PopUp.belongsTo(User,{as:"Emiter"})
 User.hasMany(PopUp, {as: "Receiver"})
 PopUp.belongsTo(User,{as:"Receiver"})
 
-User.hasMany(Chat);
-Chat.belongsTo(User);
+User.hasMany(Chat, {as:"Host"});
+Chat.belongsTo(User, {as:"Host"});
 
+User.hasMany(Chat, {as:"Guest"});
+Chat.belongsTo(User, {as:"Guest"});
+/* 
 Worker.hasMany(Chat);
-Chat.belongsTo(Worker);
+Chat.belongsTo(Worker); */
 
-User.hasMany(Message);
-Message.belongsTo(User);
+User.hasMany(Message, {as:"Emitter"});
+Message.belongsTo(User, {as:"Emitter"});
 
-Worker.hasMany(Message);
-Message.belongsTo(Worker);
+User.hasMany(Message, {as:"Recibidor"});
+Message.belongsTo(User, {as:"Recibidor"});
+
+/* Worker.hasMany(Message);
+Message.belongsTo(Worker); */
 
 Chat.hasMany(Message);
 Message.belongsTo(Chat)

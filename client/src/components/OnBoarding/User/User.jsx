@@ -73,7 +73,6 @@ const User = (props) => {
       if (res.status === 200) {
         loginWithRedirect();
       } else {
-        console.log("error en localidad");
       }
     });
   };

@@ -22,9 +22,15 @@ export const PUT_WORKER_PREMIUM = "PUT_WORKER_PREMIUM";
 export const PUT_WORKER = "PUT_WORKER";
 export const UPLOAD_IMAGE = "UPLOAD_IMAGE"
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const POST_COUNTRY = "POST_COUNTRY"
+export const POST_JOB = "POST_JOB"
+export const DELETE_USER = "DELETE_USER"
+export const DELETE_JOB = "DELETE_JOB"
+export const DELETE_COUNTRY = "DELETE_COUNTRY"
 export const AGREGAR_SOCKET = "AGREGAR_SOCKET";
 export const ELIMINAR_SOCKET = "ELIMINAR_SOCKET";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const DELETED_FAVORITE = "DELETED_FAVORITE";
 export const GET_USER = "GET_USER";
+export const GET_WORKERS_PREMIUM = "GET_WORKERS_PREMIUM"
 

@@ -1,0 +1,32 @@
+.home{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: white;
+    height: 100%;
+}
+
+.divSidebar{
+    grid-column: 1/2;
+}
+
+.homeContainer{
+    display: flex;
+    flex-direction: column;
+    grid-column: 2/7;
+}
+
+.country{
+    margin-top: 50px;
+}
+
+.top{
+    margin-bottom: 30px;
+}
+
+.title{
+    font-weight: 500;
+    font-size: 30px;
+    color: rgb(160, 160, 160);
+    margin-bottom: 20px;
+}
+

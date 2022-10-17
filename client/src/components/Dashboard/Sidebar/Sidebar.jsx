@@ -64,14 +64,18 @@ export default function Sidebar (){
                 </ul>
                     <h1 className={s.title}>Settings</h1>
                 <ul>
-                    <li className={s.li}>
-                        <WorkIcon />
-                        <span>New Job</span>
-                    </li>
-                    <li className={s.li}>
-                        <PublicIcon />
-                        <span>New Country</span>
-                    </li>
+                    <Link to='/dashboard/jobs'>
+                        <li className={s.li}>
+                            <WorkIcon />
+                            <span>New Job</span>
+                        </li>
+                    </Link>
+                    <Link to='/dashboard/country'>
+                        <li className={s.li}>
+                            <PublicIcon />
+                            <span>New Country</span>
+                        </li>
+                    </Link>
                 </ul>
             </div>
         </div>

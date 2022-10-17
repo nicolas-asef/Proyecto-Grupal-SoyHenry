@@ -29,8 +29,18 @@ import {
   GET_COUNTRIES,
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
+  POST_COUNTRY,
+  POST_JOB,
+  DELETE_USER,
+  DELETE_JOB,
+  DELETE_COUNTRY,
+  GET_WORKERS_PREMIUM,
 } from "./actions_vars";
 import { io } from "socket.io-client";
+
+const URL = "http://localhost:3001/"
+//const URL = "https://databasepf.herokuapp.com/"
+
 
 const baseURL = "http://localhost:3001/"; //Esto se cambia por localhost:3001 para usarlo local
 
@@ -44,20 +54,16 @@ export function getWorkers(query, search) {
           payload: w.data,
         });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 }
 
-export function agregarSocker(id){
-  
-  return async function(dispatch){
-    const socket = await io(baseURL)
-    await socket.emit("addUser",(id))
-    dispatch({type:AGREGAR_SOCKET,payload:socket})
-  }
-
+export function agregarSocker(id) {
+  return async function (dispatch) {
+    const socket = await io(baseURL);
+    await socket.emit("addUser", id);
+    dispatch({ type: AGREGAR_SOCKET, payload: socket });
+  };
 }
 
 export function sendNotification(email, type) {
@@ -65,14 +71,13 @@ export function sendNotification(email, type) {
   return function () {
     axios.post(`${baseURL}mailNotifications`, info);
   };
-
 }
-
 
 // export function getContractUsers(ids){
 //   return function(dispatch){
 //     dispatch({ type: LOADING });
 //     return fetch(baseURL+"contract/user",{
+//     return fetch(URL+"contract/user",{
 //       method:'GET',
 //       headers: {
 //         'Content-Type': 'application/json'
@@ -94,8 +99,8 @@ export function modifyContract(data, id) {
     },
     body: JSON.stringify(data),
   })
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
+    .then((data) => data)
+    .catch((error) => data);
 }
 
 export function createContract(data) {
@@ -106,8 +111,8 @@ export function createContract(data) {
     },
     body: JSON.stringify(data),
   })
-    .then((data) => console.log(data))
-    .catch((data) => alert(data));
+    .then((data) => data)
+    .catch((data) => data);
 }
 
 export function getContractUsers(ids) {
@@ -131,7 +136,6 @@ export function getContractUsers(ids) {
 export function getContractWorker(ids) {
   let ides = ids.reduce((acum, e) => acum + "&arr=" + e, "arr=");
   ides = ides.slice(5, ides.length);
-  console.log(ides === "");
   if (ides !== "")
     return function (dispatch) {
       dispatch({ type: LOADING });
@@ -142,9 +146,7 @@ export function getContractWorker(ids) {
         .then((json) => {
           dispatch({ type: GET_USERS_CONTRACTS, payload: json });
         })
-        .catch((error) => {
-          console.log("error------>", error);
-        });
+        .catch((error) => {});
     };
   else
     return function (dispatch) {
@@ -156,6 +158,7 @@ export function getContractWorker(ids) {
 //   return function (dispatch) {
 //     axios
 //         .get(baseURL+"users/" + id)
+//         .get(URL+"users/" + id)
 //         .then((u) => {
 //             dispatch({
 //                 type: GET_USER_ID,
@@ -163,25 +166,24 @@ export function getContractWorker(ids) {
 //             });
 //         })
 //         .catch((err) => {
-//             console.log(err);
+//
 //         });
 // };
 // }
 
-
-export function getUserDetail(id,type=GET_USER_DETAIL){
-  return function(dispatch){
-    
+export function getUserDetail(id, type = GET_USER_DETAIL) {
+  return function (dispatch) {
     dispatch({ type: LOADING });
-    
-    return fetch(baseURL+"users/"+id)
-    .then(data => {
-      return data.json()})
-    .then(json => {
-      dispatch({type:type,payload:json})
-      return json;
-    })
-  }
+
+    return fetch(baseURL + "users/" + id)
+      .then((data) => {
+        return data.json();
+      })
+      .then((json) => {
+        dispatch({ type: type, payload: json });
+        return json;
+      });
+  };
 }
 
 export function getUsers() {
@@ -194,27 +196,20 @@ export function getUsers() {
           payload: u.data,
         });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 }
 
 export function getUsersName(search) {
   return function (dispatch) {
-    axios
-      .get(baseURL + "users?name=" + search)
-      .then((u) => 
-        dispatch({
-          type: GET_USERNAME,
-          payload: u.data,
-        })
-      )}
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+    axios.get(baseURL + "users?name=" + search).then((u) =>
+      dispatch({
+        type: GET_USERNAME,
+        payload: u.data,
+      })
+    );
+  }.catch((err) => {});
+}
 
 export function getWorkersSearch(search) {
   return function (dispatch) {
@@ -230,6 +225,13 @@ export function createUser(payload, jobs) {
   return async function (dispatch) {
     const user = await axios.post(baseURL + "users", payload);
     const user_id = await user.data.ID;
+    if (jobs.length) {
+      const worker = {
+        user_id,
+        jobs,
+      };
+      const res = await axios.post(baseURL + "worker", worker);
+    }
 
     dispatch({
       type: POST_USER,
@@ -246,6 +248,15 @@ export function getJobs() {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+
+export function getWorkersPremium() {
+  return async function (dispatch) {
+    try {
+      let premium = await axios.get(baseURL + "workers_premium");
+      return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
+    } catch (error) {}
   };
 }
 
@@ -319,9 +330,7 @@ export function filter(array, job, disponibilidad, zona) {
   if (job !== "all" && disponibilidad !== "all" && zona === "all") {
     for (let i = 0; i < array.length; i++) {
       array[i].Jobs.map((el) => {
-        console.log(el);
-      if (el.name === job && array[i].User.isOnline === disponibilidad) {
-
+        if (el.name === job && array[i].User.isOnline === disponibilidad) {
           filterArray.push(array[i]);
         }
       });
@@ -330,7 +339,6 @@ export function filter(array, job, disponibilidad, zona) {
   if (job === "all" && disponibilidad !== "all" && zona !== "all") {
     for (let i = 0; i < array.length; i++) {
       if (
-
         array[i].User.isOnline === disponibilidad &&
         array[i].User.Country.name === zona
       ) {
@@ -376,7 +384,6 @@ export function get_countries() {
       let countries = await axios.get(baseURL + "countries");
       dispatch({ type: GET_COUNTRIES, payload: countries.data });
     } catch (error) {
-      console.log("------------------------->ENTRE");
       return error.response.status;
     }
   };
@@ -384,7 +391,6 @@ export function get_countries() {
 
 export function updateUser(payload, payloadId) {
   return async function (dispatch) {
-    console.log(payload);
     const user = await axios.put(baseURL + "users/" + payloadId, payload);
     dispatch({
       type: PUT_USER,
@@ -403,9 +409,7 @@ export function getUserId(id) {
           payload: u.data,
         });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 }
 
@@ -442,16 +446,11 @@ export function finishUserCreation(id, data, jobs) {
         };
         const res = await axios.post("http://localhost:3001/worker", worker);
       }
-
-
       dispatch({
         type: POST_USER,
       });
-
-      console.log(user);
       return user;
     }
-
   };
 }
 
@@ -490,13 +489,10 @@ export function premiumPay(payload) {
 export function updateWorker(payload, payload2, payloadId) {
   return async function (dispatch) {
     payload.jobs = payload2;
-    console.log(payload);
-    console.log("accions");
     const worker = await axios.put(
       "http://localhost:3001/worker/" + payloadId,
       payload
     );
-    console.log(worker);
     dispatch({
       type: PUT_WORKER,
     });
@@ -522,29 +518,100 @@ export const cleanDetail = () => (dispatch) => {
   dispatch({ type: CLEAN_DETAIL });
 };
 
-export const changeStatus =  (payload, status) => async (dispatch) => {
-  const online = await axios.put("http://localhost:3001/users/" + payload, {isOnline: status});
-}
+export const changeStatus = (payload, status) => async (dispatch) => {
+  const online = await axios.put("http://localhost:3001/users/" + payload, {
+    isOnline: status,
+  });
+};
 
 export function addFavorite(userID, idWorkerFav) {
-  console.log(idWorkerFav)  
-  return async function(dispatch){
-    await axios.put("http://localhost:3001/users/" + userID , {favorites: idWorkerFav});
+  return async function (dispatch) {
+    await axios.put("http://localhost:3001/users/" + userID, {
+      favorites: idWorkerFav,
+    });
     dispatch({
       type: ADD_FAVORITE,
-      payload: idWorkerFav
-    })
-  } 
+      payload: idWorkerFav,
+    });
+  };
 }
 export function deletedFavorite(userID, workDeleted) {
-  console.log("pase por la accion, esto va para el back")
-  console.log(workDeleted)  
-  return async function(dispatch){
-    await axios.put("http://localhost:3001/users/" + userID , {deleted: workDeleted});
+  return async function (dispatch) {
+    await axios.put("http://localhost:3001/users/" + userID, {
+      deleted: workDeleted,
+    });
     dispatch({
       type: DELETED_FAVORITE,
-      payload: workDeleted
-    })
-  } 
+      payload: workDeleted,
+    });
+  };
 }
 
+// export async function updateWorkerJobs(payload, payloadId) {
+//   return async function(dispatch){
+//   console.log(payload)
+//     const worker = await axios.put(baseURL+"worker/" + payloadId , payload);
+//     dispatch({
+//       type: PUT_WORKER,
+//     });
+//     return worker;
+//   }
+// }
+
+export function postCountry(obj) {
+  return async function (dispatch) {
+    try {
+      await axios.post("http://localhost:3001/countries", obj);
+      dispatch({ type: POST_COUNTRY });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function postJob(obj) {
+  return async function (dispatch) {
+    try {
+      await axios.post("http://localhost:3001/jobs", obj);
+      dispatch({ type: POST_JOB });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function deleteUser(id, deleted) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(
+        `http://localhost:3001/users/${id}?deleted=${deleted}`,
+        deleted
+      );
+      dispatch({ type: DELETE_USER });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function deleteJob(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`http://localhost:3001/jobs/${id}`);
+      dispatch({ type: DELETE_JOB });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function deleteCountry(id) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`http://localhost:3001/countries/${id}`);
+      dispatch({ type: DELETE_COUNTRY });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
