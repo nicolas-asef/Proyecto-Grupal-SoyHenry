@@ -20,7 +20,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { style } from "@mui/system";
 import Chip from "@mui/material/Chip";
 import s from "./Profile.module.css";
-// import { FaHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import Favorites from "../Favorites/Favorites";
 import { agregarSocker } from "../../redux/actions/actions";
 import { Badge, ClickAwayListener } from "@mui/material";
