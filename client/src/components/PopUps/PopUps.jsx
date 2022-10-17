@@ -5,7 +5,11 @@ import style from './PopUps.module.css'
 function PopUps({popUps}) {
 
   const descripciones = {
-    contrato:"te ha enviado un contrato"
+    contrato:"te ha enviado un contrato",
+    confirmado: "ha confirmado tu trabajo",
+    terminado: "ha marcado como terminado el trabajo",
+    opinado: "te ha puntuado",
+    cancelado: "ha cancelado tu contrato"
   }
   return (
     

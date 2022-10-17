@@ -12,7 +12,7 @@ import EmptyContainer from './EmptyContainer';
 
 // export default function Opinion() {
 //   return (
-//     <div class="opinion">
+//     <div className=="opinion">
 //       <p>
 //         <div className='p-interior'>
 //           <img className='o-img' src={Estrella} alt='nose'/>

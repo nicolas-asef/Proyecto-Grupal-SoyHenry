@@ -9,12 +9,12 @@ const e = require('express');
 require('./db.js');
 const { Op, Worker, Job, Contract, User, Chat, Message, Country,PopUp } = require("./db.js");
 const app = express();
-
-
+const cors = require("cors")
 
 
 app.name = 'API';
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());
@@ -40,6 +40,7 @@ const server = http.createServer(app);
 
 const io = socketio(server, {
     cors: {
+      origin: "http://localhost:3000",
         methods: ["GET", "POST"]
     }
 });
@@ -63,12 +64,16 @@ const getUser = (receiverId) => {
   return users.find(user => user.userId === receiverId)
 }
 
+const getSocket = (socketId) => {
+  return users.find(user => user.socketId === socketId)
+}
 
 io.on("connection", socket => {
-  console.log("Se ha conectado un usuario")
+  console.log("Se ha conectado un usuario" + socket.id)
   
     socket.on("addUser",async (userId) => {
-      
+
+      await User.update({isOnline:true},{where:{ID:userId}})
       addUser(userId, socket.id)
       const notificaciones = await PopUp.findAll({where:{ReceiverID:userId},include:{model:User,as:"Emiter"}})
       io.emit("getUsers", notificaciones)
@@ -77,11 +82,12 @@ io.on("connection", socket => {
     socket.on('messageCreation', async ({id_emisor, id_receptor, texto}) => {
 
       let receptor = getUser(id_receptor)
-      console.log(receptor)
         
         
       //Enviar evento con el mensaje a el socket apropiado al receptor
+      if (receptor){
        io.to(receptor.socketId).emit("createMessage", texto);
+      }
       //Crear mensaje
       const message = await Message.create({
         text:texto,
@@ -99,15 +105,25 @@ io.on("connection", socket => {
 
       //Buscar chat que este el receptor y el emisor y si no existe crearlo
       //finorcreate{where : workerID: receptor_id}
-      const chat = await Chat.findOrCreate({
-        where:{
-          HostID: id_emisor,
-          GuestID: id_receptor
+      const [chat,created] = await Chat.findOrCreate({
+        raw:true,
+        where:{[Op.and]:[{[Op.or]: [
+        {
+        HostID: id_emisor}, {HostID: id_receptor}]},
+        {
+          [Op.or]: [{GuestID: id_receptor},{GuestID: id_emisor}]
         }
+        ]    
+        },
       })
+      if(created){
+        chat.setGuest(id_receptor)
+        chat.setHost(id_emisor)
+      }
+      console.log("------------->",chat)
       //Asociar mensaje al receptor
       //Asociar mensaje al chat
-      await message.setChat(chat)
+      await message.setChat(chat.id)
     })
 
 
@@ -141,9 +157,16 @@ io.on("connection", socket => {
       await PopUp.update({viewed:true},{where:{id:elementos}})
     })
 
-    socket.on("disconnect", () => {
-      console.log("Usuario desconectado")
+
+    socket.on("disconnect", async (socket) => {
+      
+      console.log("Usuario desconectado", socket.id)
+      
+      const user = getSocket(socket.id)
+
       removeUser(socket.id)
+      if(user?.userId)
+      await User.update({isOnline:false},{where:{ID:user.userId}})
       io.emit("getUsers", users)
     })
 })

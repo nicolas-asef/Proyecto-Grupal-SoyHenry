@@ -59,26 +59,27 @@ function Profile({
     setOpenLogin(false);
   };
   const userD = useSelector((state) => state.users.Favorites);
-  console.log(userD);
   const dispatch = useDispatch();
   const favWorker = useSelector((state) => state.users.Favorites);
   const userID = useSelector((state) => state.users);
   const idWorkerFav = useSelector((state) => state.userDetail);
-  //console.log(idWorkerFav.Worker.ID);
-  // console.log(userID)
   const [checked, setChecked] = React.useState(false);
-  const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID);
+
+/*   const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID); */
   // if (isFav) {
   //   setChecked(true);
   // }
+
   const handleFav = (e) => {
     setChecked(e.target.checked);
-    dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
+    //dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
   };
   const handleChat = () => {
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
     }
+    console.log(login.user.sub)
+    console.log(params.id)
     socket?.emit("messageCreation",{id_emisor: login.user.sub, id_receptor: params.id , texto:"hola"})
 
   };
@@ -140,8 +141,6 @@ function Profile({
           </div>
         </div>
         {/* favoritos (falta condicional para que no renderice si el user logeado es el mismo que esta viendo, osea para que no te lo puedas poner vos mismo :P*/}
-        {console.log(img)}
-        {console.log(userID.img)}
         {img !== userID.img ? (
           <div>
             <Checkbox

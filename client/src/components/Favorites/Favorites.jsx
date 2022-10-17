@@ -23,17 +23,14 @@ export default function Favourite() {
 
   const id = sub;
   const favourites = useSelector((state) => state.userDetail.Favorites);
-  console.log(favourites);
   const favId = [];
   favourites && favourites.map((e) => favId.push(e.ID));
-  console.log(favId);
   const allWorker = useSelector((state) => state.allWorkers);
   const workersFavs = [];
   for (let i = 0; i < favId.length; i++) {
     const element = allWorker.filter((e) => e.ID === favId[i]);
     workersFavs.push(element);
   }
-  console.log(workersFavs);
   useEffect(() => {
     dispatch(getWorkers());
     dispatch(getUserDetail(id));
@@ -41,10 +38,7 @@ export default function Favourite() {
 
   const uId = useSelector((state) => state.userDetail.id);
   const onClick = (e, id) => {
-    console.log(workersFavs);
     const deleteFav = workersFavs.filter((w) => w.id === id);
-    console.log(deleteFav);
-    console.log(uId);
     // aca en deleteFav le tengo que mandar o el worker a eliminar o el id del worker (sequelize lo identifica si le mandas el worker entero o el id)
     // falta captarlo en el filter
     dispatch(deletedFavorite(uId, deleteFav));
@@ -58,7 +52,6 @@ export default function Favourite() {
         // asd aca tengo que mapear Usuarios Worker completos, con jobs contract
         workersFavs.map((worker, index) => (
           <>
-            {console.log(worker)}
             {/* {(idd = worker[0].ID)} */}
 
             <div>
