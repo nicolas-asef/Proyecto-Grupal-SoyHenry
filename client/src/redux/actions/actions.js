@@ -117,7 +117,7 @@ export function createContract(data) {
   })
     .then((data) => data)
     .catch((data) => data);
-
+}
 
 export function getContractUsers(ids) {
   let ides = ids.reduce((acum, e) => acum + "&arr=" + e, "arr=");
