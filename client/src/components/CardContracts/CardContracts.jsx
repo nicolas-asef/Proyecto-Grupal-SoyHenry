@@ -30,7 +30,6 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
   },[update])
 
   useEffect(()=>{
-    console.log(user)
     if(user)
       setLoading2(false)
     else
@@ -68,6 +67,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
       num = num%3
     }
     setColumns(columnas_aux)
+    console.log(columnas_aux)
   },[page,type,isLoading])
 
 
@@ -106,6 +106,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         type = {type}
         force = {forceUpdate}
         loading = {forceLoading}
+        userID = {e.UserID}
         /> ):<h3>No hay contratos para mostrar...</h3>}
         </div>
         <div className={style.columnContainer}>
@@ -117,6 +118,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         cu ={e.comment_U}
         cw ={e.comment_W}
         force = {forceUpdate}
+        userID = {e.UserID}
         /> )}
         </div>
         <div className={style.columnContainer}>
@@ -129,6 +131,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         cw ={e.comment_W}
         type = {type}
         force = {forceUpdate}
+        userID = {e.UserID}
         /> )
         }
         </div>

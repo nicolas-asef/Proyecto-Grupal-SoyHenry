@@ -39,7 +39,6 @@ function ContractForm({toggleModal,id,worker_id,closeCB}) {
     const handleSubmit = (e) =>{
         createContract(input)
         alert("pausa")
-        console.log(sub,id)
         socket?.emit("enviarNotificacion",{receptor_id:id,emisor_id:sub,tipo:"contrato"})
         alert("Sali")
     }

@@ -216,6 +216,7 @@ const Profile = () => {
 {/*             <Box sx={st}>
               <Favorites />
             </Box> */}
+
           </Modal>
         </div>
         <div>
