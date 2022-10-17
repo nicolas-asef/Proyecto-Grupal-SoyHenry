@@ -5,7 +5,7 @@ import { modifyContract } from '../../redux/actions/actions'
 
 
 
-function FormOpinion({id,closeCB,worker}) {
+function FormOpinion({handler,id,closeCB,worker}) {
 
     // const { user: { sub } } = useAuth0();
 
@@ -31,6 +31,7 @@ function FormOpinion({id,closeCB,worker}) {
     }
 
     const handleSubmit = (e) =>{
+        
         let comentario = "comment_U"
         let rating = "rating_U"
         if(worker){
@@ -38,6 +39,7 @@ function FormOpinion({id,closeCB,worker}) {
             rating = "rating_W"
         }
         modifyContract({[comentario]:input.description,[rating]:+input.rating},id)
+        handler()
     }
 
   return (

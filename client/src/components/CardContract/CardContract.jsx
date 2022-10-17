@@ -6,14 +6,17 @@ import { connect } from 'react-redux'
 import { Modal ,Button} from '@mui/material'
 import { useAuth0 } from '@auth0/auth0-react'
 import FormOpinion from '../FormOpinion/FormOpinion'
+import { useSelector } from 'react-redux'
+import { GET_WORKER_DETAIL } from '../../redux/actions/actions_vars'
 
 
-function CardContract({cu,cw,date,location,state,description,worker,type,id,force}) {
+function CardContract({userID,cu,cw,date,location,state,description,worker,type,id,force,loading}) {
 
   const [open, setOpen] = React.useState(false);
   const [controlable, setControlable] = React.useState(false);
   const login = useAuth0()
   let sub = false
+  const socket = useSelector(state => state.socket)
 
   //Esto es para que el boton solo permite dejar una opinion si no hay opinion
   React.useEffect(()=>{
@@ -22,6 +25,9 @@ function CardContract({cu,cw,date,location,state,description,worker,type,id,forc
     if(!worker && cu)
       setControlable(true)
     },[controlable])
+
+
+ 
 
   if(login.isAuthenticated) sub = login.user.sub;
 
@@ -33,18 +39,22 @@ function CardContract({cu,cw,date,location,state,description,worker,type,id,forc
 
   const confirmar = () => {
     modifyContract({confirmed:true},id)
+    socket?.emit("enviarNotificacion",{receptor_id:userID,emisor_id:sub,tipo:"confirmado"})
     force()
+    loading()
   }
   const terminar = () => {
     modifyContract({finished:true},id)
+    socket?.emit("enviarNotificacion",{receptor_id:userID,emisor_id:sub,tipo:"terminado"})
     force()
+    loading()
   }
   const opinar = () => {
-    modifyContract({confirmed:true},id)
-    force()
+    socket?.emit("enviarNotificacion",{receptor_id:userID,emisor_id:sub,tipo:"opinado"})
   }
   const cancelar = () => {
     modifyContract({finished:true},id)
+    socket?.emit("enviarNotificacion",{receptor_id:userID,emisor_id:sub,tipo:"cancelado"})
     force()
   }
   return (
@@ -65,7 +75,7 @@ function CardContract({cu,cw,date,location,state,description,worker,type,id,forc
             onClose={handleClose}
           >
             <>
-              <FormOpinion id={id} worker={worker} closeCB={handleClose} />
+              <FormOpinion handler={opinar} id={id} worker={worker} closeCB={handleClose} />
             </>
           </Modal>
         </ul>

@@ -10,7 +10,9 @@ const {
   User,
   Worker,
   Country,
-  PopUp
+  PopUp,
+  Message,
+  Op
 } = require("../db.js");
 
 const router = Router();
@@ -23,13 +25,16 @@ const getUsers = async () => {
     include: [
       { model: Worker, include: [Job, Contract] },
       { model: Contract },
-      { model: Chat },
+      { model: Chat, as: "Host" },
+      {model: Chat, as : "Guest"},
+      { model: Message, as: "Emitter" },
       { model: Country },
       { model: Worker , as : "Favorites"},
       { model:PopUp , as : "Emiter"},
 
     ],
   });
+  
   const dataUser = info?.map((u) => {
     console.log(u)
     return {
@@ -86,18 +91,18 @@ router.get("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   const info = req.body;
-  // return console.log(info);
+
   const { id } = req.params;
   try {
           // falta que aca le llegue, pero no capta el ID del worker al cual representa el boton de eliminar 
-        console.log(info.deleted) 
+
 
         // si le paso un "id" al remove lo remueve bien de la tabla Favorites 
   
     const updatedUser = await User.findOne({ where: { ID: id } });
             info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
         info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
-    console.log(updatedUser);
+
     info.name
       ? await updatedUser.update({
           name: info.name,
@@ -205,9 +210,14 @@ router.get("/:id", async (req, res, next) => {
     if (id) {
       let user = users.find((u) => u.id === id);
       if (user) {
+    
         const popUps = await PopUp.findAll({where : {ReceiverID:id},include:{model:User,as:"Emiter"}})
+        const chats = await Chat.findAll({where : {[Op.or]:[{GuestID:id},{HostID:id}]},include:{model:Message}})
         user.popUps = popUps
-        console.log(user)
+
+        user.chats = chats
+       /*  console.log(user) */
+
         res.status(200).json(user);
       } else {
         res.status(404).json({ message: "no existe el user" });

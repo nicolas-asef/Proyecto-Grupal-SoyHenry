@@ -41,8 +41,7 @@ router.get("/", async (req, res, next) => {
           },
           include: [{ model: Country }],
         },
-        Contract,
-        Chat,
+        Contract
       ],
     });
 
