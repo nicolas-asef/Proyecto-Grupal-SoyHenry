@@ -36,13 +36,13 @@ const CardSlider = () => {
 
   return (
     <div uk-slider="center: true">
-      <div class="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
-        <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-4@l uk-child-width-1-4@m uk-grid">
-          <div class={style.containerCards}>
+      <div className="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
+        <ul className="uk-slider-items uk-child-width-1-2@s uk-child-width-1-4@l uk-child-width-1-4@m uk-grid">
+          <div className={style.containerCards}>
             {workersToShow.map((w) => {
               return (
                 <li>
-                  <div class="uk-panel">
+                  <div className="uk-panel">
                     <div className={style.boxContainer}>
                       <div className={!w ? style.cardLoader : style.card}>
                         <div className={style.face}>
@@ -76,7 +76,7 @@ const CardSlider = () => {
                             </div>
                           </div>
                           <div className={style.back}>
-                            <div class={style.social}>
+                            <div className={style.social}>
                               <div className={style.state}>
                                 {w.User.status ? (
                                   <a className={style.online}>Online</a>
@@ -125,7 +125,7 @@ const CardSlider = () => {
         </div>
         ;
       </div>
-      <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+      <ul className="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
     </div>
   );
 };
