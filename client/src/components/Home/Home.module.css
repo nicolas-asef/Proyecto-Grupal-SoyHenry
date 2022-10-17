@@ -44,7 +44,7 @@
 .containerCatalog {
   display: flex;
   justify-content: center;
-  height: 2200px;
+  height: fit-content;
   background: rgba(198, 184, 184, 0.25);
   backdrop-filter: blur(6.4px);
   -webkit-backdrop-filter: blur(6.4px);
