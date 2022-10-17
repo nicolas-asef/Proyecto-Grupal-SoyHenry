@@ -1,0 +1,12 @@
+.form{
+    display: flex;
+}
+
+.input{
+    width: 400px;
+}
+
+.button{
+    width: 100px;
+
+}

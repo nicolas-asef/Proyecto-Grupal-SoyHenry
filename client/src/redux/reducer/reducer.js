@@ -25,6 +25,11 @@ import {
   GET_COUNTRIES,
   UPLOAD_IMAGE,
   CLEAN_DETAIL,
+  POST_COUNTRY,
+  POST_JOB,
+  DELETE_USER,
+  DELETE_JOB,
+  DELETE_COUNTRY,
   AGREGAR_SOCKET,
   ADD_FAVORITE,
   DELETED_FAVORITE,
@@ -44,6 +49,8 @@ const storagedData = localStorageAuth();
 
 const initialState = {
   workers: [],
+  newUser:[],
+  onlyUser: [],
   users: [],
   jobs: [],
   workersPremium: [],
@@ -108,9 +115,12 @@ const reducer = (state = initialState, action) => {
         isLoading:false
       }
     case GET_USERS:
+        let onlyUser = action.payload.filter(el => el.Worker === null)
         return {
           ...state,            
-          users: action.payload            
+          users: action.payload,
+          newUser: action.payload,
+          onlyUser: onlyUser
         }
     case GET_USERNAME:
       return {
@@ -239,6 +249,31 @@ const reducer = (state = initialState, action) => {
         ...state,
         userDetail: {},
         selectedContracts: []
+      }
+    }
+    case POST_COUNTRY: {
+      return {
+        ...state,
+      }
+    }
+    case POST_JOB: {
+      return {
+        ...state,
+      }
+    }
+    case DELETE_USER:{
+      return {
+        ...state
+      }
+    }
+    case DELETE_JOB:{
+      return {
+        ...state
+      }
+    }
+    case DELETE_COUNTRY: {
+      return {
+        ...state
       }
     }
     case ADD_FAVORITE: {

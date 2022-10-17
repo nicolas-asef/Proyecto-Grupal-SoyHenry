@@ -8,7 +8,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import FormOpinion from '../FormOpinion/FormOpinion'
 
 
-function CardContract({cu,cw,date,location,state,description,worker,type,id,force}) {
+function CardContract({cu,cw,date,location,state,description,worker,type,id,force,loading}) {
 
   const [open, setOpen] = React.useState(false);
   const [controlable, setControlable] = React.useState(false);
@@ -34,14 +34,17 @@ function CardContract({cu,cw,date,location,state,description,worker,type,id,forc
   const confirmar = () => {
     modifyContract({confirmed:true},id)
     force()
+    loading()
   }
   const terminar = () => {
     modifyContract({finished:true},id)
     force()
+    loading()
   }
   const opinar = () => {
     modifyContract({confirmed:true},id)
     force()
+    loading()
   }
   const cancelar = () => {
     modifyContract({finished:true},id)

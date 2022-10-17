@@ -36,6 +36,7 @@ const getUsers = async () => {
   });
   
   const dataUser = info?.map((u) => {
+    console.log(u)
     return {
       id: u.ID,
       name: u.name,
@@ -53,6 +54,7 @@ const getUsers = async () => {
       Worker: u.Worker,
       Contracts: u.Contracts,
       Chats: u.Chats,
+      isDeleted: u.isDeleted,
       Country: u.Country,
       Favorites: u.Favorites,
       address: u.address,
@@ -89,18 +91,18 @@ router.get("/", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   const info = req.body;
-  // return console.log(info);
+
   const { id } = req.params;
   try {
           // falta que aca le llegue, pero no capta el ID del worker al cual representa el boton de eliminar 
-        console.log(info.deleted) 
+
 
         // si le paso un "id" al remove lo remueve bien de la tabla Favorites 
   
     const updatedUser = await User.findOne({ where: { ID: id } });
             info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
         info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
-    console.log(updatedUser);
+
     info.name
       ? await updatedUser.update({
           name: info.name,
@@ -183,6 +185,24 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  const {deleted} = req.query
+  console.log(deleted)
+  const {id} = req.params
+  try {
+    await User.update ({
+      isDeleted : deleted
+    },{
+      where: {ID: id}
+    })
+    res.send("cambio")
+  } catch (error) {
+    res.send(error)
+
+  }
+})
+
+
 router.get("/:id", async (req, res, next) => {
   const { id } = req.params;
   const users = await getUsers();
@@ -194,8 +214,10 @@ router.get("/:id", async (req, res, next) => {
         const popUps = await PopUp.findAll({where : {ReceiverID:id},include:{model:User,as:"Emiter"}})
         const chats = await Chat.findAll({where : {[Op.or]:[{GuestID:id},{HostID:id}]},include:{model:Message}})
         user.popUps = popUps
+
         user.chats = chats
        /*  console.log(user) */
+
         res.status(200).json(user);
       } else {
         res.status(404).json({ message: "no existe el user" });

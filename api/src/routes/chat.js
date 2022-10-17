@@ -11,7 +11,7 @@ router.get('/', async (req,res,next) => {
                 {model: Message}
             ]
         })
-        console.log(inbox)
+
         res.status(200).send(inbox)
     }catch(error){
         res.send('Must be a problem:' + error.message).status(404);
