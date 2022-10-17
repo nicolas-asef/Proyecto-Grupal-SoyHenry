@@ -11,15 +11,15 @@ const DemoCarousel = () => {
     <div className={style.container}>
       <div
         id="carouselB5"
-        class="carousel slide carousel-fade"
+        className="carousel slide carousel-fade"
         data-bs-ride="carousel"
       >
-        <div class="carousel-indicators">
+        <div className="carousel-indicators">
           <button
             type="button"
             data-bs-target="#carouselB5"
             data-bs-slide-to="0"
-            class="active"
+            className="active"
             aria-current="true"
             aria-label="Slide 1"
           ></button>
@@ -36,14 +36,14 @@ const DemoCarousel = () => {
             aria-label="Slide 3"
           ></button>
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
+        <div className="carousel-inner">
+          <div className="carousel-item active">
             <img src={img1} alt="..." />
           </div>
-          <div class="carousel-item">
+          <div className="carousel-item">
             <img src={img2} alt="..." />
           </div>
-          <div class="carousel-item">
+          <div className="carousel-item">
             <img src={img3} alt="..." />
           </div>
         </div>

@@ -27,4 +27,19 @@ route.post("/", async (req, res) => {
   }
 });
 
+
+route.delete('/:id', async (req,res) => {
+  const {id} = req.params
+  try {
+    await Job.destroy({
+      where : {
+        id : id
+      }
+    })
+    res.send("eliminado correctamente")
+  } catch (error) {
+    res.send(error)
+  }
+})
+
 module.exports = route;
