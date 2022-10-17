@@ -33,7 +33,8 @@ import {
   POST_JOB,
   DELETE_USER, 
   DELETE_JOB, 
-  DELETE_COUNTRY
+  DELETE_COUNTRY,
+  GET_WORKERS_PREMIUM
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
@@ -239,7 +240,7 @@ export function getWorkersSearch(search) {
 
 export function createUser(payload, jobs) {
   return async function (dispatch) {
-    const user = await axios.post(URL+"users", payload);
+    const user = await axios.post(baseURL+"users", payload);
     const user_id = await user.data.ID;
     if(jobs.length) {
       const worker = {
@@ -247,7 +248,7 @@ export function createUser(payload, jobs) {
         jobs,
 
       }
-      const res = await axios.post(URL+"worker", worker);
+      const res = await axios.post(baseURL+"worker", worker);
     }
 
     dispatch({
@@ -260,7 +261,7 @@ export function createUser(payload, jobs) {
 export function getJobs() {
     return async function (dispatch) {
         try {
-            let jobs = await axios.get(URL+"jobs");
+            let jobs = await axios.get(baseURL+"jobs");
             return dispatch({ type: GET_JOBS, payload: jobs.data });
         } catch (error) {
             console.log(error);
@@ -271,7 +272,7 @@ export function getJobs() {
 export function getWorkersPremium() {
   return async function (dispatch) {
     try {
-      // let premium = await axios.get(URL+"workers_premium");
+       let premium = await axios.get(baseURL+"workers_premium");
       return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
     } catch (error) {
       console.log(error);
