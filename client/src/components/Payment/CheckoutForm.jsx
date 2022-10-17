@@ -22,19 +22,10 @@ export default function CheckoutForm() {
     
     
     const authUser = useSelector((state) => state.authState)
-    console.log("auth")
-    console.log(authUser)
     const idUser = sub;
-    console.log("idUser")
-    console.log(idUser)
     const workers = useSelector((state) => state.workers)
-    console.log("workers")
-    console.log(workers)
     const worker = workers.filter(e => e.UserID === idUser)
-    console.log("worker")
-    console.log(worker)
     const workerId = worker[0].ID
-    console.log(workerId)
 
     
     const handleSubmit = async (event) => {
@@ -54,8 +45,6 @@ export default function CheckoutForm() {
         setError("")      
         let data = {}
         data = await dispatch(pay(paymentMethod))
-        console.log("data abajo")
-        console.log(data)
         setCargando(false)
         if ( data.status === "succeeded") {
             setCompraConcretada(true)
