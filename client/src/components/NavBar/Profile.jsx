@@ -65,11 +65,11 @@ const Profile = () => {
     }
   }, [dispatch, users.img]);
 
-  useEffect(() => {
+   useEffect(() => {
     if (sub) {
       dispatch(agregarSocker(sub));
     }
-  }, []);
+  }, []); 
 
   useEffect(() => {
     if (Object.keys(user).length !== 0) {
@@ -88,9 +88,11 @@ const Profile = () => {
     }
   }, [user]);
 
+
   useEffect(() => {
+
     if (sub) dispatch(agregarSocker(sub));
-  }, [sub]);
+  }, [sub]); 
 
   useEffect(() => {
     let cantidadAuxiliar = 0;

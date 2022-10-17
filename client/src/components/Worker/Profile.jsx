@@ -64,7 +64,12 @@ function Profile({
   const userID = useSelector((state) => state.users);
   const idWorkerFav = useSelector((state) => state.userDetail);
   const [checked, setChecked] = React.useState(false);
-  //const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID);
+
+/*   const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID); */
+  // if (isFav) {
+  //   setChecked(true);
+  // }
+
   const handleFav = (e) => {
     setChecked(e.target.checked);
     //dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
