@@ -1,38 +1,13 @@
-import { useEffect, useState } from "react";
-import io from "socket.io-client";
+import { Container } from "@mui/system";
+import Sidebar from "../Chat/Sidebar/Sidebar";
 
-// const socket = io("http://localhost:3001");
-
-export default function Chat() {
-  //   const [messages, setMessages] = useState([]);
-  //   const [message, setMessage] = useState("");
-
-  //   useEffect(() => {
-  //     const receiveMessage = (message) => {
-  //       setMessages([message, ...messages]);
-  //     };
-
-  //     socket.on("createMessage", receiveMessage);
-
-  //     return () => {
-  //       socket.off("message", receiveMessage);
-  //     };
-  //   }, [messages]);
-
-  //   const handleSubmit = (event) => {
-  //     event.preventDefault();
-  //     const newMessage = {
-  //       body: message,
-  //       from: "Me",
-  //     };
-  //     setMessages([newMessage, ...messages]);
-  //     setMessage("");
-  //     socket.emit("createMessage", newMessage.body);
-  //   };
-
+export default function Chat({ id, users }) {
   return (
-    <div>
-      <h1>Chat page</h1>
-    </div>
+    <Container>
+      <Sidebar />
+      <p>Host Chat</p>
+    </Container>
   );
 }
+
+const Container = styled.div``;

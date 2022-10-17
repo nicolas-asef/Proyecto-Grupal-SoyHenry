@@ -7,7 +7,7 @@ import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import OnBoarding from './components/OnBoarding/OnBoarding';
 import Payment from './components/Payment/Payment';
-import Chat from './components/Chat/Chat/Chat';
+import Chat from './components/Chat/Chat';
 import DashHome from './components/Dashboard/Pages/DashHome/DashHome';
 import DashAnalytics from './components/Dashboard/Pages/DashAnalytics/DashAnalytics';
 import DashBalance from './components/Dashboard/Pages/DashBalance/DashBalance';
