@@ -60,7 +60,7 @@ export default function Favourite() {
     <div className={s.super}>
       {open ? (
         <div className={s.conteiner}>
-          <h3>My Favourites Workers</h3>
+          <h3 className={s.titulo}>My Favourites Workers</h3>
           {allWorker.length &&
             workersFavs.map((worker, index) => (
               <>
@@ -80,13 +80,15 @@ export default function Favourite() {
                    este es el id que no estoy pudiendo captar en el onClick */}
                   {/* <DeleteIcon name={index} />
                 </IconButton> */}
-                  <button
-                    onClick={onClick}
-                    id={worker[0].ID}
-                    className={s.boton}
-                  >
-                    X
-                  </button>
+                  <div className={s.buton}>
+                    <button
+                      onClick={onClick}
+                      id={worker[0].ID}
+                      className={s.boton}
+                    >
+                      X
+                    </button>
+                  </div>
                 </div>
               </>
             ))}
