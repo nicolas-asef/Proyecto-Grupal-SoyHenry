@@ -20,6 +20,7 @@ import DashCountry from './components/Dashboard/Pages/DashCountry/DashCountry';
 import DashJobs from './components/Dashboard/Pages/DashJobs/DashJobs';
 import Favorites from './components/Favorites/Favorites'
 import Mapview from "./components/MapView/MapView";
+import { Followers } from './components/Followers/Followers';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path='/dashboard/jobs'element= {<DashJobs />} />
         <Route path='/fav' element= { <Favorites />} />
          <Route path="/map" element={<Mapview />} />
+         <Route path="/followers" element={<Followers/>}/>
 
       </Routes>
     </div>

@@ -41,7 +41,8 @@ router.get("/", async (req, res, next) => {
           },
           include: [{ model: Country }],
         },
-        Contract
+        Contract,
+        { model: User , as : "Favorites"}
       ],
     });
 
