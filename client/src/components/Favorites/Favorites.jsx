@@ -26,7 +26,7 @@ export default function Favourite() {
   } = useAuth0();
 
   const id = sub;
-  const favourites = useSelector((state) => state.userDetail.Favorites);
+  const favourites = useSelector((state) => state.users.Favorites);
   console.log(favourites);
   const favId = [];
   favourites && favourites.map((e) => favId.push(e.ID));
@@ -41,7 +41,8 @@ export default function Favourite() {
   console.log(workersFavs);
   useEffect(() => {
     dispatch(getWorkers());
-    dispatch(getUserDetail(id));
+    dispatch(getUserId(id));
+    //dispatch(getUserDetail(id));
   }, [dispatch]);
 
   // useEffect(() => {
