@@ -13,6 +13,7 @@ import {
   GET_USERS_CONTRACTS,
   GET_USER_DETAIL,
   GET_WORKER_DETAIL,
+  GET_WORKERS_PREMIUM,
   GET_WORKERS,
   GET_JOBS,
   GET_USERS,
@@ -271,7 +272,7 @@ export function getJobs() {
 export function getWorkersPremium() {
   return async function (dispatch) {
     try {
-      // let premium = await axios.get(URL+"workers_premium");
+      let premium = await axios.get(URL+"workers_premium");
       return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
     } catch (error) {
       console.log(error);

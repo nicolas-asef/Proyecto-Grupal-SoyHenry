@@ -18,6 +18,7 @@ import { NestedModal } from './components/Payment/NestedModal';
 import DashCountry from './components/Dashboard/Pages/DashCountry/DashCountry';
 import DashJobs from './components/Dashboard/Pages/DashJobs/DashJobs';
 import Favorites from './components/Favorites/Favorites'
+import CarruselWorkersPremium from './components/CarruselWorkersPremium/CarruselWorkersPremium';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path='/dashboard/country' element= {<DashCountry />} />
         <Route path='/dashboard/jobs'element= {<DashJobs />} />
         <Route path='/fav' element= { <Favorites />} />
+        <Route path='/carruselpremium' element= { <CarruselWorkersPremium />} />
       </Routes>
     </div>
   );
