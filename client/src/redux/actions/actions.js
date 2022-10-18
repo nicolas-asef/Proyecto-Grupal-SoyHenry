@@ -13,6 +13,7 @@ import {
   GET_USERS_CONTRACTS,
   GET_USER_DETAIL,
   GET_WORKER_DETAIL,
+  GET_WORKERS_PREMIUM,
   GET_WORKERS,
   GET_JOBS,
   GET_USERS,
@@ -34,12 +35,11 @@ import {
   DELETE_USER,
   DELETE_JOB,
   DELETE_COUNTRY,
-  GET_WORKERS_PREMIUM,
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
-//original = http://localhost:3001
-const URL = "https://databasepf.herokuapp.com/";
+const URL = "http://localhost:3001/";
+//const URL = "https://databasepf.herokuapp.com/"
 
 const baseURL = "http://localhost:3001/"; //Esto se cambia por localhost:3001 para usarlo local
 
@@ -254,6 +254,7 @@ export function getWorkersPremium() {
   return async function (dispatch) {
     try {
       let premium = await axios.get(baseURL + "workers_premium");
+
       return dispatch({ type: GET_WORKERS_PREMIUM, payload: premium }); // payload: premium.data
     } catch (error) {}
   };

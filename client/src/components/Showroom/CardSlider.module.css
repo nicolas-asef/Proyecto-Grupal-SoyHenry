@@ -1,3 +1,7 @@
+.all {
+  background-color: #c6b70f;
+}
+
 .containerCards {
   display: flex;
   flex-direction: row;

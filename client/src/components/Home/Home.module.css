@@ -49,6 +49,20 @@
   backdrop-filter: blur(6.4px);
   -webkit-backdrop-filter: blur(6.4px);
   box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
+  opacity: 1;
+  transition: all 2s ease;
+}
+
+.containerCatalogHidden {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  background: rgba(198, 184, 184, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
+  opacity: 0;
+  transition: all 2s ease;
 }
 
 .catalogTilte {
@@ -79,6 +93,22 @@
   backdrop-filter: blur(6.4px);
   -webkit-backdrop-filter: blur(6.4px);
   box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
+  opacity: 1;
+  transition: 2s ease all;
+}
+
+.titlesContainerHidden {
+  display: flex;
+  flex-direction: column;
+  background: rgba(170, 170, 170, 0.25);
+  margin: 5%;
+  padding: 3%;
+  width: 1000px;
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
+  opacity: 0;
+  transition: all 2s ease;
 }
 
 .footer {
