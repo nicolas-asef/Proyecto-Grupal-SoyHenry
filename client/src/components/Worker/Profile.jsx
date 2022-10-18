@@ -3,7 +3,7 @@ import "./Profile.css";
 import Perfil from "../../img/perfil.jpg";
 import Buttons from "./Buttons";
 import Status from "./Status";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AlertTitle, Dialog } from "@mui/material";
 import ContractForm from "../ContractForm/ContractForm";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -61,12 +61,33 @@ function Profile({
   };
   const userD = useSelector((state) => state.userDetail.Favorites);
   const dispatch = useDispatch();
-  const favWorker = useSelector((state) => state.users.Favorites);
+  const us = useSelector((state) => state.users);
+  console.log(us);
   const userID = useSelector((state) => state.users);
   //console.log(userID);
   const idWorkerFav = useSelector((state) => state.userDetail);
+  console.log(idWorkerFav);
+  const usW = us.Favorites;
+  //console.log(us.Worker.ID);
   const [checked, setChecked] = React.useState(false);
-  // console.log(idWorkerFav);
+  const worksFavs = idWorkerFav.Favorites;
+  console.log(usW);
+  // console.log(id);
+  console.log(worksFavs);
+
+  // const follow = worksFavs.forEach((e) => {
+  //   if (e.Fav.WorkerID === usW) {
+  //     return true;
+  //   }
+  // });
+  const follow = usW?.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
+  console.log(follow);
+  useEffect(() => {
+    if (follow) {
+      setChecked(true);
+    }
+  });
+
   // console.log(userD);
   // const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID);
   // if (isFav) {
@@ -74,15 +95,15 @@ function Profile({
   // }
 
   const handleFav = (e) => {
-    setChecked(!checked);
+    setChecked(true);
     dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
   };
   const handleChat = () => {
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
     }
-    console.log(login.user.sub);
-    console.log(params.id);
+    // console.log(login.user.sub);
+    // console.log(params.id);
     socket?.emit("messageCreation", {
       id_emisor: login.user.sub,
       id_receptor: params.id,
@@ -123,9 +144,24 @@ function Profile({
           </p>
           <div>
             <h3>
-              Seguidores:
-              <Followers id={idWorkerFav.Worker.ID} />
+              Followers:
+              <Followers id={id} />
             </h3>
+
+            {img !== userID.img ? (
+              <div>
+                <h2>Follow:</h2>
+                <Checkbox
+                  checked={checked}
+                  icon={<FavoriteBorder />}
+                  id={id}
+                  checkedIcon={<Favorite />}
+                  onClick={handleFav}
+                />
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           {jobs && jobs.length ? (
             <label className="label-description" htmlFor="disponibility">
@@ -152,19 +188,6 @@ function Profile({
             )}
           </div>
         </div>
-        {img !== userID.img ? (
-          <div>
-            <Checkbox
-              checked={checked}
-              icon={<FavoriteBorder />}
-              id={id}
-              checkedIcon={<Favorite />}
-              onClick={handleFav}
-            />
-          </div>
-        ) : (
-          ""
-        )}
         <div className="contactar">
           <Button
             className="buttonStyled"

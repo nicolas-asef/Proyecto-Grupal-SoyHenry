@@ -22,7 +22,6 @@ export function Followers({ id }) {
   let fow = 0;
   const follow = worker.forEach((e) => {
     e.Favorites.forEach((e1) => {
-      console.log(e1.Fav.WorkerID);
       if (e1.Fav.WorkerID === id) {
         fow = fow + 1;
       }
