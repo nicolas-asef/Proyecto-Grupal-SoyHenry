@@ -7,7 +7,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import HomeIcon from '@mui/icons-material/Home';
-import DescriptionIcon from '@mui/icons-material/Description';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Link } from "react-router-dom"
 
 
@@ -54,8 +54,8 @@ export default function Sidebar (){
                     </li>
                     </Link>
                     <li className={s.li}>
-                        <DescriptionIcon />
-                        <span>Contracts</span>
+                        <StarBorderIcon />
+                        <span>Workrs Premium</span>
                     </li>
                     <li className={s.li}>
                         <BarChartIcon />
