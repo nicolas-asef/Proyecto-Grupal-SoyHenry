@@ -18,6 +18,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite } from "../../redux/actions/actions";
+import { Followers } from "../Followers/Followers";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -62,7 +63,7 @@ function Profile({
   const dispatch = useDispatch();
   const favWorker = useSelector((state) => state.users.Favorites);
   const userID = useSelector((state) => state.users);
-  // console.log(userID);
+  //console.log(userID);
   const idWorkerFav = useSelector((state) => state.userDetail);
   const [checked, setChecked] = React.useState(false);
   // console.log(idWorkerFav);
@@ -120,6 +121,12 @@ function Profile({
               ? description
               : "No se ha realizado una descripcion aun."}
           </p>
+          <div>
+            <h3>
+              Seguidores:
+              <Followers id={idWorkerFav.Worker.ID} />
+            </h3>
+          </div>
           {jobs && jobs.length ? (
             <label className="label-description" htmlFor="disponibility">
               Disponible

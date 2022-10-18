@@ -2,18 +2,18 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWorkers, getUsers } from "../../redux/actions/actions";
 
-export function Followers() {
+export function Followers({ id }) {
   const worker = useSelector((state) => state.workers);
   console.log(worker);
-  const usId = useSelector((state) => state.users.Worker);
-  console.log(usId);
-  //merompe el puot ID lcsm
-  let idW;
-  if (usId) {
-    idW = usId.ID;
-  }
+  //   const usId = useSelector((state) => state.users.Worker);
+  //   console.log(usId);
+  //   //merompe el puot ID lcsm
+  //   let idW;
+  //   if (usId) {
+  //     idW = usId.ID;
+  //   }
 
-  console.log(idW);
+  //   console.log(idW);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWorkers());
@@ -22,8 +22,8 @@ export function Followers() {
   let fow = 0;
   const follow = worker.forEach((e) => {
     e.Favorites.forEach((e1) => {
-      //console.log(e1.Fav.WorkerID);
-      if (e1.Fav.WorkerID === idW) {
+      console.log(e1.Fav.WorkerID);
+      if (e1.Fav.WorkerID === id) {
         fow = fow + 1;
       }
     });
