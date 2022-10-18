@@ -44,6 +44,9 @@ export default function Favourite() {
     dispatch(getUserDetail(id));
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   console.log("a");
+  // }, [workersFavs]);
   const uId = useSelector((state) => state.userDetail.id);
   console.log(uId);
   const onClick = (e) => {
