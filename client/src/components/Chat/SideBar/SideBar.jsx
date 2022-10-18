@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Sidebar.css";
 import { Avatar, Icon, IconButton } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import SearchOutlined from "@mui/icons-material/SearchOutlined";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
+
 import SidebarChat from "./SidebarChat";
 import Chat from "../Chat";
 
 function Sidebar() {
+  // const [chat, setChat] = useState([]);
+
+  // useEffect(() => {
+  //   const listener = db.collection("chats").onMessage((ss) => {
+  //     setChat(
+  //       chat.map((e) => ({
+  //         id: host_id,
+  //         guest: guest.data(),
+  //       }))
+  //     );
+  //   });
+  //   return () => {
+  //     listener();
+  //   };
+  // }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebar__header">

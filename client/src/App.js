@@ -49,7 +49,6 @@ function App() {
         <Route path='/dashboard/workers' element= { <DashWorker />} />
         <Route path='/dashboard/country' element= {<DashCountry />} />
         <Route path='/dashboard/jobs'element= {<DashJobs />} />
-        <Route path='/fav' element= { <Favorites />} />
         <Route path='/chat' element= { <SuperChat />} />
       </Routes>
     </div>

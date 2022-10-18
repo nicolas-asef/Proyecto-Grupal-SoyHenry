@@ -11,6 +11,8 @@
 .badge{
   margin-top: 1vh;
   margin-right: 2vh;
+  font-size: 32px;
+  align-items: center;
 }
 
 .badge:hover{

@@ -18,6 +18,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite } from "../../redux/actions/actions";
+import { Link } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -45,7 +46,7 @@ function Profile({
   const status = useSelector((state) => state.userDetail.isOnline);
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
-  const socket = useSelector(state => state.socket)
+  const socket = useSelector((state) => state.socket);
   const handleOpen = () => {
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
@@ -65,23 +66,26 @@ function Profile({
   const idWorkerFav = useSelector((state) => state.userDetail);
   const [checked, setChecked] = React.useState(false);
 
-/*   const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID); */
+  /*   const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID); */
   // if (isFav) {
   //   setChecked(true);
   // }
-
   const handleFav = (e) => {
     setChecked(e.target.checked);
     //dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
   };
+
   const handleChat = () => {
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
     }
-    console.log(login.user.sub)
-    console.log(params.id)
-    socket?.emit("messageCreation",{id_emisor: login.user.sub, id_receptor: params.id , texto:"hola"})
-
+    console.log(login.user.sub);
+    console.log(params.id);
+    socket?.emit("messageCreation", {
+      id_emisor: login.user.sub,
+      id_receptor: params.id,
+      texto: "Chau",
+    });
   };
 
   return (
@@ -157,12 +161,15 @@ function Profile({
 
         {/* favoritos */}
         <div className="contactar">
-          <Button 
-          className="buttonStyled" 
-          variant="contained" 
-          size="large" 
-          disabled={params.id === sub ? true : false}
-          onClick={handleChat}>
+          <Button
+            className="buttonStyled"
+            variant="contained"
+            size="large"
+            disabled={params.id === sub ? true : false}
+            onClick={handleChat}
+            component={Link}
+            to={`/chat`}
+          >
             Mensaje
           </Button>
           {jobs && jobs.length && (

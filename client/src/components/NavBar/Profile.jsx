@@ -21,12 +21,14 @@ import { style } from "@mui/system";
 import Chip from "@mui/material/Chip";
 import s from "./Profile.module.css";
 import { FaHeart } from "react-icons/fa";
+import ChatIcon from "@mui/icons-material/Chat";
 import Favorites from "../Favorites/Favorites";
 import { agregarSocker } from "../../redux/actions/actions";
 import { Badge, ClickAwayListener } from "@mui/material";
 import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneTwoTone";
 import { useState } from "react";
 import PopUps from "../PopUps/PopUps";
+import { Link } from "react-router-dom";
 
 const st = {
   position: "absolute",
@@ -195,6 +197,7 @@ const Profile = () => {
                 onClick={showPopUps}
                 badgeContent={cantNotificaciones}
                 color="primary"
+                sx={{ fontSize: 30 }}
               >
                 <NotificationsNoneTwoToneIcon />
               </Badge>
@@ -202,7 +205,14 @@ const Profile = () => {
             </div>
           </ClickAwayListener>
         </div>
-        <div className={s.but}>
+        <div className={s.badge}>
+          <Box>
+            <IconButton>
+              <ChatIcon component={Link} to={`/chat`} />
+            </IconButton>
+          </Box>
+        </div>
+        <div className={s.badge}>
           <Button onClick={handleOpen}>
             <FaHeart />
           </Button>

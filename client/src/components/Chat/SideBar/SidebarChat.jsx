@@ -3,15 +3,16 @@ import "./SidebarChat.css";
 import React from "react";
 import { Avatar } from "@mui/material";
 
-export default function SiderbarChat(props) {
+export default function SidebarChat(props) {
   function createChat() {
     alert("creating...");
   }
 
   return !props.newChat ? (
+    // <Link to={'/chats/${props.chatId}'}>
     <div className="sidebarChat">
       <Avatar
-        src={`https://avatars.dicebear.com/api/human/${props.userId}.svg`}
+        src={`https://avatars.dicebear.com/api/human/${props.chat}.svg`}
       />
       <div className="sidebarChat_info">
         <h2>{props.room}</h2>

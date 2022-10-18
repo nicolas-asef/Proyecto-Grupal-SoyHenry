@@ -6,15 +6,34 @@ import ChatMessage from "./ChatMessage";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MoreVert from "@mui/icons-material/MoreVert";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import { useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function Chat(props) {
   const [input, setInput] = useState("");
+  const [chat, setChat] = useState("");
+  const { chatId } = useParams();
+  const socket = useSelector((state) => state.socket);
+  const login = useAuth0();
+  const params = useParams();
 
-  function sendMessage(e) {
-    e.preventDefault();
-    alert(input);
-    setInput("");
-  }
+  // useEffect(() => {
+  //   if(chatId) {
+  //     Chat de db
+  //     .(chatId)
+  //     .socket setChat
+  //   }
+  // })
+
+  const sendMessage = async (e) => {
+    await socket?.emit("messageCreation", {
+      id_emisor: login.user.sub,
+      id_receptor: params.id,
+      texto: "Chau",
+    });
+  };
 
   const handleOnChange = (e) => {
     setInput(e.target.value);

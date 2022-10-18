@@ -10,12 +10,12 @@
     background-color: #ebebeb;
 }
 
-.sidebarChat_info > h2 {
+.sidebarChat__info > h2 {
     font-size: 16px;
     margin: 0;
     margin-bottom: 8px;
 }
-.sidebarChat_info > p {
+.sidebarChat__info > p {
     margin: 0;
 }
 
