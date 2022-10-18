@@ -20,10 +20,11 @@ function Sidebar() {
 
   
 useEffect(()=>{
-  if (!isLoading){
+  if (!isLoading && chats.length === 0){
     dispatch(getChats(user.sub))
   }
-},[])
+})
+
 
 
   return (

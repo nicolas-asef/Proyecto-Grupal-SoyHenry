@@ -30,9 +30,9 @@ export default function Favourite() {
   console.log(favourites);
   const favId = [];
   favourites && favourites.map((e) => favId.push(e.ID));
-  console.log(favId);
+
   const allWorker = useSelector((state) => state.allWorkers);
-  console.log(allWorker);
+
   const workersFavs = [];
   for (let i = 0; i < favId.length; i++) {
     const element = allWorker.filter((e) => e.ID === favId[i]);
@@ -71,7 +71,6 @@ export default function Favourite() {
           {allWorker.length && workersFavs
             ? workersFavs.map((worker, index) => (
                 <>
-                  {console.log(worker)}
                   <div className={s.hijo}>
                     <WorkerCard
                       Worker={worker[0]}

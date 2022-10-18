@@ -37,7 +37,6 @@ const getUsers = async () => {
   });
   
   const dataUser = info?.map((u) => {
-    console.log(u)
     return {
       id: u.ID,
       name: u.name,
