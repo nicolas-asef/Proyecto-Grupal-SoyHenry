@@ -16,6 +16,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
   const[maxPage,setMaxPage] = useState(1)
   const[type,setType] = useState('p')
   const[update,setUpdate] = useState(false)
+  const[loading2,setLoading2] = useState(true)
   let keys = sumador()
 
   const changePag = (e) => {
@@ -28,6 +29,12 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
     getUserDetail(id)
   },[update])
 
+  useEffect(()=>{
+    if(user)
+      setLoading2(false)
+    else
+      setLoading2(true)
+  },[user])
 
   useEffect(()=>{
     
@@ -60,11 +67,16 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
       num = num%3
     }
     setColumns(columnas_aux)
+    console.log(columnas_aux)
   },[page,type,isLoading])
 
 
   const forceUpdate = () =>{
     setUpdate(!update)
+  }
+
+  const forceLoading = () => {
+    setLoading2(true)
   }
 
   const changeType = (e) =>{
@@ -83,7 +95,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
       </ButtonGroup>
       </div>
       
-        {!isLoading ? <div className={style.cardContainer}>
+        {!isLoading && !loading2 ? <div className={style.cardContainer}>
         <div className={style.columnContainer}>
         {columns[0].length > 0 ? columns[0].map(e =>  <CardContract id = {e.id} key = {keys()} date={e.date} location={e.location}
         state = {e.finished ? "Terminado" : e.confirmed? "Confirmado" : "Pendiente de confirmacion"}
@@ -93,6 +105,8 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         cw ={e.comment_W}
         type = {type}
         force = {forceUpdate}
+        loading = {forceLoading}
+        userID = {e.UserID}
         /> ):<h3>No hay contratos para mostrar...</h3>}
         </div>
         <div className={style.columnContainer}>
@@ -104,6 +118,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         cu ={e.comment_U}
         cw ={e.comment_W}
         force = {forceUpdate}
+        userID = {e.UserID}
         /> )}
         </div>
         <div className={style.columnContainer}>
@@ -116,6 +131,7 @@ function CardContracts({isWorker,isLoading,getUserDetail,user}) {
         cw ={e.comment_W}
         type = {type}
         force = {forceUpdate}
+        userID = {e.UserID}
         /> )
         }
         </div>

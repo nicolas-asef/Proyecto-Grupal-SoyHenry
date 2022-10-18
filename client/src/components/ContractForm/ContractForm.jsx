@@ -14,7 +14,7 @@ function ContractForm({toggleModal,id,worker_id,closeCB}) {
     
     const [input,setInput] = React.useState({
         id_worker: worker_id,
-        id_user:id
+        id_user:sub
 
     })
 
@@ -29,7 +29,6 @@ function ContractForm({toggleModal,id,worker_id,closeCB}) {
 
 
     const handeInputChange = function(e){
-        // console.log(input.id_user)
         //socket?.emmit("enviarNotificacion",{receptor_id:id,emisor_id:sub,tipo:"contrato"})
         setInput({
             ...input,

@@ -1,3 +1,4 @@
+
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { Home,LandingPage,NavBar,Footer,About, SearchBar } from './components'
@@ -19,11 +20,13 @@ import DashCountry from './components/Dashboard/Pages/DashCountry/DashCountry';
 import DashJobs from './components/Dashboard/Pages/DashJobs/DashJobs';
 import Favorites from './components/Favorites/Favorites'
 import CarruselWorkersPremium from './components/CarruselWorkersPremium/CarruselWorkersPremium';
+import Mapview from "./components/MapView/MapView";
+
 
 function App() {
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <Routes>
         <Route path='/' element={ 
           <ProtectedRoute>
@@ -49,6 +52,8 @@ function App() {
         <Route path='/dashboard/jobs'element= {<DashJobs />} />
         <Route path='/fav' element= { <Favorites />} />
         <Route path='/carruselpremium' element= { <CarruselWorkersPremium />} />
+         <Route path="/map" element={<Mapview />} />
+
       </Routes>
     </div>
   );

@@ -1,7 +1,7 @@
 .popUp{
     height: 10vh;
     width: 29vw;
-    /* border: 3px solid #04f7ff; */
+    /* border: 3px solid #04f7ff;  */
     margin-left: 1vh;
     display: flex;
     gap:1vw;
@@ -16,4 +16,8 @@
 
 .popUp:hover{
     background-color: rgb(230, 230, 230);
+}
+
+.right{
+    margin-top: 2%;
 }

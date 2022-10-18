@@ -277,17 +277,23 @@ const reducer = (state = initialState, action) => {
       }
     }
     case ADD_FAVORITE: {
-      //const exist = state.favoritesWorkers.find(e => e.ID)        
-      // const newF = [...state.favoritesWorkers, action.payload]
-      // console.log(newF)
       return {
         ...state           
       }
     }
     case DELETED_FAVORITE: {
-      console.log("pase por el reducer")
+      const workersFav = state.users.Favorites
+      console.log(action.payload)
+      console.log(workersFav)
+      const us = state.users
+      console.log(us)
+      const stayWorkersFav = workersFav.filter(e => e.ID !== action.payload)   
+      console.log(stayWorkersFav)  
+      us.Favorites = stayWorkersFav
       return {
-        ...state
+        ...state,
+        users: us,
+        user: us
       }
     }
     default:
