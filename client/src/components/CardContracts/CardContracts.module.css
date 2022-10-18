@@ -1,34 +1,46 @@
-.cardContracts{
-    margin-top: 2vh;
-    /* border: 3px solid #4df30c; */
-    display: flex;
-    flex-direction: column;
+.cardContracts {
+  /* border: 3px solid #4df30c; */
+  display: flex;
+  flex-direction: column;
+
+  background-image: url("../../assets/fondocontratos.jpg");
 }
 
-.columnContainer{
-    display: flex;
-    flex-direction: column;
-    gap:1vw;
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
 }
 
-.cardContainer{
-    display: flex;
-    gap: 1vw;
-    /* border: 3px solid #4df30c; */
-    height: 100vh;
+.cardContainer {
+  display: flex;
+  gap: 1vw;
+  /* border: 3px solid #4df30c; */
+  height: 100vh;
 }
 
-.filters{
-    gap: 1px;
-    width: 60vw;
-    /* border: 3px solid #4df30c; */
-    margin-left: 18vw;
-    box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 10px;
-    margin-bottom: 2vh;
-    background-color: rgb(255, 255, 255);
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  width: 900px;
+  margin-left: 25%;
+  border-radius: 10px;
+  margin-bottom: 2vh;
+  background: rgba(139, 137, 70, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(154, 154, 154, 0.479);
+}
+
+.filters button {
+  display: flex;
+  color: white;
+  letter-spacing: 3px;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.5rem;
+  filter: drop-shadow(3px 3px 1px #000000) drop-shadow(3px 3px 2px #000000)
+    drop-shadow(3px 3px 2px #000000);
 }
