@@ -33,7 +33,8 @@ import {
   AGREGAR_SOCKET,
   ADD_FAVORITE,
   DELETED_FAVORITE,
-  GET_USER
+  GET_USER,
+  GET_CHATS
 
 } from '../actions/actions_vars'
 
@@ -65,7 +66,8 @@ const initialState = {
   filtrado: [],
   uploadedImg: "",
   socket: null,
-  popUps: []
+  popUps: [],
+  chats: []
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -100,6 +102,12 @@ const reducer = (state = initialState, action) => {
         selectedContracts:action.payload,
         isLoading:false
       }
+
+      case GET_CHATS:
+        return{
+          ...state,
+          chats: action.payload
+        }
 
     case GET_WORKER_CONTRACTS:
       return{

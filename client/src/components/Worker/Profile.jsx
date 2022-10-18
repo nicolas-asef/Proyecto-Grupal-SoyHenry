@@ -107,7 +107,7 @@ function Profile({
     socket?.emit("messageCreation", {
       id_emisor: login.user.sub,
       id_receptor: params.id,
-      texto: "hola",
+      texto: "chau",
     });
   };
 

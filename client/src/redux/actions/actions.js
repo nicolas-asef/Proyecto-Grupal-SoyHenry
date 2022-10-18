@@ -35,6 +35,7 @@ import {
   DELETE_USER,
   DELETE_JOB,
   DELETE_COUNTRY,
+  GET_CHATS
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
@@ -196,6 +197,19 @@ export function getUsers() {
         });
       })
       .catch((err) => {});
+  };
+}
+export function getChats(id) {
+  return function (dispatch) {
+    axios
+      .get(baseURL + "chat/" + id)
+      .then((chat) => {
+        dispatch({
+          type: GET_CHATS,
+          payload: chat.data,
+        });
+      })
+      .catch((err) => {console.log(err.message)});
   };
 }
 
