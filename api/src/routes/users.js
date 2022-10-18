@@ -31,7 +31,8 @@ const getUsers = async () => {
       { model: Country },
       { model: Worker , as : "Favorites"},
       { model:PopUp , as : "Emiter"},
-
+      
+     
     ],
   });
   

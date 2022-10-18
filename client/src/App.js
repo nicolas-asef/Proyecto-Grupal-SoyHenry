@@ -24,6 +24,7 @@ import Favorites from './components/Favorites/Favorites'
 import SuperChat from './components/Chat/SuperChat';
 import CarruselWorkersPremium from './components/CarruselWorkersPremium/CarruselWorkersPremium';
 import Mapview from "./components/MapView/MapView";
+import { Followers } from './components/Followers/Followers';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route path='/chat' element= { <SuperChat />} />
         <Route path='/carruselpremium' element= { <CarruselWorkersPremium />} />
          <Route path="/map" element={<Mapview />} />
+         <Route path="/followers" element={<Followers/>}/>
 
       </Routes>
     </div>
