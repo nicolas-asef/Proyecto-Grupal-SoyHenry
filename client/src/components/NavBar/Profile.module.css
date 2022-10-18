@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Lora:ital@1&display=swap');
 .name {
   margin-right: 20px;
   color: white !important;
@@ -20,4 +21,18 @@
 .but{
   padding: auto;
   margin: auto;
+}
+.st{
+  
+  
+  font-family: 'Lato', sans-serif;
+  font-family: 'Lora', serif;
+  width: 1000px;
+  display: flex;
+  margin-top: 5%;
+  margin-left: 20%;
+  max-height: 700px;  
+  color: grey;
+  position: absolute;
+  
 }

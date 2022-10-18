@@ -2,8 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 
 .container {
-  /* margin-top: 3%; */
-
   background: rgb(0, 48, 255);
   background: linear-gradient(
     0deg,
@@ -39,8 +37,8 @@
 
 .subTitletypo {
   position: absolute;
-  color: #fff;
   z-index: 2;
+  color: #fff;
   font-family: "Lobster", cursive;
   font-size: 40px;
   top: 220px;
@@ -48,7 +46,15 @@
 }
 
 .testimonials {
-  margin-top: 3%;
+  margin-top: 5%;
+  opacity: 1;
+  transition: all 2s ease;
+}
+
+.testimonialsHidden {
+  margin-top: 5%;
+  opacity: 0;
+  transition: all 2s ease;
 }
 
 .footer-links {
@@ -95,7 +101,6 @@
   padding: 5px;
   border-radius: 4px;
   text-align: start;
-
   background-image: linear-gradient(0, #d7d9db 45%, transparent 45%);
 }
 

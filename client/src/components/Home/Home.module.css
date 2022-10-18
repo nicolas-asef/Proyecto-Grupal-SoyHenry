@@ -1,45 +1,117 @@
 .all {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
-  background: rgb(0, 48, 255);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 48, 255, 0.19931722689075626) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-}
-.about-card {
-  background-color: red;
+  width: 100%;
+  background-size: contain;
+  background-image: url("../../assets/fondohomemaderaclara.jpg");
 }
 
-.container {
-  margin-top: 30px;
-  width: 45%;
-}
-
-.filterContainer {
-  width: 45%;
-}
-
-.containerTitle {
-  color: aliceblue;
-  font-family: "Anton", sans-serif;
-  font-family: "Bebas Neue", cursive;
-  font-size: 6rem;
-  width: fit-content;
-  margin: 1%;
-  filter: drop-shadow(3px 3px 1px #256d85) drop-shadow(3px 3px 2px #256d85)
-    drop-shadow(3px 3px 2px #256d85);
+.premiumContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+  width: 1400px;
+  background: rgba(139, 137, 70, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(154, 154, 154, 0.479);
 }
 
 .carouselNew {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
+.containerSearchBar {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.containerTitle {
+  display: flex;
+  justify-content: center;
+  color: aliceblue;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
+  font-size: 6rem;
+  filter: drop-shadow(3px 3px 1px #000000) drop-shadow(3px 3px 2px #000000)
+    drop-shadow(3px 3px 2px #000000);
+}
+
+.containerCatalog {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  background: rgba(198, 184, 184, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
+  opacity: 1;
+  transition: all 2s ease;
+}
+
+.containerCatalogHidden {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  background: rgba(198, 184, 184, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
+  opacity: 0;
+  transition: all 2s ease;
+}
+
+.catalogTilte {
+  background: rgba(198, 184, 184, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 5px 5px 0px 0px rgba(255, 255, 255, 0.694);
+}
+
+.catalogTilte h1 {
+  display: flex;
+  justify-content: center;
+  color: aliceblue;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
+  font-size: 6rem;
+  filter: drop-shadow(3px 3px 1px #000000) drop-shadow(3px 3px 2px #000000)
+    drop-shadow(3px 3px 2px #000000);
+}
+
+.titlesContainer {
+  display: flex;
+  flex-direction: column;
+  background: rgba(170, 170, 170, 0.25);
+  margin: 5%;
+  padding: 3%;
+  width: 1000px;
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
+  opacity: 1;
+  transition: 2s ease all;
+}
+
+.titlesContainerHidden {
+  display: flex;
+  flex-direction: column;
+  background: rgba(170, 170, 170, 0.25);
+  margin: 5%;
+  padding: 3%;
+  width: 1000px;
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
+  opacity: 0;
+  transition: all 2s ease;
+}
+
 .footer {
+  margin-top: 10%;
   width: 100%;
 }

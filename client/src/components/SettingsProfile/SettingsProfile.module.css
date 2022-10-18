@@ -1,0 +1,181 @@
+.all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../assets/fondoSeettings.jpg");
+  background-size: cover;
+}
+
+.containerSetting {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 60%;
+  height: 850px;
+  margin: 5%;
+  padding-top: 3%;
+  border: 1px black;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+}
+
+.containerSetting h1 {
+  color: aliceblue;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
+  font-size: 4rem;
+  letter-spacing: 4px;
+  filter: drop-shadow(3px 3px 1px #000000) drop-shadow(3px 3px 2px #000000)
+    drop-shadow(3px 3px 2px #000000);
+}
+
+.bloke {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+  margin-top: 4%;
+}
+
+.bloke h3 {
+  color: #fff;
+  font-family: "Lobster", cursive;
+  font-size: 2rem;
+  border-bottom: 2px solid white;
+  filter: drop-shadow(2px 2px 1px #000000) drop-shadow(2px 2px 1px #000000)
+    drop-shadow(2px 2px 1px #000000);
+}
+
+.campos {
+  position: absolute;
+  margin-left: 20%;
+}
+
+.btnImg {
+  position: absolute;
+  margin-top: 0.5%;
+  margin-left: 35%;
+}
+
+.imageUpload {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  margin-top: 2.5%;
+  margin-left: 37.5%;
+}
+
+.Jobs {
+  width: 100px;
+}
+
+.infoExtra button {
+  margin-top: 2.5%;
+  margin-left: 95%;
+}
+.premium {
+  padding: 1%;
+  margin-top: 2%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+}
+
+.premium h3 {
+  width: 800px;
+}
+
+.premium button {
+}
+/* 
+.panel {
+  box-shadow: none;
+}
+.panel-heading {
+  border-bottom: 0;
+}
+.panel-title {
+  font-size: 17px;
+}
+.panel-title > small {
+  font-size: 0.75em;
+  color: #999999;
+}
+.panel-body *:first-child {
+  margin-top: 0;
+}
+.panel-footer {
+  border-top: 0;
+}
+
+.panel-default > .panel-heading {
+  color: #333333;
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.07);
+}
+
+form label {
+  color: #999999;
+  font-weight: 400;
+}
+
+.form-horizontal .form-group {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+  }
+}
+
+.profile__contact-info-icon {
+  float: left;
+  font-size: 18px;
+  color: #999999;
+}
+.profile__contact-info-body {
+  overflow: hidden;
+  padding-left: 20px;
+  color: #999999;
+}
+.profile-avatar {
+  width: 200px;
+  position: relative;
+  margin: 0px auto;
+  margin-top: 196px;
+  border: 4px solid #f3f3f3;
+}
+
+.pad {
+  width: 10%;
+  padding-right: 4rem;
+}
+.UploadIMGDIV {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+.imgName {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.SuccessIMG {
+  color: green;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.jobsStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */

@@ -1,3 +1,7 @@
+.all {
+  background-color: #c6b70f;
+}
+
 .containerCards {
   display: flex;
   flex-direction: row;
@@ -17,7 +21,6 @@
   position: relative;
   width: 250px;
   height: 350px;
-  border-radius: 10px;
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6.4px);
@@ -29,7 +32,7 @@
   position: relative;
   width: 250px;
   height: 350px;
-  border-radius: 10px;
+
   box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.08),
     0 -1px 3px 0 rgba(0, 0, 0, 0.06);
   overflow: hidden;
@@ -43,7 +46,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 10%;
+
   animation-duration: 0.6s;
   animation-iteration-count: infinite;
   animation-name: loader-animate;
@@ -98,7 +101,6 @@
   height: 100%;
   overflow: hidden;
   backface-visibility: hidden;
-  border-radius: 10px;
 }
 
 .front {
@@ -107,7 +109,7 @@
   display: flex;
   backface-visibility: hidden;
   /* background-color: #256d85; */
-  border-radius: 10px;
+
   background: rgba(255, 255, 255, 0.35);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -121,7 +123,7 @@
   backface-visibility: hidden;
   flex-direction: column;
   transition: all 1s ease;
-  border-radius: 10px;
+
   font-size: 0.9rem;
   /* margin: 5%; */
 }
@@ -137,7 +139,7 @@
   overflow: hidden;
   transition: all 0.5s ease;
   background: #fff;
-  box-shadow: 5px 8px 8px #256d85;
+  box-shadow: 10px 10px 80px 10px rgba(255, 255, 255, 0.479);
 }
 
 .pic img {
@@ -162,8 +164,7 @@
   width: 100%;
   height: 0;
   background: #256d85;
-  transition: all 0.5s ease;
-  border-radius: 10px;
+  transition: all 1.5s ease;
 }
 .card:hover:before {
   height: 350px;
@@ -255,7 +256,7 @@
   bottom: 0;
   justify-content: center;
   font-size: 2rem;
-  color: #256d85;
+  color: #c6b70f;
   width: fit-content;
   text-shadow: #2d3436;
 }
@@ -290,7 +291,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
 }
 
 .btnLeft button {
@@ -303,13 +303,13 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   color: #ffffff;
-  background-color: #256d85;
+  background-color: #2381d3;
   text-align: center;
   transition: all 0.2s;
   border: none;
 }
 .btnLeft button:hover {
-  background-color: #256d85;
+  background-color: rgb(100, 167, 255);
 }
 @media all and (max-width: 30em) {
   .btnLeft button {
@@ -328,13 +328,13 @@
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   color: #ffffff;
-  background-color: #256d85;
+  background-color: #2381d3;
   text-align: center;
   transition: all 0.2s;
   border: none;
 }
 .btnRight button:hover {
-  background-color: #256d85;
+  background-color: rgb(100, 167, 255);
 }
 @media all and (max-width: 30em) {
   .btnRight button {

@@ -3,7 +3,7 @@ import "./Profile.css";
 import Perfil from "../../img/perfil.jpg";
 import Buttons from "./Buttons";
 import Status from "./Status";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AlertTitle, Dialog } from "@mui/material";
 import ContractForm from "../ContractForm/ContractForm";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -18,6 +18,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavorite } from "../../redux/actions/actions";
+import { Followers } from "../Followers/Followers";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -45,7 +46,7 @@ function Profile({
   const status = useSelector((state) => state.userDetail.isOnline);
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
-  const socket = useSelector(state => state.socket)
+  const socket = useSelector((state) => state.socket);
   const handleOpen = () => {
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
@@ -58,30 +59,56 @@ function Profile({
   const handleClosePopUp = () => {
     setOpenLogin(false);
   };
-  const userD = useSelector((state) => state.users.Favorites);
+  const userD = useSelector((state) => state.userDetail.Favorites);
   const dispatch = useDispatch();
-  const favWorker = useSelector((state) => state.users.Favorites);
+  const us = useSelector((state) => state.users);
+  console.log(us);
   const userID = useSelector((state) => state.users);
+  //console.log(userID);
   const idWorkerFav = useSelector((state) => state.userDetail);
+  console.log(idWorkerFav);
+  const usW = us.Favorites;
+  //console.log(us.Worker.ID);
   const [checked, setChecked] = React.useState(false);
+  const worksFavs = idWorkerFav.Favorites;
+  console.log(usW);
+  // console.log(id);
+  console.log(worksFavs);
 
-/*   const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID); */
+  // const follow = worksFavs.forEach((e) => {
+  //   if (e.Fav.WorkerID === usW) {
+  //     return true;
+  //   }
+  // });
+  const follow = usW?.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
+  console.log(follow);
+  useEffect(() => {
+    if (follow) {
+      setChecked(true);
+    }
+  });
+
+  // console.log(userD);
+  // const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID);
   // if (isFav) {
   //   setChecked(true);
   // }
 
   const handleFav = (e) => {
-    setChecked(e.target.checked);
-    //dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
+    setChecked(true);
+    dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
   };
   const handleChat = () => {
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
     }
-    console.log(login.user.sub)
-    console.log(params.id)
-    socket?.emit("messageCreation",{id_emisor: login.user.sub, id_receptor: params.id , texto:"hola"})
-
+    // console.log(login.user.sub);
+    // console.log(params.id);
+    socket?.emit("messageCreation", {
+      id_emisor: login.user.sub,
+      id_receptor: params.id,
+      texto: "hola",
+    });
   };
 
   return (
@@ -115,6 +142,27 @@ function Profile({
               ? description
               : "No se ha realizado una descripcion aun."}
           </p>
+          <div>
+            <h3>
+              Followers:
+              <Followers id={id} />
+            </h3>
+
+            {img !== userID.img ? (
+              <div>
+                <h2>Follow:</h2>
+                <Checkbox
+                  checked={checked}
+                  icon={<FavoriteBorder />}
+                  id={id}
+                  checkedIcon={<Favorite />}
+                  onClick={handleFav}
+                />
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
           {jobs && jobs.length ? (
             <label className="label-description" htmlFor="disponibility">
               Disponible
@@ -140,29 +188,14 @@ function Profile({
             )}
           </div>
         </div>
-        {/* favoritos (falta condicional para que no renderice si el user logeado es el mismo que esta viendo, osea para que no te lo puedas poner vos mismo :P*/}
-        {img !== userID.img ? (
-          <div>
-            <Checkbox
-              checked={checked}
-              icon={<FavoriteBorder />}
-              id={id}
-              checkedIcon={<Favorite />}
-              onClick={handleFav}
-            />
-          </div>
-        ) : (
-          "sos la misma persona"
-        )}
-
-        {/* favoritos */}
         <div className="contactar">
-          <Button 
-          className="buttonStyled" 
-          variant="contained" 
-          size="large" 
-          disabled={params.id === sub ? true : false}
-          onClick={handleChat}>
+          <Button
+            className="buttonStyled"
+            variant="contained"
+            size="large"
+            disabled={params.id === sub ? true : false}
+            onClick={handleChat}
+          >
             Mensaje
           </Button>
           {jobs && jobs.length && (

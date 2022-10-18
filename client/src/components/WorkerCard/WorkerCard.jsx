@@ -54,25 +54,13 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
     <div className={s.conteiner}>
       {/* <Link to={`/worker/${Worker.ID}`}></Link> */}
       <div className={s.divImg}>
-        <Stack direction="row" spacing={2}>
-          <StyledBadge
-            overlap="circular"
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            variant="dot"
-          >
-            <Avatar
-              alt="Remy Sharp"
-              src={User.img}
-              sx={{ width: 100, height: 100 }}
-            />
-          </StyledBadge>
-        </Stack>
+        <img src={User.img} alt="workerImg" />
       </div>
-
       <div className={s.divDescription}>
         <div className={s.divName}>
           <h2 className={s.h2}>{`${User.name} ${User.lastName}`}</h2>
         </div>
+
         <div className={s.divTop}>
           {Jobs &&
             Jobs.map((job) => (
@@ -80,23 +68,15 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
             ))}
         </div>
         <div className={s.information}>
-          <h3 className={s.h3}>Ubicación: {User.Country.name}</h3>
-          <h3 className={s.h3}>
+          <h3>Ubicación: {User.Country.name}</h3>
+          <h3>
             Estado: {User.isOnline === false ? "Desconectado" : "Conectado"}
           </h3>
-          <h3 className={s.h3}>
-            Trabajos realizados: {finishedContracts.length}
-          </h3>
+          <h3>Trabajos realizados: {finishedContracts.length}</h3>
         </div>
       </div>
       <div className={s.divRating}>
         <div className={s.profileRating}>
-          <Link className={s.perfilLink} to={`/profile/${Worker.User.ID}`}>
-            {" "}
-            <Button color="warning" variant="contained">
-              Perfil
-            </Button>{" "}
-          </Link>
           <Rating
             name="read-only"
             value={Worker.rating}
@@ -106,6 +86,10 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
               <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
             }
           />
+          <Link className={s.perfilLink} to={`/profile/${Worker.User.ID}`}>
+            {" "}
+            <Button variant="contained">Perfil</Button>{" "}
+          </Link>
         </div>
       </div>
     </div>
