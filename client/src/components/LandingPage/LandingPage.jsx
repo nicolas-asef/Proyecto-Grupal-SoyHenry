@@ -5,7 +5,7 @@ import {
   changeStatus,
 } from "../../redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Footer from "../Footer/Footer";
 import TestiMonials from "../Showroom/TestimonialsSlider.jsx";
@@ -19,7 +19,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 export default function Album() {
   const userRedux = useSelector((state) => state.users);
   const { isAuthenticated, user } = useAuth0();
-
+  const [hidden, setHidden] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWorkers());
@@ -31,6 +31,16 @@ export default function Album() {
     }
   }, [dispatch, userRedux.isOnline]);
 
+  const hidenTestimonials = () => {
+    if (window.scrollY >= 650) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  };
+
+  window.addEventListener("scroll", hidenTestimonials);
+
   return (
     <div className={s.container}>
       <div className={s.carouselContainer}>
@@ -40,7 +50,7 @@ export default function Album() {
         </div>
         <DemoCarousel className={s.carousel} />
       </div>
-      <div className={s.testimonials}>
+      <div className={hidden ? s.testimonials : s.testimonialsHidden}>
         <TestiMonials />
       </div>
       <div className={s.containerOptions}></div>

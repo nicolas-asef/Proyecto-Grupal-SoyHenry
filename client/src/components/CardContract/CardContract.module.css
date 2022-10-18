@@ -1,17 +1,104 @@
-.card{
-    flex:1;
-    /* border: 3px solid #24fafa; */
-    box-shadow: 5px 5px 5px 5px rgba(2, 0,2, 0.1);
-    border-radius: 10px;
-    height: 15vh;
-    width: 32vw;
-    overflow-y: hidden;
-    background-color: rgb(255, 255, 255);
-    transition: all 2s;
-    max-height: 70vh;
+.card {
+  flex-direction: column;
+  margin-left: 30%;
+  padding: 4%;
+  border-radius: 10px;
+  min-height: 450px;
+  min-width: 400px;
+  height: fit-content;
+  width: fit-content;
+  transition: all 2s;
+  background: rgba(139, 137, 70, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(154, 154, 154, 0.479);
 }
 
-.card:hover{
-    flex:500px;
+.card h3 {
+  display: flex;
+  letter-spacing: 2px;
+  justify-content: center;
+  color: aliceblue;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
+  font-size: 2.5rem;
+  filter: drop-shadow(3px 3px 1px #000000) drop-shadow(3px 3px 2px #000000)
+    drop-shadow(3px 3px 2px #000000);
+}
 
+.containerInfo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.containerInfo h4 {
+  color: #fff;
+  font-family: "Lobster", cursive;
+  font-size: 1.5rem;
+  border-bottom: 2px solid white;
+  filter: drop-shadow(2px 2px 1px #000000) drop-shadow(2px 2px 1px #000000)
+    drop-shadow(2px 2px 1px #000000);
+}
+
+.containerInfo span {
+  margin-left: 5%;
+  margin-top: 1%;
+  color: rgb(0, 0, 0);
+  font-family: "Lobster", cursive;
+  font-size: 1rem;
+}
+
+.containerInfoDesc {
+  margin-top: 4%;
+  display: flex;
+  flex-direction: column;
+}
+
+.containerInfoDesc h4 {
+  color: #fff;
+  font-family: "Lobster", cursive;
+  font-size: 1.5rem;
+  width: fit-content;
+  border-bottom: 2px solid white;
+  filter: drop-shadow(2px 2px 1px #000000) drop-shadow(2px 2px 1px #000000)
+    drop-shadow(2px 2px 1px #000000);
+}
+
+.containerInfoDesc span {
+  margin-left: 5%;
+  margin-top: 1%;
+  color: rgb(0, 0, 0);
+  font-family: "Lobster", cursive;
+  font-size: 1rem;
+}
+
+.btnsConfirmacion {
+  display: flex;
+  justify-content: center;
+  margin: 10%;
+}
+
+.btnsConfirmacion button {
+  margin-left: 5%;
+  margin-right: 5%;
+  box-shadow: 5px 5px 5px;
+  transition: all 2s ease;
+}
+
+.btnsConfirmacion button:hover {
+  transform: translateY(2px);
+  box-shadow: 20px 20px 30px 0px rgba(0, 0, 0, 0.3);
+}
+
+.opinion {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.opinion button {
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
+  font-size: 1.5rem;
 }

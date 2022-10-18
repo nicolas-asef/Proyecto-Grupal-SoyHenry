@@ -36,12 +36,15 @@ const CardSlider = () => {
 
   return (
     <div uk-slider="center: true">
-      <div className="uk-position-relative uk-visible-toggle uk-dark" tabindex="-1">
+      <div
+        className="uk-position-relative uk-visible-toggle uk-dark"
+        tabindex="-1"
+      >
         <ul className="uk-slider-items uk-child-width-1-2@s uk-child-width-1-4@l uk-child-width-1-4@m uk-grid">
           <div className={style.containerCards}>
-            {workersToShow.map((w) => {
+            {workersToShow.map((w, index) => {
               return (
-                <li>
+                <li key={index}>
                   <div className="uk-panel">
                     <div className={style.boxContainer}>
                       <div className={!w ? style.cardLoader : style.card}>

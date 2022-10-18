@@ -1,5 +1,10 @@
 import * as React from "react";
-import "./SettingsProfile.css";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import {
   getJobs,
   getUserId,
@@ -8,18 +13,14 @@ import {
   get_countries,
   uploadImage,
 } from "../../redux/actions/actions";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import MenuItem from "@mui/material/MenuItem";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import s from "./SettingsProfile.module.css";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -88,7 +89,6 @@ export default function SettingProfile() {
   const handleImgChange = (e) => {
     if (e.target.files !== undefined) {
       setImage(e.target.files[0]);
-
     } else {
       setImage("");
     }
@@ -149,61 +149,68 @@ export default function SettingProfile() {
   };
 
   return (
-    <div className="container-setting">
-      <div>
+    <div className={s.all}>
+      <div className={s.containerSetting}>
         <form onSubmit={onSubmit}>
           <h1>Edit profile</h1>
-          <div className="bloke">
+          <div className={s.bloke}>
             <h3 className="pad">Location</h3>
-            <TextField
-              id="outlined-required"
-              name="location"
-              select
-              value={input.location}
-              /* defaultValue={user.location} */
-              onChange={handleChange}
-            >
-              {countries &&
-                countries.map((country) => (
-                  <MenuItem key={country.id} value={country.name}>
-                    {country.name}
-                  </MenuItem>
-                ))}
-            </TextField>
+            <div className={s.campos}>
+              <TextField
+                id="outlined-required"
+                name="location"
+                select
+                value={input.location}
+                /* defaultValue={user.location} */
+                onChange={handleChange}
+              >
+                {countries &&
+                  countries.map((country) => (
+                    <MenuItem key={country.id} value={country.name}>
+                      {country.name}
+                    </MenuItem>
+                  ))}
+              </TextField>
+            </div>
           </div>
 
-          <div className="bloke">
+          <div className={s.bloke}>
             <h3 className="pad">Phone</h3>
-            <TextField
-              id="outlined-required"
-              name="phone"
-              value={input.phone}
-              /* defaultValue={user.phone}  */
-              onChange={handleChange}
-            />
+            <div className={s.campos}>
+              <TextField
+                id="outlined-required"
+                name="phone"
+                value={input.phone}
+                /* defaultValue={user.phone}  */
+                onChange={handleChange}
+              />
+            </div>
           </div>
-
-          <div className="bloke">
+          <div className={s.bloke}>
             <h3 className="pad">Image</h3>
-            <TextField
-              id="outlined-required"
-              name="img"
-              value={input.img}
-              /* defaultValue={user.img}  */
-              onChange={handleChange}
-            />
-            <div className="UploadIMGDIV">
-              <Button variant="contained" component="label">
-                Selecionar archivo
-                <input
-                  name="img"
-                  hidden
-                  accept="image/*"
-                  multiple
-                  type="file"
-                  onChange={handleImgChange}
-                />
-              </Button>
+            <div className={s.campos}>
+              <TextField
+                id="outlined-required"
+                name="img"
+                value={input.img}
+                /* defaultValue={user.img}  */
+                onChange={handleChange}
+              />
+            </div>
+            <div className={s.UploadIMGDIV}>
+              <div className={s.btnImg}>
+                <Button variant="contained" component="label">
+                  Selecionar archivo
+                  <input
+                    name="img"
+                    hidden
+                    accept="image/*"
+                    multiple
+                    type="file"
+                    onChange={handleImgChange}
+                  />
+                </Button>
+              </div>
               <span className="imgName">{`${
                 image === "" || image === undefined
                   ? ""
@@ -214,13 +221,15 @@ export default function SettingProfile() {
               {image === "" || image === undefined ? (
                 ""
               ) : (
-                <Button
-                  variant="contained"
-                  color="success"
-                  onClick={uploadImageHandler}
-                >
-                  Subir Imagen
-                </Button>
+                <div className={s.imageUpload}>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={uploadImageHandler}
+                  >
+                    Subir Imagen
+                  </Button>
+                </div>
               )}
               {uploaded === true ? (
                 <span className="SuccessIMG">
@@ -237,54 +246,60 @@ export default function SettingProfile() {
           <div>
             {user.Worker && (
               <>
-                <div className="bloke">
+                <div className={s.bloke}>
                   <h3 className="pad">Description</h3>
-                  <TextField
-                    id="outlined-required"
-                    name="description"
-                    type="text"
-                    value={inputWork.description}
-                    placeholder={user.Worker.description}
-                    /* defaultValue={user.password} */
-                    onChange={handleChangeWork}
-                  />
+                  <div className={s.campos}>
+                    <TextField
+                      id="outlined-required"
+                      name="description"
+                      type="text"
+                      value={inputWork.description}
+                      placeholder={user.Worker.description}
+                      /* defaultValue={user.password} */
+                      onChange={handleChangeWork}
+                    />
+                  </div>
                 </div>
 
-                <div className="bloke">
+                <div className={s.bloke}>
                   <h3 className="pad">Certification</h3>
-                  <TextField
-                    id="outlined-required"
-                    name="certification"
-                    type="text"
-                    value={inputWork.certification}
-                    placeholder={user.Worker.certification}
-                    /* defaultValue={user.password} */
-                    onChange={handleChangeWork}
-                  />
+                  <div className={s.campos}>
+                    <TextField
+                      id="outlined-required"
+                      name="certification"
+                      type="text"
+                      value={inputWork.certification}
+                      placeholder={user.Worker.certification}
+                      /* defaultValue={user.password} */
+                      onChange={handleChangeWork}
+                    />
+                  </div>
                 </div>
 
-                <div className="bloke">
+                <div className={s.bloke}>
                   <h3 className="pad">Jobs</h3>
-                  <TextField
-                    id="outlined-required"
-                    label="Jobs"
-                    name="jobs"
-                    type="text"
-                    select
-                    value={inputJobs}
-                    placeholder="Select your jobs"
-                    defaultValue="Select your jobs"
-                    onChange={handleJob}
-                  >
-                    {jobs &&
-                      jobs.map((job) => (
-                        <MenuItem key={job.id} id={job.id} value={job.name}>
-                          {job.name}
-                        </MenuItem>
-                      ))}
-                  </TextField>
+                  <div className={s.campos}>
+                    <TextField
+                      id="outlined-required"
+                      label="Jobs"
+                      name="jobs"
+                      type="text"
+                      select
+                      value={inputJobs}
+                      placeholder="Select your jobs"
+                      defaultValue="Select your jobs"
+                      onChange={handleJob}
+                    >
+                      {jobs &&
+                        jobs.map((job) => (
+                          <MenuItem key={job.id} id={job.id} value={job.name}>
+                            {job.name}
+                          </MenuItem>
+                        ))}
+                    </TextField>
+                  </div>
                 </div>
-                <div className="inputContainer jobsStyle">
+                <div className={s.Jobs}>
                   <ButtonGroup fullWidth variant="outlined">
                     {inputJobs.length
                       ? inputJobs.map((job, index) => (
@@ -303,31 +318,34 @@ export default function SettingProfile() {
               </>
             )}
           </div>
+          <div className={s.premium}>
+            <h3>You want to be a premium worker? </h3>
+            <h4>PUNCHASE HERE!</h4>
+            <Button type="submit" variant="contained" onClick={handlePremium}>
+              PREMIUM
+            </Button>
 
-          <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-            Send
-          </Button>
+            <Snackbar
+              open={openLogin}
+              autoHideDuration={3000}
+              onClose={handleClosePopUp}
+            >
+              <Alert
+                onClose={handleClosePopUp}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                Your information was successfully modified
+              </Alert>
+            </Snackbar>
+          </div>
+          <div className={s.infoExtra}>
+            <Button type="submit" variant="contained" endIcon={<SendIcon />}>
+              Send
+            </Button>
+          </div>
         </form>
       </div>
-      <div>
-        <h3>You want to be a premium worker? PUNCHASE HERE</h3>
-        <Button type="submit" variant="contained" onClick={handlePremium}>
-          PREMIUM
-        </Button>
-      </div>
-      <Snackbar
-        open={openLogin}
-        autoHideDuration={3000}
-        onClose={handleClosePopUp}
-      >
-        <Alert
-          onClose={handleClosePopUp}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Your information was successfully modified
-        </Alert>
-      </Snackbar>
     </div>
   );
 }
