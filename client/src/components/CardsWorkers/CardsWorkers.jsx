@@ -20,7 +20,7 @@ export default function CardsWorkers(){
                             Plomero
                         </div>
                         <div className={s.country}>
-                            Cordoba, Argentina
+                            Buenos Aires, Argentina
                         </div>
                     </div>
                     <div className={s.location}>
