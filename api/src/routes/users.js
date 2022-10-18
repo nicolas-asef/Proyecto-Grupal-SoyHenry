@@ -98,10 +98,12 @@ router.put("/:id", async (req, res, next) => {
 
 
         // si le paso un "id" al remove lo remueve bien de la tabla Favorites 
-  
+    console.log(info)
     const updatedUser = await User.findOne({ where: { ID: id } });
-            info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
-        info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
+            
+    info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
+        
+    info.favorites ? await updatedUser.addFavorites(info.favorites) : "lol"
 
     info.name
       ? await updatedUser.update({

@@ -282,8 +282,18 @@ const reducer = (state = initialState, action) => {
       }
     }
     case DELETED_FAVORITE: {
+      const workersFav = state.users.Favorites
+      console.log(action.payload)
+      console.log(workersFav)
+      const us = state.users
+      console.log(us)
+      const stayWorkersFav = workersFav.filter(e => e.ID !== action.payload)   
+      console.log(stayWorkersFav)  
+      us.Favorites = stayWorkersFav
       return {
-        ...state
+        ...state,
+        users: us,
+        user: us
       }
     }
     default:

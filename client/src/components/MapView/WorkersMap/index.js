@@ -1,0 +1,1 @@
+export { default as WorkersMap } from './WorkersMap';
