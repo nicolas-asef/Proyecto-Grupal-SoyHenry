@@ -48,13 +48,16 @@ export default function Favourite() {
   // useEffect(() => {
   //   console.log("a");
   // }, [workersFavs]);
-  const uId = useSelector((state) => state.userDetail.id);
-  console.log(uId);
+  // const uId = useSelector((state) => state.userDetail.id);
+  // console.log(uId);
   const onClick = (e) => {
-    const deleteFav = workersFavs.filter((w) => w.ID !== e.target.id);
-    dispatch(deletedFavorite(uId, deleteFav[0][0].ID));
-    navigate("/home");
-    handleClose();
+    console.log(workersFavs);
+    console.log(e.target.id);
+    const deleteFav = workersFavs.filter((w) => w[0].ID === e.target.id);
+    console.log(deleteFav);
+    dispatch(deletedFavorite(id, deleteFav[0][0].ID));
+    // navigate("/home");
+    // handleClose();
   };
   const [open, setOpen] = useState(true);
   const handleClose = () => setOpen(false);
@@ -65,37 +68,38 @@ export default function Favourite() {
       {open ? (
         <div className={s.conteiner}>
           <h3 className={s.titulo}>My Favourites Workers</h3>
-          {allWorker.length &&
-            workersFavs.map((worker, index) => (
-              <>
-                {console.log(worker)}
-                <div className={s.hijo}>
-                  <WorkerCard
-                    Worker={worker[0]}
-                    User={worker[0].User}
-                    Jobs={worker[0].Jobs}
-                    Contracts={worker[0].Contracts}
-                  />
-                  {/* <IconButton
+          {allWorker.length && workersFavs
+            ? workersFavs.map((worker, index) => (
+                <>
+                  {console.log(worker)}
+                  <div className={s.hijo}>
+                    <WorkerCard
+                      Worker={worker[0]}
+                      User={worker[0].User}
+                      Jobs={worker[0].Jobs}
+                      Contracts={worker[0].Contracts}
+                    />
+                    {/* <IconButton
                   aria-label="delete"
                   onClick={onClick}
                   id={worker[0].ID}
                 >
                    este es el id que no estoy pudiendo captar en el onClick */}
-                  {/* <DeleteIcon name={index} />
+                    {/* <DeleteIcon name={index} />
                 </IconButton> */}
-                  <div className={s.buton}>
-                    <button
-                      onClick={onClick}
-                      id={worker[0].ID}
-                      className={s.boton}
-                    >
-                      X
-                    </button>
+                    <div className={s.buton}>
+                      <button
+                        onClick={onClick}
+                        id={worker[0].ID}
+                        className={s.boton}
+                      >
+                        X
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </>
-            ))}
+                </>
+              ))
+            : ""}
         </div>
       ) : (
         ""
