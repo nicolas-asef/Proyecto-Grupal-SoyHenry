@@ -11,7 +11,6 @@ function ChatMessage(props) {
             : "chatMessage__message"
         }
       >
-        {props.message}
         <span className="chatMessage__name">{props.name}</span>
         {props.message}
         <span className="chatMessage__timestamp">{props.timestamp}</span>

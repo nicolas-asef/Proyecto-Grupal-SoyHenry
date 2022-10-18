@@ -1,6 +1,6 @@
 import React from "react";
 import Chat from "./Chat";
-import Sidebar from "./SideBar/SideBar";
+import Sidebar from "./Sidebar/SideBar";
 import "./SuperChat.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

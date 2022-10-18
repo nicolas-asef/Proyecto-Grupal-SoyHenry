@@ -63,13 +63,13 @@ export default function Chat(props) {
       <div className="chat__body">
         <ChatMessage
           name={"HOST"}
-          message="This is a message"
+          message="This is a message HOST  D:"
           timestamp={"8:26"}
           isSender={true}
         />
         <ChatMessage
           name={"GUEST"}
-          message="This is a message"
+          message="This is a message GUEST :D"
           timestamp={"8:26"}
           isSender={false}
         />
