@@ -26,7 +26,7 @@ export default function Favourite() {
   } = useAuth0();
 
   const id = sub;
-  const favourites = useSelector((state) => state.userDetail.Favorites);
+  const favourites = useSelector((state) => state.users.Favorites);
   console.log(favourites);
   const favId = [];
   favourites && favourites.map((e) => favId.push(e.ID));
@@ -41,16 +41,23 @@ export default function Favourite() {
   console.log(workersFavs);
   useEffect(() => {
     dispatch(getWorkers());
-    dispatch(getUserDetail(id));
+    dispatch(getUserId(id));
+    //dispatch(getUserDetail(id));
   }, [dispatch]);
 
-  const uId = useSelector((state) => state.userDetail.id);
-  console.log(uId);
+  // useEffect(() => {
+  //   console.log("a");
+  // }, [workersFavs]);
+  // const uId = useSelector((state) => state.userDetail.id);
+  // console.log(uId);
   const onClick = (e) => {
-    const deleteFav = workersFavs.filter((w) => w.ID !== e.target.id);
-    dispatch(deletedFavorite(uId, deleteFav[0][0].ID));
-    navigate("/home");
-    handleClose();
+    console.log(workersFavs);
+    console.log(e.target.id);
+    const deleteFav = workersFavs.filter((w) => w[0].ID === e.target.id);
+    console.log(deleteFav);
+    dispatch(deletedFavorite(id, deleteFav[0][0].ID));
+    // navigate("/home");
+    // handleClose();
   };
   const [open, setOpen] = useState(true);
   const handleClose = () => setOpen(false);
@@ -60,36 +67,39 @@ export default function Favourite() {
     <div className={s.super}>
       {open ? (
         <div className={s.conteiner}>
-          <h3>My Favourites Workers</h3>
-          {allWorker.length &&
-            workersFavs.map((worker, index) => (
-              <>
-                {console.log(worker)}
-                <div className={s.hijo}>
-                  <WorkerCard
-                    Worker={worker[0]}
-                    User={worker[0].User}
-                    Jobs={worker[0].Jobs}
-                    Contracts={worker[0].Contracts}
-                  />
-                  {/* <IconButton
+          <h3 className={s.titulo}>My Favourites Workers</h3>
+          {allWorker.length && workersFavs
+            ? workersFavs.map((worker, index) => (
+                <>
+                  {console.log(worker)}
+                  <div className={s.hijo}>
+                    <WorkerCard
+                      Worker={worker[0]}
+                      User={worker[0].User}
+                      Jobs={worker[0].Jobs}
+                      Contracts={worker[0].Contracts}
+                    />
+                    {/* <IconButton
                   aria-label="delete"
                   onClick={onClick}
                   id={worker[0].ID}
                 >
                    este es el id que no estoy pudiendo captar en el onClick */}
-                  {/* <DeleteIcon name={index} />
+                    {/* <DeleteIcon name={index} />
                 </IconButton> */}
-                  <button
-                    onClick={onClick}
-                    id={worker[0].ID}
-                    className={s.boton}
-                  >
-                    X
-                  </button>
-                </div>
-              </>
-            ))}
+                    <div className={s.buton}>
+                      <button
+                        onClick={onClick}
+                        id={worker[0].ID}
+                        className={s.boton}
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                </>
+              ))
+            : ""}
         </div>
       ) : (
         ""
