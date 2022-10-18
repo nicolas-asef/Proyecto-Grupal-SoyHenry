@@ -35,7 +35,6 @@ import {
   DELETE_USER,
   DELETE_JOB,
   DELETE_COUNTRY,
-  GET_WORKERS_PREMIUM,
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
