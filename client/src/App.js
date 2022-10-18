@@ -7,6 +7,7 @@ import SettingsProfile from './components/SettingsProfile/SettingsProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import OnBoarding from './components/OnBoarding/OnBoarding';
 import Payment from './components/Payment/Payment';
+import Sidebar from './components/Chat/Sidebar/SideBar';
 import Chat from './components/Chat/Chat';
 import DashHome from './components/Dashboard/Pages/DashHome/DashHome';
 import DashAnalytics from './components/Dashboard/Pages/DashAnalytics/DashAnalytics';
@@ -19,6 +20,7 @@ import { NestedModal } from './components/Payment/NestedModal';
 import DashCountry from './components/Dashboard/Pages/DashCountry/DashCountry';
 import DashJobs from './components/Dashboard/Pages/DashJobs/DashJobs';
 import Favorites from './components/Favorites/Favorites'
+import SuperChat from './components/Chat/SuperChat';
 
 function App() {
   return (
@@ -48,7 +50,7 @@ function App() {
         <Route path='/dashboard/country' element= {<DashCountry />} />
         <Route path='/dashboard/jobs'element= {<DashJobs />} />
         <Route path='/fav' element= { <Favorites />} />
-        <Route path='/chat' element= { <Chat />} />
+        <Route path='/chat' element= { <SuperChat />} />
       </Routes>
     </div>
   );
