@@ -11,6 +11,8 @@ import CardSlider from "../Showroom/CardSlider.jsx";
 import img1 from "../../assets/fondoTrasnparente.png";
 
 import s from "./Home.module.css";
+import CardsWorkersPremium from "../CardsWorkers/CardsWorkersPremium";
+import CardsWorkers from "../CardsWorkers/CardsWorkers";
 
 const Home = () => {
   let dispatch = useDispatch();
@@ -35,9 +37,15 @@ const Home = () => {
           <SearchBar />
         </div>
       </div>
-      <div className={s.containerCatalog}>
-        <Catalog />
+      <div>
+        <CardsWorkersPremium />
       </div>
+      <div>
+        <CardsWorkers />
+      </div>
+      {/* <div className={s.containerCatalog}>
+        <Catalog />
+      </div> */}
       <div className={s.footer}>
         <FooterS />
       </div>
