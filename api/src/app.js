@@ -90,14 +90,12 @@ io.on("connection", socket => {
 
     socket.on('messageCreation', async ({id_emisor, id_receptor, texto}) => {
 
-      let receptor = users[id_receptor]
+      let receptor = getUser(id_receptor)
         
         
       //Enviar evento con el mensaje a el socket apropiado al receptor
       if (receptor){
-
-       io.to(receptor.socketId).emit("createMessage", {EmitterID: id_emisor,text:texto});
-
+        receptor.forEach(e => io.to(e).emit("createMessage", {EmitterID: id_emisor,text:texto}))
       }
       //Crear mensaje
       const message = await Message.create({
