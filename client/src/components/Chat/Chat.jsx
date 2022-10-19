@@ -1,5 +1,5 @@
 import { Avatar, IconButton } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import "./Chat.css";
 import ChatMessage from "./ChatMessage";
@@ -7,15 +7,42 @@ import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MoreVert from "@mui/icons-material/MoreVert";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { useAuth0 } from '@auth0/auth0-react'
-import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import ScrollToBottom from "react-scroll-to-bottom";
 
 export default function Chat({guest, host, messages}) {
   const [input, setInput] = useState("");
-  const {user, isLoading} = useAuth0(); 
+  const { user } = useAuth0(); 
+  const socket = useSelector((state) => state.socket);
+  const [mensajes, setMensajes] = useState(messages)
+
+  useEffect(()=>{
+    setMensajes(messages)
+  }
+  ,[messages])
+
+  useEffect(()=>{
+    socket?.on("createMessage",({EmitterID,text})=>{
+      //aca renderizo el mensaje del texto y listo
+      const auxiliar = mensajes
+      auxiliar.push({text,EmitterID})
+      setMensajes(auxiliar)
+      console.log("mensajes-------->",auxiliar)
+    })
+  },[socket])
 
   function sendMessage(e) {
     e.preventDefault();
-    alert(input);
+    socket?.emit("messageCreation", {
+      id_emisor: user.sub,
+      id_receptor: host.ID === user.sub ? guest.ID : host.ID,
+      texto: input,
+    });
+    const auxiliar = mensajes
+    auxiliar.push({text:input,EmitterID:user.sub})
+    setMensajes(auxiliar)
+    console.log(user.sub)
+    console.log(host.ID)
     setInput("");
   }
 
@@ -46,16 +73,18 @@ export default function Chat({guest, host, messages}) {
         </div>
       </div>
       <div className="chat__body">
-        {messages?.map((message)=> (
-          <div key={message.id}>
+      <ScrollToBottom>
+        {mensajes?.map((message,index)=> (
+          <div key={index}>
         <ChatMessage
-          name={host === undefined ? 'Loading' : host.ID === user.sub ? `${host.name} ${host.lastName}` : `${guest.name} ${guest.lastName}`}
+          name={host === undefined ? 'Loading' : message.EmitterID === host.ID ? `${host.name} ${host.lastName}` : `${guest.name} ${guest.lastName}`}
           message={message.text}
           timestamp={new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()}
-          isSender={ host === undefined ? 'Loading' : host.ID === user.sub ? true : false}
+          isSender={ host === undefined ? 'Loading' : message.EmitterID === user.sub ? true : false}
         />
           </div>
         ))}
+        </ScrollToBottom>
 {/*         <ChatMessage
           name={"HOST"}
           message="This is a message"
