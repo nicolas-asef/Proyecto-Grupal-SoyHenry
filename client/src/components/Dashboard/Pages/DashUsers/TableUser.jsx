@@ -29,17 +29,18 @@ export default function TableUser() {
 
     return (
       <div>
-        <h1 className={s.title}>{}</h1>
+        <h1 className={s.title}>Users</h1>
         <TableContainer component={Paper} className={s.table}>
           <Table sx={{ Width: 650 }} size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell className={s.tableTop}>id</TableCell>
-                <TableCell align="left" className={s.tableTop}>Nombre</TableCell>
-                <TableCell align="left" className={s.tableTop}>DNI</TableCell>
-                <TableCell align="left" className={s.tableTop}>E-mail</TableCell>
-                <TableCell align="left" className={s.tableTop}>Telefono</TableCell>
-                <TableCell align="left" className={`${s.tableTop} ${s.flex}`}>Accion</TableCell>
+                <TableCell align="center" className={s.tableTop}>Imgage</TableCell>
+                <TableCell align="center" className={s.tableTop}>id</TableCell>
+                <TableCell align="center" className={s.tableTop}>Nombre</TableCell>
+                <TableCell align="center" className={s.tableTop}>DNI</TableCell>
+                <TableCell align="center" className={s.tableTop}>E-mail</TableCell>
+                <TableCell align="center" className={s.tableTop}>Telefono</TableCell>
+                <TableCell align="center" className={`${s.tableTop} ${s.flex}`}>Accion</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -48,14 +49,15 @@ export default function TableUser() {
                 key={el.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row" className={s.tableBot}>
+                  <TableCell align="center" className={`${s.tableBot}`}><img className={s.img} src={el.img}/></TableCell>
+                  <TableCell component="th" align="center" scope="row" className={s.tableBot}>
                     {el.id}
                   </TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.name} {el.lastName}</TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.dni}</TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.email}</TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.phone}</TableCell>
-                  <TableCell align="left" className={`${s.tableBot} ${s.flex}`}>
+                  <TableCell align="center" className={s.tableBot}>{el.name} {el.lastName}</TableCell>
+                  <TableCell align="center" className={s.tableBot}>{el.dni}</TableCell>
+                  <TableCell align="center" className={s.tableBot}>{el.email}</TableCell>
+                  <TableCell align="center" className={s.tableBot}>{el.phone}</TableCell>
+                  <TableCell align="center" className={`${s.tableBot} ${s.flex}`}>
                     <DeleteUserWorker name={`${el.name} ${el.lastName}`} id={el.id} condition={el.isDeleted} callbk={reload}/>
                   </TableCell>
                 </TableRow>

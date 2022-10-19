@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import {
-  Home,
   LandingPage,
   NavBar,
   Footer,
@@ -31,6 +30,7 @@ import CarruselWorkersPremium from "./components/CarruselWorkersPremium/Carrusel
 import Mapview from "./components/MapView/MapView";
 import { Followers } from "./components/Followers/Followers";
 import ProtectedAdmin from "./components/ProtectedAdmin/ProtectedAdmin";
+import HomePrueba from "./components/HomePrueba/HomePrueba";
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<HomePrueba />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile/user/:id" element={<Worker type="user" />} />
         <Route path="/profile/:id" element={<Worker type="worker" />} />

@@ -1,4 +1,4 @@
-import s from "./SlideShow.module.css"
+import s from "./MiniPerfil.module.css"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useEffect, useRef } from "react";
@@ -47,7 +47,7 @@ export default function SlideShow(){
     useEffect(() => {
         intervalSlaideShow.current = setInterval(() => {
             next()
-        },7000)
+        },15000)
     }, [])
 
     return(
@@ -55,36 +55,20 @@ export default function SlideShow(){
             <div className={s.containerSlide} ref={slideshow}>
                 <div className={s.slide}>
                     <div className={s.img1}>
-                    </div>
-                    <div className={s.textSlide}>
-                        Take control of your work easily
+                        <img src="https://st3.depositphotos.com/9880800/i/600/depositphotos_170349410-stock-photo-construction-worker-with-building-plans.jpg" className={s.img1}/>
                     </div>
                 </div>
                 <div className={s.slide}>
-
+                        <img src="https://fac.img.pmdstatic.net/scale/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Ffac.2F2021.2F10.2F15.2F99a5f913-6d5f-4568-9800-37d77fa227a4.2Ejpeg/autox600/quality/65/l-outil-genial-pour-faire-les-bons-choix-de-plantes-en-fonction-de-son-jardin.jpg" className={s.img1}/>
                     <div className={s.img2}>
-                    </div>
-                    <div className={s.textSlide}>
-                        Appears first in searches
                     </div>
                 </div>
                 <div className={s.slide}>
                     <div className={s.img3}>
 
                     </div>
-                    <div className={s.textSlide}>
-                        Buy now and get a discount of 15%
-                    </div>
                 </div>
                 
-            </div>
-            <div className={s.controlers}>
-                <button className={`${s.boton} ${s.left}`} onClick={previous}>
-                    <ArrowBackIosIcon />
-                </button>
-                <button className={`${s.boton} ${s.right}`} onClick={next}>
-                    <ArrowForwardIosIcon />
-                </button>
             </div>
         </div>
     )

@@ -16,7 +16,7 @@ export default function DashJobs(){
         setActualizar(actualizar === true ? false : true)
     }
 
-    const render = (e) => {
+    const render = () => {
         setActualizar(actualizar === true ? false : true)
     }
 

@@ -32,18 +32,19 @@ export default function TableWorker() {
 
     return (
       <div>
-        <h1 className={s.title}>{}</h1>
+        <h1 className={s.title}>Workers</h1>
         <TableContainer component={Paper} className={s.table}>
           <Table sx={{ Width: 650 }} size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell className={s.tableTop}>id</TableCell>
-                <TableCell align="left" className={s.tableTop}>Nombre</TableCell>
-                <TableCell align="left" className={s.tableTop}>DNI</TableCell>
-                <TableCell align="left" className={s.tableTop}>E-mail</TableCell>
-                <TableCell align="left" className={s.tableTop}>Telefono</TableCell>
-                <TableCell align="left" className={s.tableTop}>Profesion</TableCell>
-                <TableCell align="left" className={`${s.tableTop} ${s.flex}`}>Accion</TableCell>
+                <TableCell align="center" className={s.tableTop}>Image</TableCell>
+                <TableCell align="center" className={s.tableTop}>id</TableCell>
+                <TableCell align="center" className={s.tableTop}>Nombre</TableCell>
+                <TableCell align="center" className={s.tableTop}>DNI</TableCell>
+                <TableCell align="center" className={s.tableTop}>E-mail</TableCell>
+                <TableCell align="center" className={s.tableTop}>Telefono</TableCell>
+                <TableCell align="center" className={s.tableTop}>Profesion</TableCell>
+                <TableCell align="center" className={`${s.tableTop} ${s.flex}`}>Accion</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -51,17 +52,16 @@ export default function TableWorker() {
                 <TableRow
                 key={el.ID}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row" className={s.tableBot}>
-                    {el.ID}
-                  </TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.User.name} {el.User.lastName}</TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.User.dni}</TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.User.email}</TableCell>
-                  <TableCell align="left" className={s.tableBot}>{el.User.phone}</TableCell>
+                > 
+                  <TableCell align="center" className={`${s.tableBot}`}><img className={s.img} src={el.User.img}/></TableCell>
+                  <TableCell align="center" component="th" scope="row" className={s.tableBot}>{el.ID}</TableCell>
+                  <TableCell align="center" className={s.tableBot}>{el.User.name} {el.User.lastName}</TableCell>
+                  <TableCell align="center" className={s.tableBot}>{el.User.dni}</TableCell>
+                  <TableCell align="center" className={s.tableBot}>{el.User.email}</TableCell>
+                  <TableCell align="center" className={s.tableBot}>{el.User.phone}</TableCell>
                   {el.Jobs && el.Jobs.map(el => {
                     return (
-                      <TableCell align="left" className={s.tableBot}>{el.name}</TableCell>
+                      <TableCell align="center" className={s.tableBot}>{el.name}</TableCell>
                     )
                   })}
                   <TableCell align="left" className={`${s.tableBot} ${s.flex}`}>

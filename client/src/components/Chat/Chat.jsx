@@ -48,7 +48,7 @@ export default function Chat({ guest, host, messages }) {
     aux.push({text:input,EmitterID:user.sub})
     setInput("")
     setMensajes(aux)
-   
+    socket?.emit("enviarNotificacion",{receptor_id:host.ID === user.sub ? guest.ID : host.ID,emisor_id:user.sub,tipo:"mensaje"})
   }
 
   const handleOnChange = (e) => {
