@@ -45,48 +45,59 @@ const io = socketio(server, {
     }
 });
 
-let users = []
+let users = {}
 
 const addUser = (userId, socketId) => {
-  if(!users.some(u => u.userId === userId))
-    users.push({userId,socketId})
-  else{
-    
-  }
+  users[userId] ? users[userId] = [...users[userId],socketId] : users[userId] = [socketId]
   
 }
 
 const removeUser = (socketId) => {
-  users = users.filter(u => u.socketId !== socketId)
+  const asArray = Object.entries(users);
+  let filtered = asArray.filter(([key, value]) => (value.includes(socketId)));
+  if(filtered.length> 0 && filtered[0].length > 0)
+    users[filtered[0][0]] = users[filtered[0][0]].filter(e => e!==socketId)
+
+  // users = users[filtered[0]].filter(e => e!= socketId)
+  //users = users.filter(u => u.socketId !== socketId)
 }
 
 const getUser = (receiverId) => {
-  return users.find(user => user.userId === receiverId)
+  return users[receiverId]
 }
 
 const getSocket = (socketId) => {
-  return users.find(user => user.socketId === socketId)
+  const asArray = Object.entries(users);
+  const filtered = asArray.filter(([key, value]) => value.includes(socketId));
+
+  //console.log("---------------------->",filtered)
+
+  return Object.fromEntries(filtered)
 }
 
 io.on("connection", socket => {
-  console.log("Se ha conectado un usuario" + socket.id)
+
+  console.log("Se ha conectado un usuario", socket.id)
+
   
     socket.on("addUser",async (userId) => {
 
       await User.update({isOnline:true},{where:{ID:userId}})
       addUser(userId, socket.id)
       const notificaciones = await PopUp.findAll({where:{ReceiverID:userId},include:{model:User,as:"Emiter"}})
-      io.emit("getUsers", notificaciones)
+      io.emit("getUserId", notificaciones)
     })
 
     socket.on('messageCreation', async ({id_emisor, id_receptor, texto}) => {
 
-      let receptor = getUser(id_receptor)
+      let receptor = users[id_receptor]
         
         
       //Enviar evento con el mensaje a el socket apropiado al receptor
       if (receptor){
+
        io.to(receptor.socketId).emit("createMessage", {EmitterID: id_emisor,text:texto});
+
       }
       //Crear mensaje
       const message = await Message.create({
@@ -120,7 +131,6 @@ io.on("connection", socket => {
         chat.setGuest(id_receptor)
         chat.setHost(id_emisor)
       }
-      console.log("------------->",chat)
       //Asociar mensaje al receptor
       //Asociar mensaje al chat
       await message.setChat(chat.id)
@@ -149,8 +159,9 @@ io.on("connection", socket => {
       const img = emisor.img
       const nombre_emisor = emisor.name
       const id = notificacion.id
+      
       if(recepcion)
-        io.to(recepcion.socketId).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo});
+        recepcion.forEach(e => io.to(e).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo}))
     })
     
     socket.on("seen",async elementos => {
@@ -158,15 +169,22 @@ io.on("connection", socket => {
     })
 
 
-    socket.on("disconnect", async (socket) => {
+    socket.on("disconnect", async () => {
       
-      console.log("Usuario desconectado", socket.id)
+      //console.log("Usuario desconectado", socket.id)
       
       const user = getSocket(socket.id)
 
-      removeUser(socket.id)
-      if(user?.userId)
-      await User.update({isOnline:false},{where:{ID:user.userId}})
+      const userId = Object.keys(user)[0]
+      console.log(userId)
+      
+      if(userId && users[userId].length === 1){
+        console.log("entre->")
+      await User.update({isOnline:false},{where:{ID:userId}})
+     }
+      if(socket.id && users)
+        removeUser(socket.id)
+
       io.emit("getUsers", users)
     })
 })

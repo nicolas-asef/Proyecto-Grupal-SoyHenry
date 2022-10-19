@@ -62,33 +62,26 @@ function Profile({
   const userD = useSelector((state) => state.userDetail.Favorites);
   const dispatch = useDispatch();
   const us = useSelector((state) => state.users);
-  console.log(us);
   const userID = useSelector((state) => state.users);
-  //console.log(userID);
+
   const idWorkerFav = useSelector((state) => state.userDetail);
-  console.log(idWorkerFav);
   const usW = us.Favorites;
-  //console.log(us.Worker.ID);
   const [checked, setChecked] = React.useState(false);
   const worksFavs = idWorkerFav.Favorites;
-  console.log(usW);
-  // console.log(id);
-  console.log(worksFavs);
 
   // const follow = worksFavs.forEach((e) => {
   //   if (e.Fav.WorkerID === usW) {
   //     return true;
   //   }
-  // });
-  const follow = usW?.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
-  console.log(follow);
+  // });}
+ 
+  const follow = usW?.find((e) => e.Fav.WorkerID === idWorkerFav.Worker?.ID);
   useEffect(() => {
     if (follow) {
       setChecked(true);
     }
   });
 
-  // console.log(userD);
   // const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID);
   // if (isFav) {
   //   setChecked(true);
@@ -102,8 +95,7 @@ function Profile({
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
     }
-    // console.log(login.user.sub);
-    // console.log(params.id);
+
     socket?.emit("messageCreation", {
       id_emisor: login.user.sub,
       id_receptor: params.id,

@@ -13,7 +13,7 @@ const ColorChanger = styled.span`
 
 export default function Status({text}) {
 
-    const color = text === "Online" ? "#0fcc45" : "#cc0f0f"
+    const color = text === "Conectado" ? "#0fcc45" : "#cc0f0f"
 
   return (
 
