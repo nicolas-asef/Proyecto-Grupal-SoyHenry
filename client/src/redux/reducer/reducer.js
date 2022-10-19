@@ -33,7 +33,8 @@ import {
   AGREGAR_SOCKET,
   ADD_FAVORITE,
   DELETED_FAVORITE,
-  GET_USER
+  GET_USER,
+  SET_CONECTED
 
 } from '../actions/actions_vars'
 
@@ -65,10 +66,17 @@ const initialState = {
   filtrado: [],
   uploadedImg: "",
   socket: null,
-  popUps: []
+  popUps: [],
+  onlineUsers:[]
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+
+    case SET_CONECTED:
+      return {
+        ...state,
+        onlineUsers:action.payload
+      }
 
     case GET_USER:
       return{

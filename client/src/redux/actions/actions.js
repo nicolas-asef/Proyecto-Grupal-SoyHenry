@@ -35,6 +35,7 @@ import {
   DELETE_USER,
   DELETE_JOB,
   DELETE_COUNTRY,
+  SET_CONECTED,
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
@@ -55,6 +56,12 @@ export function getWorkers(query, search) {
       })
       .catch((err) => {});
   };
+}
+
+export function setOnline(conectados){
+  return function(dispatch){
+    dispatch({type:SET_CONECTED,payload:conectados})
+  }
 }
 
 export function agregarSocker(id) {
