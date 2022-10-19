@@ -10,8 +10,6 @@ import Pagination from "@mui/material/Pagination";
 
 export default function HomePrueba() {
   let workers = useSelector((worker) => worker.workers);
-  console.log(workers);
-  console.log(workers);
   let newWorkers = workers.filter((worker) => worker.User.isDeleted === false);
   const dispatch = useDispatch();
 
