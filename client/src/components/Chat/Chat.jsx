@@ -15,7 +15,8 @@ export default function Chat({guest, host, messages}) {
   const { user } = useAuth0(); 
   const socket = useSelector((state) => state.socket);
   const [mensajes, setMensajes] = useState(messages)
-
+  const [elemento, setElemento] = useState({})
+  const [forceUpdate,setForceUpdate] = useState(true)
   useEffect(()=>{
     setMensajes(messages)
   }
@@ -24,12 +25,17 @@ export default function Chat({guest, host, messages}) {
   useEffect(()=>{
     socket?.on("createMessage",({EmitterID,text})=>{
       //aca renderizo el mensaje del texto y listo
-      const auxiliar = mensajes
-      auxiliar.push({text,EmitterID})
-      setMensajes(auxiliar)
-      console.log("mensajes-------->",auxiliar)
+      setElemento({text,EmitterID})
+      setForceUpdate(false)
     })
   },[socket])
+
+  useEffect(()=> {
+    const aux = mensajes 
+    aux?.push(elemento)
+    setMensajes(aux) 
+    setForceUpdate(true)
+  },[elemento])
 
   function sendMessage(e) {
     e.preventDefault();
@@ -38,18 +44,16 @@ export default function Chat({guest, host, messages}) {
       id_receptor: host.ID === user.sub ? guest.ID : host.ID,
       texto: input,
     });
-    const auxiliar = mensajes
-    auxiliar.push({text:input,EmitterID:user.sub})
-    setMensajes(auxiliar)
-    console.log(user.sub)
-    console.log(host.ID)
-    setInput("");
+    const aux = mensajes 
+    aux.push({text:input,EmitterID:user.sub})
+    setInput("")
+    setMensajes(aux)
+   
   }
 
   const handleOnChange = (e) => {
     setInput(e.target.value);
   };
-  console.log(messages)
   return (
     <div className="chat">
       <div className="chat__header">
@@ -74,7 +78,7 @@ export default function Chat({guest, host, messages}) {
       </div>
       <div className="chat__body">
       <ScrollToBottom>
-        {mensajes?.map((message,index)=> (
+        {mensajes && mensajes?.map((message,index)=> (
           <div key={index}>
         <ChatMessage
           name={host === undefined ? 'Loading' : message.EmitterID === host.ID ? `${host.name} ${host.lastName}` : `${guest.name} ${guest.lastName}`}
