@@ -69,12 +69,16 @@ const getUser = (receiverId) => {
 const getSocket = (socketId) => {
   const asArray = Object.entries(users);
   const filtered = asArray.filter(([key, value]) => value.includes(socketId));
+
   //console.log("---------------------->",filtered)
+
   return Object.fromEntries(filtered)
 }
 
 io.on("connection", socket => {
-  //console.log("Se ha conectado un usuario")
+
+  console.log("Se ha conectado un usuario", socket.id)
+
   
     socket.on("addUser",async (userId) => {
 
@@ -168,6 +172,7 @@ io.on("connection", socket => {
       //console.log("Usuario desconectado", socket.id)
       
       const user = getSocket(socket.id)
+
       const userId = Object.keys(user)[0]
       console.log(userId)
       
@@ -177,6 +182,7 @@ io.on("connection", socket => {
      }
       if(socket.id && users)
         removeUser(socket.id)
+
       io.emit("getUsers", users)
     })
 })
