@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { useAuth0 } from "@auth0/auth0-react";
 
-function PopUp({img,name,description}) {
+function PopUp({img,name,description,ruta}) {
   const {
     user: { sub },
   } = useAuth0();
   return (
     
       
-      <Link to ={"contracts/user/"+sub} className={style.link}>
+      <Link to ={ruta} className={style.link}>
           <div className={style.popUp}>
         <div className={style.img}>
           <Avatar

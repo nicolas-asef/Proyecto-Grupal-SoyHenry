@@ -70,6 +70,8 @@ const Profile = () => {
         popUpAux.name = e.Emiter.name;
         popUpAux.viewed = e.viewed;
         popUpAux.id = e.id;
+        // const filtro = popUpsAux.filter(c => c.viewed === false && c.type==="mensaje" && c.img === e.Emiter.img && c.name === e.Emiter.name)
+        // if(filtro.length === 0)
         popUpsAux.push(popUpAux);
       });
       if (popUpsAux.length > 0) popUpsAux = popUpsAux.reverse(); //Deberia ordenarlos por fecha, para no tener que usar esto que da vuelta cuando quiere las notificaciones jaja
