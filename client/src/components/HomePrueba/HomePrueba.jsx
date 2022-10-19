@@ -11,9 +11,11 @@ import Pagination from "@mui/material/Pagination";
 export default function HomePrueba(){
 
     let workers = useSelector(worker => worker.workers)
+    console.log(workers)
+    let newWorkers = workers.filter(worker => worker.User.isDeleted === false)
     const dispatch = useDispatch()
 
-    workers.sort(function (a, b) {
+    newWorkers.sort(function (a, b) {
         if (a.premium === true) {
           return -1;
         }
@@ -28,9 +30,9 @@ export default function HomePrueba(){
     const lastIndex = page * 10;
     const firstIndex = lastIndex - 10; //0
   
-    const numberPages = Math.ceil(workers.length / 10);
+    const numberPages = Math.ceil(newWorkers.length / 10);
   
-    let currentWorkers = workers.slice(firstIndex, lastIndex);
+    let currentWorkers = newWorkers.slice(firstIndex, lastIndex);
   
     const pagesNumber = (event, value) => {
       setPage(value);
@@ -78,6 +80,7 @@ export default function HomePrueba(){
                             return (
                                 <CardsWorkers 
                                     key = {worker.ID}
+                                    id = {worker.ID}
                                     name = {worker.User.name}
                                     lastName = {worker.User.lastName}
                                     job = {worker.Jobs[0].name}
