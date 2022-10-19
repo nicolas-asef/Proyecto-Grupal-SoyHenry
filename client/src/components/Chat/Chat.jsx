@@ -44,7 +44,10 @@ export default function Chat({guest, host, messages}) {
       id_receptor: host.ID === user.sub ? guest.ID : host.ID,
       texto: input,
     });
+    const aux = mensajes 
+    aux.push({text:input,EmitterID:user.sub})
     setInput("")
+    setMensajes(aux)
    
   }
 
