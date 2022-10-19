@@ -22,9 +22,9 @@ export default function DashHome(){
                     <Chart />
                     {/* <Featured /> */}
                 </div>
-                <div className={s.table}>
+                {/* <div className={s.table}>
                     <BasicTable />
-                </div>
+                </div> */}
             </div>
         </div>
     )
