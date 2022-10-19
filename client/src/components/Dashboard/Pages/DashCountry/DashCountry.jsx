@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get_countries, postCountry } from "../../../../redux/actions/actions";
 import DashCountryTable from "./DashCountryTable";
 import { useEffect, useState } from "react";
+import SearchBar from "../../../SearchBar/SearchBar";
 
 
 export default function DashCountry(){
@@ -17,7 +18,7 @@ export default function DashCountry(){
         setActualizar(actualizar === true ? false : true)
     }
 
-    const render = (e) => {
+    const render = () => {
         setActualizar(actualizar === true ? false : true)
     }
 
