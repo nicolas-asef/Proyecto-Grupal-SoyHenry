@@ -5,20 +5,33 @@ const {Op} = require("sequelize")
 const router = Router();
 
 router.get('/', async (req,res,next) => {
+    const { id } = req.query;
     try{
-        let inbox = await Chat.findAll({
+        if(id){
+            var inbox = await Chat.findByPk(
+                id, {
+                include: [
+                    {model:User, as:"Host"},
+                    {model:User, as:"Guest"},
+                    {model: Message}
+                ]
+            })
+        }
+        else{var inbox = await Chat.findAll({
             include: [
                 {model:User, as:"Host"},
                 {model:User, as:"Guest"},
                 {model: Message}
             ]
-        })
+        })}
+
 
         res.status(200).send(inbox)
     }catch(error){
         res.send('Must be a problem:' + error.message).status(404);
     }
 })
+
 router.get('/:id', async (req,res,next) => {
     const { id } = req.params
     try{

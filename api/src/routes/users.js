@@ -37,7 +37,6 @@ const getUsers = async () => {
   });
   
   const dataUser = info?.map((u) => {
-    console.log(u)
     return {
       id: u.ID,
       name: u.name,
@@ -186,7 +185,6 @@ router.put("/:id", async (req, res, next) => {
 
 router.delete('/:id', async (req, res) => {
   const {deleted} = req.query
-  console.log(deleted)
   const {id} = req.params
   try {
     await User.update ({

@@ -33,8 +33,10 @@ import {
   AGREGAR_SOCKET,
   ADD_FAVORITE,
   DELETED_FAVORITE,
-  GET_USER
-
+  GET_USER,
+  GET_CHATS,
+  GET_CHAT_BY_PK,
+  SET_CONECTED
 } from '../actions/actions_vars'
 
 
@@ -65,10 +67,19 @@ const initialState = {
   filtrado: [],
   uploadedImg: "",
   socket: null,
-  popUps: []
+  popUps: [],
+  chats: [],
+  chat:{},
+  onlineUsers:[]
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+
+    case SET_CONECTED:
+      return {
+        ...state,
+        onlineUsers:action.payload
+      }
 
     case GET_USER:
       return{
@@ -101,6 +112,16 @@ const reducer = (state = initialState, action) => {
         isLoading:false
       }
 
+      case GET_CHATS:
+        return{
+          ...state,
+          chats: action.payload
+        }
+        case GET_CHAT_BY_PK:
+          return{
+            ...state,
+            chat: action.payload
+          }     
     case GET_WORKER_CONTRACTS:
       return{
         ...state,
@@ -283,12 +304,8 @@ const reducer = (state = initialState, action) => {
     }
     case DELETED_FAVORITE: {
       const workersFav = state.users.Favorites
-      console.log(action.payload)
-      console.log(workersFav)
       const us = state.users
-      console.log(us)
       const stayWorkersFav = workersFav.filter(e => e.ID !== action.payload)   
-      console.log(stayWorkersFav)  
       us.Favorites = stayWorkersFav
       return {
         ...state,

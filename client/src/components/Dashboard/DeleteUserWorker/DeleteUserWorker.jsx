@@ -34,7 +34,6 @@ export default function DeleteUserWorker({name, id, condition ,callbk}) {
     if (condition === false){
       deleted = true
     }
-    console.log(id)
       dispatch(deleteUser(id, deleted))
     callbk(false)
   }

@@ -33,4 +33,7 @@ export const ADD_FAVORITE = "ADD_FAVORITE";
 export const DELETED_FAVORITE = "DELETED_FAVORITE";
 export const GET_USER = "GET_USER";
 export const GET_WORKERS_PREMIUM = "GET_WORKERS_PREMIUM"
+export const SET_CONECTED = "SET_CONECTED"
+export const GET_CHATS = "GET_CHATS"
+export const GET_CHAT_BY_PK = "GET_CHAT_BY_PK"
 

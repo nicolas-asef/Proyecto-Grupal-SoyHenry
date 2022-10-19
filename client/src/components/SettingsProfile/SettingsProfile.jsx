@@ -28,16 +28,19 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function SettingProfile() {
   const dispatch = useDispatch();
-  const {
-    user: { sub },
-  } = useAuth0();
+  const login = useAuth0()
+  const[id, setId] = useState(false)
+
+  useEffect(()=>{
+    setId(login.user?.sub)
+  },[login])
+
   const { jobs } = useSelector((state) => state);
   const countries = useSelector((state) => state.allCountries);
   const user = useSelector((state) => state.users);
   const userAuth = useSelector((state) => state.authState);
   const uploadedImage = useSelector((state) => state.uploadedImg);
   const navigate = useNavigate();
-  const id = sub;
   const [openLogin, setOpenLogin] = useState(false);
   //const id = userAuth.user.id
   const [input, setInput] = useState({
@@ -100,13 +103,13 @@ export default function SettingProfile() {
     dispatch(getUserId(id));
     dispatch(getJobs());
     dispatch(get_countries());
-    if (user.Worker.certification) {
+    if (user.Worker?.certification) {
       setInputWork({
         ...inputWork,
         [inputWork.certification]: user.Worker.certification,
       });
     }
-    if (user.Worker.description) {
+    if (user.Worker?.description) {
       setInputWork({
         ...inputWork,
         [inputWork.description]: user.Worker.description,

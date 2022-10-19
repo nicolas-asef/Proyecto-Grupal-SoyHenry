@@ -27,18 +27,15 @@ export default function Favourite() {
 
   const id = sub;
   const favourites = useSelector((state) => state.users.Favorites);
-  console.log(favourites);
+
   const favId = [];
   favourites && favourites.map((e) => favId.push(e.ID));
-  console.log(favId);
   const allWorker = useSelector((state) => state.allWorkers);
-  console.log(allWorker);
   const workersFavs = [];
   for (let i = 0; i < favId.length; i++) {
     const element = allWorker.filter((e) => e.ID === favId[i]);
     workersFavs.push(element);
   }
-  console.log(workersFavs);
   useEffect(() => {
     dispatch(getWorkers());
     dispatch(getUserId(id));
@@ -46,15 +43,10 @@ export default function Favourite() {
   }, [dispatch]);
 
   // useEffect(() => {
-  //   console.log("a");
   // }, [workersFavs]);
   // const uId = useSelector((state) => state.userDetail.id);
-  // console.log(uId);
   const onClick = (e) => {
-    console.log(workersFavs);
-    console.log(e.target.id);
     const deleteFav = workersFavs.filter((w) => w[0].ID === e.target.id);
-    console.log(deleteFav);
     dispatch(deletedFavorite(id, deleteFav[0][0].ID));
     // navigate("/home");
     // handleClose();
@@ -71,7 +63,6 @@ export default function Favourite() {
           {allWorker.length && workersFavs
             ? workersFavs.map((worker, index) => (
                 <>
-                  {console.log(worker)}
                   <div className={s.hijo}>
                     <WorkerCard
                       Worker={worker[0]}

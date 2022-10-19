@@ -2,25 +2,35 @@ import "./SidebarChat.css";
 
 import React from "react";
 import { Avatar } from "@mui/material";
+import { Link } from "react-router-dom";
 
-export default function SiderbarChat(props) {
+export default function SiderbarChat({
+  host,
+  guest,
+  messages,
+  authid,
+  chatid,
+}) {
   function createChat() {
     alert("creating...");
   }
 
-  return !props.newChat ? (
-    <div className="sidebarChat">
-      <Avatar
-        src={`https://avatars.dicebear.com/api/human/${props.userId}.svg`}
-      />
-      <div className="sidebarChat_info">
-        <h2>{props.room}</h2>
-        <p>{props.message}</p>
+  return (
+    <Link to={`/chat/${chatid}`} className="link__sidechat">
+      <div className="sidebarChat">
+        <Avatar
+          sx={{ width: 50, height: 50 }}
+          src={host.ID === authid ? `${guest.img}` : `${host.img}`}
+        />
+        <div className="sidebarChat__info">
+          <h2>
+            {host.ID === authid
+              ? `${guest.name} ${guest.lastName}`
+              : `${host.name} ${host.lastName}`}
+          </h2>
+          <p>Last message. . . {messages[messages.length - 1].text}</p>
+        </div>
       </div>
-    </div>
-  ) : (
-    <div className="sidebarChat" onClick={createChat}>
-      <h2>Add new chat</h2>
-    </div>
+    </Link>
   );
 }
