@@ -37,7 +37,6 @@ const getUsers = async () => {
   });
   
   const dataUser = info?.map((u) => {
-    console.log(u)
     return {
       id: u.ID,
       name: u.name,
@@ -99,7 +98,6 @@ router.put("/:id", async (req, res, next) => {
 
 
         // si le paso un "id" al remove lo remueve bien de la tabla Favorites 
-    console.log(info)
     const updatedUser = await User.findOne({ where: { ID: id } });
             
     info.deleted ? await updatedUser.removeFavorites(info.deleted) : "lol"   
@@ -190,7 +188,6 @@ router.put("/:id", async (req, res, next) => {
 
 router.delete('/:id', async (req, res) => {
   const {deleted} = req.query
-  console.log(deleted)
   const {id} = req.params
   try {
     await User.update ({

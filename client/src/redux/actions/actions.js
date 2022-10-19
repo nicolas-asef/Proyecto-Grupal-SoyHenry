@@ -61,6 +61,7 @@ export function agregarSocker(id) {
   return async function (dispatch) {
     const socket = await io(baseURL);
     await socket.emit("addUser", id);
+    console.log(socket)
     dispatch({ type: AGREGAR_SOCKET, payload: socket });
   };
 }
