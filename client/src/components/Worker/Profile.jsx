@@ -74,7 +74,7 @@ function Profile({
   //     return true;
   //   }
   // });}
- 
+
   const follow = usW?.find((e) => e.Fav.WorkerID === idWorkerFav.Worker?.ID);
   useEffect(() => {
     if (follow) {

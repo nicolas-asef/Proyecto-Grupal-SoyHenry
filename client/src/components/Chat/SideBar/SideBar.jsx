@@ -8,24 +8,21 @@ import SearchOutlined from "@mui/icons-material/SearchOutlined";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SidebarChat from "./SidebarChat";
 import Chat from "../Chat";
-import { useSelector, useDispatch} from 'react-redux'
-import { useEffect } from 'react'
-import { getChats } from '../../../redux/actions/actions'
-import { useAuth0 } from '@auth0/auth0-react'
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getChats } from "../../../redux/actions/actions";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Sidebar() {
-   const {user, isLoading} = useAuth0(); 
-  const chats = useSelector(state=> state.chats)
-  const dispatch = useDispatch()
+  const { user, isLoading } = useAuth0();
+  const chats = useSelector((state) => state.chats);
+  const dispatch = useDispatch();
 
-  
-useEffect(()=>{
-  if (!isLoading && chats.length === 0){
-    dispatch(getChats(user.sub))
-  }
-})
-
-
+  useEffect(() => {
+    if (!isLoading && chats.length === 0) {
+      dispatch(getChats(user.sub));
+    }
+  });
 
   return (
     <div className="sidebar">
@@ -50,12 +47,20 @@ useEffect(()=>{
         </div>
       </div>
       <div className="sidebar__chats">
- {/*        <SidebarChat newChat={true} /> */}
-    {chats.length === 0 ? 'Loading' : chats.map((chat) => (
-    <div key={chat.id}>
-      <SidebarChat host={chat.Host} guest={chat.Guest} messages={chat.Messages} authid={user.sub} chatid={chat.id}  />
-    </div>))}
-        
+        {/*        <SidebarChat newChat={true} /> */}
+        {chats.length === 0
+          ? "Loading"
+          : chats.map((chat) => (
+              <div key={chat.id}>
+                <SidebarChat
+                  host={chat.Host}
+                  guest={chat.Guest}
+                  messages={chat.Messages}
+                  authid={user.sub}
+                  chatid={chat.id}
+                />
+              </div>
+            ))}
       </div>
     </div>
   );

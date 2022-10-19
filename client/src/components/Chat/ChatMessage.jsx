@@ -1,7 +1,7 @@
 import React from "react";
 import "./ChatMessage.css";
 
-function ChatMessage({name, isSender, message, timestamp}) {
+function ChatMessage({ name, isSender, message, timestamp }) {
   return (
     <div className="chatMessage ">
       <p
