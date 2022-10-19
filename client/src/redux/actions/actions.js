@@ -472,14 +472,14 @@ export function finishUserCreation(id, data, jobs) {
         coordinates: [coordinate.data[0].lat, coordinate.data[0].lon],
         onBoarded: true,
       };
-      const user = await axios.put(`http://localhost:3001/users/${id}`, toSend);
+      const user = await axios.put(baseURL+`users/${id}`, toSend);
 
       if (jobs.length) {
         const worker = {
           user_id: id,
           jobs,
         };
-        const res = await axios.post("http://localhost:3001/worker", worker);
+        const res = await axios.post(baseURL+"worker", worker);
       }
       dispatch({
         type: POST_USER,
@@ -493,7 +493,7 @@ export function pay(paymentMethod) {
   //cambiar estado premium del modelo  de wokrers
   return async function (dispatch) {
     try {
-      const response = await axios.post("http://localhost:3001/payments", {
+      const response = await axios.post(baseURL+"payments", {
         paymentMethod,
       });
 
@@ -511,7 +511,7 @@ export function pay(paymentMethod) {
 
 export function premiumPay(payload) {
   return async function (dispatch) {
-    const worker = await axios.put("http://localhost:3001/worker/" + payload, {
+    const worker = await axios.put(baseURL+"worker/" + payload, {
       premium: true,
     });
     dispatch({
@@ -526,7 +526,7 @@ export function updateWorker(payload, payload2, payloadId) {
     payload.jobs = payload2;
     console.log(payload)
     const worker = await axios.put(
-      "http://localhost:3001/worker/" + payloadId,
+      baseURL+"worker/" + payloadId,
       payload
     );
     dispatch({
@@ -555,14 +555,14 @@ export const cleanDetail = () => (dispatch) => {
 };
 
 export const changeStatus = (payload, status) => async (dispatch) => {
-  const online = await axios.put("http://localhost:3001/users/" + payload, {
+  const online = await axios.put(baseURL+"users/" + payload, {
     isOnline: status,
   });
 };
 
 export function addFavorite(userID, idWorkerFav) {
   return async function (dispatch) {
-    await axios.put("http://localhost:3001/users/" + userID, {
+    await axios.put(baseURL+"users/" + userID, {
       favorites: idWorkerFav,
     });
     dispatch({
@@ -573,7 +573,7 @@ export function addFavorite(userID, idWorkerFav) {
 }
 export function deletedFavorite(userID, workDeleted) {
   return async function (dispatch) {
-    await axios.put("http://localhost:3001/users/" + userID, {
+    await axios.put(baseURL+"users/" + userID, {
       deleted: workDeleted,
     });
     dispatch({
@@ -596,7 +596,7 @@ export function deletedFavorite(userID, workDeleted) {
 export function postCountry(obj) {
   return async function (dispatch) {
     try {
-      await axios.post("http://localhost:3001/countries", obj);
+      await axios.post(baseURL+"countries", obj);
       dispatch({ type: POST_COUNTRY });
     } catch (error) {
     }
@@ -606,7 +606,7 @@ export function postCountry(obj) {
 export function postJob(obj) {
   return async function (dispatch) {
     try {
-      await axios.post("http://localhost:3001/jobs", obj)
+      await axios.post(baseURL+"jobs", obj)
       dispatch({type: POST_JOB})
       return obj
     } catch (error) {
@@ -618,7 +618,7 @@ export function deleteUser(id, deleted) {
   return async function (dispatch) {
     try {
       await axios.delete(
-        `http://localhost:3001/users/${id}?deleted=${deleted}`,
+        baseURL+`users/${id}?deleted=${deleted}`,
         deleted
       );
       dispatch({ type: DELETE_USER });
@@ -630,7 +630,7 @@ export function deleteUser(id, deleted) {
 export function deleteJob(id) {
   return async function (dispatch) {
     try {
-      await axios.delete(`http://localhost:3001/jobs/${id}`);
+      await axios.delete(baseURL+`jobs/${id}`);
       dispatch({ type: DELETE_JOB });
     } catch (error) {
       console.log(error);
@@ -641,7 +641,7 @@ export function deleteJob(id) {
 export function deleteCountry(id) {
   return async function (dispatch) {
     try {
-      await axios.delete(`http://localhost:3001/countries/${id}`);
+      await axios.delete(baseURL+`countries/${id}`);
       dispatch({ type: DELETE_COUNTRY });
     } catch (error) {
       console.log(error);
