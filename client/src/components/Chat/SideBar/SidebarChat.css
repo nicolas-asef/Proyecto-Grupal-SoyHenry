@@ -6,6 +6,7 @@
     align-items: center;
 }
 
+
 .sidebarChat:hover {
     background-color: #ebebeb;
 }
@@ -24,5 +25,10 @@
 }
 .sidebarChat > h2 {
     font-size: 16px;
-    margin: 0;
+    margin-left: 10 px;
+}
+
+.link__sidechat {
+    text-decoration: none;
+    color: black;
 }
