@@ -35,6 +35,7 @@ import {
   DELETED_FAVORITE,
   GET_USER,
   SET_CONECTED
+  GET_CHATS
 
 } from '../actions/actions_vars'
 
@@ -67,7 +68,8 @@ const initialState = {
   uploadedImg: "",
   socket: null,
   popUps: [],
-  onlineUsers:[]
+  onlineUsers:[],
+  chats: []
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -108,6 +110,12 @@ const reducer = (state = initialState, action) => {
         selectedContracts:action.payload,
         isLoading:false
       }
+
+      case GET_CHATS:
+        return{
+          ...state,
+          chats: action.payload
+        }
 
     case GET_WORKER_CONTRACTS:
       return{

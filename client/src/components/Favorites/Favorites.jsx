@@ -63,7 +63,6 @@ export default function Favourite() {
           {allWorker.length && workersFavs
             ? workersFavs.map((worker, index) => (
                 <>
-      
                   <div className={s.hijo}>
                     <WorkerCard
                       Worker={worker[0]}

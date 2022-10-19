@@ -3,24 +3,21 @@ import "./SidebarChat.css";
 import React from "react";
 import { Avatar } from "@mui/material";
 
-export default function SiderbarChat(props) {
+export default function SiderbarChat({host, guest, messages, authid}) {
+  
   function createChat() {
     alert("creating...");
   }
 
-  return !props.newChat ? (
-    <div className="sidebarChat">
+  return (
+  <div className="sidebarChat">
       <Avatar
-        src={`https://avatars.dicebear.com/api/human/${props.userId}.svg`}
+        src={host.img}
       />
       <div className="sidebarChat_info">
-        <h2>{props.room}</h2>
-        <p>{props.message}</p>
+        <h2>{host.ID === authid ? `${guest.name}${guest.lastName}` : `${host.name}${host.lastName}`}</h2>
+        <p>{messages[messages.length -1].text}</p>
       </div>
     </div>
-  ) : (
-    <div className="sidebarChat" onClick={createChat}>
-      <h2>Add new chat</h2>
-    </div>
-  );
+  ) 
 }
