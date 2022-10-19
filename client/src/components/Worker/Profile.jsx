@@ -136,14 +136,14 @@ function Profile({
               : "No se ha realizado una descripcion aun."}
           </p>
           <div>
-            <h3>
-              Followers:
+            <span className="followers">
+              Seguidores:
               <Followers id={id} />
-            </h3>
+            </span>
 
             {img !== userID.img ? (
-              <div>
-                <h2>Follow:</h2>
+              <div className="follows">
+                <span>Seguir:</span>
                 <Checkbox
                   checked={checked}
                   icon={<FavoriteBorder />}
