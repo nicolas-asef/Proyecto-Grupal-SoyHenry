@@ -1,0 +1,1 @@
+export { default as ProtectedAdmin } from './ProtectedAdmin';

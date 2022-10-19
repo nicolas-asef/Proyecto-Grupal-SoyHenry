@@ -52,7 +52,7 @@ const Profile = () => {
       dispatch(getUserId(sub));
       dispatch(getUserDetail(sub, "GET_USER"));
     }
-  }, [dispatch, users.img]);
+  }, [dispatch, user.img]);
 
   useEffect(() => {
     if (sub) {
@@ -155,28 +155,52 @@ const Profile = () => {
     setPopUpsEnabled(false);
   };
 
-  const settings = [
-    {
-      name: "Profile",
-      handler: handleOpenProfile,
-    },
-    {
-      name: "Contratos",
-      handler: handleContracts,
-    },
-    {
-      name: "Settings",
-      handler: handleSettings,
-    },
-    {
-      name: "Dashboard",
-      handler: handleCloseUserMenu,
-    },
-    {
-      name: "Logout",
-      handler: handleLogout,
-    },
-  ];
+  const handleDashboard = () => {
+    navigate("/dashboard");
+  };
+
+  const settings = user.isAdmin
+    ? [
+        {
+          name: "Profile",
+          handler: handleOpenProfile,
+        },
+        {
+          name: "Contratos",
+          handler: handleContracts,
+        },
+        {
+          name: "Settings",
+          handler: handleSettings,
+        },
+        {
+          name: "Dashboard",
+          handler: handleDashboard,
+        },
+        {
+          name: "Logout",
+          handler: handleLogout,
+        },
+      ]
+    : [
+        {
+          name: "Profile",
+          handler: handleOpenProfile,
+        },
+        {
+          name: "Contratos",
+          handler: handleContracts,
+        },
+        {
+          name: "Settings",
+          handler: handleSettings,
+        },
+        {
+          name: "Logout",
+          handler: handleLogout,
+        },
+      ];
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -213,12 +237,12 @@ const Profile = () => {
         <div>
           <Chip
             className={s.name}
-            label={`${users.name} ${users.lastName}`}
+            label={`${user.name} ${user.lastName}`}
             variant="outlined"
           />
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src={users.img} />
+              <Avatar alt="Remy Sharp" src={user.img} />
             </IconButton>
           </Tooltip>
         </div>

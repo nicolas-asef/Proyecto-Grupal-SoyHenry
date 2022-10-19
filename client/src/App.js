@@ -29,6 +29,7 @@ import SuperChat from "./components/Chat/SuperChat";
 import CarruselWorkersPremium from "./components/CarruselWorkersPremium/CarruselWorkersPremium";
 import Mapview from "./components/MapView/MapView";
 import { Followers } from "./components/Followers/Followers";
+import ProtectedAdmin from "./components/ProtectedAdmin/ProtectedAdmin";
 import HomePrueba from "./components/HomePrueba/HomePrueba";
 
 function App() {
@@ -54,13 +55,62 @@ function App() {
         <Route path="/dashboard/user/:id" element={<DashBoardUser />} />
         <Route path="/contracts/user/:id" element={<CardContracts />} />
         <Route path="/onboarding" element={<OnBoarding />} />
-        <Route path="/dashboard" element={<DashHome />} />
-        <Route path="/dashboard/analytics" element={<DashAnalytics />} />
-        <Route path="/dashboard/balance" element={<DashBalance />} />
-        <Route path="/dashboard/users" element={<DashUsers />} />
-        <Route path="/dashboard/workers" element={<DashWorker />} />
-        <Route path="/dashboard/country" element={<DashCountry />} />
-        <Route path="/dashboard/jobs" element={<DashJobs />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedAdmin>
+              <DashHome />
+            </ProtectedAdmin>
+          }
+        />
+        <Route
+          path="/dashboard/analytics"
+          element={
+            <ProtectedAdmin>
+              <DashAnalytics />
+            </ProtectedAdmin>
+          }
+        />
+        <Route
+          path="/dashboard/balance"
+          element={
+            <ProtectedAdmin>
+              <DashBalance />
+            </ProtectedAdmin>
+          }
+        />
+        <Route
+          path="/dashboard/users"
+          element={
+            <ProtectedAdmin>
+              <DashUsers />
+            </ProtectedAdmin>
+          }
+        />
+        <Route
+          path="/dashboard/workers"
+          element={
+            <ProtectedAdmin>
+              <DashWorker />
+            </ProtectedAdmin>
+          }
+        />
+        <Route
+          path="/dashboard/country"
+          element={
+            <ProtectedAdmin>
+              <DashWorker />
+            </ProtectedAdmin>
+          }
+        />
+        <Route
+          path="/dashboard/jobs"
+          element={
+            <ProtectedAdmin>
+              <DashJobs />
+            </ProtectedAdmin>
+          }
+        />
         <Route path="/chat" element={<SuperChat />} />
         <Route path="/chat/:id" element={<SuperChat />} />
         <Route path="/carruselpremium" element={<CarruselWorkersPremium />} />
