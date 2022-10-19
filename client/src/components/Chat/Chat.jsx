@@ -92,7 +92,6 @@ export default function Chat(props) {
 //   //const [guestID] = Chat donde user sea
 
 //   const hostID = getHostID(users, user);
-//   console.log(hostID);
 
 //   const enterChat = () => {
 //     // router.push(`/chat/${id}`)
