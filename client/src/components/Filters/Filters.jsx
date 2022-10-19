@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./styles/Filters.module.css";
+import styles from "./Filters.module.css";
 import {
   filter,
   getJobs,
