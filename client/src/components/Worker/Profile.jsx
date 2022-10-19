@@ -17,7 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorite } from "../../redux/actions/actions";
+import { addFavorite, deletedFavorite } from "../../redux/actions/actions";
 import { Followers } from "../Followers/Followers";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -68,29 +68,22 @@ function Profile({
   const usW = us.Favorites;
   const [checked, setChecked] = React.useState(false);
   const worksFavs = idWorkerFav.Favorites;
-
-  // const follow = worksFavs.forEach((e) => {
-  //   if (e.Fav.WorkerID === usW) {
-  //     return true;
-  //   }
-  // });
   const follow =
     usW && usW.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
-  console.log(follow);
   useEffect(() => {
     if (follow) {
       setChecked(true);
     }
-  });
-
-  // const isFav = userD.find((e) => e.ID === idWorkerFav.Worker.ID);
-  // if (isFav) {
-  //   setChecked(true);
-  // }
+  }, []);
 
   const handleFav = (e) => {
-    setChecked(true);
-    dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
+    if (!checked) {
+      setChecked(true);
+      dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
+    } else {
+      setChecked(false);
+      dispatch(deletedFavorite(userID.id, idWorkerFav.Worker.ID));
+    }
   };
   const handleChat = () => {
     if (!login.isAuthenticated) {
