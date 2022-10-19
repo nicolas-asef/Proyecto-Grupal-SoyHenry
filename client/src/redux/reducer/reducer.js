@@ -34,7 +34,7 @@ import {
   ADD_FAVORITE,
   DELETED_FAVORITE,
   GET_USER,
-  SET_CONECTED
+  SET_CONECTED,
   GET_CHATS
 
 } from '../actions/actions_vars'
