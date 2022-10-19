@@ -10,7 +10,7 @@ import style from "./CardSlider.module.css";
 
 const CardSlider = () => {
   const workersState = useSelector((state) => state.workersPremium);
-  const workers = workersState.length < 5 ? info.examples : workersState;
+  const workers = workersState;
 
   const workersPerPage = 5;
 
@@ -41,6 +41,7 @@ const CardSlider = () => {
         tabindex="-1"
       >
         <ul className="uk-slider-items uk-child-width-1-2@s uk-child-width-1-4@l uk-child-width-1-4@m uk-grid">
+          <div className={style.titleCarrousel}>Trabajadores Premium</div>
           <div className={style.containerCards}>
             {workersToShow.map((w, index) => {
               return (
@@ -69,11 +70,10 @@ const CardSlider = () => {
                                 <Stack spacing={1}>
                                   <Rating
                                     name="read-only"
-                                    defaultValue={3}
+                                    defaultValue={w.rating}
                                     precision={0.5}
                                     readOnly
                                   />{" "}
-                                  {/* CAMBIAR defaultValue=w.rating* Cuando haya DB con contratos hechos*/}
                                 </Stack>
                               </div>
                             </div>
