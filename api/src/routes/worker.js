@@ -67,13 +67,13 @@ router.get("/:id", async (req, res, next) => {
     res.send("Error en la operacion: " + error.message).status(400);
   }
 });
-
+// 
 router.post("/", async (req, res) => {
   try {
     const { certification, description, jobs, user_id } = req.body;
     const worker = await Worker.create({
         certification: certification, 
-        description :"Agregar descripcion...",
+        description:description,
     })
     for (let job = 0; job < jobs.length; job++) {
       const element = jobs[job];
@@ -102,30 +102,25 @@ router.post("/", async (req, res) => {
 // })
  router.put('/:id', async (req, res, next) => {   
      const { id } = req.params;
-     const {certification, description, jobs, premium} = req.body; 
-
+     const {info} = req.body; 
+     console.log(info)
      try {
         const worker = await Worker.findOne({where: {ID: id}})
-        //  .then((w)=>{
-        //      w.update({
-        //          certification: certification
-        //      })
-        //  })
-        //premium ? worker.premium = true : false
-        premium ? await worker.update({
+      
+        info.premium ? await worker.update({
             premium: true
         }) : "no premium"
-          certification ? await worker.update({
-              certification: certification
-          }) : certification = "no updatie el certification"
-          description ? await worker.update({
-              description: description
+          info.certification ? await worker.update({
+              certification: info.certification
+          }) : "no updatie el certification"
+          info.description ? await worker.update({
+              description: info.description
           }) : console.log("no updatie el description") 
-          if(jobs){
+          if(info.jobs){
                 const nuevos_jobs = [] //En jobs se deben pasar todos los jobs actuales y agregados, porque asi se pueden tambien
                 //eliminar estos jobs
-                for (let job = 0; job < jobs.length; job++) {
-                    const element = jobs[job];
+                for (let job = 0; job < info.jobs.length; job++) {
+                    const element = info.jobs[job];
                     const seleccionado = await Job.findOne({where:{name:element}})
                     nuevos_jobs.push( seleccionado)
                 }

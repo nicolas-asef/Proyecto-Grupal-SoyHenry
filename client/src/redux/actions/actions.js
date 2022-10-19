@@ -490,6 +490,7 @@ export function premiumPay(payload) {
 export function updateWorker(payload, payload2, payloadId) {
   return async function (dispatch) {
     payload.jobs = payload2;
+    console.log(payload)
     const worker = await axios.put(
       "http://localhost:3001/worker/" + payloadId,
       payload

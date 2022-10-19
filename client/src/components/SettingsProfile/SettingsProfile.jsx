@@ -49,7 +49,6 @@ export default function SettingProfile() {
   const [inputWork, setInputWork] = useState({
     certification: "",
     description: "",
-    // jobs: [user.Worker.Jobs]
   });
   const [inputJobs, setInputJobs] = useState([]);
   const [workMax, setWorkMax] = useState(false);
@@ -59,10 +58,6 @@ export default function SettingProfile() {
     const exist = inputJobs.find((job) => job === e.target.value);
     if (!exist) {
       setInputJobs([...inputJobs, e.target.value]);
-      // setInputWork((prevState) => ({
-      //   ...prevState,
-      //   jobs: inputJobs,
-      // }))
     }
   };
 
@@ -121,6 +116,7 @@ export default function SettingProfile() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(inputWork);
     dispatch(updateUser(input, id));
     dispatch(updateWorker(inputWork, inputJobs, user.Worker.ID));
     setOpenLogin(true);
@@ -315,29 +311,34 @@ export default function SettingProfile() {
                       : null}
                   </ButtonGroup>
                 </div>
+
+                <div className={s.premium}>
+                  <h3>You want to be a premium worker? </h3>
+                  <h4>PUNCHASE HERE!</h4>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    onClick={handlePremium}
+                  >
+                    PREMIUM
+                  </Button>
+
+                  <Snackbar
+                    open={openLogin}
+                    autoHideDuration={3000}
+                    onClose={handleClosePopUp}
+                  >
+                    <Alert
+                      onClose={handleClosePopUp}
+                      severity="success"
+                      sx={{ width: "100%" }}
+                    >
+                      Your information was successfully modified
+                    </Alert>
+                  </Snackbar>
+                </div>
               </>
             )}
-          </div>
-          <div className={s.premium}>
-            <h3>You want to be a premium worker? </h3>
-            <h4>PUNCHASE HERE!</h4>
-            <Button type="submit" variant="contained" onClick={handlePremium}>
-              PREMIUM
-            </Button>
-
-            <Snackbar
-              open={openLogin}
-              autoHideDuration={3000}
-              onClose={handleClosePopUp}
-            >
-              <Alert
-                onClose={handleClosePopUp}
-                severity="success"
-                sx={{ width: "100%" }}
-              >
-                Your information was successfully modified
-              </Alert>
-            </Snackbar>
           </div>
           <div className={s.infoExtra}>
             <Button type="submit" variant="contained" endIcon={<SendIcon />}>

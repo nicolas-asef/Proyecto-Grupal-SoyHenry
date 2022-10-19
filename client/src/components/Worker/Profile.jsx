@@ -80,7 +80,8 @@ function Profile({
   //     return true;
   //   }
   // });
-  const follow = usW?.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
+  const follow =
+    usW && usW.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
   console.log(follow);
   useEffect(() => {
     if (follow) {
