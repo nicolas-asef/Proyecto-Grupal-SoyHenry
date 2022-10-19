@@ -66,10 +66,15 @@ function Profile({
 
   const idWorkerFav = useSelector((state) => state.userDetail);
   const usW = us.Favorites;
+  console.log(usW);
   const [checked, setChecked] = React.useState(false);
   const worksFavs = idWorkerFav.Favorites;
-  const follow =
-    usW && usW.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
+  console.log(idWorkerFav);
+  let follow;
+  if (idWorkerFav.Worker) {
+    follow = usW && usW.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
+  }
+
   useEffect(() => {
     if (follow) {
       setChecked(true);
@@ -77,12 +82,14 @@ function Profile({
   }, []);
 
   const handleFav = (e) => {
-    if (!checked) {
-      setChecked(true);
-      dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
-    } else {
-      setChecked(false);
-      dispatch(deletedFavorite(userID.id, idWorkerFav.Worker.ID));
+    if (idWorkerFav.Worker) {
+      if (!checked) {
+        setChecked(true);
+        dispatch(addFavorite(userID.id, idWorkerFav.Worker.ID));
+      } else {
+        setChecked(false);
+        dispatch(deletedFavorite(userID.id, idWorkerFav.Worker.ID));
+      }
     }
   };
   const handleChat = () => {
