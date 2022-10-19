@@ -127,14 +127,20 @@ function Profile({
               <Chip className="chip-job" label="Usuario" />
             )}
           </div>
-          <label className="label-description" htmlFor="description">
-            Descripción
-          </label>
-          <p className="text-info">
-            {description
-              ? description
-              : "No se ha realizado una descripcion aun."}
-          </p>
+          {jobs && jobs.length && (
+            <>
+            <label className="label-description" htmlFor="description">
+              Descripción
+            </label>
+            <p className="text-info">
+              {description
+                ? description
+                : "No se ha realizado una descripcion aun."}
+            </p>
+            </>
+            
+          )}
+          
           <div>
             <h3>
               Followers:
