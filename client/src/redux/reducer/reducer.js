@@ -34,9 +34,9 @@ import {
   ADD_FAVORITE,
   DELETED_FAVORITE,
   GET_USER,
-  SET_CONECTED,
-  GET_CHATS
-
+  GET_CHATS,
+  GET_CHAT_BY_PK,
+  SET_CONECTED
 } from '../actions/actions_vars'
 
 
@@ -68,8 +68,9 @@ const initialState = {
   uploadedImg: "",
   socket: null,
   popUps: [],
-  onlineUsers:[],
-  chats: []
+  chats: [],
+  chat:{},
+  onlineUsers:[]
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
@@ -116,7 +117,11 @@ const reducer = (state = initialState, action) => {
           ...state,
           chats: action.payload
         }
-
+        case GET_CHAT_BY_PK:
+          return{
+            ...state,
+            chat: action.payload
+          }     
     case GET_WORKER_CONTRACTS:
       return{
         ...state,

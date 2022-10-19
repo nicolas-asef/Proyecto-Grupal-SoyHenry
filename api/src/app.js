@@ -95,7 +95,9 @@ io.on("connection", socket => {
         
       //Enviar evento con el mensaje a el socket apropiado al receptor
       if (receptor){
-        receptor.forEach(e => io.to(e).emit("createMessage", texto))
+
+       io.to(receptor.socketId).emit("createMessage", {EmitterID: id_emisor,text:texto});
+
       }
       //Crear mensaje
       const message = await Message.create({

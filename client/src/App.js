@@ -62,6 +62,7 @@ function App() {
         <Route path="/dashboard/country" element={<DashCountry />} />
         <Route path="/dashboard/jobs" element={<DashJobs />} />
         <Route path="/chat" element={<SuperChat />} />
+        <Route path="/chat/:id" element={<SuperChat />} />
         <Route path="/carruselpremium" element={<CarruselWorkersPremium />} />
         <Route path="/map" element={<Mapview />} />
         <Route path="/followers" element={<Followers />} />
