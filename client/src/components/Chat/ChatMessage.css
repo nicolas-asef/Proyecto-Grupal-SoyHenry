@@ -1,6 +1,6 @@
 .chatMessage__message{
     position: relative;
-    font-size: 16px;
+    font-size: 22px;
     padding: 10px;
     border-radius: 10px;
     width: fit-content;
@@ -12,12 +12,12 @@
     position: absolute;
     top: -18px;
     font-weight: 800;
-    font-size: xx-small;
+    font-size: x-small;
 }
 
 .chatMessage__timestamp {
     margin-left: 10px;
-    font-size: xx-small;
+    font-size: x-small;
 }
 .chatMessage__receiver {
     margin-left: auto;

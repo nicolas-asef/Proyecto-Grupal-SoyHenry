@@ -19,7 +19,7 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
   const id = useParams().id
   const [pag,setPag] = useState(1)
   const [maxPag,setMaxPag] = useState(0)
-  const contractsVisualized = []
+  let contractsVisualized = []
   const [valoraciones,setValoraciones] = useState([])
   const [promedioRating,setpromedioRating] = useState(0)
   const [finishedJobs,setFinishedJobs] = useState(0)
@@ -28,14 +28,35 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
   const [worker, setWorker] = useState({})
   const [displaying, setDisplaying] = useState("")
 
+  const forceUpdate = ()=> {
+    console.log("-------->hola?")
+    if(type === "worker")
+      type = "user"
+    else 
+      type = "worker"
+
+    setPag(1)
+    setMaxPag(0)
+    contractsVisualized = []
+    setValoraciones([])
+    setpromedioRating(0)
+    setFinishedJobs(0)
+    setListaValoraciones([])
+    setForzarCambio(false)
+    setWorker({})
+    setDisplaying("")
+    console.log("--------------->type",type)
+    setForzarCambio(!forzarCambio)
+  }
 
   useEffect(() =>{
+    
     getUserDetail(id)
 
     return () => {
       cleanDetail();
     } 
-  },[])
+  },[forzarCambio])
 
 
 
@@ -138,6 +159,7 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
     else 
     setDisplaying("none")
   }
+
   return (
     <>
     {isLoading? 
@@ -162,7 +184,7 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
             <div className="filters-worker" style={{display:displaying}}>
               <Filters filtrado = {ordenarFiltrados}/>
             </div>
-            <Opinion contratos={valoraciones} tipo = {worker.Jobs} />
+            <Opinion forceUpdate={forceUpdate} contratos={valoraciones} tipo = {worker.Jobs} />
             
               {maxPag > 0 && finishedJobs > 0 ?  <div className="pagination"><Pagination count={maxPag} onChange={handleChange} hidePrevButton hideNextButton/> </div>:<></>}
             </>: <></>}

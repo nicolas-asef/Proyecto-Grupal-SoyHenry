@@ -4,16 +4,13 @@ import { getWorkers, getUsers } from "../../redux/actions/actions";
 
 export function Followers({ id }) {
   const worker = useSelector((state) => state.workers);
-  console.log(worker);
   //   const usId = useSelector((state) => state.users.Worker);
-  //   console.log(usId);
   //   //merompe el puot ID lcsm
   //   let idW;
   //   if (usId) {
   //     idW = usId.ID;
   //   }
 
-  //   console.log(idW);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getWorkers());
