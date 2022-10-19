@@ -6,9 +6,12 @@ import ChatMessage from "./ChatMessage";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import MoreVert from "@mui/icons-material/MoreVert";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+import { useAuth0 } from '@auth0/auth0-react'
+import { useEffect } from 'react'
 
-export default function Chat(props) {
+export default function Chat({guest, host, messages}) {
   const [input, setInput] = useState("");
+  const {user, isLoading} = useAuth0(); 
 
   function sendMessage(e) {
     e.preventDefault();
@@ -19,15 +22,16 @@ export default function Chat(props) {
   const handleOnChange = (e) => {
     setInput(e.target.value);
   };
+  console.log(messages)
   return (
     <div className="chat">
       <div className="chat__header">
         <Avatar
-          src={"https://avatars.dicebear.com/api/human/${props.userId}.svg"}
+           src={host === undefined ? 'Loading' : host.ID === user.sub ? `${guest.img}` : `${host.img}`} 
         />
         <div className="chat__headerInfo">
-          <h3>{props.room}</h3>
-          <p>Last seen at: {props.lastSeenDate}</p>
+           <h3>{host === undefined ? 'Loading' : host.ID === user.sub ? `${guest.name} ${guest.lastName}` : `${host.name} ${host.lastName}`}</h3>
+          <p>Last seen at: {'No se cuando estuvo'}</p>
         </div>
         <div className="chat__headerButtons">
           <IconButton>
@@ -42,7 +46,17 @@ export default function Chat(props) {
         </div>
       </div>
       <div className="chat__body">
+        {messages?.map((message)=> (
+          <div key={message.id}>
         <ChatMessage
+          name={host === undefined ? 'Loading' : host.ID === user.sub ? `${host.name} ${host.lastName}` : `${guest.name} ${guest.lastName}`}
+          message={message.text}
+          timestamp={new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()}
+          isSender={ host === undefined ? 'Loading' : host.ID === user.sub ? true : false}
+        />
+          </div>
+        ))}
+{/*         <ChatMessage
           name={"HOST"}
           message="This is a message"
           timestamp={"8:26"}
@@ -53,7 +67,7 @@ export default function Chat(props) {
           message="This is a message"
           timestamp={"8:26"}
           isSender={false}
-        />
+        /> */}
       </div>
       <div className="chat__footer">
         <IconButton>

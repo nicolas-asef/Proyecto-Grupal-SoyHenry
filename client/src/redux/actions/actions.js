@@ -35,7 +35,8 @@ import {
   DELETE_USER,
   DELETE_JOB,
   DELETE_COUNTRY,
-  GET_CHATS
+  GET_CHATS,
+  GET_CHAT_BY_PK
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
@@ -206,6 +207,19 @@ export function getChats(id) {
       .then((chat) => {
         dispatch({
           type: GET_CHATS,
+          payload: chat.data,
+        });
+      })
+      .catch((err) => {console.log(err.message)});
+  };
+}
+export function getChatByPk(id) {
+  return function (dispatch) {
+    axios
+      .get(baseURL + "chat/?id=" + id)
+      .then((chat) => {
+        dispatch({
+          type: GET_CHAT_BY_PK,
           payload: chat.data,
         });
       })

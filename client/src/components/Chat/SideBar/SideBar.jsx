@@ -53,17 +53,10 @@ useEffect(()=>{
  {/*        <SidebarChat newChat={true} /> */}
     {chats.length === 0 ? 'Loading' : chats.map((chat) => (
     <div key={chat.id}>
-      <SidebarChat host={chat.Host} guest={chat.Guest} messages={chat.Messages} authid={user.sub}  />
+      <SidebarChat host={chat.Host} guest={chat.Guest} messages={chat.Messages} authid={user.sub} chatid={chat.id}  />
     </div>))}
         
       </div>
-      {/* <div>
-        <Chat
-          room={"This is a room"}
-          lastSeenDate={"a random date"}
-          userId={"asdas"}
-        />
-      </div> */}
     </div>
   );
 }
