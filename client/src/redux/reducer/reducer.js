@@ -34,6 +34,7 @@ import {
   ADD_FAVORITE,
   DELETED_FAVORITE,
   GET_USER,
+  SET_CONECTED,
   GET_CHATS
 
 } from '../actions/actions_vars'
@@ -67,10 +68,17 @@ const initialState = {
   uploadedImg: "",
   socket: null,
   popUps: [],
+  onlineUsers:[],
   chats: []
 }
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+
+    case SET_CONECTED:
+      return {
+        ...state,
+        onlineUsers:action.payload
+      }
 
     case GET_USER:
       return{
@@ -291,12 +299,8 @@ const reducer = (state = initialState, action) => {
     }
     case DELETED_FAVORITE: {
       const workersFav = state.users.Favorites
-      console.log(action.payload)
-      console.log(workersFav)
       const us = state.users
-      console.log(us)
       const stayWorkersFav = workersFav.filter(e => e.ID !== action.payload)   
-      console.log(stayWorkersFav)  
       us.Favorites = stayWorkersFav
       return {
         ...state,

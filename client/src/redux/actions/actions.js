@@ -35,6 +35,7 @@ import {
   DELETE_USER,
   DELETE_JOB,
   DELETE_COUNTRY,
+  SET_CONECTED,
   GET_CHATS
 } from "./actions_vars";
 import { io } from "socket.io-client";
@@ -56,6 +57,12 @@ export function getWorkers(query, search) {
       })
       .catch((err) => {});
   };
+}
+
+export function setOnline(conectados){
+  return function(dispatch){
+    dispatch({type:SET_CONECTED,payload:conectados})
+  }
 }
 
 export function agregarSocker(id) {
@@ -260,7 +267,6 @@ export function getJobs() {
       let jobs = await axios.get(baseURL + "jobs");
       return dispatch({ type: GET_JOBS, payload: jobs.data });
     } catch (error) {
-      console.log(error);
     }
   };
 }
@@ -564,7 +570,6 @@ export function deletedFavorite(userID, workDeleted) {
 
 // export async function updateWorkerJobs(payload, payloadId) {
 //   return async function(dispatch){
-//   console.log(payload)
 //     const worker = await axios.put(baseURL+"worker/" + payloadId , payload);
 //     dispatch({
 //       type: PUT_WORKER,
@@ -579,7 +584,6 @@ export function postCountry(obj) {
       await axios.post("http://localhost:3001/countries", obj);
       dispatch({ type: POST_COUNTRY });
     } catch (error) {
-      console.log(error);
     }
   };
 }
@@ -590,7 +594,6 @@ export function postJob(obj) {
       await axios.post("http://localhost:3001/jobs", obj);
       dispatch({ type: POST_JOB });
     } catch (error) {
-      console.log(error);
     }
   };
 }
@@ -604,7 +607,6 @@ export function deleteUser(id, deleted) {
       );
       dispatch({ type: DELETE_USER });
     } catch (error) {
-      console.log(error);
     }
   };
 }
