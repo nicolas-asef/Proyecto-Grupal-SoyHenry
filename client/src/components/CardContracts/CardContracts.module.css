@@ -1,46 +1,65 @@
 .cardContracts {
-  /* border: 3px solid #4df30c; */
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 93.2vh;
+  background-image: url("https://i.imgur.com/UaCROI7.jpg");
+  background-position: center;
+  background-attachment: fixed;
+}
 
-  background-image: url("../../assets/fondocontratos.jpg");
+.containerContacts {
+  width: 90%;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.829);
+  backdrop-filter: blur(10px);
+  height: 80vh;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: 1px solid white;
 }
 
 .columnContainer {
   display: flex;
   flex-direction: column;
-  margin-top: 2%;
+  /* margin-top: 2%; */
 }
 
 .cardContainer {
   display: flex;
   gap: 1vw;
-  /* border: 3px solid #4df30c; */
-  height: 100vh;
+  justify-content: start;
+  margin-left: 20px;
+  align-items: center;
 }
 
 .filters {
   display: flex;
+  border-radius: 10px;
+  padding: 5px;
   justify-content: center;
   align-items: center;
-  margin-top: 2%;
-  width: 900px;
-  margin-left: 25%;
-  border-radius: 10px;
+  width: 100%;
   margin-bottom: 2vh;
-  background: rgba(139, 137, 70, 0.25);
-  backdrop-filter: blur(6.4px);
-  -webkit-backdrop-filter: blur(6.4px);
-  box-shadow: 10px 10px 80px 10px rgba(154, 154, 154, 0.479);
+  background-color: rgb(6, 40, 61);
 }
 
 .filters button {
   display: flex;
   color: white;
   letter-spacing: 3px;
-  font-family: "Anton", sans-serif;
   font-family: "Bebas Neue", cursive;
   font-size: 1.5rem;
-  filter: drop-shadow(3px 3px 1px #000000) drop-shadow(3px 3px 2px #000000)
-    drop-shadow(3px 3px 2px #000000);
+  padding: 0 5px;
+  background-color: transparent;
+  border: none;
+  margin: 5px;
+}
+
+.filters button:hover {
+  background-color: rgb(228, 228, 236);
+  border-radius: 10px;
+  transition: 0.5s all;
+  color: black;
 }

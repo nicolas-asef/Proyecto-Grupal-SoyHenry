@@ -119,7 +119,7 @@ const Profile = () => {
     setAnchorElUser(null);
   };
   const handleOpenProfile = () => {
-    navigate(`/profile/user/${sub}`);
+    window.location.replace(`/profile/user/${sub}`);
     setAnchorElUser(null);
   };
 

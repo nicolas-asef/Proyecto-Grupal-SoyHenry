@@ -83,23 +83,25 @@ function CardContract({
   };
   return (
     <div className={s.card}>
-      <h3>Contrato de trabajo</h3>
+      <div className={s.dataContainer}>
+        <h3>Contrato de trabajo</h3>
 
-      <div className={s.containerInfo}>
-        <h4>Fecha : </h4>
-        <span>{date ? date : "No especificado"}.</span>
-      </div>
-      <div className={s.containerInfo}>
-        <h4>Lugar : </h4>
-        <span>{location ? location : "No especificado"}.</span>
-      </div>
-      <div className={s.containerInfo}>
-        <h4>Estado : </h4>
-        <span>{state}</span>
-      </div>
-      <div className={s.containerInfoDesc}>
-        <h4>Descripcion del trabajo</h4>
-        <span>{description ? description : "No especificado"}.</span>
+        <div className={s.containerInfo}>
+          <h4>Fecha : </h4>
+          <span>{date ? date : "No especificado"}.</span>
+        </div>
+        <div className={s.containerInfo}>
+          <h4>Lugar : </h4>
+          <span>{location ? location : "No especificado"}.</span>
+        </div>
+        <div className={s.containerInfo}>
+          <h4>Estado : </h4>
+          <span>{state}</span>
+        </div>
+        <div className={s.containerInfoDesc}>
+          <h4>Descripcion del trabajo</h4>
+          <span>{description ? description : "No especificado"}.</span>
+        </div>
       </div>
       {worker ? (
         type == "p" ? (
