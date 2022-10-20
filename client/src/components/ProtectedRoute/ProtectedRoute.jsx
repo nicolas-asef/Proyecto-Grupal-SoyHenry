@@ -13,27 +13,25 @@ const ProtectedRoute = ({ children }) => {
   const dispatch = useDispatch();
   const [redirect, setRedirect] = React.useState(false);
 
-  // useEffect(() => {
-  //   console.log(userDetail)
-  //   if(isAuthenticated){
-  //     console.log("entro")
-  //     dispatch(getUserId(user.sub))
-  //     if(userDetail.message){
-  //       dispatch(createUser({
-  //         ID: user.sub,
-  //         email: user.email,
-  //         img: user.picture
-  //       }))
-  //       setRedirect(true)
-  //     } else {
-  //       if (userDetail.onBoarded === false){
-  //         setRedirect(true)
-  //       }
-  //       else {setRedirect(false)}
+  /* useEffect(() => {
+    if(isAuthenticated){
+      dispatch(getUserId(user.sub))
+      if(userDetail.message){
+        dispatch(createUser({
+          ID: user.sub,
+          email: user.email,
+          img: user.picture
+        }))
+        setRedirect(true)
+      } else {
+        if (userDetail.onBoarded === false){
+          setRedirect(true)
+        }
+        else {setRedirect(false)}
 
-  //     }
-  //   }
-  // },[userDetail, dispatch])
+      }
+    }
+  },[userDetail, dispatch]) */
 
   // userDetail.length !== 0 && console.log("userDetail", userDetail)
 

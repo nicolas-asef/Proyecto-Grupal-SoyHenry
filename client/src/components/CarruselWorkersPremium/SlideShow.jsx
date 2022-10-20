@@ -38,6 +38,7 @@ export default function SlideShow() {
       //     slideshow.current.style.transition = '300ms ease-out all'
       //     slideshow.current.style.transform = `translateX(0)`
       // },30)
+
     }
   };
 

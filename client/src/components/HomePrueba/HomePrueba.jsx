@@ -6,11 +6,11 @@ import SearchBar from "../SearchBar/SearchBar";
 import Filters from "../Filters/Filters";
 import s from "./HomePrueba.module.css";
 import CardsWorkers from "../CardsWorkers/CardsWorkers";
+import Footer from "../Footer/Footer";
 import Pagination from "@mui/material/Pagination";
 
 export default function HomePrueba() {
   let workers = useSelector((worker) => worker.workers);
-  console.log(workers);
   let newWorkers = workers.filter((worker) => worker.User.isDeleted === false);
   const dispatch = useDispatch();
 
@@ -89,7 +89,19 @@ export default function HomePrueba() {
               })}
           </div>
         </div>
-        <div className={s.footer}></div>
+        <div className={s.pagination}>
+          <Pagination
+            defaultPage={1}
+            color="primary"
+            count={numberPages}
+            page={page}
+            onChange={pagesNumber}
+            shape="rounded"
+          />
+        </div>
+        <div className={s.footer}>
+          <Footer />
+        </div>
       </div>
     </div>
   );

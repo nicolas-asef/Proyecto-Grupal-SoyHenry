@@ -180,6 +180,7 @@ body.active-modal {
 }
 
 .text-info {
+    min-width: 23vw;
     width: 80%;
     font-size: 20px;
     min-height: 10vh ;
@@ -206,6 +207,7 @@ body.active-modal {
 }
 
 .label-description {
+    min-width: 23vw;
     width: 75%;
     text-align: start;
     background-color: #1976d2;

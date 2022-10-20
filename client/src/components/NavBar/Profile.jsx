@@ -27,6 +27,7 @@ import { Badge, ClickAwayListener } from "@mui/material";
 import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneTwoTone";
 import { useState } from "react";
 import PopUps from "../PopUps/PopUps";
+import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -120,7 +121,6 @@ const Profile = () => {
   };
   const handleOpenProfile = () => {
     window.location.replace(`/profile/user/${sub}`);
-    //navigate(`/profile/user/${sub}`);
     setAnchorElUser(null);
   };
 
@@ -208,23 +208,24 @@ const Profile = () => {
   return (
     <>
       <div className={s.contenedor}>
-        <div className={s.badge}>
+        <div className={s.but}>
           <ClickAwayListener onClickAway={DshowPopUps}>
-            <div>
-              <Badge
-                onClick={showPopUps}
-                badgeContent={cantNotificaciones}
-                color="primary"
-              >
-                <NotificationsNoneTwoToneIcon />
-              </Badge>
+            <div className={s.iconAlign}>
+              <Button onClick={showPopUps}>
+                <Badge badgeContent={cantNotificaciones} color="primary">
+                  <NotificationsNoneTwoToneIcon
+                    sx={{ color: "white" }}
+                    fontSize={"medium"}
+                  />
+                </Badge>
+              </Button>
               {popUpsEnabled ? <PopUps popUps={popUps} /> : <></>}
             </div>
           </ClickAwayListener>
         </div>
         <div className={s.but}>
           <Button onClick={handleOpen}>
-            <FaHeart />
+            <FavoriteTwoToneIcon fontSize={"medium"} sx={{ color: "white" }} />
           </Button>
 
           {open && (
@@ -240,6 +241,7 @@ const Profile = () => {
             className={s.name}
             label={`${user.name} ${user.lastName}`}
             variant="outlined"
+            sx={{ marginLeft: 3 }}
           />
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

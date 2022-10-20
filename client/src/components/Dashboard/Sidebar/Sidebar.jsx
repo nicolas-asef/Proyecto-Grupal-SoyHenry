@@ -20,19 +20,19 @@ export default function Sidebar (){
             <div className={s.dashboard}>
                 <h1 className={s.title}>Dashboard</h1>
                 <ul>
-                    <Link to='/dashboard'>
+                    <Link to='/dashboard' className={s.link}>
                         <li className={s.li}>
                             <HomeIcon />
                             <span>Home</span>
                         </li>
                     </Link>
-                    <Link to='/dashboard/analytics'>
+                    <Link to='/dashboard/analytics' className={s.link}>
                         <li className={s.li}>
                             <TrendingUpIcon />
                             <span>Analytics</span>
                         </li>
                     </Link>
-                    <Link to='/dashboard/balance'>
+                    <Link to='/dashboard/balance' className={s.link}>
                         <li className={s.li}>
                             <TrendingUpIcon />
                             <span>Balance</span>
@@ -41,36 +41,28 @@ export default function Sidebar (){
                 </ul>
                 <h1 className={s.title}>Quick Menu</h1>
                 <ul>
-                    <Link to='/dashboard/users'>
+                    <Link to='/dashboard/users' className={s.link}>
                         <li className={s.li}>
                             <PersonOutlineIcon />
                             <span>Users</span>
                         </li>
                     </Link>
-                    <Link to='/dashboard/workers'>
+                    <Link to='/dashboard/workers' className={s.link}>
                     <li className={s.li}>
                         <EngineeringIcon />
                         <span>Workers</span>
                     </li>
                     </Link>
-                    <li className={s.li}>
-                        <StarBorderIcon />
-                        <span>Workrs Premium</span>
-                    </li>
-                    <li className={s.li}>
-                        <BarChartIcon />
-                        <span>Reports</span>
-                    </li>
                 </ul>
                     <h1 className={s.title}>Settings</h1>
                 <ul>
-                    <Link to='/dashboard/jobs'>
+                    <Link to='/dashboard/jobs' className={s.link}>
                         <li className={s.li}>
                             <WorkIcon />
                             <span>New Job</span>
                         </li>
                     </Link>
-                    <Link to='/dashboard/country'>
+                    <Link to='/dashboard/country' className={s.link}>
                         <li className={s.li}>
                             <PublicIcon />
                             <span>New Country</span>

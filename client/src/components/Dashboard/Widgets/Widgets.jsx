@@ -1,6 +1,6 @@
 import s from "./Widgets.module.css"
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import CircleIcon from '@mui/icons-material/Circle';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import AdjustIcon from '@mui/icons-material/Adjust';
@@ -11,56 +11,62 @@ import { getUsers, getWorkers } from "../../../redux/actions/actions";
 
 export default function Widgets ({ type }){
     
-    let data = {}
-    
-    if (type === 'users'){
-        data = {
-            title : "Users",
-            counter: 4532,
-            link: "See all users",
-            icon: <KeyboardArrowUpIcon/>,
-            porcentaje: "45 %",
-            access: <PeopleAltIcon className={s.users}/>
-        }
-    }
-    if (type === 'workers'){
-        data = {
-            title : "Workers",
-            counter: 2843,
-            link: "See all workers",
-            icon: <KeyboardArrowUpIcon/>,
-            porcentaje: "8 %",
-            access: <EngineeringIcon className={s.workers}/>
-        }
-    }
-    if (type === 'online'){
-        data = {
-            title : "Online",
-            counter: 932,
-            link: "Users online",
-            icon: <CircleIcon className={s.circle}/>,
-            porcentaje: "",
-            access: <AdjustIcon className={s.online}/>
-        }
-    }
-    if (type === 'premium'){
-        data = {
-            title : "Premium",
-            counter: 1723,
-            link: "Users premium",
-            icon: <KeyboardArrowUpIcon/>,
-            porcentaje: "30 %",
-            access: <StarIcon className={s.premium}/>
-        }
-    }
 
     const dispatch = useDispatch()
+    const users = useSelector(state => state.onlyUser)
+    const workers = useSelector(state => state.allWorkers)
+    const online = useSelector(state => state.newUser)
+    const workersPremium = workers.filter(worker => worker.premium === true)
+    const allOnline = online.filter(online => online.isOnline === true)
 
     useEffect (() => {
         dispatch(getWorkers())
         dispatch(getUsers())
     },[])
-
+    
+    let userCount = 15
+    let workerCount = 15
+    let workerPremiumCount = 5
+    let onlineCount = 2
+    
+    let data = {}
+    
+    if (type === 'users'){
+        data = {
+            title : "Users",
+            counter: users.length,
+            link: "See all users",
+            porcentaje: Math.ceil((users.length / userCount)*100) - 100,
+            access: <PeopleAltIcon className={s.users}/>
+        }    
+    }    
+    if (type === 'workers'){
+        data = {
+            title : "Workers",
+            counter: workers.length,
+            link: "See all workers",
+            porcentaje:  Math.ceil((workers.length / workerCount)*100) - 100,
+            access: <EngineeringIcon className={s.workers}/>
+        }    
+    }    
+    if (type === 'online'){
+        data = {
+            title : "Online",
+            counter: allOnline.length,
+            link: "Users online",
+            porcentaje:  Math.ceil((allOnline.length / onlineCount)*100) - 100,
+            access: <AdjustIcon className={s.online}/>
+        }    
+    }    
+    if (type === 'premium'){
+        data = {
+            title : "Premium",
+            counter: workersPremium.length,
+            link: "Users premium",
+            porcentaje: Math.ceil((workersPremium.length / workerPremiumCount)*100) - 100,
+            access: <StarIcon className={s.premium}/>
+        }    
+    }        
 
     return (
         <div className={s.widgets}>
@@ -71,8 +77,17 @@ export default function Widgets ({ type }){
             </div>
             <div className={s.right}>
                 <div className={s.porcentage}>
-                    {data.icon}
-                    {data.porcentaje}
+                {
+                    data.porcentaje >= 0
+                    ? <div className={s.porcentage}>
+                        <KeyboardArrowUpIcon />
+                        {data.porcentaje} %
+                    </ div> 
+                    : <div className={s.porcentageNeg}>
+                         <KeyboardArrowDownIcon />
+                        {data.porcentaje} %
+                    </ div> 
+                }
                 </div>
                 <div className={s.access}>
                     {data.access}
