@@ -8,7 +8,8 @@ import style from "./SearchBar.module.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
-export default function SearchBar() {
+export default function SearchBar({callbk}) {
+  
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -23,6 +24,7 @@ export default function SearchBar() {
         "Has creado tu perfil de trabajador con exito !!"
       )
     );
+    callbk()
   };
   return (
     <form className={style.search} onSubmit={handleSubmit}>

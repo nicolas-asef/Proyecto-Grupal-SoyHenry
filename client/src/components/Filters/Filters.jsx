@@ -11,7 +11,7 @@ import {
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
-const Filters = () => {
+const Filters = ({callbk}) => {
   const dispatch = useDispatch();
   const [order, setOrder] = useState("");
   const [job, setJob] = useState("all");
@@ -25,24 +25,28 @@ const Filters = () => {
   const orderBy = (e) => {
     dispatch(orderByRating(worker, e.target.value));
     setOrder(`ordenado ${e.target.value}`);
+    callbk()
   };
 
   const filterjob = (e) => {
     e.preventDefault();
     setJob(e.target.value);
     dispatch(filter(filtrado, e.target.value, available, zone));
+    callbk()
   };
 
   const filterAvailable = (e) => {
     e.preventDefault();
     setAvailable(e.target.value);
     dispatch(filter(filtrado, job, e.target.value, zone));
+    callbk()
   };
 
   const filterZone = (e) => {
     e.preventDefault();
     setZone(e.target.value);
     dispatch(filter(filtrado, job, available, e.target.value));
+    callbk()
   };
 
   useEffect(() => {
