@@ -40,7 +40,6 @@ const ProtectedRoute = ({ children }) => {
   // userDetail.length !== 0 && console.log("userDetail", userDetail)
   /* 
   React.useEffect(() => {
-    console.log(userDetail);
     if (isAuthenticated) {
       dispatch(getUserId(user.sub));
 

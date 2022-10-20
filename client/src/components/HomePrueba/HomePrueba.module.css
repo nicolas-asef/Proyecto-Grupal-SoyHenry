@@ -14,7 +14,11 @@
   grid-column: 2/11;
   background-color: #eaeaea;
 }
-
+.errormessage h1{
+  border: 1px solid black;
+  border-radius: 5%;
+  padding: 3rem;
+}
 .carrusel {
   padding-top: 15px;
 }

@@ -9,7 +9,6 @@ function CommentBox({forceUpdate,descripcion,imagen,nombre,rating,type,id}) {
   const navigate = useNavigate()
   const navegar = () => {
     navigate('/profile/'+type+id);
-    console.log(forceUpdate)
     forceUpdate()
   };
 

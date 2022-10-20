@@ -69,10 +69,8 @@ function Profile({
 
   const idWorkerFav = useSelector((state) => state.userDetail);
   const usW = us.Favorites;
-  console.log(usW);
   const [checked, setChecked] = React.useState(false);
   const worksFavs = idWorkerFav.Favorites;
-  console.log(idWorkerFav);
   let follow;
   if (idWorkerFav.Worker) {
     follow = usW && usW.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);

@@ -70,14 +70,11 @@ const getSocket = (socketId) => {
   const asArray = Object.entries(users);
   const filtered = asArray.filter(([key, value]) => value.includes(socketId));
 
-  //console.log("---------------------->",filtered)
-
   return Object.fromEntries(filtered)
 }
 
 io.on("connection", socket => {
 
-  console.log("Se ha conectado un usuario", socket.id)
 
   
     socket.on("addUser",async (userId) => {
@@ -166,9 +163,23 @@ io.on("connection", socket => {
       const img = emisor.img
       const nombre_emisor = emisor.name
       const id = notificacion.id
-      
+      let id_mensaje = null
+      if(tipo === "mensaje"){
+        const chat = await Chat.findOne({where:{[Op.and]:[{[Op.or]: [
+          {
+          HostID: emisor_id}, {HostID: receptor_id}]},
+          {
+            [Op.or]: [{GuestID: receptor_id},{GuestID: emisor_id}]
+          }
+          ]    
+          },})
+          if(chat){
+            id_mensaje = chat.id
+          }
+  
+      }
       if(recepcion)
-        recepcion.forEach(e => io.to(e).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo}))
+        recepcion.forEach(e => io.to(e).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo,id_mensaje}))
     })
     
     socket.on("seen",async elementos => {
@@ -178,15 +189,15 @@ io.on("connection", socket => {
 
     socket.on("disconnect", async () => {
       
-      //console.log("Usuario desconectado", socket.id)
+     
       
       const user = getSocket(socket.id)
 
       const userId = Object.keys(user)[0]
-      console.log(userId)
+   
       
       if(userId && users[userId].length === 1){
-        console.log("entre->")
+   
       await User.update({isOnline:false},{where:{ID:userId}})
      }
       if(socket.id && users)
