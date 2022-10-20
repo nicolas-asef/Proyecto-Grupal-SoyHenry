@@ -21,6 +21,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Avatar from "@mui/material/Avatar";
 import s from "./SettingsProfile.module.css";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -31,6 +32,7 @@ export default function SettingProfile() {
   const dispatch = useDispatch();
   const login = useAuth0();
   const [id, setId] = useState(false);
+  const [InitImg, setInitImg] = useState("");
 
   useEffect(() => {
     setId(login.user?.sub);
@@ -96,6 +98,7 @@ export default function SettingProfile() {
       ...prevState,
       img: uploadedImage.url,
     }));
+    setInitImg(uploadedImage.url);
   }, [uploadedImage]);
 
   const formData = new FormData();
@@ -163,6 +166,156 @@ export default function SettingProfile() {
   const handleClosePopUp = () => {
     setOpenLogin(false);
   };
+
+  return (
+    <div className={s.all}>
+      <div className={s.containerSetting}>
+        <form onSubmit={onSubmit}>
+          <h1>Editar perfil</h1>
+          <div className={s.pictureContainer}>
+            <Avatar src={InitImg} sx={{ width: 86, height: 86 }} />
+            <Button
+              className={s.buttonImage}
+              variant="contained"
+              component="label"
+            >
+              Selecionar archivo
+              <input
+                name="img"
+                hidden
+                accept="image/*"
+                multiple
+                type="file"
+                onChange={handleImgChange}
+              />
+            </Button>
+            {image === "" || image === undefined ? (
+              ""
+            ) : (
+              <div className={s.imageUpload}>
+                <Button
+                  className={s.buttonImage}
+                  variant="contained"
+                  color="success"
+                  onClick={uploadImageHandler}
+                >
+                  Subir Imagen
+                </Button>
+              </div>
+            )}
+            {uploaded === true ? (
+              <span className="SuccessIMG">
+                Imagen subida correctamente, persiona el botón Send para guardar
+                los cambios
+              </span>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className={s.bloke}>
+            <div className={s.blokeField}>
+              <span className={s.labelInput}>Telefono</span>
+              <TextField
+                id="outlined-required"
+                name="phone"
+                fullWidth
+                value={input.phone}
+                placeholder={"112324592"}
+                /* defaultValue={user.phone}  */
+                onChange={handleChange}
+              />
+            </div>
+            <div className={s.blokeField}>
+              <span className={s.labelInput}>Trabajo</span>
+              <TextField
+                id="outlined-required"
+                name="jobs"
+                type="text"
+                select
+                value={inputJobs}
+                placeholder="Select your jobs"
+                defaultValue="Select your jobs"
+                onChange={handleJob}
+              >
+                {jobs &&
+                  jobs.map((job) => (
+                    <MenuItem key={job.id} id={job.id} value={job.name}>
+                      {job.name}
+                    </MenuItem>
+                  ))}
+              </TextField>
+            </div>
+            <div className={s.blokeField}>
+              <span className={s.labelInput}>Descripción</span>
+              <TextField
+                id="outlined-required"
+                name="description"
+                multiline
+                value={inputWork.description}
+                rows={4}
+                maxRows={4}
+                fullWidth
+                aria-label="maximum height"
+                placeholder={
+                  user.Worker.description || "Descripción breve sobre tí"
+                }
+                defaultValue=""
+                // style={{ width: 200 }}
+                onChange={handleChangeWork}
+              />
+            </div>
+          </div>
+
+          <div className={s.premium}>
+            <div className={s.sendPremium}>
+              <Button
+                // fullWidth
+                type="submit"
+                variant="contained"
+                endIcon={<SendIcon />}
+                sx={{ marginRight: 2 }}
+              >
+                ENVIAR
+              </Button>
+              <Button
+                // fullWidth
+                type="submit"
+                variant="contained"
+                onClick={handlePremium}
+                sx={{
+                  background: "#ffa600",
+                  border: "2px solid #ffa600",
+                  color: "black",
+                  "&:hover": {
+                    // background: "red",
+                    color: "white",
+                    border: "none",
+                  },
+                }}
+              >
+                PREMIUM
+              </Button>
+            </div>
+            <h4>¡Convertirse en premium!</h4>
+
+            <Snackbar
+              open={openLogin}
+              autoHideDuration={3000}
+              onClose={handleClosePopUp}
+            >
+              <Alert
+                onClose={handleClosePopUp}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                Tus datos se modificaron correctamente
+              </Alert>
+            </Snackbar>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 
   return (
     <div className={s.all}>
