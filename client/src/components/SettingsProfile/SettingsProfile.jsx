@@ -28,12 +28,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function SettingProfile() {
   const dispatch = useDispatch();
-  const login = useAuth0()
-  const[id, setId] = useState(false)
+  const login = useAuth0();
+  const [id, setId] = useState(false);
 
-  useEffect(()=>{
-    setId(login.user?.sub)
-  },[login])
+  useEffect(() => {
+    setId(login.user?.sub);
+  }, [login]);
 
   const { jobs } = useSelector((state) => state);
   const countries = useSelector((state) => state.allCountries);
@@ -152,7 +152,7 @@ export default function SettingProfile() {
       <div className={s.containerSetting}>
         <form onSubmit={onSubmit}>
           <h1>Edit profile</h1>
-          <div className={s.bloke}>
+          {/* <div className={s.bloke}>
             <h3 className="pad">Location</h3>
             <div className={s.campos}>
               <TextField
@@ -160,7 +160,7 @@ export default function SettingProfile() {
                 name="location"
                 select
                 value={input.location}
-                /* defaultValue={user.location} */
+                 
                 onChange={handleChange}
               >
                 {countries &&
@@ -171,7 +171,7 @@ export default function SettingProfile() {
                   ))}
               </TextField>
             </div>
-          </div>
+          </div> */}
 
           <div className={s.bloke}>
             <h3 className="pad">Phone</h3>
