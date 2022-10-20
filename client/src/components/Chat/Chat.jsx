@@ -24,6 +24,7 @@ export default function Chat({ guest, host, messages }) {
   ,[messages])
 
 
+
   useEffect(() => {
     socket?.on("createMessage", ({ EmitterID, text, date }) => {
       //aca renderizo el mensaje del texto y listo
@@ -171,50 +172,3 @@ if (minutos < 10){ minutos = '0' + minutos}
   );
 }
 
-// import { Container } from "@mui/system";
-// import { useEffect, useState } from "react";
-// import io from "socket.io-client";
-// import styled from "styled-components";
-// import { Avatar } from "@mui/material";
-// import Sidebar from "./Sidebar/SideBar";
-// import getHostID from "../../../../api/utils/getHostID";
-// import { useAuth0 } from "@auth0/auth0-react";
-// import router from "../../../../api/src/routes/chat";
-
-// // const socket = io("http://localhost:3001");
-
-// export default function Chat(id, users) {
-//   const [user] = useAuth0;
-//   //const [guestID] = Chat donde user sea
-
-//   const hostID = getHostID(users, user);
-
-//   const enterChat = () => {
-//     // router.push(`/chat/${id}`)
-//   };
-//   return (
-//     <Container1 onClick={enterChat}>
-//       {/* {chat ? (
-//         <UserAvatar1 src={host?.imgURL} />
-//         ) : (
-//           <UserAvatar1>{guest[0]}</UserAvatar1>
-//         )
-//       }
-
-//       <p>{hostID}</p> */}
-//     </Container1>
-//   );
-// }
-
-// const Container1 = styled.div`
-//   display: flex;
-//   align-items: center;
-//   cursor: pointer;
-//   padding: 15px;
-//   word-break: break-word;
-// `;
-
-// const UserAvatar1 = styled(Avatar)`
-//   margin: 5px;
-//   margin-right: 15px;
-// `;

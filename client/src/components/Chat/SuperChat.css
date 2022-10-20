@@ -11,4 +11,15 @@
     height: 90vh;
     width: 90vw;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgb(0,0,0,0.23);
+    /* align-items: center;
+    justify-content: center; */
+}
+
+.chat__loading{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    left: 25%;
+    align-items: center;
 }
