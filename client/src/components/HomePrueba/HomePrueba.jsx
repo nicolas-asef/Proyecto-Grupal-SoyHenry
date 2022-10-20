@@ -71,7 +71,7 @@ export default function HomePrueba() {
         </div>
         <div className={titles ? s.divWorker : s.divWorkerHidden}>
           <div className={s.workers}>
-            {currentWorkers &&
+            {currentWorkers.length ? (
               currentWorkers.map((worker) => {
                 return (
                   <CardsWorkers
@@ -86,7 +86,12 @@ export default function HomePrueba() {
                     img={worker.User.img}
                   />
                 );
-              })}
+              })
+            ) : (
+              <div className={s.errormessage}>
+                <h1>NO SE ENCONTRARON RESULTADOS COINCIDENTES</h1>
+              </div>
+            )}
           </div>
         </div>
         <div className={s.pagination}>

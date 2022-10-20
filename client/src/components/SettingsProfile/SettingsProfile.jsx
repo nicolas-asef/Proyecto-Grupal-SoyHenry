@@ -286,6 +286,7 @@ export default function SettingProfile() {
                       placeholder={user.Worker.description}
                       defaultValue=""
                       style={{ width: 200 }}
+                      onChange={handleChangeWork}
                     />
                   </div>
                 </div>
