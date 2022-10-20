@@ -231,7 +231,11 @@ const Profile = () => {
         </div>
         <div className={s.inbox}>
           <IconButton onClick={sendInbox}>
-            <MailOutlineRoundedIcon color="primary" fontSize="large" />
+            <MailOutlineRoundedIcon
+              color="primary"
+              fontSize="medium"
+              sx={{ color: "white" }}
+            />
           </IconButton>
         </div>
         <div className={s.but}>
