@@ -10,22 +10,22 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import "./TestimonialsSlider.css";
 
 const TestiMonials = () => {
-  const workersState = useSelector((state) => state.workers);
-  const workers = workersState ? workersState : info.examples;
+  // const workersState = useSelector((state) => state.workers);
+  const workers = info.examples;
 
   const options = info.opt;
 
   return (
     <section id="testimonial" className="testimonials pt-70 pb-70">
       <div>
-        <div className="title">Testimonials about our workers</div>
+        <div className="title">Testimonios acerca de nuestros trabajadores</div>
         <Typography
           variant="h5"
           align="center"
           color="text.secondary"
           paragraph
         >
-          What Our Clients are Saying?
+          ¿Que dicen nuestros clientes?
         </Typography>
         <div className="row">
           <div className="col-md-12">

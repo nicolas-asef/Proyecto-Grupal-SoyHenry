@@ -12,6 +12,18 @@
   z-index: 1;
 }
 
+.premiumContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 4%;
+  margin-left: 8%;
+  width: 1400px;
+  background: rgba(139, 137, 70, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(154, 154, 154, 0.479);
+}
+
 .carouselContainer {
   display: flex;
   justify-content: center;

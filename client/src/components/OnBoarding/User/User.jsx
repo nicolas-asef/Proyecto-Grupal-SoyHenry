@@ -14,10 +14,11 @@ import MenuItem from "@mui/material/MenuItem";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { validator } from "../validator";
 import { useAuth0 } from "@auth0/auth0-react";
+import { sendNotification } from "../../../redux/actions/actions";
 
 const User = (props) => {
   const dispatch = useDispatch();
-  const { loginWithRedirect, isLoading } = useAuth0();
+  const { loginWithRedirect, isLoading, user } = useAuth0();
   const [jobsState, setJobsState] = useState([]);
   const [workMax, setWorkMax] = useState(false);
   const [validateWorks, setValidateWorks] = useState(false);
@@ -65,11 +66,26 @@ const User = (props) => {
   };
 
   const onSubmit = (data) => {
-
     if (props.type === "worker" && !jobsState.length)
       return setValidateWorks(true);
     props.stepperCb(3);
     dispatch(finishUserCreation(props.authID, data, jobsState)).then((res) => {
+      if (props.type === "worker") {
+        dispatch(
+          sendNotification(
+            user.email,
+            "Tu perfil de Trabajador se ha creado con exito !"
+          )
+        );
+      } else {
+        dispatch(
+          sendNotification(
+            user.email,
+            "Tu cuenta ha sido creada de manera exitosa !"
+          )
+        );
+      }
+
       if (res.status === 200) {
         loginWithRedirect();
       } else {
