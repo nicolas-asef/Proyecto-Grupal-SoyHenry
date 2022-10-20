@@ -53,32 +53,6 @@ import Footer from "../Footer/Footer";
           <Footer />
         </div>
       </div>
-  //       <div className={s.pageAbout}>
-  //         <div className={s.container}>
-  //             <div className={s.top}>
-  //               <div className={s.imgProfile}>
-  //                 {/* <img className={s.img} src={require("./worker2.jpg")} alt="" /> */}
-  //               </div>
-  //             </div>
-  //             <div className={s.mid}>
-  //               <div className={s.name}>Nico</div>
-  //               <div className={s.job}>Developer</div>
-  //               <div className={s.description}>Well meaning and kindly</div>
-  //             </div>
-  //             <div className={s.bottom}>
-  //               <a href="#" className={s.a}>
-  //                 <GitHubIcon fontSize="large"/>
-  //               </a>
-  //               <a href="#" className={s.a}>
-  //                 <LinkedInIcon fontSize="large"/>
-  //               </a>
-  //               <a href="#" className={s.a}>
-  //                 <MailOutlineIcon fontSize="large"/>
-  //               </a>
-  //             </div>
-  //         </div>
-  //       </div>
-  // )
-      )
+  )
 }
 
