@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
+import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
+import SvgIcon from "@mui/material/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
@@ -27,6 +29,7 @@ import { Badge, ClickAwayListener } from "@mui/material";
 import NotificationsNoneTwoToneIcon from "@mui/icons-material/NotificationsNoneTwoTone";
 import { useState } from "react";
 import PopUps from "../PopUps/PopUps";
+import FavoriteTwoToneIcon from "@mui/icons-material/FavoriteTwoTone";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -124,7 +127,7 @@ const Profile = () => {
     setAnchorElUser(null);
   };
   const handleOpenProfile = () => {
-    navigate(`/profile/user/${sub}`);
+    window.location.replace(`/profile/user/${sub}`);
     setAnchorElUser(null);
   };
 
@@ -142,6 +145,10 @@ const Profile = () => {
   const handleContracts = () => {
     navigate("/contracts/user/" + sub);
     setAnchorElUser(null);
+  };
+
+  const sendInbox = () => {
+    navigate("/chat");
   };
 
   const showPopUps = () => {
@@ -212,25 +219,34 @@ const Profile = () => {
   return (
     <>
       <div className={s.contenedor}>
-        <div className={s.badge}>
+        <div className={s.but}>
           <ClickAwayListener onClickAway={DshowPopUps}>
-            <div>
-              <Badge
-                onClick={showPopUps}
-                badgeContent={cantNotificaciones}
-                color="primary"
-              >
-                <NotificationsNoneTwoToneIcon />
-              </Badge>
+            <div className={s.iconAlign}>
+              <Button onClick={showPopUps}>
+                <Badge badgeContent={cantNotificaciones} color="primary">
+                  <NotificationsNoneTwoToneIcon
+                    sx={{ color: "white" }}
+                    fontSize={"medium"}
+                  />
+                </Badge>
+              </Button>
               {popUpsEnabled ? <PopUps popUps={popUps} /> : <></>}
             </div>
           </ClickAwayListener>
         </div>
+        <div className={s.inbox}>
+          <IconButton onClick={sendInbox}>
+            <MailOutlineRoundedIcon
+              color="primary"
+              fontSize="medium"
+              sx={{ color: "white" }}
+            />
+          </IconButton>
+        </div>
         <div className={s.but}>
           <Button onClick={handleOpen}>
-            <FaHeart />
+            <FavoriteTwoToneIcon fontSize={"medium"} sx={{ color: "white" }} />
           </Button>
-
           {open && (
             <Modal open={open} onClick={handleClose}>
               <Box className={s.st}>
@@ -244,6 +260,7 @@ const Profile = () => {
             className={s.name}
             label={`${user.name} ${user.lastName}`}
             variant="outlined"
+            sx={{ marginLeft: 3 }}
           />
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

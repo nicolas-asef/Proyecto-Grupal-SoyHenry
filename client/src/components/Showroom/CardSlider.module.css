@@ -5,6 +5,30 @@
 .containerCards {
   display: flex;
   flex-direction: row;
+  margin-top: 5%;
+}
+
+.titleCarrousel {
+  display: flex;
+  justify-content: center;
+  margin-left: 20%;
+  margin-top: 3%;
+  font-size: 3.2rem;
+  font-family: "Anton", sans-serif;
+  font-family: "Bebas Neue", cursive;
+  background-image: linear-gradient(0, #9c9d9e 45%, transparent 45%);
+  width: 450px;
+}
+
+.premiumContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+  width: 1400px;
+  background: rgba(139, 137, 70, 0.25);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  box-shadow: 10px 10px 80px 10px rgba(154, 154, 154, 0.479);
 }
 
 .boxContainer {
@@ -192,7 +216,7 @@
   font-size: 0.8rem;
 }
 .social p {
-  margin-top: 35%;
+  margin-top: 25%;
 }
 
 .social button {
@@ -221,7 +245,9 @@
   color: #2d3436;
   transition: 0.5s ease;
 }
+
 .title {
+  min-height: 50px;
   font-family: "Yantramanav", sans-serif;
   font-size: 22px;
 }
@@ -262,7 +288,7 @@
 }
 
 .online {
-  margin-bottom: 25%;
+  /* margin-bottom: 25%; */
   color: rgb(1, 206, 104);
   font-size: 1.3rem;
   display: inline-block;
@@ -275,7 +301,7 @@
 }
 
 .disconnected {
-  margin-bottom: 25%;
+  /* margin-bottom: 25%; */
   color: rgb(202, 0, 0);
   font-size: 1.3rem;
   display: inline-block;

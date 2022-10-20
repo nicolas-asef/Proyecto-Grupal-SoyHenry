@@ -114,7 +114,7 @@ const NavBar = () => {
 
               fontFamily: "Bebas Neue",
               fontWeight: 700,
-              letterSpacing: "7px",
+              letterSpacing: "4px",
               color: "white",
               textShadow: "4px 4px 4px black;",
               textDecoration: "none",
@@ -133,9 +133,10 @@ const NavBar = () => {
                 sx={{
                   my: 2,
                   color: "white",
-                  "&:hover": { color: "black" },
+                  "&:hover": { color: "white" },
                   display: "block",
                   margin: "0.2%",
+                  fontWeight: "bold",
                   textShadow: "2px 2px 2px black;",
                 }}
                 component={Link}
@@ -154,7 +155,7 @@ const NavBar = () => {
                 sx={{
                   my: 1,
                   color: "white",
-                  "&:hover": { color: "black" },
+                  "&:hover": { color: "white" },
                   display: "flex",
                   textShadow: "4px 4px 4px black;",
                 }}

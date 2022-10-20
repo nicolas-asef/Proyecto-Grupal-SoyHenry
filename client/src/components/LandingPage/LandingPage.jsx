@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
 import TestiMonials from "../Showroom/TestimonialsSlider.jsx";
 import DemoCarousel from "../Showroom/LandingSlider.jsx";
+import CardSlider from "../Showroom/CardSlider.jsx";
 
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
@@ -49,6 +50,9 @@ export default function Album() {
           Solos podemos hacer poco, juntos podemos hacer mucho.
         </div>
         <DemoCarousel className={s.carousel} />
+      </div>
+      <div className={s.premiumContainer}>
+        <CardSlider />
       </div>
       <div className={hidden ? s.testimonials : s.testimonialsHidden}>
         <TestiMonials />

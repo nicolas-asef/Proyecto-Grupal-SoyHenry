@@ -180,6 +180,7 @@ body.active-modal {
 }
 
 .text-info {
+    min-width: 23vw;
     width: 80%;
     font-size: 20px;
     min-height: 10vh ;
@@ -206,6 +207,7 @@ body.active-modal {
 }
 
 .label-description {
+    min-width: 23vw;
     width: 75%;
     text-align: start;
     background-color: #1976d2;
@@ -218,4 +220,12 @@ body.active-modal {
 .buttonStyled {
     margin: 0 5px;
     width: 150px;
+}
+.followers{
+    font-size: 1.5rem;
+    color: #1976d2;
+}
+.follows{
+    font-size: 1.5rem;
+    color: #1976d2; 
 }
