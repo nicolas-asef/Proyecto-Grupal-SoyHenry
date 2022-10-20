@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getChatByPk } from "../../redux/actions/actions";
 import { useEffect } from "react";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function SuperChat() {
   const { id } = useParams();
@@ -24,7 +26,10 @@ function SuperChat() {
       <div className="app__body">
         <Sidebar />
         {!id ? (
-          <h1>Bienvenido a tus chats</h1>
+          <div className="chat__loading">
+            <p>Debes seleccionar un chat</p>
+            <CircularProgress color="success" />
+          </div>
         ) : (
           <Chat guest={chat.Guest} host={chat.Host} messages={chat.Messages} />
         )}

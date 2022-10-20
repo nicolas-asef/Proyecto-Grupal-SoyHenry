@@ -11,10 +11,6 @@ export default function SiderbarChat({
   authid,
   chatid,
 }) {
-  function createChat() {
-    alert("creating...");
-  }
-
   return (
     <Link to={`/chat/${chatid}`} className="link__sidechat">
       <div className="sidebarChat">

@@ -14,28 +14,27 @@ export default function Chat({ guest, host, messages }) {
   const [input, setInput] = useState("");
   const { user } = useAuth0();
   const socket = useSelector((state) => state.socket);
-  const [mensajes, setMensajes] = useState(messages)
-  const [elemento, setElemento] = useState({})
-  const [forceUpdate,setForceUpdate] = useState(true)
-  useEffect(()=>{
-    setMensajes(messages)
-  }
-  ,[messages])
+  const [mensajes, setMensajes] = useState(messages);
+  const [elemento, setElemento] = useState({});
+  const [forceUpdate, setForceUpdate] = useState(true);
+  useEffect(() => {
+    setMensajes(messages);
+  }, [messages]);
 
   useEffect(() => {
     socket?.on("createMessage", ({ EmitterID, text }) => {
       //aca renderizo el mensaje del texto y listo
-      setElemento({text,EmitterID})
-      setForceUpdate(false)
-    })
-  },[socket])
+      setElemento({ text, EmitterID });
+      setForceUpdate(false);
+    });
+  }, [socket]);
 
-  useEffect(()=> {
-    const aux = mensajes 
-    aux?.push(elemento)
-    setMensajes(aux) 
-    setForceUpdate(true)
-  },[elemento])
+  useEffect(() => {
+    const aux = mensajes;
+    aux?.push(elemento);
+    setMensajes(aux);
+    setForceUpdate(true);
+  }, [elemento]);
 
   function sendMessage(e) {
     e.preventDefault();
@@ -44,11 +43,15 @@ export default function Chat({ guest, host, messages }) {
       id_receptor: host.ID === user.sub ? guest.ID : host.ID,
       texto: input,
     });
-    const aux = mensajes 
-    aux.push({text:input,EmitterID:user.sub})
-    setInput("")
-    setMensajes(aux)
-    socket?.emit("enviarNotificacion",{receptor_id:host.ID === user.sub ? guest.ID : host.ID,emisor_id:user.sub,tipo:"mensaje"})
+    const aux = mensajes;
+    aux.push({ text: input, EmitterID: user.sub });
+    setInput("");
+    setMensajes(aux);
+    socket?.emit("enviarNotificacion", {
+      receptor_id: host.ID === user.sub ? guest.ID : host.ID,
+      emisor_id: user.sub,
+      tipo: "mensaje",
+    });
   }
 
   const handleOnChange = (e) => {
