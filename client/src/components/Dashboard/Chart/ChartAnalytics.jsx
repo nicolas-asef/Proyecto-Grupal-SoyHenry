@@ -1,82 +1,92 @@
-import React, { PureComponent } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts';
+import { getUsers, getWorkers } from "../../../redux/actions/actions";
 import s from "./ChartAnalytics.module.css"
-
-
-const data = [
-    {
-    name: 'January ',
-    premium: 300,
-    users: 2000,
-    workers: 1000
-    },
-    {
-    name: 'February ',
-    premium: 500,
-    users: 2432,
-    workers: 1400,
-    },
-    {
-    name: 'March ',
-    premium: 750,
-    users: 1200,
-    workers: 2000,
-    },
-    {
-    name: 'April ',
-    premium: 400,
-    users: 4000,
-    workers: 900,
-    },
-    {
-    name: 'May',
-    premium: 600,
-    users: 7200,
-    workers: 4000,
-    },
-    {
-    name: 'June',
-    premium: 600,
-    users: 8000,
-    workers: 4000
-    },
-    {
-    name: 'July',
-    premium: 800,
-    users: 4500,
-    workers: 7400
-    },
-    {
-    name: 'August',
-    premium: 500,
-    users: 4500,
-    workers: 2000,
-    },
-    {
-    name: 'September',
-    premium: 1000,
-    users: 6000,
-    workers: 1800,
-    },
-    {
-    name: 'Octuber',
-    premium: 205,
-    users: 1400,
-    workers: 1200
-    },
-    {name: 'November',
-    },
-    {
-    name: 'December',
-    }
-];
   
 export default function ChartAnalytics(){
+    const dispatch = useDispatch()
+    const users = useSelector(state => state.onlyUser)
+    const workers = useSelector(state => state.allWorkers)
+    const workersPremium = workers.filter(worker => worker.premium === true)
+
+    useEffect (() => {
+        dispatch(getWorkers())
+        dispatch(getUsers())
+    },[])
+
+    const data = [
+        {
+        name: 'January ',
+        premium: 1,
+        users: 12,
+        workers: 4
+        },
+        {
+        name: 'February ',
+        premium: 3,
+        users: 5,
+        workers: 7,
+        },
+        {
+        name: 'March ',
+        premium: 2,
+        users: 2,
+        workers: 8,
+        },
+        {
+        name: 'April ',
+        premium: 2,
+        users: 9,
+        workers: 8,
+        },
+        {
+        name: 'May',
+        premium: 5,
+        users: 8,
+        workers: 15,
+        },
+        {
+        name: 'June',
+        premium: 7,
+        users: 17,
+        workers: 10
+        },
+        {
+        name: 'July',
+        premium: 4,
+        users: 25,
+        workers: 17
+        },
+        {
+        name: 'August',
+        premium: 5,
+        users: 14,
+        workers: 12,
+        },
+        {
+        name: 'September',
+        premium: 1,
+        users: 12,
+        workers: 19,
+        },
+        {
+        name: 'Octuber',
+        premium: workersPremium.length,
+        users: users.length,
+        workers: workers.length
+        },
+        {name: 'November'
+        },
+        {
+        name: 'December'
+        }
+    ];
     return (
         <div>
             <div>
                 <h1 className={s.title}>Workers - Users</h1>
-                <AreaChart width={1600} height={400} data={data}
+                <AreaChart width={1500} height={350} data={data}
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -98,7 +108,7 @@ export default function ChartAnalytics(){
             </div>
             <div>
                 <h1 className={s.title}>Workers - Workers Premium</h1>
-                <AreaChart width={1600} height={400} data={data}
+                <AreaChart width={1500} height={350} data={data}
                 margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                 <defs>
                     <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
