@@ -62,7 +62,7 @@ export default function SettingProfile() {
     if (user.Worker) {
       if (user.Worker.Jobs) {
         user.Worker.Jobs.map((e) => {
-          setInputJobs([...inputJobs, e.name]);
+          setInputJobs([e.name]);
         });
       }
       if (user.Worker.description) {
@@ -80,7 +80,7 @@ export default function SettingProfile() {
   const handleJob = (e) => {
     const exist = inputJobs.find((job) => job === e.target.value);
     if (!exist) {
-      setInputJobs([...inputJobs, e.target.value]);
+      setInputJobs([e.target.value]);
     }
   };
 
@@ -256,9 +256,7 @@ export default function SettingProfile() {
                 maxRows={4}
                 fullWidth
                 aria-label="maximum height"
-                placeholder={
-                  user.Worker.description || "Descripción breve sobre tí"
-                }
+                placeholder={"Descripción breve sobre tí"}
                 defaultValue=""
                 // style={{ width: 200 }}
                 onChange={handleChangeWork}
