@@ -166,9 +166,22 @@ io.on("connection", socket => {
       const img = emisor.img
       const nombre_emisor = emisor.name
       const id = notificacion.id
-      
+      let id_mensaje = null
+      if(tipo === "mensaje"){
+        const chat = await Chat.findOne({where:{[Op.and]:[{[Op.or]: [
+          {
+          HostID: emisor_id}, {HostID: receptor_id}]},
+          {
+            [Op.or]: [{GuestID: receptor_id},{GuestID: emisor_id}]
+          }
+          ]    
+          },})
+          if(chat){
+            id_mensaje = chat.id
+          }
+      }
       if(recepcion)
-        recepcion.forEach(e => io.to(e).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo}))
+        recepcion.forEach(e => io.to(e).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo,id_mensaje}))
     })
     
     socket.on("seen",async elementos => {

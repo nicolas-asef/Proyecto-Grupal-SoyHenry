@@ -103,15 +103,32 @@ const Profile = () => {
       navigate(`/chat/${id}`) 
     })
 
-    socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo }) => {
+    socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo ,id_mensaje}) => {
       let popsAuxiliar = popUps;
       let popAuxiliar = {};
+      if(tipo !== "mensaje")
       popAuxiliar = {
         type: tipo,
         viewed: false,
         img: img,
         name: nombre_emisor,
-      };
+        id_mensaje:id_mensaje
+      }
+      else{
+        const filtro = popsAuxiliar.filter(e =>(!e.viewed && e.type === tipo  &&  e.img === img && e.name === nombre_emisor))
+        console.log("------------------>Filter",filtro)
+        if(filtro.length > 0){
+          socket.emit("seen",[id])
+          return false
+        }
+        else
+        popAuxiliar = {
+          type: tipo,
+          viewed: false,
+          img: img,
+          name: nombre_emisor,
+        }
+      }
       popsAuxiliar.push(popAuxiliar);
       popsAuxiliar = popsAuxiliar.reverse();
       setPopUps(popsAuxiliar);

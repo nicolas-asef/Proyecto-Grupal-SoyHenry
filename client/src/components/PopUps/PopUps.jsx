@@ -24,7 +24,7 @@ function PopUps({popUps}) {
     terminado: "contracts/user/"+sub,
     opinado: "profile/user/"+sub,
     cancelado: "contracts/user/"+sub,
-    mensaje: "chat"
+    mensaje: "chat/"+popUps.id_mensaje
   }
   console.log(ruta)
   return (
