@@ -5,11 +5,14 @@
   text-transform: capitalize;
 }
 
-.contenedor {
-  display: flex;
+.contenedor{
+    display: flex;
+    align-items: center;
 }
 
-.badge {
+
+.badge{
+
   margin-top: 1vh;
   margin-right: 2vh;
 }
