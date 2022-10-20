@@ -41,7 +41,6 @@ const ProtectedRoute = ({ children }) => {
       dispatch(getUserId(user.sub));
 
       if (alreadyOnboard) return;
-
       if (userDetail.id) {
         if (!userDetail.onBoarded) {
           setRedirect(true);

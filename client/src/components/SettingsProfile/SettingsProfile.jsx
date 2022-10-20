@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 import {
   getJobs,
@@ -54,6 +55,21 @@ export default function SettingProfile() {
     description: "",
   });
   const [inputJobs, setInputJobs] = useState([]);
+
+  useEffect(() => {
+    if (user.Worker.Jobs) {
+      user.Worker.Jobs.map((e) => {
+        setInputJobs([...inputJobs, e.name]);
+      });
+    }
+    if (user.Worker.description) {
+      setInputWork((inputWork.description = user.Worker.description));
+    }
+    if (user.Worker.certification) {
+      setInputWork((inputWork.certification = user.Worker.certification));
+    }
+  }, []);
+
   const [workMax, setWorkMax] = useState(false);
   const [validateWorks, setValidateWorks] = useState(false);
 
@@ -187,7 +203,7 @@ export default function SettingProfile() {
           </div>
           <div className={s.bloke}>
             <h3 className="pad">Image</h3>
-            <div className={s.campos}>
+            <div className={s.im}>
               <TextField
                 id="outlined-required"
                 name="img"
@@ -195,49 +211,51 @@ export default function SettingProfile() {
                 /* defaultValue={user.img}  */
                 onChange={handleChange}
               />
-            </div>
-            <div className={s.UploadIMGDIV}>
-              <div className={s.btnImg}>
-                <Button variant="contained" component="label">
-                  Selecionar archivo
-                  <input
-                    name="img"
-                    hidden
-                    accept="image/*"
-                    multiple
-                    type="file"
-                    onChange={handleImgChange}
-                  />
-                </Button>
-              </div>
-              <span className="imgName">{`${
-                image === "" || image === undefined
-                  ? ""
-                  : image.name.length < 15
-                  ? image.name
-                  : `${image.name.slice(0, 15)}...`
-              }`}</span>
-              {image === "" || image === undefined ? (
-                ""
-              ) : (
-                <div className={s.imageUpload}>
-                  <Button
-                    variant="contained"
-                    color="success"
-                    onClick={uploadImageHandler}
-                  >
-                    Subir Imagen
+
+              <div className={s.UploadIMGDIV}>
+                <div className={s.btnImg}>
+                  <Button variant="contained" component="label">
+                    Selecionar archivo
+                    <input
+                      name="img"
+                      hidden
+                      accept="image/*"
+                      multiple
+                      type="file"
+                      onChange={handleImgChange}
+                    />
                   </Button>
                 </div>
-              )}
-              {uploaded === true ? (
-                <span className="SuccessIMG">
-                  Imagen subida correctamente, persiona el botón Send para
-                  guardar los cambios
-                </span>
-              ) : (
-                ""
-              )}
+                {/* </div> */}
+                <span className="imgName">{`${
+                  image === "" || image === undefined
+                    ? ""
+                    : image.name.length < 15
+                    ? image.name
+                    : `${image.name.slice(0, 15)}...`
+                }`}</span>
+                {image === "" || image === undefined ? (
+                  ""
+                ) : (
+                  <div className={s.imageUpload}>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={uploadImageHandler}
+                    >
+                      Subir Imagen
+                    </Button>
+                  </div>
+                )}
+                {uploaded === true ? (
+                  <span className="SuccessIMG">
+                    Imagen subida correctamente, persiona el botón Send para
+                    guardar los cambios
+                  </span>
+                ) : (
+                  ""
+                )}
+              </div>
             </div>
           </div>
 
@@ -248,14 +266,24 @@ export default function SettingProfile() {
                 <div className={s.bloke}>
                   <h3 className="pad">Description</h3>
                   <div className={s.campos}>
-                    <TextField
+                    {/* <TextField
                       id="outlined-required"
                       name="description"
                       type="text"
                       value={inputWork.description}
                       placeholder={user.Worker.description}
-                      /* defaultValue={user.password} */
+                      
                       onChange={handleChangeWork}
+                    /> */}
+                    <TextareaAutosize
+                      id="outlined-required"
+                      name="description"
+                      value={inputWork.description}
+                      maxRows={4}
+                      aria-label="maximum height"
+                      placeholder={user.Worker.description}
+                      defaultValue=""
+                      style={{ width: 200 }}
                     />
                   </div>
                 </div>
@@ -302,14 +330,16 @@ export default function SettingProfile() {
                   <ButtonGroup fullWidth variant="outlined">
                     {inputJobs.length
                       ? inputJobs.map((job, index) => (
-                          <Button
-                            size="large"
-                            onClick={handleDelete}
-                            id={index}
-                            key={job}
-                          >
-                            {job}
-                          </Button>
+                          <div>
+                            <Button
+                              size="large"
+                              onClick={handleDelete}
+                              id={index}
+                              key={job}
+                            >
+                              {job}
+                            </Button>
+                          </div>
                         ))
                       : null}
                   </ButtonGroup>
@@ -345,7 +375,7 @@ export default function SettingProfile() {
           </div>
           <div className={s.infoExtra}>
             <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-              Send
+              ENVIAR
             </Button>
           </div>
         </form>

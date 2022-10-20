@@ -221,3 +221,11 @@ body.active-modal {
     margin: 0 5px;
     width: 150px;
 }
+.followers{
+    font-size: 1.5rem;
+    color: #1976d2;
+}
+.follows{
+    font-size: 1.5rem;
+    color: #1976d2; 
+}
