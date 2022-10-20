@@ -98,15 +98,38 @@ const Profile = () => {
     };
   }, []);
   useEffect(() => {
-    socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo }) => {
+    socket?.on("redirect", ({ id }) => {
+      navigate(`/chat/${id}`);
+    });
+
+
+    socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo ,id_mensaje}) => {
+
       let popsAuxiliar = popUps;
       let popAuxiliar = {};
+      if(tipo !== "mensaje")
       popAuxiliar = {
         type: tipo,
         viewed: false,
         img: img,
         name: nombre_emisor,
-      };
+        id_mensaje:id_mensaje
+      }
+      else{
+        const filtro = popsAuxiliar.filter(e =>(!e.viewed && e.type === tipo  &&  e.img === img && e.name === nombre_emisor))
+  
+        if(filtro.length > 0){
+          socket.emit("seen",[id])
+          return false
+        }
+        else
+        popAuxiliar = {
+          type: tipo,
+          viewed: false,
+          img: img,
+          name: nombre_emisor,
+        }
+      }
       popsAuxiliar.push(popAuxiliar);
       popsAuxiliar = popsAuxiliar.reverse();
       setPopUps(popsAuxiliar);
@@ -169,7 +192,7 @@ const Profile = () => {
   const settings = user.isAdmin
     ? [
         {
-          name: "Profile",
+          name: "Perfil",
           handler: handleOpenProfile,
         },
         {
@@ -177,7 +200,7 @@ const Profile = () => {
           handler: handleContracts,
         },
         {
-          name: "Settings",
+          name: "Ajustes",
           handler: handleSettings,
         },
         {
@@ -185,13 +208,13 @@ const Profile = () => {
           handler: handleDashboard,
         },
         {
-          name: "Logout",
+          name: "Deslogear",
           handler: handleLogout,
         },
       ]
     : [
         {
-          name: "Profile",
+          name: "Perfil",
           handler: handleOpenProfile,
         },
         {
@@ -199,11 +222,11 @@ const Profile = () => {
           handler: handleContracts,
         },
         {
-          name: "Settings",
+          name: "Ajustes",
           handler: handleSettings,
         },
         {
-          name: "Logout",
+          name: "Deslogear",
           handler: handleLogout,
         },
       ];
@@ -217,27 +240,31 @@ const Profile = () => {
         <div className={s.but}>
           <ClickAwayListener onClickAway={DshowPopUps}>
             <div className={s.iconAlign}>
-              <Button onClick={showPopUps}>
+              <IconButton onClick={showPopUps}>
                 <Badge badgeContent={cantNotificaciones} color="primary">
                   <NotificationsNoneTwoToneIcon
                     sx={{ color: "white" }}
                     fontSize={"medium"}
                   />
                 </Badge>
-              </Button>
+              </IconButton>
               {popUpsEnabled ? <PopUps popUps={popUps} /> : <></>}
             </div>
           </ClickAwayListener>
         </div>
         <div className={s.inbox}>
           <IconButton onClick={sendInbox}>
-            <MailOutlineRoundedIcon color="primary" fontSize="large" />
+            <MailOutlineRoundedIcon
+              color="primary"
+              fontSize="medium"
+              sx={{ color: "white" }}
+            />
           </IconButton>
         </div>
         <div className={s.but}>
-          <Button onClick={handleOpen}>
+          <IconButton onClick={handleOpen}>
             <FavoriteTwoToneIcon fontSize={"medium"} sx={{ color: "white" }} />
-          </Button>
+          </IconButton>
           {open && (
             <Modal open={open} onClick={handleClose}>
               <Box className={s.st}>

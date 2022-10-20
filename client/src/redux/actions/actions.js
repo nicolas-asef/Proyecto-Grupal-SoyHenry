@@ -37,7 +37,8 @@ import {
   DELETE_COUNTRY,
   GET_CHATS,
   GET_CHAT_BY_PK,
-  SET_CONECTED
+  SET_CONECTED,
+  GET_CHAT_BY_USERS
 } from "./actions_vars";
 import { io } from "socket.io-client";
 
@@ -70,7 +71,6 @@ export function agregarSocker(id) {
   return async function (dispatch) {
     const socket = await io(baseURL);
     await socket.emit("addUser", id);
-    console.log(socket)
     dispatch({ type: AGREGAR_SOCKET, payload: socket });
   };
 }
@@ -228,6 +228,19 @@ export function getChatByPk(id) {
       .then((chat) => {
         dispatch({
           type: GET_CHAT_BY_PK,
+          payload: chat.data,
+        });
+      })
+      .catch((err) => {console.log(err.message)});
+  };
+}
+export function getChatByUsers(idparam, idsub) {
+  return function (dispatch) {
+    axios
+      .get(baseURL + "chat/?idparam=" + idparam+ "&idsub=" + idsub)
+      .then((chat) => {
+        dispatch({
+          type: GET_CHAT_BY_USERS,
           payload: chat.data,
         });
       })
@@ -524,7 +537,6 @@ export function premiumPay(payload) {
 export function updateWorker(payload, payload2, payloadId) {
   return async function (dispatch) {
     payload.jobs = payload2;
-    console.log(payload)
     const worker = await axios.put(
       baseURL+"worker/" + payloadId,
       payload

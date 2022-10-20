@@ -213,7 +213,7 @@ router.get("/:id", async (req, res, next) => {
         user.popUps = popUps
 
         user.chats = chats
-       /*  console.log(user) */
+
 
         res.status(200).json(user);
       } else {

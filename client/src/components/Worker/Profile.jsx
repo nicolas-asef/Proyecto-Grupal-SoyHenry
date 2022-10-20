@@ -17,8 +17,9 @@ import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorite, deletedFavorite } from "../../redux/actions/actions";
+import { addFavorite, deletedFavorite, getChatByUsers } from "../../redux/actions/actions";
 import { Followers } from "../Followers/Followers";
+import { useNavigate, Link   } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,6 +48,7 @@ function Profile({
   const [open, setOpen] = React.useState(false);
   const [openLogin, setOpenLogin] = React.useState(false);
   const socket = useSelector((state) => state.socket);
+  const navigate = useNavigate()
   const handleOpen = () => {
     if (!login.isAuthenticated) {
       return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
@@ -59,6 +61,7 @@ function Profile({
   const handleClosePopUp = () => {
     setOpenLogin(false);
   };
+  const chat = useSelector(state=> state.chat)
   const userD = useSelector((state) => state.userDetail.Favorites);
   const dispatch = useDispatch();
   const us = useSelector((state) => state.users);
@@ -66,10 +69,8 @@ function Profile({
 
   const idWorkerFav = useSelector((state) => state.userDetail);
   const usW = us.Favorites;
-  console.log(usW);
   const [checked, setChecked] = React.useState(false);
   const worksFavs = idWorkerFav.Favorites;
-  console.log(idWorkerFav);
   let follow;
   if (idWorkerFav.Worker) {
     follow = usW && usW.find((e) => e.Fav.WorkerID === idWorkerFav.Worker.ID);
@@ -80,7 +81,12 @@ function Profile({
       setChecked(true);
     }
   }, []);
-
+/* useEffect(()=>{
+  if (!login.isAuthenticated) {
+    return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
+  }
+  dispatch(getChatByUsers(params.id, login.user.sub))
+},[]) */
   const handleFav = (e) => {
     if (idWorkerFav.Worker) {
       if (!checked) {
@@ -93,15 +99,13 @@ function Profile({
     }
   };
   const handleChat = () => {
-    if (!login.isAuthenticated) {
-      return setOpenLogin(true); // pendiente pop up para avisar que debe logearse
-    }
-
-    socket?.emit("messageCreation", {
+     socket?.emit("messageCreation", {
       id_emisor: login.user.sub,
       id_receptor: params.id,
-      texto: "chau",
-    });
+      texto: "",
+      redirect:true
+    }); 
+    navigate(`/chat/${chat.id}`) 
   };
 
   return (

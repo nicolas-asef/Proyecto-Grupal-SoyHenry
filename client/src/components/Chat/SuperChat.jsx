@@ -19,7 +19,6 @@ function SuperChat() {
       dispatch(getChatByPk(id));
     }
   }, [id]);
-  console.log(chat);
 
   return (
     <div className="app">

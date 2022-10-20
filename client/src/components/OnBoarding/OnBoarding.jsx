@@ -42,7 +42,7 @@ const OnBoarding = () => {
         <div className={style.stepper}>
           <Stepper activeStep={step} alternativeLabel>
             {steps.map((label) => (
-              <Step key={label}>
+              <Step className={style.stepper} key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             ))}
