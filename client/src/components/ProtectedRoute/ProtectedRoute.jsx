@@ -13,28 +13,32 @@ const ProtectedRoute = ({ children }) => {
   const dispatch = useDispatch();
   const [redirect, setRedirect] = React.useState(false);
 
-  /* useEffect(() => {
-    if(isAuthenticated){
-      dispatch(getUserId(user.sub))
-      if(userDetail.message){
-        dispatch(createUser({
-          ID: user.sub,
-          email: user.email,
-          img: user.picture
-        }))
-        setRedirect(true)
-      } else {
-        if (userDetail.onBoarded === false){
-          setRedirect(true)
-        }
-        else {setRedirect(false)}
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (userDetail.onBoarded) return;
 
+      dispatch(getUserId(user.sub));
+      if (userDetail.message) {
+        dispatch(
+          createUser({
+            ID: user.sub,
+            email: user.email,
+            img: user.picture,
+          })
+        );
+        setRedirect(true);
+      } else {
+        if (userDetail.onBoarded === false) {
+          setRedirect(true);
+        } else {
+          setRedirect(false);
+        }
       }
     }
-  },[userDetail, dispatch]) */
+  }, [userDetail, dispatch]);
 
   // userDetail.length !== 0 && console.log("userDetail", userDetail)
-
+  /* 
   React.useEffect(() => {
     console.log(userDetail);
     if (isAuthenticated) {
@@ -64,7 +68,7 @@ const ProtectedRoute = ({ children }) => {
     userDetail.id,
     userDetail.message,
     userDetail.onBoarded,
-  ]);
+  ]); */
 
   if (isAuthenticated && redirect) return <Navigate to="/onboarding" />;
 

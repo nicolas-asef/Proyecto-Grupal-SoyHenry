@@ -257,6 +257,7 @@ const User = (props) => {
         type="submit"
         variant="contained"
         value="Registrarse"
+        sx={{ background: "#06283d" }}
       >
         Registrarse
       </Button>

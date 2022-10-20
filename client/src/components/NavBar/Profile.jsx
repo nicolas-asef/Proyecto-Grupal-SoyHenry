@@ -98,10 +98,9 @@ const Profile = () => {
     };
   }, []);
   useEffect(() => {
-
-    socket?.on("redirect",({id})=> {
-      navigate(`/chat/${id}`) 
-    })
+    socket?.on("redirect", ({ id }) => {
+      navigate(`/chat/${id}`);
+    });
 
     socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo }) => {
       let popsAuxiliar = popUps;
@@ -222,14 +221,14 @@ const Profile = () => {
         <div className={s.but}>
           <ClickAwayListener onClickAway={DshowPopUps}>
             <div className={s.iconAlign}>
-              <Button onClick={showPopUps}>
+              <IconButton onClick={showPopUps}>
                 <Badge badgeContent={cantNotificaciones} color="primary">
                   <NotificationsNoneTwoToneIcon
                     sx={{ color: "white" }}
                     fontSize={"medium"}
                   />
                 </Badge>
-              </Button>
+              </IconButton>
               {popUpsEnabled ? <PopUps popUps={popUps} /> : <></>}
             </div>
           </ClickAwayListener>
@@ -244,9 +243,9 @@ const Profile = () => {
           </IconButton>
         </div>
         <div className={s.but}>
-          <Button onClick={handleOpen}>
+          <IconButton onClick={handleOpen}>
             <FavoriteTwoToneIcon fontSize={"medium"} sx={{ color: "white" }} />
-          </Button>
+          </IconButton>
           {open && (
             <Modal open={open} onClick={handleClose}>
               <Box className={s.st}>
