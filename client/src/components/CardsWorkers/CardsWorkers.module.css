@@ -88,8 +88,8 @@
 
 .imgProfilePremium {
   border: 2px solid #f3a801;
-  width: 80%;
-  height: 80%;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
 }
