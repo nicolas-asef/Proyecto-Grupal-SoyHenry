@@ -103,7 +103,7 @@ router.post("/", async (req, res) => {
  router.put('/:id', async (req, res, next) => {   
      const { id } = req.params;
      const info = req.body; 
-     console.log(info)
+
      try {
         const worker = await Worker.findOne({where: {ID: id}})
       
@@ -138,7 +138,6 @@ router.post("/", async (req, res) => {
         //        premium: premium,
         //        available: available
         //   })
-        //   console.log(w)
         //    worker.set({
         //        certification: certification,
         //        description: description

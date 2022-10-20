@@ -135,7 +135,6 @@ export default function SettingProfile() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(inputWork);
     dispatch(updateUser(input, id));
     dispatch(updateWorker(inputWork, inputJobs, user.Worker.ID));
     setOpenLogin(true);

@@ -17,24 +17,30 @@ export default function Chat({ guest, host, messages }) {
   const [mensajes, setMensajes] = useState(messages)
   const [elemento, setElemento] = useState({})
   const [forceUpdate,setForceUpdate] = useState(true)
+  const [onChat,setOnchat] = useState()
   useEffect(()=>{
     setMensajes(messages)
   }
   ,[messages])
 
+
   useEffect(() => {
     socket?.on("createMessage", ({ EmitterID, text, date }) => {
       //aca renderizo el mensaje del texto y listo
+      setOnchat(EmitterID)
       setElemento({text,EmitterID, date})
       setForceUpdate(false)
     })
-  },[socket])
+  },[socket,onChat])
 
   useEffect(()=> {
-    const aux = mensajes 
-    aux?.push(elemento)
-    setMensajes(aux) 
-    setForceUpdate(true)
+    if(guest?.ID === onChat || host?.ID ===onChat){
+      const aux = mensajes 
+      aux?.push(elemento)
+      setMensajes(aux) 
+      setForceUpdate(true)
+    }
+    
   },[elemento])
 
 var horas = `${new Date(Date.now()).getHours()}`
@@ -47,7 +53,8 @@ if (minutos < 10){ minutos = '0' + minutos}
       id_emisor: user.sub,
       id_receptor: host.ID === user.sub ? guest.ID : host.ID,
       texto: input,
-      date: horas + ":" + minutos
+      date: horas + ":" + minutos,
+
     });
     const aux = mensajes 
     aux.push({text:input,EmitterID:user.sub, date: horas + ":" + minutos})

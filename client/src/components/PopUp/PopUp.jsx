@@ -4,14 +4,23 @@ import { Link } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { useAuth0 } from "@auth0/auth0-react";
 
-function PopUp({img,name,description,ruta}) {
+function PopUp({img,name,description,ruta,id_mensaje}) {
   const {
     user: { sub },
   } = useAuth0();
+  const [routing,setRouting] = React.useState(ruta)
+
+  React.useEffect(()=>{
+    if(ruta === "mensaje"){
+      setRouting("chat/"+id_mensaje) 
+    }
+    
+  },[])
+
   return (
     
       
-      <Link to ={ruta} className={style.link}>
+      <Link to ={routing} className={style.link}>
           <div className={style.popUp}>
         <div className={style.img}>
           <Avatar
