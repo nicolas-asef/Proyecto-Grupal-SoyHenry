@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 
 import {
   getJobs,
@@ -265,14 +266,24 @@ export default function SettingProfile() {
                 <div className={s.bloke}>
                   <h3 className="pad">Description</h3>
                   <div className={s.campos}>
-                    <TextField
+                    {/* <TextField
                       id="outlined-required"
                       name="description"
                       type="text"
                       value={inputWork.description}
                       placeholder={user.Worker.description}
-                      /* defaultValue={user.password} */
+                      
                       onChange={handleChangeWork}
+                    /> */}
+                    <TextareaAutosize
+                      id="outlined-required"
+                      name="description"
+                      value={inputWork.description}
+                      maxRows={4}
+                      aria-label="maximum height"
+                      placeholder={user.Worker.description}
+                      defaultValue=""
+                      style={{ width: 200 }}
                     />
                   </div>
                 </div>
@@ -364,7 +375,7 @@ export default function SettingProfile() {
           </div>
           <div className={s.infoExtra}>
             <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-              Send
+              ENVIAR
             </Button>
           </div>
         </form>
