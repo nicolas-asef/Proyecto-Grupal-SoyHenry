@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
+import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
+import SvgIcon from "@mui/material/SvgIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
@@ -139,6 +141,10 @@ const Profile = () => {
     setAnchorElUser(null);
   };
 
+  const sendInbox = () => {
+    navigate("/chat");
+  };
+
   const showPopUps = () => {
     setPopUpsEnabled(!popUpsEnabled);
     let vistos = [];
@@ -215,17 +221,21 @@ const Profile = () => {
                 badgeContent={cantNotificaciones}
                 color="primary"
               >
-                <NotificationsNoneTwoToneIcon />
+                <NotificationsNoneTwoToneIcon fontSize="large" />
               </Badge>
               {popUpsEnabled ? <PopUps popUps={popUps} /> : <></>}
             </div>
           </ClickAwayListener>
         </div>
+        <div className={s.inbox}>
+          <IconButton onClick={sendInbox}>
+            <MailOutlineRoundedIcon color="primary" fontSize="large" />
+          </IconButton>
+        </div>
         <div className={s.but}>
           <Button onClick={handleOpen}>
-            <FaHeart />
+            <FaHeart fontSize="large" color="disabled" />
           </Button>
-
           {open && (
             <Modal open={open} onClick={handleClose}>
               <Box className={s.st}>

@@ -7,7 +7,9 @@
 
 .contenedor{
     display: flex;
+    align-items: center;
 }
+
 
 .badge{
   margin-top: 1vh;

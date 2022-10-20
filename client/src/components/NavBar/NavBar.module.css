@@ -4,6 +4,7 @@
     align-items: center;
     padding: 10px 10px;
     background: #bbcc;
+    font-size: large;
 }
 li{
     display: inline-block;
