@@ -99,7 +99,7 @@ function App() {
           path="/dashboard/country"
           element={
             <ProtectedAdmin>
-              <DashWorker />
+              <DashCountry />
             </ProtectedAdmin>
           }
         />
