@@ -11,11 +11,17 @@ import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Profile from "./Profile";
+import style from "./NavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 // import { FaHeart } from "react-icons/fa";
 
-const pages = ["Inicio", "Sobre Nosotros", "Mapa"];
+
+const pages = [
+  { name: "Inicio", ruta: "home" },
+  { name: "Sobre nosotros", ruta: "about" },
+  { name: "Mapa", ruta: "map" },
+];
 
 const NavBar = () => {
   const location = useLocation();
@@ -37,33 +43,12 @@ const NavBar = () => {
     <AppBar style={{ background: "#06283D" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "Bebas Neue",
-              fontWeight: 700,
-              letterSpacing: "7px",
-              color: "white",
-              textShadow: "4px 4px 4px black;",
-              fontSize: "2rem",
-              textDecoration: "none",
-              left: "0",
-              transition: "all 2s ease",
-              "&:hover": {
-                background: "none",
-                color: "white",
-                textShadow: "4px 4px 4px black;",
-              },
-            }}
-          >
-            Changuitas
-          </Typography>
-
+          <Link to="/" className={style.linkLogo}>
+            <div className={style.logotype}>
+              <img src="https://i.imgur.com/mVRDDgD.png" alt="" />
+            </div>
+            <div className={style.logoText}>Changuitas |</div>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -94,42 +79,20 @@ const NavBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page.ruta} onClick={handleCloseNavMenu}>
                   <Typography sx={{ fontWeight: 700 }} textAlign="center">
-                    {page}
+                    {page.name}
                   </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-
-              fontFamily: "Bebas Neue",
-              fontWeight: 700,
-              letterSpacing: "4px",
-              color: "white",
-              textShadow: "4px 4px 4px black;",
-              textDecoration: "none",
-              fontSize: "1rem",
-              transition: "all 2s ease",
-              left: "0",
-            }}
-          >
-            Changuitas
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.ruta}
                 onClick={handleCloseNavMenu}
+                className={style.buttonLinks}
                 sx={{
                   my: 2,
                   color: "white",
@@ -137,12 +100,11 @@ const NavBar = () => {
                   display: "block",
                   margin: "0.2%",
                   fontWeight: "bold",
-                  textShadow: "2px 2px 2px black;",
                 }}
                 component={Link}
-                to={`/${page}`}
+                to={`/${page.ruta}`}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
