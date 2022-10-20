@@ -36,6 +36,10 @@ export default function HomePrueba() {
     setPage(value);
   };
 
+  const callbk = () => {
+    setPage(1)
+  }
+
   useEffect(() => {
     dispatch(getWorkers());
   }, []);
@@ -54,10 +58,10 @@ export default function HomePrueba() {
           <CarruselWorkersPremium />
         </div>
         <div className={s.search}>
-          <SearchBar />
+          <SearchBar callbk={callbk} />
         </div>
         <div className={s.filters}>
-          <Filters />
+          <Filters callbk={callbk} />
         </div>
         <div className={s.pagination}>
           <Pagination

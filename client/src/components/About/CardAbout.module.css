@@ -1,0 +1,69 @@
+.pageAbout{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.container{
+    height: 400px;
+    width: 300px;
+    background-color: #222222;
+    margin: 40px;
+}
+
+.top{
+    height: 33%;
+    background-image: url("./img/about.jpg");
+    display: flex;
+    justify-content: center;
+}
+
+.img{
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    border: 2px solid white;
+    margin-top: 70px;
+}
+
+.mid{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70px;
+}
+
+.name{
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.job{
+    color: #4CB493;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.description{
+    color: #BDBDBD;
+    font-size: 15px;
+    font-weight: 300;
+    margin-top: 15px;
+}
+
+.bottom{
+    color: #4CB493;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.a{
+    text-decoration: none;
+    color: #4CB493;
+}
+
+.a:hover{
+    color: #4CB493;
+}

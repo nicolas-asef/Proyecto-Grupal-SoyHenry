@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    background-color: #eaeaea;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer{
+    background-color: #eaeaea;
+    padding-top: 40px;
+}
