@@ -169,27 +169,6 @@ export default function SettingProfile() {
       <div className={s.containerSetting}>
         <form onSubmit={onSubmit}>
           <h1>Editar perfil</h1>
-          {/* <div className={s.bloke}>
-            <h3 className="pad">Location</h3>
-            <div className={s.campos}>
-              <TextField
-                id="outlined-required"
-                name="location"
-                select
-                value={input.location}
-                 
-                onChange={handleChange}
-              >
-                {countries &&
-                  countries.map((country) => (
-                    <MenuItem key={country.id} value={country.name}>
-                      {country.name}
-                    </MenuItem>
-                  ))}
-              </TextField>
-            </div>
-          </div> */}
-
           <div className={s.bloke}>
             <h3 className="pad">Telefono</h3>
             <div className={s.campos}>

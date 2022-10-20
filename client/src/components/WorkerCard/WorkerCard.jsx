@@ -39,7 +39,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   },
 }));
 
-const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
+const WorkerCard = ({ Worker, User, Jobs, Contracts, callback, workerId }) => {
   let finishedContracts = [];
   if (typeof Contracts === "object") {
     if (Contracts.finished === true) {
@@ -77,7 +77,7 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
       </div>
       <div className={s.divRating}>
         <div className={s.profileRating}>
-          <Rating
+          {/* <Rating
             name="read-only"
             value={Worker.rating}
             readOnly
@@ -85,11 +85,16 @@ const WorkerCard = ({ Worker, User, Jobs, Contracts }) => {
             emptyIcon={
               <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
             }
-          />
+          /> */}
           <Link className={s.perfilLink} to={`/profile/${Worker.User.ID}`}>
             {" "}
             <Button variant="contained">Perfil</Button>{" "}
           </Link>
+          <div className={`${s.perfilLink} ${s.remove}`}>
+            <Button variant="contained" onClick={callback} id={workerId}>
+              Eliminar
+            </Button>{" "}
+          </div>
         </div>
       </div>
     </div>

@@ -2,119 +2,114 @@
 /*Magic card*/
 
 .profile-card {
-    border-radius: 10px;
-    width: 28.5rem;
-    height: auto;
-    background: #ffffff;
-    overflow-y: visible;
-    box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* border: 3px solid #73AD21; */
-   }
-   
-   .card-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    /* gap: 1em; */
-    /* padding: 0 1rem; */
- 
-    margin-top: 1.5rem;
-    position: relative;
-    top: -9rem;
-   }
-   
-   .card-img {
-    --size: 15rem;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    transform: translateY(-50%);
-    background: #42caff;
-    background: linear-gradient(to bottom, #42caff 0%, #e81aff 100%);
-    position: relative;
-    transition: all .3s ease-in-out;
-   }
-
-   .card-img>:nth-child(1){
-        --size: 15rem;
-        width: var(--size);
-        height: var(--size);
-        border-radius: 50%;
-        background: #42caff;
-        background: linear-gradient(to bottom, #42caff 0%, #e81aff 100%);
-        position: relative;
-        transition: all .3s ease-in-out;
-        object-fit: cover;
-    }
-
-   
-   .card-img::before {
-    content: "";
-    border-radius: inherit;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    height: 90%;
-    transform: translate(-50%, -50%);
-    border: 1rem solid #e8e8e8;
-   }
-
-   .card-img>:nth-child(1)::before{
-    content: "";
-    border-radius: inherit;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    height: 90%;
-    transform: translate(-50%, -50%);
-    border: 1rem solid #e8e8e8;
-    object-fit: cover;
+  border-radius: 10px;
+  width: 28.5rem;
+  height: auto;
+  background: #ffffff;
+  overflow-y: visible;
+  box-shadow: 5px 5px 5px 5px rgba(8, 8, 8, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 3px solid #73AD21; */
 }
 
-   
-   /*Text*/
-   .text-title {
-    width: 100%;
-    text-transform: uppercase;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #1976d2;
-    letter-spacing: 0.05rem;
-    text-align: center;
-    margin-bottom: 10px;
-    
-   }
-   
-   .text-body {
-    width: 300px;
-    font-size: 1.1em;
-    text-align: start;
-    color: #6f6d78;
-    font-weight: 400;
+.card-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-   }
-   
-   /*Hover*/
-   .card-img:hover > :nth-child(1){
-    --size: 17rem;
-    width: var(--size);
-    height: var(--size);
-   }
-   .card-img:hover {
-    --size: 17rem;
-    width: var(--size);
-    height: var(--size);
-   }
+  /* gap: 1em; */
+  /* padding: 0 1rem; */
 
+  margin-top: 1.5rem;
+  position: relative;
+  top: -9rem;
+}
 
-   /* .card-img>:nth-child(1):hover{
+.card-img {
+  --size: 15rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: #06283d;
+  background: linear-gradient(to bottom, #42caff 0%, #e81aff 100%);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-img > :nth-child(1) {
+  --size: 15rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: #06283d;
+  background: linear-gradient(to bottom, #42caff 0%, #e81aff 100%);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  object-fit: cover;
+}
+
+.card-img::before {
+  content: "";
+  border-radius: inherit;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  transform: translate(-50%, -50%);
+  border: 1rem solid #e8e8e8;
+}
+
+.card-img > :nth-child(1)::before {
+  content: "";
+  border-radius: inherit;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  transform: translate(-50%, -50%);
+  border: 1rem solid #e8e8e8;
+  object-fit: cover;
+}
+
+/*Text*/
+.text-title {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #06283d;
+  letter-spacing: 0.05rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.text-body {
+  width: 300px;
+  font-size: 1.1em;
+  text-align: start;
+  color: #6f6d78;
+  font-weight: 400;
+}
+
+/*Hover*/
+.card-img:hover > :nth-child(1) {
+  --size: 17rem;
+  width: var(--size);
+  height: var(--size);
+}
+.card-img:hover {
+  --size: 17rem;
+  width: var(--size);
+  height: var(--size);
+}
+
+/* .card-img>:nth-child(1):hover{
     --size: 17rem;
     width: var(--size);
     height: var(--size);
@@ -122,110 +117,115 @@
 } */
 
 .contactar {
-    /* border: 3px solid #73AD21; */
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1vh;
+  /* border: 3px solid #73AD21; */
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1vh;
 }
 
-.job-title{
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    color:#7C8097;
-    font-size: 1.2em;
-    font-weight: 100;
-    font-family:roboto;
-  }
-
+.job-title {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  color: #7c8097;
+  font-size: 1.2em;
+  font-weight: 100;
+  font-family: roboto;
+}
 
 body.active-modal {
-    overflow-y: hidden;
+  overflow-y: hidden;
 }
 
-.modal, .overlay {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content {
-    position: absolute;
-    top: 50%;
-    left: 65%;
-    transform: translate(-50%, -50%);
-    line-height: 1.4;
-    padding: 14px 28px;
-    border-radius: 3px;
-    max-width: 600px;
-    min-width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
 }
 
 .profile-information {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .text-info {
-    min-width: 23vw;
-    width: 80%;
-    font-size: 20px;
-    min-height: 10vh ;
-    background-color: #00000018;
-    padding: 10px 0;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    margin-top: 0;
-    margin-bottom: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)
+  /* min-width: 23vw; */
+  width: 80%;
+  font-size: 20px;
+  min-height: 10vh;
+  color: black !important;
+  background-color: #00000018;
+  padding: 10px 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 .chip-job {
-    font-size: 20px !important;
-    margin: 0 5px !important;
-    margin-bottom: 20px !important;
+  font-size: 20px !important;
+  margin: 0 5px !important;
+  margin-bottom: 20px !important;
+  background-color: #06283d !important;
+  color: white !important;
 }
 
 .jobs-container {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .label-description {
-    min-width: 23vw;
-    width: 75%;
-    text-align: start;
-    background-color: #1976d2;
-    color: white;
-    padding: 0 10px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+  /* min-width: 23vw; */
+  width: 80%;
+  text-align: start;
+  background-color: #06283d;
+  color: white;
+  padding: 0 10px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .buttonStyled {
-    margin: 0 5px;
-    width: 150px;
+  margin: 0 5px;
+  width: 150px;
 }
-.followers{
-    font-size: 1.5rem;
-    color: #1976d2;
+.followers {
+  font-size: 1.5rem;
+  color: black;
 }
-.follows{
-    font-size: 1.5rem;
-    color: #1976d2; 
+.follows {
+  font-size: 1.5rem;
+  color: #06283d;
+  margin-bottom: 15px;
 }

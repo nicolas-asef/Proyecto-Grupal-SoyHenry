@@ -1,16 +1,13 @@
 .conteiner {
   display: flex;
-  width: 650px;
+  width: 750px;
   height: 200px;
-  background: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 5px 5px 0px 0px rgba(255, 255, 255, 0.494);
-  transition: all 1s ease;
-}
-.conteiner:hover {
-  transform: translateY(5px);
+  padding: 5px;
+  border-radius: 10px;
+  border: solid 2px #06283d;
+  backdrop-filter: blur(10px);
+  font-family: "Exo 2", sans-serif;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .divImg {
@@ -31,28 +28,24 @@
 .divDescription {
   width: 380px;
   margin-top: 2%;
+  margin-left: 10px;
 }
 
 .divName h2 {
   font-size: 1.5rem;
-  color: #fff;
-  border-bottom: 4px solid white;
-  width: fit-content;
-  filter: drop-shadow(2px 2px 1px #000000) drop-shadow(2px 2px 1px #000000)
-    drop-shadow(2px 2px 1px #000000);
+  color: black;
+  font-family: "Exo 2", sans-serif;
 }
 
 .chip {
   display: flex;
   flex-direction: row;
+  color: white !important;
+  font-weight: bold;
+  background-color: #06283d !important;
   width: fit-content;
-  margin-top: 2%;
+  /* margin-top: 2%; */
   margin-bottom: 2%;
-  background: rgba(173, 173, 173, 0.35);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 1px 1px 0px 0px rgba(255, 255, 255, 0.694);
 }
 
 .information h3 {
@@ -69,4 +62,17 @@
 .perfilLink button {
   margin-top: 10%;
   margin-left: 14%;
+  background-color: #06283d;
+  width: 100px;
+}
+
+.remove button {
+  background-color: transparent;
+  border: 2px solid red;
+  color: red;
+}
+
+.remove button:hover {
+  background-color: red;
+  color: white;
 }

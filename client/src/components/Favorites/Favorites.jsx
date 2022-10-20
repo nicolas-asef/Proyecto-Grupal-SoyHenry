@@ -69,6 +69,8 @@ export default function Favourite() {
                       User={worker[0].User}
                       Jobs={worker[0].Jobs}
                       Contracts={worker[0].Contracts}
+                      callback={onClick}
+                      workerId={worker[0].ID}
                     />
                     {/* <IconButton
                   aria-label="delete"
@@ -78,15 +80,6 @@ export default function Favourite() {
                    este es el id que no estoy pudiendo captar en el onClick */}
                     {/* <DeleteIcon name={index} />
                 </IconButton> */}
-                    <div className={s.buton}>
-                      <button
-                        onClick={onClick}
-                        id={worker[0].ID}
-                        className={s.boton}
-                      >
-                        X
-                      </button>
-                    </div>
                   </div>
                 </>
               ))
