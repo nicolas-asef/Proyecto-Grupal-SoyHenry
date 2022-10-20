@@ -1,58 +1,58 @@
-
-.super{
-    /* justify-content: center;
+.super {
+  /* justify-content: center;
     align-items: center;
     min-width: auto;
     height: fit-content;
     width: fit-content; */
-    display: flex;
-    width: 100%;
-    
-    
+  display: flex;
+  width: 100%;
 }
-.conteiner{
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    min-height: 50%;
-    padding: 10%;
-    border-radius: 10px;
-    background: rgba( 255, 255, 255, 0.35 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 6px );
-    -webkit-backdrop-filter: blur( 6px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    overflow-y: auto;
-    
+.conteiner {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 50%;
+  padding: 10%;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.767);
+  backdrop-filter: blur(10px);
+  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
+  /* backdrop-filter: blur(6px); */
+  /* -webkit-backdrop-filter: blur(6px); */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow-y: none;
 }
-.hijo{
-    display: flex;
-    flex-direction: row;
-    padding: 2rem;
+.hijo {
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
 }
-.buton{
-    position: absolute;
-    right: 20%;
+.buton {
+  position: absolute;
+  right: 20%;
 }
-.boton{
-    width: 30px;
-    height: 30px;
-    padding-top: 2%;
-    margin-top: 20%;
-    background-color: red;
-    border-radius: 15%;
-    color: white;
-    font-size: large;
-
+.boton {
+  width: 30px;
+  height: 30px;
+  padding-top: 2%;
+  margin-top: 20%;
+  background-color: red;
+  border-radius: 15%;
+  color: white;
+  font-size: large;
 }
-.boton:hover{
-    
-    background-color: brown;
+.boton:hover {
+  background-color: brown;
 }
-.titulo{
-    color: black;
-    font-weight: bold;
-    font-size: 3rem;
+.titulo {
+  color: black;
+  font-weight: bold;
+  font-size: 2.5rem;
+  background-color: rgba(0, 0, 0, 0.151);
+  padding: 10px;
+  border-radius: 10px;
+  font-family: "Exo 2", sans-serif;
 }
