@@ -5,9 +5,32 @@ const {Op} = require("sequelize")
 const router = Router();
 
 router.get('/', async (req,res,next) => {
-    const { id } = req.query;
+    const { id, idparam, idsub } = req.query;
     try{
-        if(id){
+        if (idparam && idsub && !id){
+            var [inbox,created] = await Chat.findOrCreate({
+                 include: [
+                    {model:User, as:"Host"},
+                    {model:User, as:"Guest"},
+                    {model: Message}
+                ], 
+                
+                where:{[Op.and]:[{[Op.or]: [
+                {
+                HostID: idsub}, {HostID: idparam}]},
+                {
+                  [Op.or]: [{GuestID: idparam},{GuestID: idsub}]
+                }
+                ]    
+                },
+              })
+              if(created){
+                inbox.setGuest(idparam)
+                inbox.setHost(idsub)
+              }            
+        }
+
+        else if(id){
             var inbox = await Chat.findByPk(
                 id, {
                 include: [
@@ -24,8 +47,7 @@ router.get('/', async (req,res,next) => {
                 {model: Message}
             ]
         })}
-
-
+console.log(inbox)
         res.status(200).send(inbox)
     }catch(error){
         res.send('Must be a problem:' + error.message).status(404);

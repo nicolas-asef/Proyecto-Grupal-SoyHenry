@@ -28,7 +28,7 @@ export default function SiderbarChat({
               ? `${guest.name} ${guest.lastName}`
               : `${host.name} ${host.lastName}`}
           </h2>
-          <p>Last message. . . {messages[messages.length - 1].text}</p>
+          <p>Last message. . . {messages.length > 0 && messages[messages.length - 1].text}</p>
         </div>
       </div>
     </Link>

@@ -23,9 +23,9 @@ export default function Chat({ guest, host, messages }) {
   ,[messages])
 
   useEffect(() => {
-    socket?.on("createMessage", ({ EmitterID, text }) => {
+    socket?.on("createMessage", ({ EmitterID, text, date }) => {
       //aca renderizo el mensaje del texto y listo
-      setElemento({text,EmitterID})
+      setElemento({text,EmitterID, date})
       setForceUpdate(false)
     })
   },[socket])
@@ -37,15 +37,20 @@ export default function Chat({ guest, host, messages }) {
     setForceUpdate(true)
   },[elemento])
 
+var horas = `${new Date(Date.now()).getHours()}`
+var minutos = `${new Date(Date.now()).getMinutes()}`
+if (minutos < 10){ minutos = '0' + minutos}
+
   function sendMessage(e) {
     e.preventDefault();
     socket?.emit("messageCreation", {
       id_emisor: user.sub,
       id_receptor: host.ID === user.sub ? guest.ID : host.ID,
       texto: input,
+      date: horas + ":" + minutos
     });
     const aux = mensajes 
-    aux.push({text:input,EmitterID:user.sub})
+    aux.push({text:input,EmitterID:user.sub, date: horas + ":" + minutos})
     setInput("")
     setMensajes(aux)
     socket?.emit("enviarNotificacion",{receptor_id:host.ID === user.sub ? guest.ID : host.ID,emisor_id:user.sub,tipo:"mensaje"})
@@ -54,6 +59,19 @@ export default function Chat({ guest, host, messages }) {
   const handleOnChange = (e) => {
     setInput(e.target.value);
   };
+  mensajes && mensajes.sort(function (a, b) {
+    if (a.createdAt > b.createdAt) {
+      return 1;
+    }
+    if (a.createdAt < b.createdAt) {
+      return -1;
+    }
+    // a must be equal to b
+    return 0;
+  });
+
+/*   let date = messages && messages[0].createdAt.split(".", 1).join("").split("T").pop().slice(0,2)
+  console.log(date - 3) */
   return (
     <div className="chat">
       <div className="chat__header">
@@ -97,15 +115,11 @@ export default function Chat({ guest, host, messages }) {
                   host === undefined
                     ? "Loading"
                     : message.EmitterID === host.ID
-                    ? `${host.name} ${host.lastName}`
-                    : `${guest.name} ${guest.lastName}`
+                    ? `${host.name}`
+                    : `${guest.name}`
                 }
                 message={message.text}
-                timestamp={
-                  new Date(Date.now()).getHours() +
-                  ":" +
-                  new Date(Date.now()).getMinutes()
-                }
+                timestamp={message.date}
                 isSender={
                   host === undefined
                     ? "Loading"

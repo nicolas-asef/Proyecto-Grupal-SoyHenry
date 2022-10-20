@@ -12,7 +12,7 @@ const ProtectedRoute = ({children}) => {
   const userDetail = useSelector(state => state.user)
   const dispatch = useDispatch();
   const [redirect, setRedirect] = React.useState(false)
-
+/* 
   useEffect(() => {
     console.log(userDetail)
     if(isAuthenticated){
@@ -33,34 +33,34 @@ const ProtectedRoute = ({children}) => {
 
       }
     }
-  },[userDetail, dispatch])
+  },[userDetail, dispatch]) */
 
   // userDetail.length !== 0 && console.log("userDetail", userDetail)
 
 
-  // React.useEffect( () => {
-  //   console.log(userDetail)
-  //   if(isAuthenticated) {
-  //    	dispatch(getUserDetail(user.sub))
+   React.useEffect( () => {
+     console.log(userDetail)
+     if(isAuthenticated) {
+      	dispatch(getUserId(user.sub))
 
-  //     if(alreadyOnboard) return;
+       if(alreadyOnboard) return;
 
-  //     if(userDetail.id) {
-  //       if(!userDetail.onBoarded) {
-  //         setRedirect(true)
-  //       } else {
-  //         setRedirect(false)
-  //       }
-  //     } else if (userDetail.message) {
-  //       dispatch(createUser({
-	// 				ID: user.sub,
-  //     		email: user.email,
-  //    			img: user.picture
-	// 			}))
-	// 			setRedirect(true)
-  //     }
-  //   }
-  // }, [dispatch, isAuthenticated, userDetail.id, userDetail.message, userDetail.onBoarded])
+       if(userDetail.id) {
+         if(!userDetail.onBoarded) {
+           setRedirect(true)
+         } else {
+           setRedirect(false)
+         }
+       } else if (userDetail.message) {
+         dispatch(createUser({
+	 				ID: user.sub,
+       		email: user.email,
+      			img: user.picture
+	 			}))
+	 			setRedirect(true)
+       }
+     }
+   }, [dispatch, isAuthenticated, userDetail.id, userDetail.message, userDetail.onBoarded])
 
 	if( isAuthenticated && redirect) return <Navigate to="/onboarding" />
 

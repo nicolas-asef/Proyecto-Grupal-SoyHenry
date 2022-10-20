@@ -95,6 +95,11 @@ const Profile = () => {
     };
   }, []);
   useEffect(() => {
+
+    socket?.on("redirect",({id})=> {
+      navigate(`/chat/${id}`) 
+    })
+
     socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo }) => {
       let popsAuxiliar = popUps;
       let popAuxiliar = {};

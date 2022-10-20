@@ -79,8 +79,8 @@ export default function HomePrueba(){
                         {currentWorkers && currentWorkers.map (worker => {
                             return (
                                 <CardsWorkers 
-                                    key = {worker.ID}
-                                    id = {worker.ID}
+                                    key = {worker.User.ID}
+                                    id = {worker.User.ID}
                                     name = {worker.User.name}
                                     lastName = {worker.User.lastName}
                                     job = {worker.Jobs[0].name}
