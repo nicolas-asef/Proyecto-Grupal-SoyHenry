@@ -98,6 +98,11 @@ const Profile = () => {
     };
   }, []);
   useEffect(() => {
+
+    socket?.on("redirect",({id})=> {
+      navigate(`/chat/${id}`) 
+    })
+
     socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo }) => {
       let popsAuxiliar = popUps;
       let popAuxiliar = {};
@@ -231,7 +236,11 @@ const Profile = () => {
         </div>
         <div className={s.inbox}>
           <IconButton onClick={sendInbox}>
-            <MailOutlineRoundedIcon color="primary" fontSize="large" />
+            <MailOutlineRoundedIcon
+              color="primary"
+              fontSize="medium"
+              sx={{ color: "white" }}
+            />
           </IconButton>
         </div>
         <div className={s.but}>

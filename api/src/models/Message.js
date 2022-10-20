@@ -14,9 +14,14 @@ module.exports = (sequelize) => {
     text: {
         type: DataTypes.STRING,
         defaultValue: ""
-      }},
+      },
+      date: {
+        type: DataTypes.STRING,
+        defaultValue: `${new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes()}`                    
+      }  
+    },
     {
-      timestamps: false,
+      timestamps: true,
     }
   );
 };

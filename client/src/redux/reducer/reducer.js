@@ -36,6 +36,7 @@ import {
   GET_CHATS,
   GET_CHAT_BY_PK,
   SET_CONECTED,
+  GET_CHAT_BY_USERS,
 } from "../actions/actions_vars";
 
 const localStorageAuth = () => {
@@ -119,6 +120,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         chat: action.payload,
       };
+      case GET_CHAT_BY_USERS:
+        return {
+          ...state,
+          chat: action.payload,
+        };
     case GET_WORKER_CONTRACTS:
       return {
         ...state,
