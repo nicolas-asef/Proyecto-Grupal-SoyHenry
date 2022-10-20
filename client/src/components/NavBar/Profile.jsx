@@ -116,7 +116,7 @@ const Profile = () => {
       }
       else{
         const filtro = popsAuxiliar.filter(e =>(!e.viewed && e.type === tipo  &&  e.img === img && e.name === nombre_emisor))
-        console.log("------------------>Filter",filtro)
+  
         if(filtro.length > 0){
           socket.emit("seen",[id])
           return false

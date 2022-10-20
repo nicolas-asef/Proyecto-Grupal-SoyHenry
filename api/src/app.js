@@ -179,6 +179,7 @@ io.on("connection", socket => {
           if(chat){
             id_mensaje = chat.id
           }
+          console.log(id_mensaje)
       }
       if(recepcion)
         recepcion.forEach(e => io.to(e).emit("obtenerNotificacion",{id,img,nombre_emisor,tipo,id_mensaje}))

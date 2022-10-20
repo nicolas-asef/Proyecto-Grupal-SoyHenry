@@ -29,7 +29,6 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
   const [displaying, setDisplaying] = useState("")
 
   const forceUpdate = ()=> {
-    console.log("-------->hola?")
     if(type === "worker")
       type = "user"
     else 
@@ -45,7 +44,6 @@ export const Worker = ({type,authState,getUserDetail,getContractWorker,getContra
     setForzarCambio(false)
     setWorker({})
     setDisplaying("")
-    console.log("--------------->type",type)
     setForzarCambio(!forzarCambio)
   }
 
