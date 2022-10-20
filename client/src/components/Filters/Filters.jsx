@@ -77,7 +77,7 @@ const Filters = () => {
           defaultValue=""
           onChange={filterjob}
         >
-          <MenuItem value="all">All</MenuItem>
+          <MenuItem value="all">Todos</MenuItem>
           {jobs &&
             jobs.map((job) => {
               return (
@@ -98,9 +98,9 @@ const Filters = () => {
           select
           onChange={filterAvailable}
         >
-          <MenuItem value="all">all</MenuItem>
-          <MenuItem value={true}>Online</MenuItem>
-          <MenuItem value={false}>Offline</MenuItem>
+          <MenuItem value="all">Todos</MenuItem>
+          <MenuItem value={true}>Conectado</MenuItem>
+          <MenuItem value={false}>Desconectado</MenuItem>
         </TextField>
       </div>
       <div className={styles.textField}>
@@ -113,7 +113,7 @@ const Filters = () => {
           select
           onChange={filterZone}
         >
-          <MenuItem value="all">all</MenuItem>
+          <MenuItem value="all">Todos</MenuItem>
           {countries &&
             countries.map((country) => {
               return (

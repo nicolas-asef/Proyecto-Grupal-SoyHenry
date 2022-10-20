@@ -38,11 +38,10 @@ const TestiMonials = () => {
                 <div className="item">
                   <div className="shadow-effect">
                     <p>
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
-                      magna.Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore
-                      magna."
+                      "Muy buena pagina para contratar, te permite contactarte
+                      de manera rapida y con referencias con una persona. Super
+                      contento con Gustavo, se toco unos temas despues de
+                      arreglarme el calefon"
                     </p>
                   </div>
                   <div className="testimonial-name">

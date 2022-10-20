@@ -57,16 +57,18 @@ export default function SettingProfile() {
   const [inputJobs, setInputJobs] = useState([]);
 
   useEffect(() => {
-    if (user.Worker.Jobs) {
-      user.Worker.Jobs.map((e) => {
-        setInputJobs([...inputJobs, e.name]);
-      });
-    }
-    if (user.Worker.description) {
-      setInputWork((inputWork.description = user.Worker.description));
-    }
-    if (user.Worker.certification) {
-      setInputWork((inputWork.certification = user.Worker.certification));
+    if (user.Worker) {
+      if (user.Worker.Jobs) {
+        user.Worker.Jobs.map((e) => {
+          setInputJobs([...inputJobs, e.name]);
+        });
+      }
+      if (user.Worker.description) {
+        setInputWork((inputWork.description = user.Worker.description));
+      }
+      if (user.Worker.certification) {
+        setInputWork((inputWork.certification = user.Worker.certification));
+      }
     }
   }, []);
 
@@ -166,7 +168,7 @@ export default function SettingProfile() {
     <div className={s.all}>
       <div className={s.containerSetting}>
         <form onSubmit={onSubmit}>
-          <h1>Edit profile</h1>
+          <h1>Editar perfil</h1>
           {/* <div className={s.bloke}>
             <h3 className="pad">Location</h3>
             <div className={s.campos}>
@@ -189,7 +191,7 @@ export default function SettingProfile() {
           </div> */}
 
           <div className={s.bloke}>
-            <h3 className="pad">Phone</h3>
+            <h3 className="pad">Telefono</h3>
             <div className={s.campos}>
               <TextField
                 id="outlined-required"
@@ -201,7 +203,7 @@ export default function SettingProfile() {
             </div>
           </div>
           <div className={s.bloke}>
-            <h3 className="pad">Image</h3>
+            <h3 className="pad">Imagen</h3>
             <div className={s.im}>
               <TextField
                 id="outlined-required"
@@ -263,7 +265,7 @@ export default function SettingProfile() {
             {user.Worker && (
               <>
                 <div className={s.bloke}>
-                  <h3 className="pad">Description</h3>
+                  <h3 className="pad">Descripcion</h3>
                   <div className={s.campos}>
                     {/* <TextField
                       id="outlined-required"
@@ -283,12 +285,13 @@ export default function SettingProfile() {
                       placeholder={user.Worker.description}
                       defaultValue=""
                       style={{ width: 200 }}
+                      onChange={handleChangeWork}
                     />
                   </div>
                 </div>
 
                 <div className={s.bloke}>
-                  <h3 className="pad">Certification</h3>
+                  <h3 className="pad">Certificacion</h3>
                   <div className={s.campos}>
                     <TextField
                       id="outlined-required"
@@ -303,7 +306,7 @@ export default function SettingProfile() {
                 </div>
 
                 <div className={s.bloke}>
-                  <h3 className="pad">Jobs</h3>
+                  <h3 className="pad">Trabajo</h3>
                   <div className={s.campos}>
                     <TextField
                       id="outlined-required"
@@ -345,8 +348,8 @@ export default function SettingProfile() {
                 </div>
 
                 <div className={s.premium}>
-                  <h3>You want to be a premium worker? </h3>
-                  <h4>PUNCHASE HERE!</h4>
+                  <h3>¿Quieres convertirte en premium? </h3>
+                  <h4>CLICK AQUI!</h4>
                   <Button
                     type="submit"
                     variant="contained"
@@ -365,7 +368,7 @@ export default function SettingProfile() {
                       severity="success"
                       sx={{ width: "100%" }}
                     >
-                      Your information was successfully modified
+                      Tus datos se modificaron correctamente
                     </Alert>
                   </Snackbar>
                 </div>

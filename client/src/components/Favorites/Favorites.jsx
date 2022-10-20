@@ -59,7 +59,7 @@ export default function Favourite() {
     <div className={s.super}>
       {open ? (
         <div className={s.conteiner}>
-          <h3 className={s.titulo}>My Favourites Workers</h3>
+          <h3 className={s.titulo}>Trabajadores Favoritos</h3>
           {allWorker.length && workersFavs
             ? workersFavs.map((worker, index) => (
                 <>

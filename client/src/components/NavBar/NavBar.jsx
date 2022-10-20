@@ -15,7 +15,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 // import { FaHeart } from "react-icons/fa";
 
-const pages = ["Home", "About", "map"];
+const pages = ["Inicio", "Sobre Nosotros", "Mapa"];
 
 const NavBar = () => {
   const location = useLocation();

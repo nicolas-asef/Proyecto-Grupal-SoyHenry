@@ -67,18 +67,18 @@ export default function CheckoutForm() {
     <div className={s.cardPayment}>
       <div className={s.formPayment}>
         <div className={s.textPaymentContainer}>
-          <h1>¿Why choose to be premium?</h1>
+          <h1>¿Porque elegir ser premium?</h1>
           <p>
-            JobsOffice is a totally free platform. Our dream is that informal
-            workers from all over the country can form a network of clients,
-            give greater visibility to their work, be inspired and connect with
-            colleagues.
+            Changuitas es una plataforma totalmente gratuita. Nuestro sueño es
+            que informal trabajadores de todo el país pueden formar una red de
+            clientes, dar mayor visibilidad a su trabajo, inspirarse y conectar
+            con colegas.
           </p>
           <p>
-            Being premium will increase your visibility on the page and enhance
-            your work network
+            Ser premium aumentará su visibilidad en la página y mejorará tu red
+            de trabajo
           </p>
-          <h3>¡Thanks for your help!</h3>
+          <h3>¡Gracias por tu ayuda!</h3>
         </div>
         <form className={s.forPaymentContainer} onSubmit={handleSubmit}>
           <img
@@ -87,19 +87,19 @@ export default function CheckoutForm() {
             className={s.donationImage}
           />
           <h5 className={s.formPaymentTitle}>
-            Premium has a cost of 1 dollar!!!
+            Ser premium cuesta solo 1 dollar!!!
           </h5>
           <p className={s.formPaymentSubtitle}>
-            (Your card converts it to your local currency)
+            (Tu tarjeta la convierte a tu moneda local)
           </p>
           <CardElement className={s.cardElementPayment} />
           {error && <div className={s.paymentError}>{error}</div>}
           <button className={s.btnPayment} type="submit" disabled={cargando}>
             {" "}
-            BE PREMIUM{" "}
+            SE PREMIUM{" "}
           </button>
 
-          {cargando && <div>Loading...</div>}
+          {cargando && <div>Cargando...</div>}
         </form>
       </div>
       {compraConcretada && <NestedModal />}
