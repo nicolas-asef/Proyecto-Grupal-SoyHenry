@@ -41,6 +41,13 @@
     align-items: center;
 }
 
+.porcentageNeg{
+    font-size: 20px;
+    color: red;
+    display: flex;
+    align-items: center;
+}
+
 .circle{
     font-size: 13px;
     padding: 10px;

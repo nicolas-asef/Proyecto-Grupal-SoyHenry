@@ -6,6 +6,7 @@
 
 ul{
     padding: 0;
+    text-decoration: none;
 }
 
 .top{
@@ -18,13 +19,17 @@ ul{
 
 .logo{
     font-size: 30px;
-    font-weight: 500;
-    color: blue;
+    font-weight: 700;
+    color: #003785;
     padding: 20px;
 }
 
 .center{
     padding-left: 0px;
+}
+
+.link{
+    text-decoration: none;
 }
 
 .li{
@@ -34,8 +39,10 @@ ul{
     padding-left: 35px;
     margin-bottom: 15px;
     cursor: pointer;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 20px;
+    text-decoration: none;
+    color: #003785
 }
 
 .li:hover{
@@ -44,6 +51,7 @@ ul{
 
 .title{
     padding-left: 20px;
+    padding-bottom: 10px;
     margin: 0;
     color: rgb(200, 200, 200);
     font-weight: 600;

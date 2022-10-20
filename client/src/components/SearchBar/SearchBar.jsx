@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-
 import { getWorkersSearch } from "../../redux/actions/actions";
-
+import { sendNotification } from "../../redux/actions/actions";
 import SearchIcon from "@mui/icons-material/Search";
 import { Button } from "@mui/material";
 import style from "./SearchBar.module.css";
@@ -18,6 +17,12 @@ export default function SearchBar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(getWorkersSearch(input));
+    dispatch(
+      sendNotification(
+        "viottilucas16@gmail.com",
+        "Has creado tu perfil de trabajador con exito !!"
+      )
+    );
   };
   return (
     <form className={style.search} onSubmit={handleSubmit}>

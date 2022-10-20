@@ -37,10 +37,10 @@ export default function SlideShow(){
             const sizeSlide = slideshow.current.children[0].offsetWidth
             slideshow.current.style.transform = `translateX(-${sizeSlide}px)`
 
-            setTimeout(() => {
+/*             setTimeout(() => {
                 slideshow.current.style.transition = '300ms ease-out all'
                 slideshow.current.style.transform = `translateX(0)`
-            },30)
+            },30) */
         }
     }
 
