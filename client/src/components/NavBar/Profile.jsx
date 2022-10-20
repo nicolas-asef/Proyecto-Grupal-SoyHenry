@@ -102,50 +102,60 @@ const Profile = () => {
       navigate(`/chat/${id}`);
     });
 
+    socket?.on(
+      "obtenerNotificacion",
+      ({ id, img, nombre_emisor, tipo, id_mensaje }) => {
+        let popsAuxiliar = popUps;
+        let popAuxiliar = {};
+        if (tipo !== "mensaje")
+          popAuxiliar = {
+            type: tipo,
+            viewed: false,
+            img: img,
+            name: nombre_emisor,
+            id_mensaje: id_mensaje,
+          };
+        else {
+          const filtro = popsAuxiliar.filter(
+            (e) =>
+              !e.viewed &&
+              e.type === tipo &&
+              e.img === img &&
+              e.name === nombre_emisor
+          );
 
-    socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo ,id_mensaje}) => {
-
-      let popsAuxiliar = popUps;
-      let popAuxiliar = {};
-      if(tipo !== "mensaje")
-      popAuxiliar = {
-        type: tipo,
-        viewed: false,
-        img: img,
-        name: nombre_emisor,
-        id_mensaje:id_mensaje
-      }
-      else{
-        const filtro = popsAuxiliar.filter(e =>(!e.viewed && e.type === tipo  &&  e.img === img && e.name === nombre_emisor))
-  
-        if(filtro.length > 0){
-          socket.emit("seen",[id])
-          return false
+          if (filtro.length > 0) {
+            socket.emit("seen", [id]);
+            return false;
+          } else
+            popAuxiliar = {
+              type: tipo,
+              viewed: false,
+              img: img,
+              name: nombre_emisor,
+            };
         }
-        else
-        popAuxiliar = {
-          type: tipo,
-          viewed: false,
-          img: img,
-          name: nombre_emisor,
-        }
+        popsAuxiliar.push(popAuxiliar);
+        popsAuxiliar = popsAuxiliar.reverse();
+        setPopUps(popsAuxiliar);
+        let cantidadAuxiliar = 0;
+        popsAuxiliar?.forEach((e) =>
+          e.viewed ? cantidadAuxiliar : cantidadAuxiliar++
+        );
+        setcantNotificaciones(cantidadAuxiliar);
       }
-      popsAuxiliar.push(popAuxiliar);
-      popsAuxiliar = popsAuxiliar.reverse();
-      setPopUps(popsAuxiliar);
-      let cantidadAuxiliar = 0;
-      popsAuxiliar?.forEach((e) =>
-        e.viewed ? cantidadAuxiliar : cantidadAuxiliar++
-      );
-      setcantNotificaciones(cantidadAuxiliar);
-    });
+    );
   }, [socket, popUps]);
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
   const handleOpenProfile = () => {
-    window.location.replace(`/profile/user/${sub}`);
+    if (user.Worker) {
+      window.location.replace(`/profile/${sub}`);
+    } else {
+      window.location.replace(`/profile/user/${sub}`);
+    }
     setAnchorElUser(null);
   };
 

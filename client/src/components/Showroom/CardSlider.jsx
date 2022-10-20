@@ -93,11 +93,7 @@ const CardSlider = () => {
                                 w.Contracts.comment_U
                               ) : (
                                 <p>
-                                  " Lorem ipsum dolor sit amet, consectetur
-                                  adipisicing elit. Perspiciatis provident eum
-                                  reiciendis iste dicta. Ab non eaque quaerat
-                                  neque nulla, natus illo nisi aliquam est earum
-                                  facilis corporis ut in."
+                                  "Todavia no fue puntuado por sus clientes."
                                 </p>
                               )}
                               <Link to={`/profile/${w.User.ID}`}>
