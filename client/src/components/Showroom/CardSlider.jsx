@@ -82,10 +82,10 @@ const CardSlider = () => {
                             <div className={style.social}>
                               <div className={style.state}>
                                 {w.User.status ? (
-                                  <a className={style.online}>Online</a>
+                                  <a className={style.online}>Conectado</a>
                                 ) : (
                                   <a className={style.disconnected}>
-                                    Disconnected
+                                    Desconectado
                                   </a>
                                 )}
                               </div>
@@ -117,12 +117,12 @@ const CardSlider = () => {
         <div className={style.btns}>
           <div className={style.btnLeft}>
             <button variant="contained" onClick={positionLess}>
-              View Lesss
+              Ver Menos
             </button>
           </div>
           <div className={style.btnRight}>
             <button href="" variant="contained" onClick={positionMore}>
-              View More
+              Ver Mas
             </button>
           </div>
         </div>

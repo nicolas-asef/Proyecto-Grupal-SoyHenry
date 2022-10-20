@@ -26,7 +26,7 @@ const Catalog = () => {
   return (
     <div className={s.OutterCardsDIV}>
       <div className={s.filterContainer}>
-        <h1>Filter by: </h1>
+        <h1>Filtrar por: </h1>
         <Filters />
       </div>
       <div className={s.paginationContainer1}>

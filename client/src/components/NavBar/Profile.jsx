@@ -98,10 +98,9 @@ const Profile = () => {
     };
   }, []);
   useEffect(() => {
-
-    socket?.on("redirect",({id})=> {
-      navigate(`/chat/${id}`) 
-    })
+    socket?.on("redirect", ({ id }) => {
+      navigate(`/chat/${id}`);
+    });
 
     socket?.on("obtenerNotificacion", ({ id, img, nombre_emisor, tipo }) => {
       let popsAuxiliar = popUps;
@@ -174,7 +173,7 @@ const Profile = () => {
   const settings = user.isAdmin
     ? [
         {
-          name: "Profile",
+          name: "Perfil",
           handler: handleOpenProfile,
         },
         {
@@ -182,7 +181,7 @@ const Profile = () => {
           handler: handleContracts,
         },
         {
-          name: "Settings",
+          name: "Ajustes",
           handler: handleSettings,
         },
         {
@@ -190,13 +189,13 @@ const Profile = () => {
           handler: handleDashboard,
         },
         {
-          name: "Logout",
+          name: "Deslogear",
           handler: handleLogout,
         },
       ]
     : [
         {
-          name: "Profile",
+          name: "Perfil",
           handler: handleOpenProfile,
         },
         {
@@ -204,11 +203,11 @@ const Profile = () => {
           handler: handleContracts,
         },
         {
-          name: "Settings",
+          name: "Ajustes",
           handler: handleSettings,
         },
         {
-          name: "Logout",
+          name: "Deslogear",
           handler: handleLogout,
         },
       ];
